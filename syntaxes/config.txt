@@ -1,0 +1,13 @@
+        "grammars": [
+            {
+                "language": "ow",
+                "scopeName": "source.ow",
+                "path": "syntaxes/ow.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "ow",
+                "path": "ow.main.js"
+            }
+        ],

@@ -1,0 +1,90 @@
+rule_block          →   BlockRule LParen String RParen LBrace event_block condition_block action_block RBrace
+
+event_block         →   BlockEvent LBrace event_list RBrace
+event_list          →   Event Semicolon (ɛ|Variable Semicolon|EventTeam Semicolon EventPlayer Semicolon)
+
+condition_block     →   BlockCondition LBrace condition_list RBrace
+condition_list      →   (compare_expr Semicolon)*
+compare_expr        →   param_expr compare_op param_expr
+
+action_block        →   BlockAction LBrace action_list RBrace
+action_list         →   (action_expr Semicolon|assign_expr Semicolon)*
+action_expr         →   Action param_expr
+assign_expr         →   param_expr Dot Variable (ɛ|LSquare param_expr RSquare) assign_op param_expr
+
+bool_expr           →   param_expr bool_op param_expr
+calc_expr           →   param_expr calc_op param_expr
+funct_expr          →   Function param_expr
+
+//消除左递归
+param_expr          →   param | LParen param_list RParen
+param_list          →   param | param Comma param_list
+param               →   Variable | Number | Bool | String | compare_expr | calc_expr | bool_expr | funct_expr
+
+bool_op             →   Or | And | Not
+calc_op             →   Plus | Minus | Times | Divide | Power | Modulus
+assign_op           →   Equal | PlusEqual | MinusEqual | TimesEqual | DivideEqual | PowerEqual | ModulusEqual
+compare_op          →   EqualTo | NotEqualTo | LessEqualTo | GreaterEqualTo | LessTo | GreaterTo
+
+LBrace              '{'
+RBrace              '}'
+
+LParen              '('
+RParen              ')'
+
+LSquare             '['
+RSquare             ']'
+
+Semicolon           ';'
+Colon               ':'
+Comma               ','
+Dot                 '.'
+Question            '?'
+
+Or                  '||'
+And                 '&&'
+Not                 '!'
+
+EqualTo             '=='
+NotEqualTo          '!='
+LessEqualTo         '<='
+GreaterEqualTo      '>='
+LessTo              '<'
+GreaterTo           '>'
+
+Plus                '+'
+Minus               '-'
+Times               '*'
+Divide              '/'
+Power               '^'
+Modulus             '%'
+
+Equal               '='
+PlusEqual           '+='
+MinusEqual          '-='
+TimesEqual          '*='
+DivideEqual         '/='
+PowerEqual          '^='
+ModulusEqual        '%='
+
+BlockRule           '规则'
+BlockEvent          '事件'
+BlockCondition      '条件'
+BlockAction         '动作'
+
+Event               '事件1' | '事件2' | '事件3'
+EventTeam           '队伍1' | '队伍2' | '双方'
+EventPlayer         '栏位1' | '栏位2' | '全部'
+Function            '函数1' | '函数2' | '函数3'
+Action              '动作1' | '动作2' | '动作3'
+Const               '常量1' | '常量2' | '常量3'
+Bool                '真' | '假'
+Number              /(-?\d+)(.\d+|\d+)?/
+Variable            /[a-zA-Z_][a-zA-Z0-9_]*/
+String              /"(.*)"/
+
+
+Comment_Line        '//'
+Comment_Start       '/*'
+Comment_End         '*/'
+

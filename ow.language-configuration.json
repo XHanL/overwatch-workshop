@@ -1,0 +1,34 @@
+{
+    "comments": {
+        // symbol used for single line comment. Remove this entry if your language does not support line comments
+        "lineComment": "//",
+        // symbols used for start and end a block comment. Remove this entry if your language does not support block comments
+        "blockComment": [ "/*", "*/" ]
+    },
+    // symbols used as brackets
+    "brackets": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"]
+    ],
+    // symbols that are auto closed when typing
+    "autoClosingPairs":[
+        ["{", "}"],
+        ["[", "]"],
+        ["\"", "\""]
+    ],
+    // symbols that can be used to surround a selection
+    "surroundingPairs": [
+        ["{", "}"],
+        ["(", ")"],
+        ["[", "]"],
+        ["\"", "\""]
+    ],
+    "autoCloseBefore": ";:.,=}])> \n\t",
+    "colorizedBracketPairs": [
+        ["{", "}"],
+        ["(", ")"],
+        ["[", "]"]
+    ],
+    "wordPattern": "(规则\\(\".*\"\\))|(持续 - 全局)|(持续 - 每名玩家)|(Else If)|(For 全局变量)|(For 玩家变量)|(D.Va)|\\b(-?\\d+)(.\\d+|\\d+)?\\b|(\\\\.)|(\\/\\/)|(\\/\\*)|(\\*\\/)|(\\+\\=)|(\\-\\=)|(\\*\\=)|(\\/\\=)|(\\%\\=)|(\\^\\=)|(\\<\\=)|(\\>\\=)|(\\=\\=)|(\\!\\=)|(\\|\\|)|(\\&\\&)|(\\+)|(\\-)|(\\*)|(\\/)|(\\%)|(\\^)|(\\<)|(\\>)|(\\=)|(\\!)|(\\?)|([^\\+\\-\\*\\/\\%\\^\\<\\>\\=\\!\\&\\|\\?\\{\\}\\(\\)\\[\\]\\;\\:\\,\\.\\s\\\"\\\\]+)"
+}
