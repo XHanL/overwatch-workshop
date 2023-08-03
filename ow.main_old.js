@@ -4037,13 +4037,6 @@ function activate(context) {
         }
     })
 
-    //文档语义标记
-    vscode.languages.registerDocumentSemanticTokensProvider("ow", {
-        provideDocumentSemanticTokens() {
-
-        }
-    })
-
     //可评估表达式
     vscode.languages.registerEvaluatableExpressionProvider("ow", {
         provideEvaluatableExpression() {

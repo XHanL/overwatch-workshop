@@ -65,9 +65,9 @@ function activate(context) {
             //高亮
             vscode.languages.registerDocumentSemanticTokensProvider("ow", {
                 provideDocumentSemanticTokens(document, token) {
-    
+                    return generateSemanticTokens(document)
                 }
-            }, new vscode.SemanticTokensLegend([''])),
+            }, new vscode.SemanticTokensLegend(['comment', 'string', 'number', 'variable', `symbol`, `action`, 'condition', `constant`, 'event', 'other'])),
     
             //折叠
             vscode.languages.registerFoldingRangeProvider("ow", {
@@ -800,5 +800,278 @@ function activate(context) {
         )
     } catch (error) {
         console.log(error)
+    }
+}
+
+function generateSemanticTokens(document) {
+    let i = 0
+    let lineEnd = 0
+    let isString = false
+    let isLineComment = false
+    let isPhaseComment = false
+    let buffer = ""
+    let blocks = []
+    let functs = []
+    let tokens = []
+
+    const builder = new vscode.SemanticTokensBuilder()
+    const text = document.getText()
+    const length = text.length
+
+    const type = {
+        comment: 0,
+        string: 1,
+        number: 2,
+        variable: 3,
+        symbol: 4,
+        action: 5,
+        condition: 6,
+        constant: 7,
+        event: 8,
+        other: 9
+    }
+
+    function skip(n) {
+        i += n
+    }
+
+    function take(n) {
+        let len = Math.min(i + n, length)
+        for (let j = i; j < len; j++) {
+            buffer += text[j]
+            skip(1)
+        }
+    }
+
+    function peek(n) {
+        if (i < length - n) {
+            return text[i + n]
+        }
+    }
+
+    function push(type) {
+        if (buffer.length > 0) {
+            let position = document.positionAt(i - buffer.length)
+            //console.log(buffer, position.line, position.character, buffer.length, type)
+            builder.push(position.line, position.character, buffer.length, type)
+            tokens.push(buffer)
+            buffer = ""
+        }
+    }
+
+    function matchToken(type, min, max) {
+        for (let j = max; j >= min; j--) {
+            let keyword = text.slice(i, i + j)
+            if (type.has(keyword)) {
+                return keyword
+            }
+        }
+    }
+
+    function getBlock() {
+        return blocks[blocks.length - 1]
+    }
+
+    function getFunct() {
+        return functs[functs.length - 1]
+    }
+
+    function isConstant(funct) {
+        if (MODEL.RULES.ACTION.hasOwnProperty(funct.name) && MODEL.RULES.ACTION[funct.name].hasOwnProperty("参数")) {
+            let n = 0
+            for (p in MODEL.RULES.ACTION[funct.name].参数) {
+                if (n++ == funct.param) {
+                    return MODEL.RULES.ACTION[funct.name].参数[p].类型 != "条件"
+                }
+            }
+        } else if (MODEL.RULES.CONDITION.hasOwnProperty(funct.name) && MODEL.RULES.CONDITION[funct.name].hasOwnProperty("参数")) {
+            let n = 0
+            for (p in MODEL.RULES.CONDITION[funct.name].参数) {
+                if (n++ == funct.param) {
+                    return MODEL.RULES.CONDITION[funct.name].参数[p].类型 != "条件"
+                }
+            }
+        } else {
+            return false
+        }
+    }
+
+    while (i < length) {
+        if (isLineComment) {
+            //行注
+            if (i == lineEnd) {
+                take(1)
+                push(type.comment)
+                isLineComment = false
+            } else {
+                take(1)
+            }
+        } else if (isPhaseComment) {
+            //段注
+            if (peek(0) == "*" && peek(1) == "/") {
+                take(2)
+                push(type.comment)
+                isPhaseComment = false
+            } else {
+                take(1)
+            }
+        } else if (isString) {
+            //字符串
+            if (peek(0) == "\"") {
+                take(1)
+                push(type.string)
+                isString = false
+            } else if (peek(0) == "\\") {
+                take(2)
+            } else {
+                take(1)
+            }
+        } else if (peek(0).match(/\s/)) {
+            //跳过空白
+            skip(1)
+        } else if (peek(0) == "/" && peek(1) == "/") {
+            //行注开始
+            take(2)
+            const line = document.lineAt(document.positionAt(i).line);
+            const text = line.text;
+            const index = text.search(/\S\s*$/);
+            if (index !== -1) {
+                lineEnd = document.offsetAt(new vscode.Position(document.positionAt(i).line, index))
+                isLineComment = true
+            }
+        } else if (peek(0) == "/" && peek(1) == "*") {
+            //段注开始
+            take(2)
+            isPhaseComment = true
+        } else if (peek(0) == "\"") {
+            //字符串开始
+            take(1)
+            isString = true
+        } else if (peek(0) == "{") {
+            //块头
+            if (tokens[tokens.length - 1] == "设置" || tokens[tokens.length - 1] == "变量" || tokens[tokens.length - 1] == "子程序" || tokens[tokens.length - 1] == "事件" || tokens[tokens.length - 1] == "条件" || tokens[tokens.length - 1] == "动作") {
+                blocks.push(tokens[tokens.length - 1])
+            } else if (tokens[tokens.length - 4] == "规则") {
+                blocks.push(tokens[tokens.length - 4])
+            } else {
+                blocks.push(blocks[blocks.length - 1])
+            }
+            //console.log(blocks)
+            take(1)
+            push(type.other)
+        } else if (peek(0) == "}") {
+            //块尾
+            blocks.pop()
+            take(1)
+            push(type.other)
+        } else if (peek(0) == "(") {
+            //函头
+            if (TOKEN.ACTION.has(tokens[tokens.length - 1]) || TOKEN.CONDITION.has(tokens[tokens.length - 1]) || tokens[tokens.length - 1] == "规则") {
+                functs.push({
+                    name: tokens[tokens.length - 1],
+                    param: 0
+                })
+            } else {
+                functs.push({
+                    name: "表达式",
+                    param: 0
+                })
+            }
+            take(1)
+            push(type.other)
+        } else if (peek(0) == ",") {
+            if (functs.length > 0) {
+                functs[functs.length - 1].param++
+            } else {
+                //函数参数错误
+                //getReport()
+                let position = document.positionAt(i)
+                let word = document.getText(document.getWordRangeAtPosition(document.positionAt(i)))
+                if (word.length > 20) {
+                    word = word.slice(0, 15) + "..."
+                }
+                vscode.window.setStatusBarMessage(`✦ 着色错误 ▹ 第${position.line + 1}行, 第${position.character}字符处未定义：${word}`)
+                return builder.build()
+            }
+            take(1)
+            push(type.other)
+        } else if (peek(0) == ")") {
+            //函尾
+            functs.pop()
+            take(1)
+            push(type.other)
+        } else if (peek(0) == "禁" && peek(1) == "用" && peek(2).match(/\s/)) {
+            //禁用
+            take(2)
+            push(type.other)
+        } else if (!getBlock() && ((peek(0) == "设" && peek(1) == "置") || (peek(0) == "变" && peek(1) == "量") || (peek(0) == "规" && peek(1) == "则"))) {
+            //块
+            take(2)
+            push(type.other)
+        } else if (!getBlock() && (peek(0) == "子" && peek(1) == "程" && peek(2) == "序")) {
+            //块
+            take(3)
+            push(type.other)
+        } else if (getBlock() == "变量" && ((peek(0) == "全" && peek(1) == "局") || (peek(0) == "玩" && peek(1) == "家"))) {
+            //设置
+            take(2)
+            push(type.other)
+        } else if (getBlock() == "规则" && ((peek(0) == "事" && peek(1) == "件") || (peek(0) == "条" && peek(1) == "件") || (peek(0) == "动" && peek(1) == "作"))) {
+            //设置
+            take(2)
+            push(type.other)
+        } else if (getBlock() == "设置" && (match = matchToken(TOKEN.SETTING, 1, 16))) {
+            //设置
+            take(match.length)
+            push(type.other)
+        } else if (getBlock() == "事件" && (match = matchToken(TOKEN.EVENT, 1, 16))) {
+            //事件
+            take(match.length)
+            push(type.event)
+        } else if (getBlock() == "动作" && (match = matchToken(TOKEN.ACTION, 1, 16))) {
+            //动作
+            take(match.length)
+            push(type.action)
+        } else if ((getBlock() == "条件" || getBlock() == "动作") && functs.length > 0 && isConstant(getFunct()) && (match = matchToken(TOKEN.CONSTANT, 1, 16))) {
+            //常量
+            take(match.length)
+            push(type.constant)
+        } else if ((getBlock() == "条件" || getBlock() == "动作") && (match = matchToken(TOKEN.CONDITION, 1, 16))) {
+            //条件
+            take(match.length)
+            push(type.condition)
+        } else if (match = text.slice(i).match(/^([a-zA-Z_][a-zA-Z0-9_]*).*/)) {
+            //命名
+            take(match[1].length)
+            push(type.variable)
+        } else if (match = text.slice(i).match(/^((-?\d+)(.\d+|\d+)?).*/)) {
+            //数字
+            take(match[1].length)
+            push(type.number)
+        } else if (((peek(0) == "+" || peek(0) == "-" || peek(0) == "*" || peek(0) == "/" || peek(0) == "^" || peek(0) == "%" || peek(0) == "<" || peek(0) == ">" || peek(0) == "!" || peek(0) == "=") && peek(1) == "=") || (peek(0) == "|" && peek(1) == "|") || (peek(0) == "&" && peek(1) == "&")) {
+            //符号
+            take(2)
+            push(type.symbol)
+        } else if (peek(0) == ":" || peek(0) == ";" || peek(0) == "," || peek(0) == "." || peek(0) == "+" || peek(0) == "-" || peek(0) == "*" || peek(0) == "/" || peek(0) == "^" || peek(0) == "%" || peek(0) == "<" || peek(0) == ">" || peek(0) == "!" || peek(0) == "?" || peek(0) == "=" || peek(0) == "|" || peek(0) == "&") {
+            //符号
+            take(1)
+            push(type.symbol)
+        } else if (peek(0) == "[" || peek(0) == "]") {
+            //括号
+            take(1)
+            push(type.other)
+        } else {
+            let position = document.positionAt(i)
+            let word = document.getText(document.getWordRangeAtPosition(document.positionAt(i)))
+            if (word.length > 20) {
+                word = word.slice(0, 15) + "..."
+            }
+            vscode.window.setStatusBarMessage(`✦ 着色错误 ▹ 第${position.line + 1}行, 第${position.character}字符处未定义：${word}`)
+            console.log(builder.build())
+            return builder.build()
+        }
+        vscode.window.setStatusBarMessage("✧ Overwatch Workshop 语言支持")
+        console.log(builder.build())
+        return builder.build()
     }
 }
