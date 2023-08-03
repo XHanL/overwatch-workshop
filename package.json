@@ -1,0 +1,209 @@
+{
+    "icon": "images/extension/background/icon.png",
+    "name": "overwatch-workshop",
+    "displayName": "Overwatch Workshop",
+    "publisher": "Xcrystal",
+    "description": "守望先锋® 高级工坊语言支持",
+    "repository": {
+        "url": "https://github.com/XHanL/overwatch-workshop"
+    },
+    "keywords": [
+        "ow",
+        "overwatch",
+        "workshop",
+        "守望先锋",
+        "工坊"
+    ],
+    "version": "1.1.7",
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "main": "ow.main.js",
+    "activationEvents": [
+        "onLanguage:json"
+    ],
+    "contributes": {
+        "configuration": {
+            "title": "高亮引擎",
+            "properties": {
+                "启用语法分析（实验性）": {
+                    "type": "boolean",
+                    "default": "false",
+                    "description": "开启可提供更加精准着色和语法检查能力，但仍处于实验阶段并具有较多BUG。"
+                }
+            }
+        },
+        "languages": [
+            {
+                "id": "ow",
+                "aliases": [
+                    "OW",
+                    "ow"
+                ],
+                "extensions": [
+                    ".ow",
+                    ".owl",
+                    ".watch"
+                ],
+                "configuration": "ow.language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "ow",
+                "scopeName": "source.ow",
+                "path": "syntaxes/ow.tmLanguage.json"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "ow.key.enter",
+                "when": "editorLangId == ow && editorTextFocus && suggestWidgetVisible && !suggestWidgetHasFocusedSuggestion",
+                "key": "Enter"
+            },
+            {
+                "command": "ow.key.backspace",
+                "when": "editorLangId == ow && editorTextFocus",
+                "key": "Backspace"
+            }
+        ],
+        "commands": [
+            {
+                "command": "ow.command.suggest",
+                "title": "建议",
+                "icon": {
+                    "light": "images/extension/command/black/suggest.png",
+                    "dark": "images/extension/command/suggest.png"
+                }
+            },
+            {
+                "command": "ow.command.undo",
+                "title": "撤销",
+                "icon": {
+                    "light": "images/extension/command/black/undo.png",
+                    "dark": "images/extension/command/undo.png"
+                }
+            },
+            {
+                "command": "ow.command.redo",
+                "title": "恢复",
+                "icon": {
+                    "light": "images/extension/command/black/redo.png",
+                    "dark": "images/extension/command/redo.png"
+                }
+            },
+            {
+                "command": "ow.command.line",
+                "title": "换行",
+                "icon": {
+                    "light": "images/extension/command/black/line.png",
+                    "dark": "images/extension/command/line.png"
+                }
+            },
+            {
+                "command": "ow.command.format",
+                "title": "整理",
+                "icon": {
+                    "light": "images/extension/command/black/format.png",
+                    "dark": "images/extension/command/format.png"
+                }
+            },
+            {
+                "command": "ow.command.copy",
+                "title": "复制",
+                "icon": {
+                    "light": "images/extension/command/black/copy.png",
+                    "dark": "images/extension/command/copy.png"
+                }
+            },
+            {
+                "command": "ow.command.paste",
+                "title": "粘贴",
+                "icon": {
+                    "light": "images/extension/command/black/paste.png",
+                    "dark": "images/extension/command/paste.png"
+                }
+            },
+            {
+                "command": "ow.command.blur",
+                "title": "混淆",
+                "icon": {
+                    "light": "images/extension/command/black/blur.png",
+                    "dark": "images/extension/command/blur.png"
+                }
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "ow_container",
+                    "title": "OW",
+                    "icon": "images/extension/command/outline.png"
+                }
+            ]
+        },
+        "views": {
+            "ow_container": [
+                {
+                    "id": "ow.view.manual",
+                    "name": "手册",
+                    "type": "webview"
+                }
+            ]
+        },
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "ow.command.suggest",
+                    "when": "editorLangId == ow",
+                    "group": "navigation@100"
+                },
+                {
+                    "command": "ow.command.line",
+                    "when": "editorLangId == ow",
+                    "group": "navigation@101"
+                },
+                {
+                    "command": "ow.command.format",
+                    "when": "editorLangId == ow",
+                    "group": "navigation@102"
+                },
+                {
+                    "command": "ow.command.copy",
+                    "when": "editorLangId == ow",
+                    "group": "navigation@103"
+                },
+                {
+                    "command": "ow.command.paste",
+                    "when": "editorLangId == ow",
+                    "group": "navigation@104"
+                }
+            ]
+        },
+        "themes": [
+            {
+                "label": "OW Dark",
+                "uiTheme": "vs-dark",
+                "path": "themes/ow.dark.json"
+            },
+            {
+                "label": "OW Crystal Dark",
+                "uiTheme": "vs-dark",
+                "path": "themes/ow.crystal_dark.json"
+            },
+            {
+                "label": "OW Light (实验性)",
+                "uiTheme": "vs",
+                "path": "themes/ow.light.json"
+            },
+            {
+                "label": "OW Crystal Light (实验性)",
+                "uiTheme": "vs",
+                "path": "themes/ow.crystal_light.json"
+            }
+        ]
+    }
+}
