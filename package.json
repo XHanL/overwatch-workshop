@@ -59,16 +59,6 @@
             }
         ],
         "keybindings": [
-            {
-                "command": "ow.key.enter",
-                "when": "editorLangId == ow && editorTextFocus && suggestWidgetVisible && !suggestWidgetHasFocusedSuggestion",
-                "key": "Enter"
-            },
-            {
-                "command": "ow.key.backspace",
-                "when": "editorLangId == ow && editorTextFocus",
-                "key": "Backspace"
-            }
         ],
         "commands": [
             {

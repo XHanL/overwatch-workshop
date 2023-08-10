@@ -556,7 +556,7 @@ function activate(context) {
                         <br>
                         <button style="width: auto; height: 25px;" onclick="navigate('Home')">返回</button>
                         <i><h3>图标选项</h3></i>
-                        
+
                         ${tableHtml}
                         </body>
 
@@ -566,19 +566,19 @@ function activate(context) {
                     function getHeroIconTableHtml() {
                         return `<!DOCTYPE html>
                         <html>
-                        
+
                         <head>
                         <link href="${styleUri}" rel="stylesheet">
                         <script src="${scriptUri}"></script>
                         <title>英雄图标选项</title>
                         </head>
-                       
+
                         <body>
                         <br>
                         <button style="width: auto; height: 25px;" onclick="navigate('Home')">返回</button>
                         <i><h3>英雄图标选项</h3></i>
-                        
-                        
+
+
                         <h4 style="display: flex; align-items: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', `${themeUri}tank.png`))}" width="auto" height="30" style="vertical-align: middle;">&nbsp;重装</h4>
                         <table style="min-width: 300px; max-width: 400px;">
                         <tr>
@@ -601,7 +601,7 @@ function activate(context) {
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'ramattra', 'icon.png'))}" width="50" height="50"><br>拉玛刹<br></td>
                         </tr>
                         </table>
-                        
+
                         <h4 style="display: flex; align-items: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', `${themeUri}damage.png`))}" width="auto" height="30" style="vertical-align: middle;">&nbsp;输出</h4>
                         <table style="min-width: 300px; max-width: 400px;">
                         <tr>
@@ -634,7 +634,7 @@ function activate(context) {
                         <td style="text-align: center"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'widowmaker', 'icon.png'))}" width="50" height="50"><br>黑百合<br></td>
                         </tr>
                         </table>
-                        
+
                         <h4 style="display: flex; align-items: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', `${themeUri}support.png`))}" width="auto" height="30" style="vertical-align: middle;">&nbsp;支援</h4>
                         <table style="min-width: 300px; max-width: 400px;">
                         <tr>
@@ -653,7 +653,7 @@ function activate(context) {
                         <td style="text-align: center"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'lifeweaver', 'icon.png'))}" width="50" height="50"><br>生命之梭<br></td>
                         </tr>
                         </table>
-                        
+
                         </body>
                         </html>`
                     }
@@ -670,7 +670,7 @@ function activate(context) {
                         <br>
                         <button style="width: auto; height: 25px;" onclick="navigate('Home')">返回</button>
                         <i><h3>技能图标选项</h3></i>
-                        
+
 
                         <h4 style="display: flex; align-items: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', `${themeUri}tank.png`))}" width="auto" height="30" style="vertical-align: middle;">&nbsp;重装</h4>
                         <table style="min-width: 700px; max-width: 800px;">
@@ -697,7 +697,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'dva', 'icon.png'))}" width="auto" height="50"><br>D.Va<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'dva', 'weapon1.png'))}" width="60" height="auto"></td>
@@ -709,7 +709,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'wrecking-ball', 'icon.png'))}" width="auto" height="50"><br>破坏球<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'wrecking-ball', 'weapon.png'))}" width="auto" height="30"></td>
@@ -721,7 +721,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'wrecking-ball', `${themeUri}crouch.png`))}" width="30" height="30"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'junker-queen', 'icon.png'))}" width="auto" height="50"><br>渣客女王<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'junker-queen', 'weapon.png'))}" width="auto" height="30"></td>
@@ -733,7 +733,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'orisa', 'icon.png'))}" width="auto" height="50"><br>奥丽莎<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'orisa', 'weapon.png'))}" width="auto" height="30"></td>
@@ -745,7 +745,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'reinhardt', 'icon.png'))}" width="auto" height="50"><br>莱因哈特<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'reinhardt', 'weapon.png'))}" width="auto" height="30"></td>
@@ -757,7 +757,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'roadhog', 'icon.png'))}" width="auto" height="50"><br>路霸<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'roadhog', 'weapon.png'))}" width="auto" height="30"></td>
@@ -769,7 +769,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'sigma', 'icon.png'))}" width="auto" height="50"><br>西格玛<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'sigma', 'weapon.png'))}" width="auto" height="30"></td>
@@ -781,7 +781,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'winston', 'icon.png'))}" width="auto" height="50"><br>温斯顿<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'winston', 'weapon.png'))}" width="auto" height="30"></td>
@@ -793,7 +793,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'zarya', 'icon.png'))}" width="auto" height="50"><br>查莉娅<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'zarya', 'weapon.png'))}" width="auto" height="30"></td>
@@ -805,7 +805,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'ramattra', 'icon.png'))}" width="auto" height="50"><br>拉玛刹<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'tank', 'ramattra', 'weapon1.png'))}" width="auto" height="30"></td>
@@ -819,7 +819,7 @@ function activate(context) {
                         </tr>
                         </tbody>
                         </table>
-                        
+
                         <h4 style="display: flex; align-items: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', `${themeUri}damage.png`))}" width="auto" height="30" style="vertical-align: middle;">&nbsp;输出</h4>
                         <table style="min-width: 700px; max-width: 800px;">
                         <thead>
@@ -845,7 +845,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'bastion', 'icon.png'))}" width="auto" height="50"><br>堡垒<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'bastion', 'weapon1.png'))}" width="auto" height="30"></td>
@@ -857,7 +857,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'echo', 'icon.png'))}" width="auto" height="50"><br>回声<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'echo', 'weapon.png'))}" width="auto" height="30"></td>
@@ -869,7 +869,7 @@ function activate(context) {
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'echo', `${themeUri}passive.png`))}" width="30" height="30"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'genji', 'icon.png'))}" width="auto" height="50"><br>源氏<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'genji', 'weapon.png'))}" width="auto" height="30"></td>
@@ -881,7 +881,7 @@ function activate(context) {
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'genji', `${themeUri}passive.png`))}" width="30" height="30"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'hanzo', 'icon.png'))}" width="auto" height="50"><br>半藏<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'hanzo', 'weapon.png'))}" width="auto" height="30"></td>
@@ -904,7 +904,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'cassidy', 'icon.png'))}" width="auto" height="50"><br>卡西迪<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'cassidy', 'weapon.png'))}" width="auto" height="30"></td>
@@ -916,7 +916,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'mei', 'icon.png'))}" width="auto" height="50"><br>美<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'mei', 'weapon.png'))}" width="auto" height="30"></td>
@@ -928,7 +928,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'pharah', 'icon.png'))}" width="auto" height="50"><br>法老之鹰<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'pharah', 'weapon.png'))}" width="auto" height="30"></td>
@@ -940,7 +940,7 @@ function activate(context) {
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'pharah', `${themeUri}passive.png`))}" width="30" height="30"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'reaper', 'icon.png'))}" width="auto" height="50"><br>死神<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'reaper', 'weapon.png'))}" width="auto" height="30"></td>
@@ -952,7 +952,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'sojourn', 'icon.png'))}" width="auto" height="50"><br>索杰恩<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'sojourn', 'weapon.png'))}" width="auto" height="30"></td>
@@ -964,7 +964,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'soldier-76', 'icon.png'))}" width="auto" height="50"><br>士兵：76<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'soldier-76', 'weapon.png'))}" width="auto" height="30"></td>
@@ -976,7 +976,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'sombra', 'icon.png'))}" width="auto" height="50"><br>黑影<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'sombra', 'weapon.png'))}" width="auto" height="30"></td>
@@ -988,7 +988,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'symmetra', 'icon.png'))}" width="auto" height="50"><br>秩序之光<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'symmetra', 'weapon.png'))}" width="auto" height="30"></td>
@@ -1000,7 +1000,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'torbjorn', 'icon.png'))}" width="auto" height="50"><br>托比昂<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'torbjorn', 'weapon1.png'))}" width="auto" height="30"></td>
@@ -1012,7 +1012,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'tracer', 'icon.png'))}" width="auto" height="50"><br>猎空<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'tracer', 'weapon.png'))}" width="auto" height="30"></td>
@@ -1024,7 +1024,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'widowmaker', 'icon.png'))}" width="auto" height="50"><br>黑百合<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'damage', 'widowmaker', 'weapon.png'))}" width="auto" height="30"></td>
@@ -1038,7 +1038,7 @@ function activate(context) {
                         </tr>
                         </tbody>
                         </table>
-                        
+
                         <h4 style="display: flex; align-items: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', `${themeUri}support.png`))}" width="auto" height="30" style="vertical-align: middle;">&nbsp;支援</h4>
                         <table style="min-width: 700px; max-width: 800px;">
                         <thead>
@@ -1064,7 +1064,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'baptiste', 'icon.png'))}" width="auto" height="50"><br>巴蒂斯特<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'baptiste', 'weapon1.png'))}" width="auto" height="30"></td>
@@ -1076,7 +1076,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'baptiste', `${themeUri}passive.png`))}" width="30" height="30"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'brigitte', 'icon.png'))}" width="auto" height="50"><br>布丽吉塔<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'brigitte', 'weapon.png'))}" width="auto" height="30"></td>
@@ -1088,7 +1088,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'kiriko', 'icon.png'))}" width="auto" height="50"><br>雾子<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'kiriko', 'weapon1.png'))}" width="auto" height="30"></td>
@@ -1100,7 +1100,7 @@ function activate(context) {
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'kiriko', `${themeUri}passive.png`))}" width="30" height="30"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'lucio', 'icon.png'))}" width="auto" height="50"><br>卢西奥<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'lucio', 'weapon.png'))}" width="auto" height="30"></td>
@@ -1112,7 +1112,7 @@ function activate(context) {
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'lucio', `${themeUri}passive.png`))}" width="30" height="30"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'mercy', 'icon.png'))}" width="auto" height="50"><br>天使<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'mercy', 'weapon1.png'))}" width="auto" height="30"></td>
@@ -1124,7 +1124,7 @@ function activate(context) {
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'mercy', `${themeUri}passive.png`))}" width="30" height="30"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'moira', 'icon.png'))}" width="auto" height="50"><br>莫伊拉<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'moira', 'weapon.png'))}" width="auto" height="30"></td>
@@ -1136,7 +1136,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'zenyatta', 'icon.png'))}" width="auto" height="50"><br>禅雅塔<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'zenyatta', 'weapon.png'))}" width="auto" height="30"></td>
@@ -1148,7 +1148,7 @@ function activate(context) {
                         <td style="text-align: center;"></td>
                         <td style="text-align: center;"></td>
                         </tr>
-                        
+
                         <tr>
                         <td style="text-align: center;"><img style="border-radius: 50%" src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'lifeweaver', 'icon.png'))}" width="auto" height="50"><br>生命之梭<br></td>
                         <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'hero', 'support', 'lifeweaver', 'weapon1.png'))}" width="60" height="auto"></td>
@@ -1162,7 +1162,7 @@ function activate(context) {
                         </tr>
                         </tbody>
                         </table>
-                        
+
                         </body>
                         </html>`
                     }
@@ -1388,7 +1388,7 @@ function activate(context) {
                 return colors
             },
             provideColorPresentations(color) {
-                const newColor = 
+                const newColor =
                     "自定义颜色(" + Math.floor(color.red * 255) +
                     ", " + Math.floor(color.green * 255) +
                     ", " + Math.floor(color.blue * 255) +
@@ -2602,7 +2602,11 @@ function activate(context) {
                     let isPhaseComment = false
 
                     let foldingRanges = []
-                    let blocks = []
+
+                    let braces = []
+                    let brackets = []
+                    let parentheses = []
+
                     let flows = []
 
                     function peek(n) {
@@ -2615,7 +2619,7 @@ function activate(context) {
                         i += n
                     }
 
-                    function matchStart() {
+                    function matchControlFlowSStart() {
                         if (text.slice(i, i + 8) == "For 全局变量") {
                             return "For 全局变量"
                         }
@@ -2631,7 +2635,7 @@ function activate(context) {
                         return undefined
                     }
 
-                    function matchMiddle() {
+                    function matchControlFlowMiddle() {
                         if (text.slice(i, i + 7) == "Else If") {
                             return "Else If"
                         }
@@ -2641,7 +2645,7 @@ function activate(context) {
                         return undefined
                     }
 
-                    function matchEnd() {
+                    function matchControlFlowEnd() {
                         if (text.slice(i, i + 3) == "End") {
                             return "End"
                         }
@@ -2680,11 +2684,9 @@ function activate(context) {
                             skip(2)
                             const line = document.lineAt(document.positionAt(i).line);
                             const text = line.text;
-                            const index = text.search(/\S\s*$/);
-                            if (index !== -1) {
-                                lineEnd = document.offsetAt(new vscode.Position(document.positionAt(i).line, index))
-                                isLineComment = true
-                            }
+                            const index = text.search(/$/)
+                            lineEnd = document.offsetAt(new vscode.Position(document.positionAt(i).line, index))
+                            isLineComment = true
                         } else if (peek(0) == "/" && peek(1) == "*") {
                             //段注开始
                             skip(2)
@@ -2694,19 +2696,31 @@ function activate(context) {
                             skip(1)
                             isString = true
                         } else if (peek(0) == "{") {
-                            blocks.push(i)
+                            braces.push(i)
                             skip(1)
                         } else if (peek(0) == "}") {
-                            foldingRanges.push(new vscode.FoldingRange(document.positionAt(blocks.pop()).line - 1, document.positionAt(i).line))
+                            foldingRanges.push(new vscode.FoldingRange(document.positionAt(braces.pop()).line - 1, document.positionAt(i).line))
                             skip(1)
-                        } else if (match = matchStart()) {
+                        } else if (peek(0) == "[") {
+                            brackets.push(i)
+                            skip(1)
+                        } else if (peek(0) == "]") {
+                            foldingRanges.push(new vscode.FoldingRange(document.positionAt(brackets.pop()).line - 1, document.positionAt(i).line))
+                            skip(1)
+                        } else if (peek(0) == "(") {
+                            parentheses.push(i)
+                            skip(1)
+                        } else if (peek(0) == ")") {
+                            foldingRanges.push(new vscode.FoldingRange(document.positionAt(parentheses.pop()).line - 1, document.positionAt(i).line))
+                            skip(1)
+                        } else if (match = matchControlFlowSStart()) {
                             flows.push(i)
                             skip(match.length)
-                        } else if (match = matchMiddle()) {
+                        } else if (match = matchControlFlowMiddle()) {
                             foldingRanges.push(new vscode.FoldingRange(document.positionAt(flows.pop()).line, document.positionAt(i).line - 1))
                             flows.push(i)
                             skip(match.length)
-                        } else if (match = matchEnd()) {
+                        } else if (match = matchControlFlowEnd()) {
                             foldingRanges.push(new vscode.FoldingRange(document.positionAt(flows.pop()).line, document.positionAt(i).line - 1))
                             skip(match.length)
                         } else {
@@ -3757,7 +3771,7 @@ function activate(context) {
                             take(2)
                             const line = document.lineAt(document.positionAt(i).line);
                             const text = line.text;
-                            const index = text.search(/\S\s*$/);
+                            const index = text.search(/\$/);
                             if (index !== -1) {
                                 lineEnd = document.offsetAt(new vscode.Position(document.positionAt(i).line, index))
                                 isLineComment = true
@@ -3940,7 +3954,7 @@ function activate(context) {
 
     })
 
-    
+
 
     //代码镜头
     vscode.languages.registerCodeLensProvider("ow", {
@@ -4044,7 +4058,7 @@ function activate(context) {
         }
     })
 
-    
+
 }
 
 function getCompletionItems() {
