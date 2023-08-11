@@ -153,10 +153,12 @@ function activate(context) {
         //悬停
         vscode.languages.registerHoverProvider("ow", {
             provideHover(document, position) {
-                const hoverText = document.getText(document.getWordRangeAtPosition(position))
-                if (hoverText == document.getText()) {
+                const hoverRange = document.getWordRangeAtPosition(position)
+                if (!hoverRange) {
                     return
                 }
+                const hoverText = document.getText(hoverRange)
+
                 let rightBracesCount = 0
                 for (let i = position.line; i >= 0; i--) {
                     const line = document.lineAt(i)
@@ -279,22 +281,6 @@ function activate(context) {
         //补全
         vscode.languages.registerCompletionItemProvider("ow", {
             provideCompletionItems(document, position, context) {
-
-                const text = document.getText()
-                const wordPrefix = document.getText(document.getWordRangeAtPosition(position, /((禁用)?\s*规则\(".*"\))|(持续 - 全局)|(持续 - 每名玩家)|(栏位\s+[0-9]|10|11)|(Else If)|(For 全局变量)|(For 玩家变量)|(D\.Va)|\b(-?\d+)(.\d+|\d+)?\b|(\\.)|(\/\/)|(\/\*)|(\*\/)|(\+=)|(-=)|(\*=)|(\/=)|(%=)|(\^=)|(<=)|(>=)|(==)|(!=)|(\|\|)|(&&)|\+|-|(\*)|(\/)|(%)|(\^)|(<)|(>)|(=)|(!)|(\?)|([^\+\-\*\/%\^<>!=&\|?\{\}\(\)\[\];:,\.\s"\\]+)/g))
-
-                const wordRegex = /\S+/g
-                const words = []
-
-                while ((match = wordRegex.exec(text)) !== null) {
-                    const word = match[0];
-                    if (word !== wordPrefix) {
-                        words.push(new vscode.CompletionItem(word, vscode.CompletionItemKind.Text));
-                    }
-                }
-
-                return words
-
                 const completionText = document.getText(document.getWordRangeAtPosition(position))
                 let completionItems = []
                 let rightBracesCount = 0
@@ -318,42 +304,59 @@ function activate(context) {
                                     return MODEL.RULES.EVENT_PLAYER[`${theme}补全`]
                                 }
                             } else if (prevLineText === "条件") {
-
-
+                                getPrefix()
                             } else if (prevLineText === "动作") {
-
+                                getPrefix()
                             }
 
                             function getPrefix() {
-                                let text = document.getText()
-                                let i = document.offsetAt(document.getWordRangeAtPosition(position).start) - 1
-                                let rightBracesCount = 0
-                                let rightBracketsCount = 0
-                                let rightParenthesesCount = 0
-                                while (i > 0) {
-                                    if (text[i] === " ") {
-                                        continue
-                                    } else if (text[i] === "{") {
-                                        if (rightParenthesesCount > 0) {
-                                            rightParenthesesCount--
-                                        } else {
-                                            // scan front, skip space and get the block name
+                                try {
+                                    let type = 0
+                                    let rightBracesCount = 0
+                                    let rightBracketsCount = 0
+                                    let rightParenthesesCount = 0
+                                    let commasCount = 0
+                                    for (let i = document.offsetAt(position) - 1; i >= 0; i--) {
+                                        const wordRange = document.getWordRangeAtPosition(document.positionAt(i))
+                                        if (!wordRange) {
+                                            continue
                                         }
-                                    } else if (text[i] === "}") {
-                                        rightBracesCount++
-                                    } else if (text[i] === "(") {
-                                        if (rightParenthesesCount > 0) {
-                                            rightParenthesesCount--
-                                        } else {
-                                            // scan front, skip space and get the condition/action name
+                                        const word = document.getText(wordRange)
+                                        if (type == 1) {
+                                            console.log(`单个条件/动作 ${word} 参数索引 ${commasCount}`);
+                                            return
                                         }
-                                    } else if (text[i] === ")") {
-                                        rightParenthesesCount++
-                                    } else if (text[i] === ";") {
-                                        // scan back, skip space and get the no param condition/action name
-                                    } else if (text[i] === ".") {
-                                        // scan front, return 全局变量 or 玩家变量
+                                        console.log(`: ${word}`);
+                                        if (word == "{") {
+                                            if (rightParenthesesCount > 0) {
+                                                rightParenthesesCount--
+                                            } else {
+                                                console.log(`条件/动作列表`);
+                                            }
+                                        } else if (word == "}") {
+                                            rightBracesCount++
+                                        } else if (word == "(") {
+                                            if (rightParenthesesCount > 0) {
+                                                rightParenthesesCount--
+                                            } else {
+                                                // 参数列表 等待扫描函数名
+                                                type = 1
+                                            }
+                                        } else if (word == ")") {
+                                            rightParenthesesCount++
+                                        } else if (word == ";") {
+                                            // 条件/动作列表 直接返回
+                                            console.log(`条件/动作列表`);
+                                        } else if (word == ",") {
+                                            if (rightParenthesesCount == 0) {
+                                                commasCount++
+                                            }
+                                        }
+                                        i = document.offsetAt(wordRange.start)
+                                        console.log(rightParenthesesCount, commasCount);
                                     }
+                                } catch (error) {
+                                    console.log(error);
                                 }
                             }
                         }
