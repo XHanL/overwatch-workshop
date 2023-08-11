@@ -402,7 +402,7 @@ function initModelLightCompletion(context) {
     }
     for (i in RULES) {
         for (j in RULES[i]) {
-
+            
 
             RULES[i][j]["亮色补全"] = info
         }
