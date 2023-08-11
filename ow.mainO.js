@@ -76,7 +76,7 @@ const SYMBOL = require('./model/ow.symbol.js')
 
 const TEMPLATE = require('./model/ow.template.js')
 
-const PINYIN = require('./model/ow.pinyin.js')
+const PINYIN = require('./ow.pinyin.js')
 
 let blur = false
 

@@ -138,7 +138,7 @@ function initModelDarkHover(context) {
             } else {
                 info.appendMarkdown(`\n\n${CONSTS[i][j].提示}`)
             }
-            CONSTS[i][j]["暗色"] = info
+            CONSTS[i][j]["暗色悬停"] = new vscode.Hover(info)
         }
     }
     for (i in RULES) {
@@ -149,7 +149,7 @@ function initModelDarkHover(context) {
             info.supportThemeIcons = true
             info.baseUri = vscode.Uri.file(path.join(context.extensionPath, '', path.sep))
             info.appendMarkdown(`**<span>${j}</span>**\n\n`)
-            
+
             //标签
             for (k in RULES[i][j].标签) {
                 info.appendMarkdown(`\`${RULES[i][j].标签[k]}\`&nbsp;`)
@@ -210,7 +210,7 @@ function initModelDarkHover(context) {
                     info.appendMarkdown(`|\n\n---`)
                 }
             }
-            RULES[i][j]["暗色"] = info
+            RULES[i][j]["暗色悬停"] = new vscode.Hover(info)
         }
     }
 }
@@ -291,7 +291,7 @@ function initModelLightHover(context) {
             } else {
                 info.appendMarkdown(`\n\n${CONSTS[i][j].提示}`)
             }
-            CONSTS[i][j]["亮色"] = info
+            CONSTS[i][j]["亮色悬停"] = new vscode.Hover(info)
         }
     }
     for (i in RULES) {
@@ -302,7 +302,7 @@ function initModelLightHover(context) {
             info.supportThemeIcons = true
             info.baseUri = vscode.Uri.file(path.join(context.extensionPath, '', path.sep))
             info.appendMarkdown(`**<span>${j}</span>**\n\n`)
-            
+
             //标签
             for (k in RULES[i][j].标签) {
                 info.appendMarkdown(`\`${RULES[i][j].标签[k]}\`&nbsp;`)
@@ -363,12 +363,32 @@ function initModelLightHover(context) {
                     info.appendMarkdown(`|\n\n---`)
                 }
             }
-            RULES[i][j]["亮色"] = info
+            RULES[i][j]["亮色悬停"] = new vscode.Hover(info)
         }
     }
 }
 
-function initModelSuggestion(context) {
+function initModelDarkCompletion(context) {
+    for (i in CONSTS) {
+        if (i == "STRING") {
+            continue
+        }
+        for (j in CONSTS[i]) {
+
+
+            CONSTS[i][j]["暗色补全"] = info
+        }
+    }
+    for (i in RULES) {
+        for (j in RULES[i]) {
+
+
+            RULES[i][j]["暗色补全"] = info
+        }
+    }
+}
+
+function initModelLightCompletion(context) {
     for (i in CONSTS) {
         if (i == "STRING") {
             continue
@@ -377,7 +397,14 @@ function initModelSuggestion(context) {
 
 
 
-            CONSTS[i][j]["建议"] = info
+            CONSTS[i][j]["亮色补全"] = info
+        }
+    }
+    for (i in RULES) {
+        for (j in RULES[i]) {
+
+
+            RULES[i][j]["亮色补全"] = info
         }
     }
 }
@@ -387,5 +414,325 @@ module.exports = {
     CONSTS,
     initModelDarkHover,
     initModelLightHover,
-    initModelSuggestion
+    initModelDarkCompletion,
+    initModelLightCompletion
+}
+
+function getTypedItems(type) {
+    const theme = vscode.window.activeColorTheme.kind == vscode.ColorThemeKind.Dark
+    const themeUri = theme ? '' : 'gray/'
+    let items = []
+    for (i in type) {
+        let item = new vscode.CompletionItem(i)
+        if (type == TEMPLATE) {
+            item.kind = vscode.CompletionItemKind.Module
+        } else if (type == MODEL.RULES.EVENT) {
+            item.kind = vscode.CompletionItemKind.Event
+        } else if (type == MODEL.RULES.EVENT_TEAM) {
+            item.kind = vscode.CompletionItemKind.Event
+        } else if (type == MODEL.RULES.EVENT_PLAYER) {
+            item.kind = vscode.CompletionItemKind.Event
+        } else if (type == MODEL.RULES.CONDITION) {
+            item.kind = vscode.CompletionItemKind.Class
+            item.command = {
+                command: 'editor.action.triggerParameterHints',
+                title: 'triggerParameterHints',
+                arguments: []
+            }
+        } else if (type == MODEL.RULES.ACTION) {
+            item.kind = vscode.CompletionItemKind.Method
+            item.command = {
+                command: 'editor.action.triggerParameterHints',
+                title: 'triggerParameterHints',
+                arguments: []
+            }
+        } else if (CONSTS.hasOwnProperty(type)) {
+            item.kind = vscode.CompletionItemKind.Constant
+        }
+
+        //名称
+        item.documentation = new vscode.MarkdownString(`**${i}**`)
+        item.documentation.isTrusted = true
+        item.documentation.supportHtml = true
+        item.documentation.supportThemeIcons = true
+        item.documentation.baseUri = vscode.Uri.file(path.join(context.extensionPath, '', path.sep))
+        item.filterText = (i + getPinyin(i)).split("").join(" ")
+        //console.log(item.filterText)
+
+        if (type[i].hasOwnProperty("顺序")) {
+            item.sortText = type[i].顺序
+        }
+
+        if (type[i].hasOwnProperty("格式")) {
+            item.insertText = new vscode.SnippetString(`${type[i].格式}`)
+        } else {
+            item.insertText = new vscode.SnippetString(`${i}`)
+        }
+
+        //参数
+        if (type[i].hasOwnProperty("参数")) {
+            item.documentation.appendMarkdown(`&nbsp;**(**&nbsp;`)
+            item.insertText.appendText(`(`)
+            let n = 0
+            for (j in type[i].参数) {
+                item.documentation.appendMarkdown(`\`${type[i].参数[j].默认}\``)
+                if (type[i].参数[j].类型 == "字符串选项") {
+                    item.insertText.appendText(`"`)
+                    item.insertText.appendPlaceholder(`${type[i].参数[j].默认}`)
+                    item.insertText.appendText(`"`)
+                } else {
+                    item.insertText.appendPlaceholder(`${type[i].参数[j].默认}`)
+                }
+
+                n++
+                if (n < Object.keys(type[i].参数).length) {
+                    item.documentation.appendMarkdown(`**,**&nbsp;`)
+                    item.insertText.appendText(`, `)
+                }
+            }
+            item.documentation.appendMarkdown(` **)**`)
+            item.insertText.appendText(`)`)
+        }
+
+        //标签
+        if (type == MODEL.RULES.EVENT || type == MODEL.RULES.EVENT_PLAYER || type == MODEL.RULES.EVENT_TEAM || type == MODEL.RULES.ACTION) {
+            item.documentation.appendMarkdown(`&nbsp;**;**`)
+            item.insertText.appendText(`;`)
+        }
+        item.documentation.appendMarkdown(`\n\n`)
+        for (j in type[i].标签) {
+            item.documentation.appendMarkdown(`\`\`${type[i].标签[j]}\`\`&nbsp;`)
+        }
+
+        switch (type) {
+            case CONSTS.BUTTON:
+                item.documentation.appendMarkdown(
+                    `\n\n
+||||
+|:--|:--|:--|
+|<img src="images/ow/input/${themeUri}${CONSTS.BUTTON[i].图标}.png" width=25 height=25/>|&nbsp;&nbsp;|${CONSTS.BUTTON[i].提示}|
+\n\n`
+                )
+                break;
+            case CONSTS.COLOR:
+                item.documentation.appendMarkdown(
+                    `\n\n
+||||
+|:--|:--|:--|
+|<img src="images/ow/color/${CONSTS.COLOR[i].图标}.png" width=25 height=25/>|&nbsp;&nbsp;|${CONSTS.COLOR[i].提示}|
+\n\n`
+                )
+                break;
+            case CONSTS.ICON:
+                item.documentation.appendMarkdown(
+                    `\n\n
+||||
+|:--|:--|:--|
+|<img src="images/ow/icon/${themeUri}${CONSTS.ICON[i].图标}.png" width=30 height=30/>|&nbsp;&nbsp;|${CONSTS.ICON[i].提示}|
+\n\n`
+                )
+                break;
+            case MODEL.RULES.EVENT_PLAYER:
+                if (!MODEL.RULES.EVENT_PLAYER[i].hasOwnProperty("路径")) {
+                    break
+                }
+            case CONSTS.HERO:
+
+                item.documentation.appendMarkdown(
+                    `\n\n
+||||
+|:--|:--|:--|
+|<img src="${CONSTS.HERO[i].路径}${CONSTS.HERO[i].图标}.png" width=50 height=50/>|&nbsp;&nbsp;|${CONSTS.HERO[i].提示}|
+\n\n`
+                )
+                for (k in CONSTS.HERO[i].生命) {
+                    switch (k) {
+                        case "自由":
+                            item.documentation.appendMarkdown(`***自由***&nbsp;&nbsp;\`${CONSTS.HERO[i].生命[k]}\`&nbsp;&nbsp;`)
+                            break;
+
+                        case "职责":
+                            item.documentation.appendMarkdown(`***职责***&nbsp;&nbsp;\`${CONSTS.HERO[i].生命[k]}\`&nbsp;&nbsp;`)
+                            break;
+
+                        case "护甲":
+                            item.documentation.appendMarkdown(`***护甲***&nbsp;&nbsp;<span style="color:#C50;">\`${CONSTS.HERO[i].生命[k]}\`</span>&nbsp;&nbsp;`)
+                            break;
+
+                        case "护盾":
+                            item.documentation.appendMarkdown(`***护盾***&nbsp;&nbsp;<span style="color:#0AC;">\`${CONSTS.HERO[i].生命[k]}\`</span>`)
+                            break;
+                    }
+                }
+                item.documentation.appendMarkdown(`\n\n`)
+
+                for (k in CONSTS.HERO[i].技能) {
+                    item.documentation.appendMarkdown(
+                        `
+||||
+|:-:|-:|:-|
+|<img src="${CONSTS.HERO[i].路径}${vscode.window.activeColorTheme.kind == vscode.ColorThemeKind.Dark ? "" : CONSTS.HERO[i].技能[k].图标.match(/weapon.*/) ? "" : "gray/"}${CONSTS.HERO[i].技能[k].图标}.png" width=auto height=25/>&nbsp;&nbsp;|***${k}***&nbsp;&nbsp;|`
+                    )
+                    for (l in CONSTS.HERO[i].技能[k].绑定) {
+                        item.documentation.appendMarkdown(`\`${CONSTS.HERO[i].技能[k].绑定[l]}\`&nbsp;`)
+                    }
+                    item.documentation.appendMarkdown(`|\n\n`)
+                    //item.documentation.appendMarkdown(`|\n\n${CONST[i][j].技能[k].hasOwnProperty("提示") ? `*${CONST[i][j].技能[k].提示}*` : ``}\n\n---`)
+                }
+                break;
+
+            default:
+                //提示
+                item.documentation.appendMarkdown(`\n\n${type[i].提示}`)
+
+                //返回
+                if (type[i].hasOwnProperty("返回")) {
+                    item.documentation.appendMarkdown(`\n\n***<span style="color:#c50;">⬘</span>&nbsp;返回***\n\n`)
+                    for (j in type[i].返回) {
+                        item.documentation.appendMarkdown(`\`${type[i].返回[j]}\` `)
+                    }
+                }
+
+                //参数
+                if (type[i].hasOwnProperty("参数")) {
+                    item.documentation.appendMarkdown(`\n\n***<span style="color:#0ac;">⬘</span>&nbsp;参数***\n\n`)
+                    let n = 0
+                    for (j in type[i].参数) {
+                        item.documentation.appendMarkdown(`\`${n}\` \`${j}\` - ${type[i].参数[j].提示}\n\n`)
+                        n++
+                    }
+                }
+
+                //格式
+                if (type[i].hasOwnProperty("格式")) {
+                    item.documentation.appendCodeblock(type[i].格式, "ow")
+                }
+                break;
+        }
+        items.push(item)
+    }
+    return items
+}
+
+function getVariableItems() {
+    const text = document.getText()
+    const length = text.length
+    const ranges = getStringRange(document)
+    let globalItems = []
+    let playerItems = []
+
+    let inblock = false
+    let kind = ""
+    for (let i = 0; i < length; i++) {
+        //跳过字符串
+        if (ranges.has(i)) {
+            continue
+        }
+        if (text[i] == "{") {
+            let word = getBlock(document, i)
+            if (word[0] == "变量") {
+                inblock = true
+            }
+        } else if (inblock) {
+            if (text[i] == "}") {
+                break
+            } else if (text[i] == ":") {
+                let index = getVariableIndex(document, i, ranges)
+                if (index.match(/(全局|玩家)/)) {
+                    kind = index
+                } else if (index.match(/\b(-?\d+)(.\d+|\d+)?\b/)) {
+                    let name = getVariableName(document, i, ranges)
+                    let item = new vscode.CompletionItem(index.padStart(3, '0') + ": " + name, vscode.CompletionItemKind.Variable)
+                    item.kind = vscode.CompletionItemKind.Variable
+                    item.documentation = new vscode.MarkdownString()
+                    item.documentation.isTrusted = true
+                    item.documentation.supportHtml = true
+                    item.documentation.supportThemeIcons = true
+                    item.documentation.baseUri = vscode.Uri.file(path.join(context.extensionPath, '', path.sep))
+                    item.documentation.appendMarkdown(`***${name}***\n\n\`${kind}变量\`&nbsp;\`${index}\`\n\n一个已声明的${kind}变量。`)
+                    item.insertText = name
+                    item.filterText = (index.padStart(3, '0') + name).split("").join(" ")
+                    if (kind == "全局") {
+                        globalItems.push(item)
+                    } else {
+                        playerItems.push(item)
+                    }
+                }
+            }
+        }
+    }
+    if (globalItems.length == 0) {
+        let item = new vscode.CompletionItem("没有已注册的变量")
+        item.insertText = ""
+        globalItems.push(item)
+    }
+    if (playerItems.length == 0) {
+        let item = new vscode.CompletionItem("没有已注册的变量")
+        item.insertText = ""
+        playerItems.push(item)
+    }
+    return [globalItems, playerItems]
+}
+
+function getSubroutineItems() {
+    const text = document.getText()
+    const length = text.length
+    const ranges = getStringRange(document)
+    let items = []
+    let inblock = false
+    for (let i = 0; i < length; i++) {
+        //跳过字符串
+        if (ranges.has(i)) {
+            continue
+        }
+        if (text[i] == "{") {
+            let word = getBlock(document, i)
+            if (word[0] == "子程序") {
+                inblock = true
+            }
+        } else if (inblock) {
+            if (text[i] == "}") {
+                break
+            } else if (text[i] == ":") {
+                let index = getVariableIndex(document, i, ranges)
+                if (index.match(/\b(-?\d+)(.\d+|\d+)?\b/)) {
+                    let name = getVariableName(document, i, ranges)
+                    let item = new vscode.CompletionItem(index.padStart(3, '0') + ": " + name, vscode.CompletionItemKind.Function)
+                    item.kind = vscode.CompletionItemKind.Function
+                    item.documentation = new vscode.MarkdownString()
+                    item.documentation.isTrusted = true
+                    item.documentation.supportHtml = true
+                    item.documentation.supportThemeIcons = true
+                    item.documentation.baseUri = vscode.Uri.file(path.join(context.extensionPath, '', path.sep))
+                    item.documentation.appendMarkdown(`***${name}***\n\n\`${index}\`&nbsp;\`子程序\`\n\n一个已声明的子程序。`)
+                    item.insertText = name
+                    item.filterText = name.split("").join(" ")
+                    //console.log(item.filterText)
+                    item.sortText = index.padStart(3, '0')
+                    items.push(item)
+                }
+            }
+        }
+    }
+    if (items.length == 0) {
+        let item = new vscode.CompletionItem("没有已注册的子程序")
+        item.insertText = ""
+        items.push(item)
+    }
+    return items
+}
+
+function getPinyin(text) {
+    let pinyin = ""
+    for (let i = 0; i < text.length; i++) {
+        if (PINYIN.hasOwnProperty(text[i])) {
+            for (let j = 0; j < PINYIN[text[i]].length; j++) {
+                pinyin += PINYIN[text[i]][j]
+            }
+        } else if (/[a-zA-Z]/.test(text[i])) {
+            pinyin += text[i]
+        }
+    }
+    //console.log(pinyin)
+    return pinyin
 }
