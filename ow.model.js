@@ -17189,6 +17189,13 @@ function buildDarkHovers(context) {
         }
     }
     */
+    for (i in 常量) {
+        for (j in 常量[i]) {
+            const tags = 常量[i][j].标签
+            console.log(tags);
+            常量[i][j]["暗色悬停"] = buildHover(context, i, 常量[i][j].标签, 常量[i][j].提示)
+        }
+    }
     for (i in 规则.事件.选项) {
         规则.事件.选项[i]["暗色悬停"] = buildHover(context, i, 规则.事件.选项[i].标签, 规则.事件.选项[i].提示)
     }
@@ -17198,90 +17205,90 @@ function buildDarkHovers(context) {
     for (i in 规则.事件.玩家) {
         规则.事件.玩家[i]["暗色悬停"] = buildHover(context, i, 规则.事件.玩家[i].标签, 规则.事件.玩家[i].提示)
     }
-    /*
     for (i in 规则.条件) {
-
+        规则.条件[i]["暗色悬停"] = buildHover(context, i, 规则.条件[i].标签, 规则.条件[i].提示)
     }
     for (i in 规则.动作) {
-
+        规则.动作[i]["暗色悬停"] = buildHover(context, i, 规则.动作[i].标签, 规则.动作[i].提示)
     }
-    for (i in 规则) {
-        for (j in 规则[i]) {
-           try {
-               let info = new vscode.MarkdownString()
-               info.isTrusted = true
-               info.supportHtml = true
-               info.supportThemeIcons = true
-               info.baseUri = vscode.Uri.file(path.join(context.extensionPath, '', path.sep))
-               info.appendMarkdown(`**<span>${j}</span>**\n\n`)
-               //标签
-               for (k in 规则[i][j].标签) {
-                   info.appendMarkdown(`\`${规则[i][j].标签[k]}\`&nbsp;`)
-               }
-               //提示
-               info.appendMarkdown(`\n\n${规则[i][j].提示}`)
-               console.log(j);
+    /*
+for (i in 规则) {
+    for (j in 规则[i]) {
+       try {
+           let info = new vscode.MarkdownString()
+           info.isTrusted = true
+           info.supportHtml = true
+           info.supportThemeIcons = true
+           info.baseUri = vscode.Uri.file(path.join(context.extensionPath, '', path.sep))
+           info.appendMarkdown(`**<span>${j}</span>**\n\n`)
+           //标签
+           for (k in 规则[i][j].标签) {
+               info.appendMarkdown(`\`${规则[i][j].标签[k]}\`&nbsp;`)
+           }
+           //提示
+           info.appendMarkdown(`\n\n${规则[i][j].提示}`)
+           console.log(j);
 
-               //返回
-               if (规则[i][j].hasOwnProperty("返回")) {
-                   info.appendMarkdown(`\n\n---\n\n***<span style="color:#c50;">⬘</span>&nbsp;返回***\n\n`)
-                   for (k in 规则[i][j].返回) {
-                       info.appendMarkdown(`\`${规则[i][j].返回[k]}\` `)
-                   }
+           //返回
+           if (规则[i][j].hasOwnProperty("返回")) {
+               info.appendMarkdown(`\n\n---\n\n***<span style="color:#c50;">⬘</span>&nbsp;返回***\n\n`)
+               for (k in 规则[i][j].返回) {
+                   info.appendMarkdown(`\`${规则[i][j].返回[k]}\` `)
                }
-               //参数
-               if (规则[i][j].hasOwnProperty("参数")) {
-                   info.appendMarkdown(`\n\n---\n\n***<span style="color:#0ac;">⬘</span>&nbsp;参数***\n\n`)
-                   let n = 0
-                   for (k in 规则[i][j].参数) {
-                       info.appendMarkdown(`\`${n}\`&nbsp;\`${k}\`&nbsp;-&nbsp;${规则[i][j].参数[k].提示}\n\n`)
-                       n++
-                   }
+           }
+           //参数
+           if (规则[i][j].hasOwnProperty("参数")) {
+               info.appendMarkdown(`\n\n---\n\n***<span style="color:#0ac;">⬘</span>&nbsp;参数***\n\n`)
+               let n = 0
+               for (k in 规则[i][j].参数) {
+                   info.appendMarkdown(`\`${n}\`&nbsp;\`${k}\`&nbsp;-&nbsp;${规则[i][j].参数[k].提示}\n\n`)
+                   n++
                }
-               //参数
-               if (规则[i][j].hasOwnProperty("路径")) {
-                   info.appendMarkdown(`\n\n
+           }
+           //参数
+           if (规则[i][j].hasOwnProperty("路径")) {
+               info.appendMarkdown(`\n\n
 ||||
 |:--|:--|:--|
 |<img src="${常量.HERO[j].路径}${常量.HERO[j].图标}.png" width=50 height=50/>|&nbsp;&nbsp;|${常量.HERO[j].提示}|
 \n\n`
-                   )
-                   for (k in 常量.HERO[j].生命) {
-                       switch (k) {
-                           case "自由":
-                               info.appendMarkdown(`***自由***&nbsp;&nbsp;\`${常量.HERO[j].生命[k]}\`&nbsp;&nbsp;`)
-                               break;
-                           case "职责":
-                               info.appendMarkdown(`***职责***&nbsp;&nbsp;\`${常量.HERO[j].生命[k]}\`&nbsp;&nbsp;`)
-                               break;
-                           case "护甲":
-                               info.appendMarkdown(`***护甲***&nbsp;&nbsp;<span style="color:#C50;">\`${常量.HERO[j].生命[k]}\`</span>&nbsp;&nbsp;`)
-                               break;
-                           case "护盾":
-                               info.appendMarkdown(`***护盾***&nbsp;&nbsp;<span style="color:#0AC;">\`${常量.HERO[j].生命[k]}\`</span>`)
-                               break;
-                       }
+               )
+               for (k in 常量.HERO[j].生命) {
+                   switch (k) {
+                       case "自由":
+                           info.appendMarkdown(`***自由***&nbsp;&nbsp;\`${常量.HERO[j].生命[k]}\`&nbsp;&nbsp;`)
+                           break;
+                       case "职责":
+                           info.appendMarkdown(`***职责***&nbsp;&nbsp;\`${常量.HERO[j].生命[k]}\`&nbsp;&nbsp;`)
+                           break;
+                       case "护甲":
+                           info.appendMarkdown(`***护甲***&nbsp;&nbsp;<span style="color:#C50;">\`${常量.HERO[j].生命[k]}\`</span>&nbsp;&nbsp;`)
+                           break;
+                       case "护盾":
+                           info.appendMarkdown(`***护盾***&nbsp;&nbsp;<span style="color:#0AC;">\`${常量.HERO[j].生命[k]}\`</span>`)
+                           break;
                    }
-                   info.appendMarkdown(`\n\n`)
-                   for (k in 常量.HERO[j].技能) {
-                       info.appendMarkdown(`
+               }
+               info.appendMarkdown(`\n\n`)
+               for (k in 常量.HERO[j].技能) {
+                   info.appendMarkdown(`
 ---
 ||||
 |:-:|-:|:-|
 |<img src="${常量.HERO[j].路径}${常量.HERO[j].技能[k].图标}.png" width=auto height=25/>&nbsp;&nbsp;|***${k}***&nbsp;&nbsp;|`
-                       )
-                       for (l in 常量.HERO[j].技能[k].绑定) {
-                           info.appendMarkdown(`\`${常量.HERO[j].技能[k].绑定[l]}\`&nbsp;`)
-                       }
-                       info.appendMarkdown(`|\n\n---`)
+                   )
+                   for (l in 常量.HERO[j].技能[k].绑定) {
+                       info.appendMarkdown(`\`${常量.HERO[j].技能[k].绑定[l]}\`&nbsp;`)
                    }
+                   info.appendMarkdown(`|\n\n---`)
                }
-               规则[i][j]["暗色悬停"] = new vscode.Hover(info)
-           } catch (error) {
-            console.log(error);
            }
-        }
-    }*/
+           规则[i][j]["暗色悬停"] = new vscode.Hover(info)
+       } catch (error) {
+        console.log(error);
+       }
+    }
+}*/
 }
 
 
@@ -17294,12 +17301,16 @@ function buildHover(context, name, tags, details) {
     //标题
     hoverString.appendMarkdown(`**<span>${name}</span>**\n\n`)
     //标签
-    for (i of tags) {
-        hoverString.appendMarkdown(`\`${i}\`&nbsp;`)
+    if (tags) {
+        for (i of tags) {
+            hoverString.appendMarkdown(`\`${i}\`&nbsp;`)
+        }
     }
     //详情
-    hoverString.appendMarkdown(`\n\n${details}`)
+    if (details) {
+        hoverString.appendMarkdown(`\n\n${details}`)
+    }
     return new vscode.Hover(hoverString)
 }
 
-module.exports = { 规则, 常量, buildDarkHovers }
+module.exports = { 规则, 常量, buildHover, buildDarkHovers }

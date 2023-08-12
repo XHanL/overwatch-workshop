@@ -144,7 +144,6 @@ function activate(context) {
                     return
                 }
                 const hoverText = document.getText(hoverRange)
-
                 let rightBracesCount = 0
                 for (let i = position.line; i >= 0; i--) {
                     const line = document.lineAt(i)
@@ -159,45 +158,38 @@ function activate(context) {
                             if (prevLineText === "事件") {
                                 if (MODEL.规则.事件.选项.hasOwnProperty(hoverText)) {
                                     return MODEL.规则.事件.选项[hoverText][`${theme}悬停`]
-                                } else if (MODEL.规则.事件.队伍.hasOwnProperty(hoverText)) {
+                                }
+                                if (MODEL.规则.事件.队伍.hasOwnProperty(hoverText)) {
                                     return MODEL.规则.事件.队伍[hoverText][`${theme}悬停`]
-                                } else if (MODEL.规则.事件.玩家.hasOwnProperty(hoverText)) {
+                                }
+                                if (MODEL.规则.事件.玩家.hasOwnProperty(hoverText)) {
                                     return MODEL.规则.事件.玩家[hoverText][`${theme}悬停`]
-                                } else if (match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/)) {
+                                }
+                                if (match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/)) {
                                     return getCustomNameHover()
                                 }
                             } else if (prevLineText === "条件") {
-                                for (i in MODEL.规则.条件) {
-                                    if (hoverText === i) {
-                                        return MODEL.规则.条件[hoverText][`${theme}悬停`]
-                                    }
+                                if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
+                                    return MODEL.规则.条件[hoverText][`${theme}悬停`]
                                 }
                                 for (i in MODEL.常量) {
-                                    for (j in MODEL.常量[i]) {
-                                        if (hoverText === j) {
-                                            return MODEL.常量[i][hoverText][`${theme}悬停`]
-                                        }
+                                    if (MODEL.常量[i].hasOwnProperty(hoverText)) {
+                                        return MODEL.常量[i][hoverText][`${theme}悬停`]
                                     }
                                 }
                                 if (match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/)) {
                                     return getCustomNameHover()
                                 }
                             } else if (prevLineText === "动作") {
-                                for (i in MODEL.规则.动作) {
-                                    if (hoverText === i) {
-                                        return MODEL.规则.动作[hoverText][`${theme}悬停`]
-                                    }
+                                if (MODEL.规则.动作.hasOwnProperty(hoverText)) {
+                                    return MODEL.规则.动作[hoverText][`${theme}悬停`]
                                 }
-                                for (i in MODEL.规则.条件) {
-                                    if (hoverText === i) {
-                                        return MODEL.规则.条件[hoverText][`${theme}悬停`]
-                                    }
+                                if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
+                                    return MODEL.规则.条件[hoverText][`${theme}悬停`]
                                 }
                                 for (i in MODEL.常量) {
-                                    for (j in MODEL.常量[i]) {
-                                        if (hoverText === j) {
-                                            return MODEL.常量[i][hoverText][`${theme}悬停`]
-                                        }
+                                    if (MODEL.常量[i].hasOwnProperty(hoverText)) {
+                                        return MODEL.常量[i][hoverText][`${theme}悬停`]
                                     }
                                 }
                                 if (match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/)) {
@@ -214,7 +206,6 @@ function activate(context) {
 
                 function getCustomNameHover() {
                     const customs = getCustoms(document)
-                    console.log(customs.扩展);
                     let prefix = document.offsetAt(document.getWordRangeAtPosition(position).start) - 1
                     let prefixText = document.getText()[prefix]
                     if (prefixText === ".") {
@@ -222,35 +213,22 @@ function activate(context) {
                         if (prefixText === "全局") {
                             for (i in customs.全局变量) {
                                 if (hoverText === customs.全局变量[i]) {
-                                    return buildHover(hoverText, ["全局变量", i])
+                                    return MODEL.buildHover(context, hoverText, ["全局变量", i])
                                 }
                             }
                         } else {
                             for (i in customs.玩家变量) {
                                 if (hoverText === customs.玩家变量[i]) {
-                                    return buildHover(hoverText, ["玩家变量", i])
+                                    return MODEL.buildHover(context, hoverText, ["玩家变量", i])
                                 }
                             }
                         }
                     } else {
                         for (i in customs.子程序) {
                             if (hoverText === customs.子程序[i]) {
-                                return buildHover(hoverText, ["子程序", i])
+                                return MODEL.buildHover(context, hoverText, ["子程序", i])
                             }
                         }
-                    }
-
-                    function buildHover(name, tags) {
-                        let str = new vscode.MarkdownString()
-                        str.isTrusted = true
-                        str.supportHtml = true
-                        str.supportThemeIcons = true
-                        str.baseUri = vscode.Uri.file(path.join(context.extensionPath, '', path.sep))
-                        str.appendMarkdown(`***<span>${name}</span>***\n\n`)
-                        for (const i of tags) {
-                            str.appendMarkdown(`\`${i}\` `)
-                        }
-                        return new vscode.Hover(str)
                     }
                 }
             }
