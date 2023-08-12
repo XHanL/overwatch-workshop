@@ -58,8 +58,7 @@
                 "path": "syntaxes/ow.tmLanguage.json"
             }
         ],
-        "keybindings": [
-        ],
+        "keybindings": [],
         "commands": [
             {
                 "command": "ow.command.suggest",
@@ -195,5 +194,8 @@
                 "path": "themes/ow.crystal_light.json"
             }
         ]
+    },
+    "dependencies": {
+        "split-string": "^6.1.0"
     }
 }
