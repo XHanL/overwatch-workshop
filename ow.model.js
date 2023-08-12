@@ -16116,7 +16116,7 @@ let 规则 = {
   },
 };
 
-function buildDarkHovers(context) {
+function buildHovers(context) {
   for (i in 常量.英雄) {
     let details = `
 |||
@@ -16146,7 +16146,7 @@ function buildDarkHovers(context) {
       }
       details += `\n\n`;
     }
-    常量.英雄[i]["暗色悬停"] = buildHover(
+    常量.英雄[i]["暗色悬停"] = getHover(
       context,
       i,
       常量.英雄[i].标签,
@@ -16154,7 +16154,7 @@ function buildDarkHovers(context) {
     );
   }
   for (i in 常量.图标) {
-    常量.图标[i]["暗色悬停"] = buildHover(
+    常量.图标[i]["暗色悬停"] = getHover(
       context,
       i,
       常量.图标[i].标签,
@@ -16165,7 +16165,7 @@ function buildDarkHovers(context) {
     );
   }
   for (i in 常量.颜色) {
-    常量.颜色[i]["暗色悬停"] = buildHover(
+    常量.颜色[i]["暗色悬停"] = getHover(
       context,
       i,
       常量.颜色[i].标签,
@@ -16176,7 +16176,7 @@ function buildDarkHovers(context) {
     );
   }
   for (i in 常量.按钮) {
-    常量.按钮[i]["暗色悬停"] = buildHover(
+    常量.按钮[i]["暗色悬停"] = getHover(
       context,
       i,
       常量.按钮[i].标签,
@@ -16186,8 +16186,27 @@ function buildDarkHovers(context) {
 <img src="${常量.按钮[i].图标}" width=25 height=25/>&nbsp;&nbsp;|${常量.按钮[i].提示}`
     );
   }
+  for (i in 常量) {
+    if (
+      i == 常量.英雄 ||
+      i == 常量.图标 ||
+      i == 常量.颜色 ||
+      i == 常量.按钮 ||
+      i == 常量.字符串
+    ) {
+      continue;
+    }
+    for (j in 常量[i]) {
+      常量[i][j]["暗色悬停"] = getHover(
+        context,
+        j,
+        常量[i][j].标签,
+        常量[i][j].提示
+      );
+    }
+  }
   for (i in 规则.事件.选项) {
-    规则.事件.选项[i]["暗色悬停"] = buildHover(
+    规则.事件.选项[i]["暗色悬停"] = getHover(
       context,
       i,
       规则.事件.选项[i].标签,
@@ -16195,7 +16214,7 @@ function buildDarkHovers(context) {
     );
   }
   for (i in 规则.事件.队伍) {
-    规则.事件.队伍[i]["暗色悬停"] = buildHover(
+    规则.事件.队伍[i]["暗色悬停"] = getHover(
       context,
       i,
       规则.事件.队伍[i].标签,
@@ -16206,7 +16225,7 @@ function buildDarkHovers(context) {
     if (常量.英雄.hasOwnProperty(i)) {
       规则.事件.玩家[i]["暗色悬停"] = 常量.英雄[i]["暗色悬停"];
     } else {
-      规则.事件.玩家[i]["暗色悬停"] = buildHover(
+      规则.事件.玩家[i]["暗色悬停"] = getHover(
         context,
         i,
         规则.事件.玩家[i].标签,
@@ -16230,7 +16249,7 @@ function buildDarkHovers(context) {
         details += `\`${index}\`&nbsp;\`${element.标签}\`&nbsp;-&nbsp;${element.提示}\n\n`;
       });
     }
-    规则.条件[i]["暗色悬停"] = buildHover(
+    规则.条件[i]["暗色悬停"] = getHover(
       context,
       i,
       规则.条件[i].标签,
@@ -16246,57 +16265,16 @@ function buildDarkHovers(context) {
         details += `\`${index}\`&nbsp;\`${element.标签}\`&nbsp;-&nbsp;${element.提示}\n\n`;
       });
     }
-    规则.动作[i]["暗色悬停"] = buildHover(
+    规则.动作[i]["暗色悬停"] = getHover(
       context,
       i,
       规则.动作[i].标签,
       details
     );
   }
-  /*
-for (i in 规则) {
-    for (j in 规则[i]) {
-       try {
-           let info = new vscode.MarkdownString()
-           info.isTrusted = true
-           info.supportHtml = true
-           info.supportThemeIcons = true
-           info.baseUri = vscode.Uri.file(path.join(context.extensionPath, '', path.sep))
-           info.appendMarkdown(`**<span>${j}</span>**\n\n`)
-           //标签
-           for (k in 规则[i][j].标签) {
-               info.appendMarkdown(`\`${规则[i][j].标签[k]}\`&nbsp;`)
-           }
-           //提示
-           info.appendMarkdown(`\n\n${规则[i][j].提示}`)
-           console.log(j);
-
-           //返回
-           if (规则[i][j].hasOwnProperty("返回")) {
-               info.appendMarkdown(`\n\n---\n\n***<span style="color:#c50;">⬘</span>&nbsp;返回***\n\n`)
-               for (k in 规则[i][j].返回) {
-                   info.appendMarkdown(`\`${规则[i][j].返回[k]}\` `)
-               }
-           }
-           //参数
-           if (规则[i][j].hasOwnProperty("参数")) {
-               info.appendMarkdown(`\n\n---\n\n***<span style="color:#0ac;">⬘</span>&nbsp;参数***\n\n`)
-               let n = 0
-               for (k in 规则[i][j].参数) {
-                   info.appendMarkdown(`\`${n}\`&nbsp;\`${k}\`&nbsp;-&nbsp;${规则[i][j].参数[k].提示}\n\n`)
-                   n++
-               }
-           }
-
-           规则[i][j]["暗色悬停"] = new vscode.Hover(info)
-       } catch (error) {
-        console.log(error);
-       }
-    }
-}*/
 }
 
-function buildHover(context, name, tags, details) {
+function getHover(context, name, tags, details) {
   let hoverString = new vscode.MarkdownString();
   hoverString.isTrusted = true;
   hoverString.supportHtml = true;
@@ -16305,11 +16283,11 @@ function buildHover(context, name, tags, details) {
     path.join(context.extensionPath, "", path.sep)
   );
   //标题
-  hoverString.appendMarkdown(`**<span>${name}</span>**\n\n`);
+  hoverString.appendMarkdown(`**<span>${name}</span>**&nbsp;&nbsp;`);
   //标签
   if (tags) {
-    for (i of tags) {
-      hoverString.appendMarkdown(`\`${i}\`&nbsp;`);
+    for (t of tags) {
+      hoverString.appendMarkdown(`\`${t}\`&nbsp;`);
     }
   }
   //详情
@@ -16319,4 +16297,4 @@ function buildHover(context, name, tags, details) {
   return new vscode.Hover(hoverString);
 }
 
-module.exports = { 规则, 常量, buildHover, buildDarkHovers };
+module.exports = { 规则, 常量, buildHover: getHover, buildHovers };

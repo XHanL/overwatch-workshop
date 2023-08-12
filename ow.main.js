@@ -7,7 +7,7 @@ const MODEL = require("./ow.model.js");
 //主函数
 function activate(context) {
   //初始化模型
-  MODEL.buildDarkHovers(context);
+  MODEL.buildHovers(context);
   //MODEL.initModelLightHover(context)
   //MODEL.initModelDarkCompletion(context)
   //MODEL.initModelLightCompletion(context)
@@ -217,6 +217,7 @@ function activate(context) {
           return;
         }
         const hoverText = document.getText(hoverRange);
+        console.log(hoverText);
         let rightBracesCount = 0;
         for (let i = position.line; i >= 0; i--) {
           const line = document.lineAt(i);
