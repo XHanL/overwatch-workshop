@@ -1,39 +1,25 @@
 const vscode = require('vscode')
-const path = require('path')
 const fs = require('fs')
-module.exports = {
-    activate
-}
+const path = require('path')
 
-const TEMPLATE = require('./model/ow.template.js')
-const PINYIN = require('./ow.pinyin.js')
 const MODEL = require('./ow.model.js')
-const { off } = require('process')
 
-//工具：正则排序
-function sortAndFilterChineseKeyword(s) {
-    const str = s.split("|")
-    const set = new Set(str)
-    let arr = Array.from(set).sort((b, a) => a.localeCompare(b, "zh-Hans-CN"))
-    console.log(arr.join('|'))
-}
-
-//工具：正则字符串
-function getModelString() {
-    let str = ""
-    for (i in MODEL.RULES.ACTION) {
-        str += "|" + i
-    }
-    sortAndFilterChineseKeyword(str.slice(1))
-}
-
+//主函数
 function activate(context) {
     //初始化模型
-    MODEL.initModelDarkHover(context)
-    MODEL.initModelLightHover(context)
+    MODEL.buildDarkHovers(context)
+    //MODEL.initModelLightHover(context)
+    //MODEL.initModelDarkCompletion(context)
+    //MODEL.initModelLightCompletion(context)
 
     //注册能力
     context.subscriptions.push(
+        //建议
+        vscode.commands.registerCommand('ow.command.suggest', () => {
+            vscode.commands.executeCommand('editor.action.triggerSuggest')
+            //vscode.commands.executeCommand('editor.action.triggerParameterHints')
+        }),
+
         //折叠
         vscode.languages.registerFoldingRangeProvider("ow", {
             provideFoldingRanges(document) {
@@ -171,34 +157,25 @@ function activate(context) {
                             const prevLineText = prevLine.text.trim()
                             const theme = vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark ? "暗色" : "亮色"
                             if (prevLineText === "事件") {
-                                for (i in MODEL.RULES.EVENT) {
-                                    if (hoverText === i) {
-                                        return MODEL.RULES.EVENT[hoverText][`${theme}悬停`]
-                                    }
-                                }
-                                for (i in MODEL.RULES.EVENT_TEAM) {
-                                    if (hoverText === i) {
-                                        return MODEL.RULES.EVENT_TEAM[hoverText][`${theme}悬停`]
-                                    }
-                                }
-                                for (i in MODEL.RULES.EVENT_PLAYER) {
-                                    if (hoverText === i) {
-                                        return MODEL.RULES.EVENT_PLAYER[hoverText][`${theme}悬停`]
-                                    }
-                                }
-                                if (match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/)) {
+                                if (MODEL.规则.事件.选项.hasOwnProperty(hoverText)) {
+                                    return MODEL.规则.事件.选项[hoverText][`${theme}悬停`]
+                                } else if (MODEL.规则.事件.队伍.hasOwnProperty(hoverText)) {
+                                    return MODEL.规则.事件.队伍[hoverText][`${theme}悬停`]
+                                } else if (MODEL.规则.事件.玩家.hasOwnProperty(hoverText)) {
+                                    return MODEL.规则.事件.玩家[hoverText][`${theme}悬停`]
+                                } else if (match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/)) {
                                     return getCustomNameHover()
                                 }
                             } else if (prevLineText === "条件") {
-                                for (i in MODEL.RULES.CONDITION) {
+                                for (i in MODEL.规则.条件) {
                                     if (hoverText === i) {
-                                        return MODEL.RULES.CONDITION[hoverText][`${theme}悬停`]
+                                        return MODEL.规则.条件[hoverText][`${theme}悬停`]
                                     }
                                 }
-                                for (i in MODEL.CONSTS) {
-                                    for (j in MODEL.CONSTS[i]) {
+                                for (i in MODEL.常量) {
+                                    for (j in MODEL.常量[i]) {
                                         if (hoverText === j) {
-                                            return MODEL.CONSTS[i][hoverText][`${theme}悬停`]
+                                            return MODEL.常量[i][hoverText][`${theme}悬停`]
                                         }
                                     }
                                 }
@@ -206,20 +183,20 @@ function activate(context) {
                                     return getCustomNameHover()
                                 }
                             } else if (prevLineText === "动作") {
-                                for (i in MODEL.RULES.ACTION) {
+                                for (i in MODEL.规则.动作) {
                                     if (hoverText === i) {
-                                        return MODEL.RULES.ACTION[hoverText][`${theme}悬停`]
+                                        return MODEL.规则.动作[hoverText][`${theme}悬停`]
                                     }
                                 }
-                                for (i in MODEL.RULES.CONDITION) {
+                                for (i in MODEL.规则.条件) {
                                     if (hoverText === i) {
-                                        return MODEL.RULES.CONDITION[hoverText][`${theme}悬停`]
+                                        return MODEL.规则.条件[hoverText][`${theme}悬停`]
                                     }
                                 }
-                                for (i in MODEL.CONSTS) {
-                                    for (j in MODEL.CONSTS[i]) {
+                                for (i in MODEL.常量) {
+                                    for (j in MODEL.常量[i]) {
                                         if (hoverText === j) {
-                                            return MODEL.CONSTS[i][hoverText][`${theme}悬停`]
+                                            return MODEL.常量[i][hoverText][`${theme}悬停`]
                                         }
                                     }
                                 }
@@ -236,27 +213,28 @@ function activate(context) {
                 }
 
                 function getCustomNameHover() {
-                    const customNames = getCustomNames(document)
+                    const customs = getCustoms(document)
+                    console.log(customs.扩展);
                     let prefix = document.offsetAt(document.getWordRangeAtPosition(position).start) - 1
                     let prefixText = document.getText()[prefix]
                     if (prefixText === ".") {
                         prefixText = document.getText(document.getWordRangeAtPosition(document.positionAt(prefix - 1)))
                         if (prefixText === "全局") {
-                            for (i in customNames.全局变量) {
-                                if (hoverText === customNames.全局变量[i]) {
+                            for (i in customs.全局变量) {
+                                if (hoverText === customs.全局变量[i]) {
                                     return buildHover(hoverText, ["全局变量", i])
                                 }
                             }
                         } else {
-                            for (i in customNames.玩家变量) {
-                                if (hoverText === customNames.玩家变量[i]) {
+                            for (i in customs.玩家变量) {
+                                if (hoverText === customs.玩家变量[i]) {
                                     return buildHover(hoverText, ["玩家变量", i])
                                 }
                             }
                         }
                     } else {
-                        for (i in customNames.子程序) {
-                            if (hoverText === customNames.子程序[i]) {
+                        for (i in customs.子程序) {
+                            if (hoverText === customs.子程序[i]) {
                                 return buildHover(hoverText, ["子程序", i])
                             }
                         }
@@ -282,7 +260,6 @@ function activate(context) {
         vscode.languages.registerCompletionItemProvider("ow", {
             provideCompletionItems(document, position, context) {
                 const completionText = document.getText(document.getWordRangeAtPosition(position))
-                let completionItems = []
                 let rightBracesCount = 0
                 let semicolonCount = 0
                 for (let i = position.line; i >= 0; i--) {
@@ -296,69 +273,56 @@ function activate(context) {
                             const prevLineText = prevLine.text.trim()
                             const theme = vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark ? "暗色" : "亮色"
                             if (prevLineText === "事件") {
-                                if (semicolonCount === 0) {
-                                    return MODEL.RULES.EVENT[`${theme}补全`]
-                                } else if (semicolonCount === 1) {
-                                    return MODEL.RULES.EVENT_TEAM[`${theme}补全`]
-                                } else if (semicolonCount === 2) {
-                                    return MODEL.RULES.EVENT_PLAYER[`${theme}补全`]
+                                const nextLine = document.lineAt(i + 1)
+                                const nextLineText = nextLine.text.trim()
+                                if (nextLineText === "子程序;") {
+                                    if (semicolonCount === 0) {
+                                        return MODEL.规则.事件.选项[`${theme}补全`]
+                                    } else {
+                                        let completionItems = []
+                                        const customs = getCustoms(document)
+                                        for (const i in customs.子程序) {
+                                            const item = new vscode.CompletionItem(i.padStart(3, '0') + ": " + customs.子程序[i], vscode.CompletionItemKind.Variable)
+                                            item.documentation = new vscode.MarkdownString()
+                                            item.documentation.appendMarkdown(`***${customs.子程序[i]}***\n\n\`子程序\`&nbsp;\`${i}\` `)
+                                            item.filterText = (i.padStart(3, '0') + customs.子程序[i]).split("").join(" ")
+                                            item.insertText = customs.子程序[i]
+                                            completionItems.push(item)
+                                        }
+                                        return completionItems
+                                    }
+                                } else {
+                                    if (semicolonCount === 0) {
+                                        return MODEL.规则.事件.选项[`${theme}补全`]
+                                    } else if (semicolonCount === 1) {
+                                        return MODEL.规则.事件.队伍[`${theme}补全`]
+                                    } else if (semicolonCount === 2) {
+                                        return MODEL.规则.事件.玩家[`${theme}补全`]
+                                    }
                                 }
                             } else if (prevLineText === "条件") {
                                 getPrefix()
                             } else if (prevLineText === "动作") {
-                                getPrefix()
+                                // 匹配 ACTION;
+                                // 匹配 ACTION(0, 0);
+
+                                // 匹配 COND
+                                // 匹配 COND(0, 0)
+
+                                // 匹配 全局.A / 事件玩家.B;
+
+                                // 匹配
+
+
+                                if (wordRange = document.getWordRangeAtPosition(position, /([^\s{;]*)\s*=\s*(.*)\s*;/g)) {
+                                    console.log(document.getText(wordRange));
+
+                                } else if (wordRange = document.getWordRangeAtPosition(position, /([^\s{;]*)\s*(?:\((?:(.*)(?:,\s*)?)*\))?\s*;/g)) {
+                                    console.log(document.getText(wordRange));
+                                }
+                                //变量
                             }
 
-                            function getPrefix() {
-                                try {
-                                    let type = 0
-                                    let rightBracesCount = 0
-                                    let rightBracketsCount = 0
-                                    let rightParenthesesCount = 0
-                                    let commasCount = 0
-                                    for (let i = document.offsetAt(position) - 1; i >= 0; i--) {
-                                        const wordRange = document.getWordRangeAtPosition(document.positionAt(i))
-                                        if (!wordRange) {
-                                            continue
-                                        }
-                                        const word = document.getText(wordRange)
-                                        if (type == 1) {
-                                            console.log(`单个条件/动作 ${word} 参数索引 ${commasCount}`);
-                                            return
-                                        }
-                                        console.log(`: ${word}`);
-                                        if (word == "{") {
-                                            if (rightParenthesesCount > 0) {
-                                                rightParenthesesCount--
-                                            } else {
-                                                console.log(`条件/动作列表`);
-                                            }
-                                        } else if (word == "}") {
-                                            rightBracesCount++
-                                        } else if (word == "(") {
-                                            if (rightParenthesesCount > 0) {
-                                                rightParenthesesCount--
-                                            } else {
-                                                // 参数列表 等待扫描函数名
-                                                type = 1
-                                            }
-                                        } else if (word == ")") {
-                                            rightParenthesesCount++
-                                        } else if (word == ";") {
-                                            // 条件/动作列表 直接返回
-                                            console.log(`条件/动作列表`);
-                                        } else if (word == ",") {
-                                            if (rightParenthesesCount == 0) {
-                                                commasCount++
-                                            }
-                                        }
-                                        i = document.offsetAt(wordRange.start)
-                                        console.log(rightParenthesesCount, commasCount);
-                                    }
-                                } catch (error) {
-                                    console.log(error);
-                                }
-                            }
                         }
                     } else if (lineText.endsWith("}")) {
                         rightBracesCount++
@@ -415,7 +379,7 @@ function activate(context) {
                 }
 
                 function getStringTableHtml() {
-                    const strings = Object.getOwnPropertyNames(MODEL.CONSTS.STRING).map((v, i) => {
+                    const strings = Object.getOwnPropertyNames(MODEL.常量.字符串).map((v, i) => {
                         if (i % 3 === 0) {
                             return `</tr><tr><td style="text-align: center;">${v}</td>`
                         } else {
@@ -496,7 +460,7 @@ function activate(context) {
                         const imageCells = Array(endImageIndex - startImageIndex + 1).fill().map((_, colIndex) => {
                             const imageNumber = startImageIndex + colIndex
                             const imageSrc = webviewView.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'images', 'ow', 'icon', `${themeUri}${imageNumber}.png`))
-                            const icons = Object.getOwnPropertyNames(MODEL.CONSTS.ICON)
+                            const icons = Object.getOwnPropertyNames(MODEL.常量.图标)
                             return `<td style="text-align: center; font-weight: 500;"><img src="${imageSrc}" width="30" height="30"><br>${icons[imageNumber - 1]}</td>`
                         }).join("")
                         return `<tr>${imageCells}</tr>`
@@ -1044,9 +1008,10 @@ function activate(context) {
     )
 }
 
-//全局变量，玩家变量，和子程序列表
-function getCustomNames(document) {
+//扩展，全局变量，玩家变量，和子程序列表
+function getCustoms(document) {
     let type = 0
+    let extensions = []
     let globalVariables = {}
     let playerVariables = {}
     let subroutines = {}
@@ -1056,27 +1021,110 @@ function getCustomNames(document) {
         if (text.startsWith("{")) {
             const prevLine = document.lineAt(i - 1)
             const prevLineText = prevLine.text.trim()
-            if (prevLineText === "变量") {
+            if (prevLineText === "扩展") {
                 type = 1
+            } else if (prevLineText === "变量") {
+                type = 2
             } else if (prevLineText === "子程序") {
-                type = 4
+                type = 3
             } else if (match = prevLineText.match(/^(禁用)?\s*规则\s*\("(.*)"\)$/)) {
-                return {
-                    "全局变量": globalVariables,
-                    "玩家变量": playerVariables,
-                    "子程序": subroutines
-                }
+                break
             }
-        } else if (type === 1 && (match = text.match(/^全局\s*:$/))) {
-            type = 2
-        } else if ((type === 1 || type === 2) && (match = text.match(/^玩家\s*:$/))) {
-            type = 3
-        } else if (type === 2 && (match = text.match(/^((?:[0-9]{1,2}|1[01][0-9]|12[0-7]))\s*:\s*\b([_a-zA-Z][_a-zA-Z0-9]*)\b/))) {
-            globalVariables[match[1]] = match[2]
-        } else if (type === 3 && (match = text.match(/^((?:[0-9]{1,2}|1[01][0-9]|12[0-7]))\s*:\s*\b([_a-zA-Z][_a-zA-Z0-9]*)\b/))) {
-            playerVariables[match[1]] = match[2]
+        } else if (type === 1 && (match = text.match(/^光束效果|光束声音|增益状态效果|减益状态效果|增益效果和减益效果声音|能量爆炸效果|运动爆炸效果|爆炸声音|播放更多效果|生成更多机器人|弹道$/))) {
+            extensions.push(match[0])
+        } else if (type === 2 && (match = text.match(/^全局\s*:$/))) {
+            type = 4
+        } else if ((type === 2 || type === 4) && (match = text.match(/^玩家\s*:$/))) {
+            type = 5
         } else if (type === 4 && (match = text.match(/^((?:[0-9]{1,2}|1[01][0-9]|12[0-7]))\s*:\s*\b([_a-zA-Z][_a-zA-Z0-9]*)\b/))) {
+            globalVariables[match[1]] = match[2]
+        } else if (type === 5 && (match = text.match(/^((?:[0-9]{1,2}|1[01][0-9]|12[0-7]))\s*:\s*\b([_a-zA-Z][_a-zA-Z0-9]*)\b/))) {
+            playerVariables[match[1]] = match[2]
+        } else if (type === 3 && (match = text.match(/^((?:[0-9]{1,2}|1[01][0-9]|12[0-7]))\s*:\s*\b([_a-zA-Z][_a-zA-Z0-9]*)\b/))) {
             subroutines[match[1]] = match[2]
         }
     }
+    return {
+        "扩展": extensions,
+        "全局变量": globalVariables,
+        "玩家变量": playerVariables,
+        "子程序": subroutines
+    }
+}
+
+function getPrefix() {
+    try {
+        let type = 0
+        let rightBracesCount = 0
+        let rightBracketsCount = 0
+        let rightParenthesesCount = 0
+        let commasCount = 0
+        for (let i = document.offsetAt(position) - 1; i >= 0; i--) {
+            let wordRange = document.getWordRangeAtPosition(document.positionAt(i), type > 0 ? undefined : /{|}|\[\(|\)|;|,/)
+            if (!wordRange) {
+                continue
+            }
+            const word = document.getText(wordRange)
+            if (type == 1) {
+                console.log(`单个条件/动作 ${word} 参数索引 ${commasCount}`);
+                return
+            }
+            console.log(`${word}`);
+            if (word == "{") {
+                if (rightParenthesesCount > 0) {
+                    rightParenthesesCount--
+                } else {
+                    console.log(`条件/动作列表`);
+                    return
+                }
+            } else if (word == "}") {
+                rightBracesCount++
+            } else if (word == "(") {
+                if (rightParenthesesCount > 0) {
+                    rightParenthesesCount--
+                } else {
+                    // 参数列表 等待扫描函数名
+                    type = 1
+                }
+            } else if (word == ")") {
+                rightParenthesesCount++
+            } else if (word == ";") {
+                // 条件/动作列表 直接返回
+                console.log(`条件/动作列表`);
+                return
+            } else if (word == "[") {
+                // 条件列表 直接返回
+                console.log(`条件列表`);
+                return
+            } else if (word == ",") {
+                if (rightParenthesesCount == 0) {
+                    commasCount++
+                }
+            }
+            i = document.offsetAt(wordRange.start)
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = {
+    activate
+}
+
+//工具：正则排序
+function sortAndFilterChineseKeyword(s) {
+    const str = s.split("|")
+    const set = new Set(str)
+    let arr = Array.from(set).sort((b, a) => a.localeCompare(b, "zh-Hans-CN"))
+    console.log(arr.join('|'))
+}
+
+//工具：正则字符串
+function getModelString() {
+    let str = ""
+    for (i in MODEL.规则.动作) {
+        str += "|" + i
+    }
+    sortAndFilterChineseKeyword(str.slice(1))
 }
