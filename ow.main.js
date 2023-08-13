@@ -4,6 +4,7 @@ const fs = require("fs");
 
 //语言模型
 const MODEL = require("./ow.model.js");
+const UTIL = require("./ow.utiliy.js");
 
 //主函数
 function activate(context) {
@@ -20,7 +21,7 @@ function activate(context) {
     //建议
     vscode.commands.registerCommand("ow.command.suggest", () => {
       vscode.commands.executeCommand("editor.action.triggerSuggest");
-      //vscode.commands.executeCommand('editor.action.triggerParameterHints')
+      vscode.commands.executeCommand("editor.action.triggerParameterHints");
     }),
 
     //折叠
@@ -297,31 +298,9 @@ function activate(context) {
           //(全局|For 全局变量|设置全局变量|修改全局变量|在索引处设置全局变量|在索引处修改全局变量|持续追踪全局变量|追踪全局变量频率|停止追踪全局变量)/;
           //(子程序|调用子程序|开始规则)/;
           //(For 玩家变量|设置玩家变量|修改玩家变量|在索引处设置玩家变量|在索引处修改玩家变量|持续追踪玩家变量|追踪玩家变量频率|停止追踪玩家变量)/;
-          const dynamicList = getDynamicList(document);
-          function getCustomTypeRange() {
-            let pos = document
-              .getWordRangeAtPosition(position)
-              .start.translate(0, -1);
-            let i = pos.line;
-            let j = pos.character;
-            while (i > 0) {
-              while (j > 0) {
-                const range = document.getWordRangeAtPosition(
-                  new vscode.Position(i, j)
-                );
-                if (range) {
-                  return range;
-                }
-                j--;
-              }
-              pos = document.lineAt(i - 1).range.end;
-              i = pos.line;
-              j = pos.character;
-            }
-            return undefined;
-          }
-          let range = getCustomTypeRange();
-          let text = document.getText(range);
+          const dynamicList = UTIL.getDynamicList(document);
+          const range = UTIL.getPrefixPatternRange(document, position);
+          const text = document.getText(range);
           if (
             (match = text.match(
               /全局|For 全局变量|设置全局变量|修改全局变量|在索引处设置全局变量|在索引处修改全局变量|持续追踪全局变量|追踪全局变量频率|停止追踪全局变量/
@@ -371,32 +350,78 @@ function activate(context) {
                   const prevLineText = prevLine.text.trim();
                   if (prevLineText === "事件") {
                     if (semicolonCount === 0) {
-                      return MODEL.getStaticCompletions(
-                        MODEL.规则.事件.选项,
-                        range
-                      );
+                      return getStaticCompletions(MODEL.规则.事件.选项, range);
                     } else if (semicolonCount === 1) {
                       const nextLine = document.lineAt(i + 1);
                       const nextLineText = nextLine.text.trim();
                       if (nextLineText.startsWith("子程序")) {
                         return buildSubroutineCompletions(range);
                       } else {
-                        return MODEL.getStaticCompletions(
+                        return getStaticCompletions(
                           MODEL.规则.事件.队伍,
                           range
                         );
                       }
                     } else if (semicolonCount === 2) {
-                      return MODEL.getStaticCompletions(
-                        MODEL.规则.事件.玩家,
-                        range
-                      );
+                      return getStaticCompletions(MODEL.规则.事件.玩家, range);
                     }
                   } else if (prevLineText === "条件") {
-                    return MODEL.getStaticCompletions(MODEL.规则.条件, range);
+                    let commasCount = 0;
+                    let rightParenthesesCount = 0;
+                    let pos = position;
+                    while (pos.line > 0 || pos.character > 0) {
+                      const range = UTIL.getPrefixPatternRange(
+                        document,
+                        pos,
+                        /\{|\[|;|\(|\)|,|./
+                      );
+                      const symbol = document.getText(range);
+                      console.log(symbol);
+                      if (symbol == "{" || symbol == "[" || symbol == ";") {
+                        return getStaticCompletions(MODEL.规则.条件);
+                      } else if (symbol == "(") {
+                        if (rightParenthesesCount > 0) {
+                          rightParenthesesCount--;
+                        } else {
+                          pos = range.start;
+                          if (pos.character > 0) {
+                            pos = pos.translate(0, -1);
+                          } else if (pos.line > 0) {
+                            pos = document.lineAt(pos.line - 1).range.end;
+                          } else {
+                            return undefined;
+                          }
+                          const nameRange = UTIL.getPrefixPatternRange(
+                            document,
+                            pos
+                          );
+                          const nameText = document.getText(nameRange);
+                          if (MODEL.规则.条件.hasOwnProperty(nameText)) {
+                            return new vscode.CompletionItem(nameText);
+                          }
+                        }
+                      } else if (symbol == ")") {
+                        rightParenthesesCount++;
+                      } else if (symbol == ",") {
+                        if (rightParenthesesCount == 0) {
+                          commasCount++;
+                        }
+                      } else if (symbol == ".") {
+                        return new vscode.CompletionItem("变量");
+                      }
+                      pos = range.start;
+                      if (pos.character > 0) {
+                        pos = pos.translate(0, -1);
+                      } else if (pos.line > 0) {
+                        pos = document.lineAt(pos.line - 1).range.end;
+                      } else {
+                        return undefined;
+                      }
+                    }
+                    return getStaticCompletions(MODEL.规则.条件, range);
                   } else if (prevLineText === "动作") {
                     // 设置玩家变量 => (条件 = 条件);
-                    return MODEL.getStaticCompletions(MODEL.规则.动作, range);
+                    return getStaticCompletions(MODEL.规则.动作, range);
                   }
                 }
               } else if (lineText.endsWith("}")) {
@@ -406,76 +431,27 @@ function activate(context) {
               }
             }
 
+            //调试：无建议
             let item = new vscode.CompletionItem("无建议");
             item.insertText = "";
             return [item];
 
             function getCompletionRange() {
               for (let i = position.character; i >= 0; i--) {
-                let range = document.getWordRangeAtPosition(
+                const range = document.getWordRangeAtPosition(
                   position.with(undefined, i)
                 );
-                if (!range) {
-                  continue;
+                if (range) {
+                  return range.with(undefined, position);
                 }
-                return range.with(undefined, position);
               }
               return undefined;
             }
 
-            function getCompletionType() {
-              for (let i = document.offsetAt(position) - 1; i >= 0; i--) {
-                let wordRange = document.getWordRangeAtPosition(
-                  document.positionAt(i),
-                  type > 0 ? undefined : /{|}|\[\(|\)|;|,/
-                );
-                if (!wordRange) {
-                  continue;
-                }
-                const word = document.getText(wordRange);
-                if (type == 1) {
-                  console.log(`单个条件/动作 ${word} 参数索引 ${commasCount}`);
-                  return;
-                }
-                console.log(`${word}`);
-                if (word == "{") {
-                  if (rightParenthesesCount > 0) {
-                    rightParenthesesCount--;
-                  } else {
-                    console.log(`条件/动作列表`);
-                    return;
-                  }
-                } else if (word == "}") {
-                  rightBracesCount++;
-                } else if (word == "(") {
-                  if (rightParenthesesCount > 0) {
-                    rightParenthesesCount--;
-                  } else {
-                    // 参数列表 等待扫描函数名
-                    type = 1;
-                  }
-                } else if (word == ")") {
-                  rightParenthesesCount++;
-                } else if (word == ";") {
-                  // 条件/动作列表 直接返回
-                  console.log(`条件/动作列表`);
-                  return;
-                } else if (word == "[") {
-                  // 条件列表 直接返回
-                  console.log(`条件列表`);
-                  return;
-                } else if (word == ",") {
-                  if (rightParenthesesCount == 0) {
-                    commasCount++;
-                  }
-                }
-                i = document.offsetAt(wordRange.start);
-              }
-            }
-
             function buildSubroutineCompletions(range) {
               let completionItems = [];
-              const dynamicList = getDynamicList(document);
+              const dynamicList = UTIL.getDynamicList(document);
+              console.log(dynamicList);
               for (const i in dynamicList.子程序) {
                 let item = MODEL.buildCompletion(
                   PATH,
@@ -492,6 +468,25 @@ function activate(context) {
                 completionItems.push(item);
               }
               return completionItems;
+            }
+
+            function getStaticCompletions(object, range) {
+              let completions = [];
+              for (const p in object) {
+                if (Array.isArray(object[p].补全)) {
+                  const theme =
+                    vscode.window.activeColorTheme.kind ===
+                    vscode.ColorThemeKind.Dark
+                      ? 0
+                      : 1;
+                  object[p].补全[theme].range = range;
+                  completions.push(object[p].补全[theme]);
+                } else {
+                  object[p].补全.range = range;
+                  completions.push(object[p].补全);
+                }
+              }
+              return completions;
             }
           } catch (error) {
             console.log(error);
@@ -3882,75 +3877,6 @@ function activate(context) {
       },
     })
   );
-}
-
-//扩展，全局变量，玩家变量，和子程序列表
-function getDynamicList(document) {
-  let type = 0;
-  let extensions = [];
-  let globalVariables = {};
-  let playerVariables = {};
-  let subroutines = {};
-  for (let i = 0; i < document.lineCount; i++) {
-    const line = document.lineAt(i);
-    const text = line.text.trim();
-    if (text.startsWith("{")) {
-      const prevLine = document.lineAt(i - 1);
-      const prevLineText = prevLine.text.trim();
-      if (prevLineText === "扩展") {
-        type = 1;
-      } else if (prevLineText === "变量") {
-        type = 2;
-      } else if (prevLineText === "子程序") {
-        type = 3;
-      } else if (
-        (match = prevLineText.match(/^(禁用)?\s*规则\s*\("(.*)"\)$/))
-      ) {
-        break;
-      }
-    } else if (
-      type === 1 &&
-      (match = text.match(
-        /^光束效果|光束声音|增益状态效果|减益状态效果|增益效果和减益效果声音|能量爆炸效果|运动爆炸效果|爆炸声音|播放更多效果|生成更多机器人|弹道$/
-      ))
-    ) {
-      extensions.push(match[0]);
-    } else if (type === 2 && (match = text.match(/^全局\s*:$/))) {
-      type = 4;
-    } else if (
-      (type === 2 || type === 4) &&
-      (match = text.match(/^玩家\s*:$/))
-    ) {
-      type = 5;
-    } else if (
-      type === 4 &&
-      (match = text.match(
-        /^((?:[0-9]{1,2}|1[01][0-9]|12[0-7]))\s*:\s*\b([_a-zA-Z][_a-zA-Z0-9]*)\b/
-      ))
-    ) {
-      globalVariables[match[1]] = match[2];
-    } else if (
-      type === 5 &&
-      (match = text.match(
-        /^((?:[0-9]{1,2}|1[01][0-9]|12[0-7]))\s*:\s*\b([_a-zA-Z][_a-zA-Z0-9]*)\b/
-      ))
-    ) {
-      playerVariables[match[1]] = match[2];
-    } else if (
-      type === 3 &&
-      (match = text.match(
-        /^((?:[0-9]{1,2}|1[01][0-9]|12[0-7]))\s*:\s*\b([_a-zA-Z][_a-zA-Z0-9]*)\b/
-      ))
-    ) {
-      subroutines[match[1]] = match[2];
-    }
-  }
-  return {
-    扩展: extensions,
-    全局变量: globalVariables,
-    玩家变量: playerVariables,
-    子程序: subroutines,
-  };
 }
 
 function getPrefix() {

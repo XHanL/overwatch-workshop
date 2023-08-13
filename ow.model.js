@@ -17046,7 +17046,7 @@ function buildStaticModels(PATH) {
   for (i in 规则.动作) {
     let details = `${规则.动作[i].提示}`;
     let insertText = `${i}`;
-    let command = undefined
+    let command = undefined;
     //参数
     if (规则.动作[i].hasOwnProperty("参数")) {
       details += `\n\n---\n\n***<span style="color:#0ac;">⬘</span>&nbsp;参数***\n\n`;
@@ -17078,25 +17078,6 @@ function buildStaticModels(PATH) {
   }
 }
 
-function getStaticCompletions(object, range) {
-  let completions = [];
-  for (const p in object) {
-    if (Array.isArray(object[p].补全)) {
-      const theme =
-        vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark
-          ? 0
-          : 1;
-      object[p].补全[theme].range = range;
-      completions.push(object[p].补全[theme]);
-    } else {
-      object[p].补全.range = range;
-      completions.push(object[p].补全);
-    }
-  }
-  console.log(completions);
-  return completions;
-}
-
 module.exports = {
   拼音,
   常量,
@@ -17105,5 +17086,4 @@ module.exports = {
   buildCompletion,
   buildStaticModels,
   buildStaticModels,
-  getStaticCompletions,
 };
