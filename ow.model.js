@@ -2,744 +2,752 @@ const vscode = require("vscode");
 const path = require("path");
 
 let 拼音 = {
-  规: ["Gui"],
-  则: ["Ze"],
-  事: ["Shi"],
-  件: ["Jian"],
-  条: ["Tiao"],
-  动: ["Dong"],
-  作: ["Zuo"],
-  变: ["Bian"],
-  量: ["Liang"],
-  全: ["Quan"],
-  局: ["Ju"],
-  玩: ["Wan"],
-  家: ["Jia"],
-  子: ["Zi"],
-  程: ["Chen"],
-  序: ["Xu"],
-  持: ["Chi"],
-  续: ["Xu"],
-  每: ["Mei"],
-  名: ["Ming"],
-  造: ["Zao"],
-  成: ["Cheng"],
-  伤: ["Shang"],
-  害: ["Hai"],
-  受: ["Shou"],
-  到: ["Dao"],
-  治: ["Zhi"],
-  疗: ["Liao"],
-  击: ["Ji"],
-  退: ["Tui"],
-  最: ["Zui"],
-  后: ["Hou"],
-  一: ["Yi"],
-  阵: ["Zhen"],
-  亡: ["Wang"],
-  参: ["Can"],
-  与: ["Yu"],
-  消: ["Xiao"],
-  灭: ["Mie"],
-  加: ["Jia"],
-  入: ["Ru"],
-  比: ["Bi"],
-  赛: ["Sai"],
-  离: ["Li"],
-  开: ["Kai"],
-  双: ["Shuang"],
-  方: ["Fang"],
-  队: ["Dui"],
-  伍: ["Wu"],
-  所: ["Suo"],
-  有: ["You"],
-  栏: ["Lan"],
-  位: ["Wei"],
-  等: ["Deng"],
-  待: ["Dai"],
-  直: ["Zhi"],
-  跳: ["Tiao"],
-  过: ["Guo"],
-  根: ["Gen"],
-  据: ["Ju"],
-  中: ["Zhong"],
-  止: ["Zhi"],
-  如: ["Ru"],
-  为: ["Wei"],
-  假: ["Jia"],
-  真: ["Zhen"],
-  循: ["Xun"],
-  环: ["Huan"],
-  断: ["Duan"],
-  继: ["Xu"],
-  调: ["DiaoTiao"],
-  用: ["Yong"],
-  始: ["Shi"],
-  添: ["Tian"],
-  生: ["Sheng"],
-  命: ["Ming"],
-  池: ["Chi"],
-  移: ["Yi"],
-  除: ["Chu"],
-  的: ["De"],
-  值: ["Zhi"],
-  整: ["Zheng"],
-  停: ["Ting"],
-  助: ["Zhu"],
-  攻: ["Gong"],
-  机: ["Ji"],
-  器: ["Qi"],
-  人: ["Ren"],
-  绑: ["Bang"],
-  定: ["Ding"],
-  解: ["Jie"],
-  大: ["Da"],
-  小: ["Xiao"],
-  障: ["Zhang"],
-  碍: ["Ai"],
-  修: ["Xiu"],
-  改: ["Gai"],
-  英: ["Ying"],
-  雄: ["Xiong"],
-  语: ["Yu"],
-  音: ["Yin"],
-  强: ["Qiang"],
-  制: ["Zhi"],
-  设: ["She"],
-  置: ["Zhi"],
-  称: ["Cheng"],
-  启: ["Qi"],
-  碰: ["Peng"],
-  撞: ["Zhuang"],
-  取: ["Qu"],
-  境: ["Jing"],
-  朝: ["Chao"],
-  向: ["Xiang"],
-  镜: ["Jing"],
-  头: ["Tou"],
-  按: ["An"],
-  下: ["Xia"],
-  钮: ["Niu"],
-  速: ["Su"],
-  选: ["Xuan"],
-  择: ["Ze"],
-  轮: ["Lun"],
-  廓: ["Kuo"],
-  限: ["Xian"],
-  阈: ["Yu"],
-  转: ["Zhuan"],
-  换: ["Huan"],
-  状: ["Zhuang"],
-  态: ["Tai"],
-  清: ["Qing"],
-  可: ["Ke"],
-  禁: ["Jin"],
-  主: ["Zhu"],
-  要: ["Yao"],
-  传: ["Chuan"],
-  送: ["Song"],
-  复: ["Fu"],
-  活: ["Huo"],
-  杀: ["Sha"],
-  分: ["Fen"],
-  数: ["Shu"],
-  对: ["Dui"],
-  死: ["Si"],
-  回: ["Hui"],
-  放: ["Fang"],
-  时: ["Shi"],
-  目: ["Mu"],
-  标: ["Biao"],
-  键: ["Jian"],
-  施: ["Shi"],
-  推: ["Tui"],
-  力: ["Li"],
-  不: ["Bu"],
-  见: ["Jian"],
-  交: ["Jiao"],
-  流: ["Liu"],
-  模: ["Mo"],
-  式: ["Shi"],
-  辅: ["Fu"],
-  技: ["Ji"],
-  能: ["Neng"],
-  终: ["Zhong"],
-  极: ["Ji"],
-  近: ["Jin"],
-  战: ["Zhan"],
-  装: ["Zhuang"],
-  填: ["Tian"],
-  跃: ["Yue"],
-  蹲: ["Dun"],
-  充: ["Chong"],
-  资: ["Zi"],
-  源: ["Yuan"],
-  冷: ["Leng"],
-  却: ["Que"],
-  武: ["Wu"],
-  弹: ["Dan"],
-  药: ["Yao"],
-  道: ["Dao"],
-  引: ["Yin"],
-  度: ["Du"],
-  瞄: ["Miao"],
-  准: ["Zhun"],
-  垂: ["Chui"],
-  地: ["Di"],
-  形: ["Xing"],
-  者: ["Zhe"],
-  间: ["Jian"],
-  重: ["ZhongChong"],
-  预: ["Yu"],
-  载: ["Zai"],
-  点: ["Dian"],
-  描: ["Miao"],
-  述: ["Shu"],
-  慢: ["Man"],
-  在: ["Zai"],
-  索: ["Suo"],
-  处: ["Chu"],
-  追: ["Zhui"],
-  踪: ["Zong"],
-  频: ["Pin"],
-  率: ["Lv"],
-  逐: ["Zhu"],
-  帧: ["Zhen"],
-  更: ["Geng"],
-  新: ["Xin"],
-  单: ["Dan"],
-  次: ["Ci"],
-  赋: ["Fu"],
-  显: ["Xian"],
-  示: ["Shi"],
-  姓: ["Xing"],
-  板: ["Ban"],
-  隐: ["Yin"],
-  藏: ["Zang", "Cang"],
-  提: ["Ti"],
-  游: ["You"],
-  戏: ["Xi"],
-  图: ["Tu"],
-  计: ["Ji"],
-  信: ["Xin"],
-  息: ["Xi"],
-  聊: ["Liao"],
-  天: ["Tian"],
-  文: ["Wen"],
-  字: ["Zi"],
-  完: ["Wan"],
-  关: ["Guan"],
-  闭: ["Bi"],
-  通: ["Tong"],
-  告: ["Gao"],
-  乐: ["Yue"],
-  宣: ["Xuan"],
-  合: ["He"],
-  胜: ["Sheng"],
-  利: ["Li"],
-  布: ["Bu"],
-  平: ["Ping"],
-  暂: ["Zan"],
-  前: ["Qian"],
-  往: ["Wang"],
-  集: ["Ji"],
-  结: ["Jie"],
-  返: ["Fan"],
-  厅: ["Ting"],
-  室: ["Shi"],
-  创: ["Chuang"],
-  建: ["Jian"],
-  本: ["Ben"],
-  进: ["Jin"],
-  效: ["Xiao"],
-  果: ["Guo"],
-  光: ["Guang"],
-  束: ["Shu"],
-  播: ["Bo"],
-  体: ["Ti"],
-  查: ["Cha", "Zha"],
-  看: ["Kan"],
-  录: ["Lu"],
-  记: ["Ji"],
-  部: ["Bu"],
-  无: ["Wu"],
-  互: ["Hu"],
-  身: ["Shen"],
-  左: ["Zuo"],
-  边: ["Bian"],
-  顶: ["Ding"],
-  右: ["You"],
-  沉: ["Chen"],
-  睡: ["Shui"],
-  燃: ["Ran"],
-  冰: ["Bing"],
-  冻: ["Dong"],
-  被: ["Bei"],
-  侵: ["Qin"],
-  敌: ["Di"],
-  倒: ["Dao"],
-  相: ["Xiang"],
-  晕: ["Yun"],
-  法: ["Fa"],
-  护: ["Hu"],
-  甲: ["Jia"],
-  盾: ["Dun"],
-  防: ["Fang"],
-  赏: ["Shang"],
-  金: ["Jin"],
-  猎: ["Lie"],
-  手: ["Shou"],
-  占: ["Zhan"],
-  领: ["Ling"],
-  勇: ["Yong"],
-  夺: ["Duo"],
-  锦: ["Jin"],
-  旗: ["Qi"],
-  决: ["Jue"],
-  斗: ["Dou"],
-  先: ["Xian"],
-  锋: ["Feng"],
-  运: ["Yun"],
-  融: ["Chu"],
-  怪: ["Guai"],
-  鼠: ["Shu"],
-  仇: ["Fu"],
-  雪: ["Xue"],
-  球: ["Qiu"],
-  势: ["Shi"],
-  训: ["Xu"],
-  练: ["Lian"],
-  靶: ["Ba"],
-  场: ["Chang"],
-  突: ["Tu"],
-  团: ["Tuan"],
-  域: ["Yu"],
-  狩: ["Shou"],
-  箭: ["Jian"],
-  上: ["Shang"],
-  星: ["Xing"],
-  矢: ["Shi"],
-  号: ["Hao"],
-  圆: ["Yuan"],
-  圈: ["Quan"],
-  梅: ["Mei"],
-  花: ["Hua"],
-  块: ["Kuai"],
-  眩: ["Xuan"],
-  感: ["Gan"],
-  叹: ["Tan"],
-  眼: ["Yan"],
-  睛: ["Jing"],
-  火: ["Huo"],
-  焰: ["Yan"],
-  帜: ["Zhi"],
-  高: ["Gao"],
-  兴: ["Xing"],
-  红: ["Hong"],
-  桃: ["Tao"],
-  满: ["Man"],
-  月: ["Yue"],
-  拒: ["Ju"],
-  绝: ["Jue"],
-  剧: ["Ju"],
-  毒: ["Du"],
-  问: ["Wen"],
-  辐: ["Fu"],
-  射: ["She"],
-  收: ["Shou"],
-  宽: ["Kuan"],
-  细: ["Xi"],
-  难: ["Nan"],
-  骷: ["Ku"],
-  髅: ["Lou"],
-  黑: ["Hei"],
-  螺: ["Luo"],
-  旋: ["Xuan"],
-  垃: ["La"],
-  圾: ["Ji"],
-  箱: ["Xiang"],
-  警: ["Jing"],
-  神: ["Shen"],
-  空: ["Kong"],
-  使: ["Shi"],
-  半: ["Ban"],
-  托: ["Tuo"],
-  昂: ["Ang"],
-  莱: ["Lai"],
-  因: ["Yin"],
-  哈: ["Ha"],
-  特: ["Te"],
-  老: ["Lao"],
-  之: ["Zhi"],
-  鹰: ["Ying"],
-  温: ["Wen"],
-  斯: ["Si"],
-  顿: ["Dun"],
-  百: ["Bai"],
-  堡: ["Bao"],
-  垒: ["Lei"],
-  秩: ["Zhi"],
-  禅: ["Chan"],
-  雅: ["Ya"],
-  塔: ["Ta"],
-  氏: ["Shi"],
-  路: ["Lu"],
-  霸: ["Ba"],
-  卡: ["Ka"],
-  西: ["Xi"],
-  迪: ["Di"],
-  狂: ["Kuang"],
-  莉: ["Li"],
-  娅: ["Ya"],
-  士: ["Shi"],
-  兵: ["Bing"],
-  卢: ["Lu"],
-  奥: ["Ao"],
-  美: ["Mei"],
-  影: ["Ying"],
-  末: ["Mo"],
-  日: ["Ri"],
-  铁: ["Tie"],
-  拳: ["Quan"],
-  安: ["An"],
-  娜: ["Na"],
-  丽: ["Li"],
-  莎: ["Sha"],
-  吉: ["Ji"],
-  莫: ["Mo"],
-  伊: ["Yi"],
-  拉: ["La"],
-  破: ["Po"],
-  坏: ["Huai"],
-  杰: ["Jie"],
-  恩: ["En"],
-  艾: ["Ai"],
-  什: ["Shi"],
-  声: ["Sheng"],
-  巴: ["Ba"],
-  蒂: ["Di"],
-  雾: ["Wu"],
-  渣: ["Zha"],
-  客: ["Ke"],
-  女: ["Nv"],
-  王: ["Wang"],
-  格: ["Ge"],
-  玛: ["Ma"],
-  刹: ["ChaSha"],
-  公: ["Gong"],
-  万: ["Wan"],
-  圣: ["Sheng"],
-  节: ["Jie"],
-  德: ["De"],
-  好: ["Hao"],
-  坞: ["Wu"],
-  瓦: ["Wa"],
-  尔: ["Er"],
-  废: ["Fei"],
-  墟: ["Xu"],
-  深: ["Shen"],
-  井: ["Jing"],
-  灯: ["Deng"],
-  佩: ["Pei"],
-  努: ["Nu"],
-  尼: ["Ni"],
-  那: ["Na"],
-  国: ["Guo"],
-  诞: ["Dan"],
-  泊: ["Bo"],
-  村: ["Cun"],
-  庄: ["Zhuang"],
-  暴: ["Bao"],
-  世: ["Shi"],
-  界: ["Jie"],
-  监: ["Jian"],
-  测: ["Ce"],
-  站: ["Zhan"],
-  南: ["Nan"],
-  洲: ["Zhou"],
-  森: ["Shen"],
-  林: ["Lin"],
-  工: ["Gong"],
-  坊: ["Fang"],
-  内: ["Nei"],
-  岛: ["Dao"],
-  屿: ["Yu"],
-  夜: ["Ye"],
-  绿: ["Lv"],
-  幕: ["Mu"],
-  城: ["Cheng"],
-  墓: ["Mu"],
-  园: ["Yuan"],
-  多: ["Duo"],
-  坛: ["Tan"],
-  黎: ["Li"],
-  弗: ["Fu"],
-  育: ["Yu"],
-  悉: ["Xi"],
-  海: ["Hai"],
-  港: ["Gang"],
-  竞: ["Jing"],
-  经: ["Jing"],
-  典: ["Dian"],
-  春: ["Chun"],
-  漓: ["Li"],
-  江: ["Jiang"],
-  市: ["Shi"],
-  庭: ["Ting"],
-  院: ["Yuan"],
-  控: ["Kong"],
-  心: ["Xin"],
-  釜: ["Fu"],
-  山: ["Shan"],
-  区: ["Qu"],
-  寺: ["Si"],
-  沃: ["Wo"],
-  业: ["Ye"],
-  镇: ["Zhen"],
-  罗: ["Luo"],
-  陀: ["Tuo"],
-  学: ["Xue"],
-  里: ["Li"],
-  阿: ["A"],
-  坂: ["Ban"],
-  殿: ["Dian"],
-  马: ["Ma"],
-  耶: ["Ye"],
-  线: ["Xian"],
-  基: ["Ji"],
-  皇: ["Huang"],
-  兽: ["Shou"],
-  埃: ["Ai"],
-  爪: ["Zhao", "Zhua"],
-  兰: ["Lan"],
-  萨: ["Sa"],
-  街: ["Jie"],
-  帕: ["Pa"],
-  苏: ["Su"],
-  香: ["Xiang"],
-  行: ["Xing"],
-  抱: ["Bao"],
-  歉: ["Qian"],
-  谢: ["Xie"],
-  撤: ["Che"],
-  再: ["Zai"],
-  候: ["Hou"],
-  我: ["Wo"],
-  了: ["Le"],
-  来: ["Lai"],
-  袭: ["Xi"],
-  需: ["Xu"],
-  帮: ["Bang"],
-  做: ["Zuo"],
-  备: ["Bei"],
-  正: ["Zheng"],
-  守: ["Shou"],
-  赶: ["Gan"],
-  跟: ["Gen"],
-  着: ["Zhe"],
-  你: ["Ni"],
-  喷: ["Pen"],
-  漆: ["Qi"],
-  表: ["Biao"],
-  情: ["Qing"],
-  益: ["Yi"],
-  抓: ["Zhuang"],
-  钩: ["Gou"],
-  柱: ["Zhu"],
-  云: ["Yun"],
-  爆: ["Bao"],
-  炸: ["Zha"],
-  面: ["Mian"],
-  负: ["Fu"],
-  激: ["Ji"],
-  物: ["Wu"],
-  雷: ["Lei"],
-  增: ["Zeng"],
-  纳: ["Na"],
-  米: ["Mi"],
-  素: ["Su"],
-  化: ["Hua"],
-  麻: ["Ma"],
-  醉: ["Zui"],
-  镖: ["Biao"],
-  聚: ["Ju"],
-  焦: ["Jiao"],
-  黏: ["Nian"],
-  性: ["Xing"],
-  陷: ["Xian"],
-  阱: ["Jing"],
-  链: ["Lian"],
-  榴: ["Liu"],
-  发: ["Fa"],
-  震: ["Zhen"],
-  荡: ["Dang"],
-  胎: ["Tai"],
-  触: ["Chu"],
-  连: ["Lian"],
-  接: ["Jie"],
-  散: ["San"],
-  失: ["Shi"],
-  现: ["Xian"],
-  住: ["Zhu"],
-  别: ["Bie"],
-  哨: ["Shao"],
-  戒: ["Jie"],
-  炮: ["Pao"],
-  原: ["Yuan"],
-  怒: ["Nu"],
-  背: ["Bei"],
-  包: ["Bao"],
-  陆: ["Lu"],
-  粒: ["Li"],
-  维: ["Wei"],
-  保: ["Bao"],
-  枪: ["Qiang"],
-  幽: ["You"],
-  灵: ["Ling"],
-  疾: ["Ji"],
-  跑: ["Pao"],
-  热: ["Re"],
-  台: ["Tai"],
-  视: ["Shi"],
-  应: ["Ying"],
-  坠: ["Zhui"],
-  延: ["Yan"],
-  管: ["Guan"],
-  烧: ["Shao"],
-  材: ["Cai"],
-  料: ["Liao"],
-  闪: ["Shan"],
-  乱: ["Luan"],
-  超: ["Chao"],
-  质: ["Zhi"],
-  吸: ["Xi"],
-  附: ["Fu"],
-  志: ["Zhi"],
-  电: ["Dian"],
-  磁: ["Ci"],
-  脉: ["Mai"],
-  冲: ["Chong"],
-  诡: ["Gui"],
-  恢: ["Hui"],
-  飞: ["Fei"],
-  锤: ["Chui"],
-  范: ["Fan"],
-  围: ["Wei"],
-  枷: ["Jia"],
-  微: ["Wei"],
-  型: ["Xing"],
-  自: ["Zi"],
-  毁: ["Hui"],
-  初: ["Chu"],
-  坦: ["Tan"],
-  克: ["Ke"],
-  勾: ["Gou"],
-  烈: ["Lie"],
-  打: ["Da"],
-  当: ["Dang"],
-  默: ["Mo"],
-  认: ["Ren"],
-  及: ["Ji"],
-  屏: ["Ping"],
-  截: ["Jie"],
-  反: ["Fan"],
-  并: ["Bing"],
-  遮: ["Zhe"],
-  蔽: ["Bi"],
-  总: ["Zong"],
-  是: ["Shi"],
-  替: ["Ti"],
-  至: ["Zhi"],
-  减: ["Jian"],
-  乘: ["Cheng"],
-  从: ["Cong"],
-  组: ["Zu"],
-  个: ["Ge"],
-  实: ["Shi"],
-  或: ["Huo"],
-  非: ["Fei"],
-  较: ["Jiao"],
-  于: ["Yu"],
-  野: ["Ye"],
-  急: ["Ji"],
-  救: ["Jiu"],
-  立: ["Li"],
-  存: ["Cun"],
-  否: ["Fou"],
-  具: ["Ju"],
-  携: ["Xie"],
-  带: ["Dai"],
-  锁: ["Zuo"],
-  已: ["Yi"],
-  任: ["Ren"],
-  意: ["Yi"],
-  墙: ["Qiang"],
-  像: ["Xiang"],
-  类: ["Lei"],
-  距: ["Ju"],
-  随: ["Sui"],
-  水: ["Shui"],
-  指: ["Zhi"],
-  服: ["Fu"],
-  务: ["Fu"],
-  均: ["Jun"],
-  峰: ["Feng"],
-  耗: ["Hao"],
-  得: ["De"],
-  象: ["Xiang"],
-  支: ["Zhi"],
-  援: ["Yuan"],
-  输: ["Shu"],
-  出: ["Chu"],
-  角: ["Jiao"],
-  此: ["Ci"],
-  外: ["Wai"],
-  远: ["Yuan"],
-  幅: ["Fu"],
-  归: ["Gui"],
-  积: ["Ji"],
-  走: ["Zou"],
-  差: ["Cha"],
-  余: ["Yu"],
-  弦: ["Xian"],
-  切: ["Qie"],
-  夹: ["Jia"],
-  以: ["Yi"],
-  弧: ["Hu"],
-  映: ["Ying"],
-  排: ["Pai"],
-  滤: ["Lv"],
-  元: ["Yuan"],
-  割: ["Ge"],
-  含: ["Han"],
-  首: ["Shou"],
-  阻: ["Zu"],
-  挡: ["Dang"],
-  承: ["Cheng"],
-  协: ["Xie"],
-  佳: ["Jia"],
-  瞬: ["Shun"],
-  独: ["Du"],
-  获: ["Huo"],
-  未: ["Wei"],
-  和: ["He"],
-  会: ["Hui"],
-  符: ["Fu"],
-  串: ["Chuan"],
-  颜: ["Yan"],
-  色: ["Se"],
-  径: ["Jing"],
-  义: ["Yi"],
-  长: ["Chang"],
-  白: ["Bai"],
-  黄: ["Huang"],
-  紫: ["Zi"],
-  蓝: ["Lan"],
-  橙: ["Cheng"],
-  青: ["Qing"],
-  灰: ["Hui"],
-  亮: ["Liang"],
-  玫: ["Mei"],
+  阿: "AE",
+  埃: "ZhiAi",
+  艾: "YiAi",
+  碍: "Ai",
+  安: "An",
+  按: "An",
+  昂: "YangAng",
+  奥: "YouAoYu",
+  巴: "Ba",
+  靶: "Ba",
+  霸: "PoBa",
+  白: "BoBai",
+  百: "MoBaiBo",
+  坂: "Ban",
+  板: "Ban",
+  半: "PanBan",
+  帮: "Bang",
+  绑: "Bang",
+  包: "PaoBaoFu",
+  保: "Bao",
+  堡: "PuBuBao",
+  抱: "PouPaoBao",
+  暴: "BoPuBao",
+  爆: "BoBao",
+  备: "Bei",
+  背: "Bei",
+  被: "BeiPiBi",
+  本: "Ben",
+  比: "BiPi",
+  闭: "Bi",
+  蔽: "BiePieBi",
+  边: "Bian",
+  变: "Bian",
+  标: "Biao",
+  镖: "Biao",
+  表: "Biao",
+  别: "Bie",
+  冰: "BingNing",
+  兵: "Bing",
+  并: "Bing",
+  播: "Bo",
+  不: "BuFuFou",
+  布: "Bu",
+  部: "BuPou",
+  材: "Cai",
+  参: "CenShenCan",
+  藏: "ZangCang",
+  操: "Cao",
+  测: "Ce",
+  查: "ZhaChaChai",
+  差: "ChaiJieChaCiCuo",
+  禅: "ChanShan",
+  场: "Chang",
+  超: "ChaoTiao",
+  朝: "ZhuChaoZhao",
+  撤: "Che",
+  沉: "Chen",
+  称: "ChengChen",
+  成: "Cheng",
+  承: "ChengZheng",
+  城: "Cheng",
+  乘: "ChengSheng",
+  程: "Cheng",
+  橙: "ChenChengDeng",
+  池: "CheChiTuo",
+  持: "Chi",
+  充: "Chong",
+  冲: "Chong",
+  仇: "JuQiuChou",
+  出: "Chu",
+  初: "Chu",
+  除: "ShuZhuChu",
+  处: "Chu",
+  触: "Chu",
+  传: "ZhuanChuan",
+  串: "ChuanGuanQuan",
+  创: "Chuang",
+  垂: "ZhuiChui",
+  锤: "Chui",
+  春: "Chun",
+  磁: "Ci",
+  此: "Ci",
+  次: "CiZi",
+  从: "Cong",
+  村: "Cun",
+  存: "Cun",
+  打: "Da",
+  大: "TaiDaDai",
+  带: "Dai",
+  待: "Dai",
+  单: "ShanChanDan",
+  诞: "Dan",
+  弹: "TanDan",
+  当: "Dang",
+  挡: "Dang",
+  荡: "Dang",
+  岛: "Dao",
+  到: "Dao",
+  倒: "Dao",
+  道: "Dao",
+  得: "DeiDe",
+  德: "De",
+  地: "DeDi",
+  的: "DiDe",
+  灯: "DengDing",
+  等: "Deng",
+  迪: "Di",
+  敌: "DiHua",
+  蒂: "Di",
+  典: "DianTian",
+  点: "Dian",
+  电: "Dian",
+  殿: "Dian",
+  调: "DiaoTiao",
+  顶: "Ding",
+  定: "Ding",
+  动: "Dong",
+  冻: "Dong",
+  斗: "ZhuDou",
+  毒: "DuDai",
+  独: "Du",
+  度: "ZhaiDuDuo",
+  断: "Duan",
+  队: "Dui",
+  对: "Dui",
+  蹲: "ZunCuanDunQunCun",
+  盾: "ShunDunYun",
+  顿: "DuDun",
+  多: "Duo",
+  夺: "Duo",
+  恩: "En",
+  尔: "Er",
+  发: "Fa",
+  法: "Fa",
+  反: "Fan",
+  返: "Fan",
+  范: "Fan",
+  方: "FangWangFengPang",
+  坊: "Fang",
+  防: "Fang",
+  放: "Fang",
+  飞: "Fei",
+  非: "Fei",
+  废: "Fei",
+  分: "FenBan",
+  峰: "Feng",
+  锋: "Feng",
+  否: "PiFou",
+  弗: "Fu",
+  服: "FuBiBo",
+  符: "Fu",
+  幅: "BiFu",
+  辐: "Fu",
+  釜: "Fu",
+  辅: "Fu",
+  负: "Fu",
+  附: "BuFu",
+  复: "Fu",
+  赋: "Fu",
+  改: "Gai",
+  赶: "QianGan",
+  感: "GanHan",
+  港: "HongGang",
+  高: "Gao",
+  告: "GaoJuGu",
+  割: "Ge",
+  格: "LuoHeGe",
+  个: "GeGan",
+  根: "Gen",
+  跟: "Gen",
+  更: "Geng",
+  工: "Gong",
+  公: "Gong",
+  攻: "Gong",
+  勾: "Gou",
+  钩: "Gou",
+  怪: "Guai",
+  关: "Guan",
+  观: "Guan",
+  管: "Guan",
+  光: "Guang",
+  归: "Gui",
+  规: "Gui",
+  诡: "Gui",
+  国: "Guo",
+  果: "LuoGuanGuo",
+  过: "Guo",
+  哈: "TaHaShaHe",
+  海: "Hai",
+  害: "HeHai",
+  含: "Han",
+  好: "Hao",
+  号: "XiaoHao",
+  耗: "HaoMao",
+  合: "HeGe",
+  和: "HuoHuHe",
+  黑: "Hei",
+  红: "GongHong",
+  后: "Hou",
+  候: "Hou",
+  弧: "Hu",
+  互: "Hu",
+  护: "Hu",
+  花: "Hua",
+  化: "HuaHuo",
+  坏: "PeiPiHuai",
+  环: "Huan",
+  换: "Huan",
+  皇: "HuangWang",
+  黄: "Huang",
+  灰: "Hui",
+  恢: "Hui",
+  回: "Hui",
+  毁: "Hui",
+  会: "HuiKuai",
+  活: "HuoGuo",
+  火: "Huo",
+  或: "YuHuo",
+  获: "Huo",
+  击: "Ji",
+  圾: "JieJi",
+  机: "JiWei",
+  积: "JiZhi",
+  基: "Ji",
+  激: "JiJiao",
+  及: "Ji",
+  吉: "Ji",
+  极: "Ji",
+  急: "Ji",
+  疾: "Ji",
+  集: "Ji",
+  计: "Ji",
+  记: "Ji",
+  技: "JiQi",
+  继: "Ji",
+  加: "Jia",
+  夹: "GaJia",
+  佳: "Jia",
+  枷: "Jia",
+  家: "JiaGuJie",
+  甲: "Jia",
+  假: "JiaJieGeXia",
+  间: "Jian",
+  监: "Jian",
+  减: "Jian",
+  检: "Jian",
+  见: "XianJian",
+  件: "JianMou",
+  建: "Jian",
+  键: "Jian",
+  箭: "Jian",
+  江: "Jiang",
+  交: "Jiao",
+  焦: "QiaoJiao",
+  角: "JiaoGuLuJue",
+  较: "Jiao",
+  接: "XieShaJieCha",
+  街: "Jie",
+  节: "Jie",
+  杰: "Jie",
+  结: "Jie",
+  截: "Jie",
+  解: "JieXie",
+  戒: "Jie",
+  界: "Jie",
+  金: "Jin",
+  锦: "Jin",
+  近: "Jin",
+  进: "Jin",
+  禁: "Jin",
+  经: "Jing",
+  睛: "Jing",
+  井: "Jing",
+  阱: "Jing",
+  警: "Jing",
+  径: "Jing",
+  竞: "Jing",
+  境: "Jing",
+  镜: "Jing",
+  救: "Jiu",
+  局: "Ju",
+  拒: "Ju",
+  具: "Ju",
+  剧: "Ju",
+  据: "Ju",
+  距: "Ju",
+  聚: "Ju",
+  决: "Jue",
+  绝: "Jue",
+  均: "YunJun",
+  卡: "QiaKa",
+  开: "Kai",
+  看: "Kan",
+  可: "KeGe",
+  克: "Ke",
+  客: "QiaKe",
+  空: "Kong",
+  控: "QiangKong",
+  骷: "Ku",
+  块: "KuaiYue",
+  宽: "Kuan",
+  狂: "JueKuang",
+  廓: "Kuo",
+  垃: "La",
+  拉: "La",
+  来: "Lai",
+  莱: "Lai",
+  兰: "Lan",
+  栏: "Lan",
+  蓝: "LaLan",
+  老: "Lao",
+  乐: "LeYue",
+  了: "LiaoLe",
+  雷: "Lei",
+  垒: "Lei",
+  类: "Lei",
+  冷: "LingLeng",
+  离: "LiChi",
+  漓: "Li",
+  黎: "Li",
+  里: "Li",
+  力: "Li",
+  立: "WeiLi",
+  丽: "Li",
+  利: "Li",
+  莉: "ChiLi",
+  粒: "Li",
+  连: "Lian",
+  练: "Lian",
+  链: "Lian",
+  亮: "Liang",
+  量: "Liang",
+  疗: "Liao",
+  聊: "LiaoLiu",
+  料: "Liao",
+  烈: "Lie",
+  猎: "QueXiLie",
+  林: "Lin",
+  灵: "Ling",
+  领: "Ling",
+  流: "Liu",
+  榴: "Liu",
+  髅: "Lou",
+  卢: "Lu",
+  陆: "LuLiu",
+  录: "Lu",
+  路: "LuoLu",
+  率: "LvShuaiLve",
+  绿: "LuLv",
+  滤: "Lv",
+  乱: "Luan",
+  轮: "Lun",
+  罗: "Luo",
+  螺: "Luo",
+  麻: "Ma",
+  马: "Ma",
+  玛: "Ma",
+  脉: "MaiMo",
+  满: "Man",
+  慢: "Man",
+  玫: "Mei",
+  梅: "Mei",
+  每: "Mei",
+  美: "Mei",
+  米: "Mi",
+  面: "Mian",
+  描: "MaoMiao",
+  瞄: "Miao",
+  灭: "Mie",
+  名: "Ming",
+  命: "Ming",
+  模: "MuMo",
+  末: "MeMo",
+  莫: "MuMo",
+  默: "Mo",
+  目: "Mu",
+  墓: "Mu",
+  幕: "ManMu",
+  那: "NaNaiNuoNeiNe",
+  纳: "Na",
+  娜: "NaNuo",
+  南: "NanNa",
+  难: "Nan",
+  内: "NeiRuiNa",
+  能: "TaiXiongNengNai",
+  尼: "Ni",
+  你: "Ni",
+  黏: "Nian",
+  钮: "Niu",
+  努: "Nu",
+  怒: "Nu",
+  女: "RuNv",
+  帕: "MoPa",
+  排: "BaiPai",
+  跑: "BoPao",
+  炮: "BaoPao",
+  佩: "Pei",
+  喷: "Pen",
+  碰: "Peng",
+  频: "Pin",
+  平: "PingBengBingPian",
+  屏: "PingBing",
+  泊: "BoPo",
+  破: "Po",
+  漆: "QieQi",
+  旗: "Qi",
+  启: "Qi",
+  器: "Qi",
+  前: "QianJian",
+  歉: "Qian",
+  枪: "Qiang",
+  强: "JiangQiang",
+  墙: "Qiang",
+  切: "QiQie",
+  侵: "Qin",
+  青: "JingQing",
+  清: "Qing",
+  情: "Qing",
+  球: "Qiu",
+  区: "QuOu",
+  取: "Qu",
+  圈: "JuanQuan",
+  全: "Quan",
+  拳: "Quan",
+  却: "Que",
+  燃: "Ran",
+  热: "Re",
+  人: "Ren",
+  认: "Ren",
+  任: "LinRen",
+  日: "Ri",
+  融: "Rong",
+  如: "Ru",
+  入: "Ru",
+  锐: "Rui",
+  萨: "Sa",
+  赛: "Sai",
+  散: "San",
+  色: "SeShai",
+  森: "Sen",
+  杀: "Sha",
+  刹: "ChaSha",
+  莎: "ShaSuoSui",
+  山: "Shan",
+  闪: "Shan",
+  善: "Shan",
+  伤: "Shang",
+  赏: "Shang",
+  上: "Shang",
+  烧: "Shao",
+  哨: "ShaoSaoXiao",
+  设: "She",
+  射: "SheYiYe",
+  身: "ShenJuan",
+  深: "Shen",
+  什: "ShenShi",
+  神: "Shen",
+  生: "Sheng",
+  声: "ShengQing",
+  圣: "ShengKu",
+  胜: "ShengQingXing",
+  失: "YiShi",
+  施: "ShiYi",
+  时: "Shi",
+  实: "Shi",
+  矢: "Shi",
+  使: "Shi",
+  始: "Shi",
+  士: "Shi",
+  氏: "ShiZhiJing",
+  世: "Shi",
+  市: "ShiFu",
+  示: "ZhiQiShi",
+  式: "ShiTe",
+  事: "ZiShi",
+  势: "Shi",
+  视: "Shi",
+  室: "Shi",
+  是: "ShiTi",
+  收: "Shou",
+  手: "Shou",
+  守: "Shou",
+  首: "Shou",
+  受: "ShouDao",
+  狩: "Shou",
+  兽: "Shou",
+  输: "Shu",
+  鼠: "Shu",
+  束: "Shu",
+  述: "Shu",
+  数: "ShuShuo",
+  刷: "Shua",
+  双: "Shuang",
+  水: "Shui",
+  睡: "Shui",
+  瞬: "Shun",
+  斯: "ShiSi",
+  死: "Si",
+  寺: "ShiSi",
+  送: "Song",
+  苏: "Su",
+  素: "Su",
+  速: "Su",
+  随: "Sui",
+  梭: "SuoXun",
+  所: "Suo",
+  索: "Suo",
+  锁: "Suo",
+  塔: "TaDa",
+  胎: "Tai",
+  台: "SiTaiYi",
+  态: "Tai",
+  坛: "Tan",
+  坦: "Tan",
+  叹: "YouYiTan",
+  桃: "ZhaoTiaoTao",
+  特: "Te",
+  提: "ShiChiDiTi",
+  体: "BenCuiTi",
+  替: "Ti",
+  天: "Tian",
+  添: "Tian",
+  填: "ChenZhenTian",
+  条: "Tiao",
+  跳: "TiaoDiaoTao",
+  铁: "Tie",
+  厅: "Ting",
+  庭: "Ting",
+  停: "Ting",
+  通: "Tong",
+  头: "Tou",
+  突: "Tu",
+  图: "Tu",
+  团: "QiuTuan",
+  推: "Tui",
+  退: "Tui",
+  托: "Tuo",
+  陀: "TuoDuo",
+  瓦: "Wa",
+  外: "Wai",
+  完: "WanKuan",
+  玩: "Wan",
+  万: "MoWan",
+  亡: "WangWu",
+  王: "YuWang",
+  往: "Wang",
+  微: "Wei",
+  围: "Wei",
+  维: "Wei",
+  为: "Wei",
+  未: "Wei",
+  位: "WeiLi",
+  温: "WenYun",
+  文: "Wen",
+  问: "Wen",
+  我: "Wo",
+  沃: "Wo",
+  无: "MoWu",
+  伍: "Wu",
+  武: "Wu",
+  务: "Wu",
+  坞: "Wu",
+  物: "Wu",
+  雾: "Wu",
+  吸: "Xi",
+  西: "Xi",
+  息: "Xi",
+  悉: "Xi",
+  袭: "Xi",
+  戏: "HuXi",
+  细: "Xi",
+  下: "Xia",
+  先: "Xian",
+  弦: "Xian",
+  显: "Xian",
+  现: "Xian",
+  线: "Xian",
+  限: "WenXian",
+  陷: "Xian",
+  相: "Xiang",
+  香: "Xiang",
+  箱: "Xiang",
+  向: "Xiang",
+  象: "Xiang",
+  像: "Xiang",
+  消: "Xiao",
+  小: "Xiao",
+  效: "Xiao",
+  协: "Xie",
+  携: "Xie",
+  谢: "Xie",
+  心: "Xin",
+  新: "Xin",
+  信: "XinShen",
+  星: "Xing",
+  行: "XingHangHeng",
+  形: "Xing",
+  型: "Xing",
+  兴: "Xing",
+  姓: "XingSheng",
+  性: "Xing",
+  雄: "Xiong",
+  修: "Xiu",
+  墟: "Xu",
+  需: "RuNuoRuanXu",
+  序: "Xu",
+  续: "Xu",
+  宣: "Xuan",
+  旋: "Xuan",
+  选: "Xuan",
+  眩: "HuanJuanXuan",
+  学: "Xue",
+  雪: "Xue",
+  循: "Xun",
+  训: "Xun",
+  雅: "Ya",
+  娅: "Ya",
+  延: "Yan",
+  颜: "Yan",
+  眼: "WenYan",
+  焰: "Yan",
+  药: "Yao",
+  要: "Yao",
+  耶: "YeXie",
+  野: "ShuYe",
+  业: "Ye",
+  夜: "Ye",
+  一: "Yi",
+  伊: "Yi",
+  移: "YiChi",
+  已: "SiYi",
+  以: "SiYi",
+  义: "Yi",
+  益: "Yi",
+  意: "Yi",
+  因: "Yin",
+  音: "Yin",
+  引: "Yin",
+  隐: "Yin",
+  应: "Ying",
+  英: "YingYang",
+  鹰: "Ying",
+  影: "Ying",
+  映: "YangYing",
+  勇: "Yong",
+  用: "Yong",
+  幽: "You",
+  游: "LiuYou",
+  友: "You",
+  有: "YouWei",
+  右: "You",
+  于: "XuWeiYu",
+  余: "TuXuYu",
+  与: "Yu",
+  屿: "Yu",
+  语: "Yu",
+  育: "YuZhouYo",
+  预: "Yu",
+  域: "Yu",
+  阈: "Yu",
+  元: "Yuan",
+  园: "WanYuan",
+  原: "Yuan",
+  圆: "Yuan",
+  援: "YuanHuan",
+  源: "Yuan",
+  远: "Yuan",
+  院: "Yuan",
+  月: "RuYue",
+  跃: "Yue",
+  晕: "Yun",
+  云: "Yun",
+  运: "Yun",
+  再: "Zai",
+  在: "Zai",
+  载: "Zai",
+  暂: "Zan",
+  造: "CaoZao",
+  则: "Ze",
+  择: "ZhaiZe",
+  增: "CengZeng",
+  渣: "Zha",
+  炸: "Zha",
+  占: "TieZhan",
+  战: "Zhan",
+  站: "Zhan",
+  长: "ZhangChang",
+  障: "Zhang",
+  爪: "ZhuaZhao",
+  遮: "Zhe",
+  者: "Zhe",
+  着: "ZhuoZhaoZhe",
+  真: "Zhen",
+  阵: "Zhen",
+  镇: "Zhen",
+  震: "ShenZhen",
+  整: "Zheng",
+  正: "Zheng",
+  帧: "Zheng",
+  之: "ZhuZhi",
+  支: "ZhiQi",
+  直: "Zhi",
+  值: "Zhi",
+  止: "Zhi",
+  指: "Zhi",
+  至: "ZhiDie",
+  志: "Zhi",
+  制: "Zhi",
+  帜: "Zhi",
+  治: "ZhiChi",
+  质: "Zhi",
+  秩: "Zhi",
+  置: "Zhi",
+  中: "Zhong",
+  终: "Zhong",
+  重: "TongZhongChong",
+  洲: "Zhou",
+  逐: "ZhouZhuDiTun",
+  主: "Zhu",
+  住: "Zhu",
+  助: "ChuZhu",
+  柱: "Zhu",
+  抓: "Zhua",
+  转: "ZhuanZhuai",
+  庄: "PengZhuang",
+  装: "Zhuang",
+  状: "Zhuang",
+  撞: "Zhuang",
+  追: "TuiDuiZhui",
+  坠: "Zhui",
+  准: "Zhun",
+  资: "Zi",
+  紫: "Zi",
+  字: "Zi",
+  自: "Zi",
+  子: "Zi",
+  踪: "Zong",
+  总: "Zong",
+  走: "Zou",
+  阻: "ZuZhu",
+  组: "Zu",
+  最: "CuoZui",
+  醉: "Zui",
+  左: "Zuo",
+  作: "Zuo",
+  做: "Zuo",
 };
 
 let 常量 = {
@@ -747,61 +755,61 @@ let 常量 = {
     技能1: {
       标签: ["按钮"],
       提示: "绑定技能1的按钮。",
-      图标: "images/ow/input/button.png",
+      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
     },
 
     技能2: {
       标签: ["按钮"],
       提示: "绑定技能2的按钮。",
-      图标: "images/ow/input/button.png",
+      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
     },
 
     蹲下: {
       标签: ["按钮"],
       提示: "绑定蹲下的按钮。",
-      图标: "images/ow/input/button.png",
+      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
     },
 
     互动: {
       标签: ["按钮"],
       提示: "绑定互动的按钮。",
-      图标: "images/ow/input/button.png",
+      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
     },
 
     跳跃: {
       标签: ["按钮"],
       提示: "绑定跳跃的按钮。",
-      图标: "images/ow/input/button.png",
+      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
     },
 
     近身攻击: {
       标签: ["按钮"],
       提示: "绑定近身攻击的按钮。",
-      图标: "images/ow/input/button.png",
+      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
     },
 
     主要攻击模式: {
       标签: ["按钮"],
       提示: "绑定主要攻击模式的按钮。",
-      图标: "images/ow/input/left.png",
+      图标: ["images/ow/input/left.png", "images/ow/input/gray/left.png"],
     },
 
     装填: {
       标签: ["按钮"],
       提示: "绑定装填的按钮。",
-      图标: "images/ow/input/button.png",
+      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
     },
 
     辅助攻击模式: {
       标签: ["按钮"],
       提示: "绑定辅助攻击模式的按钮。",
-      图标: "images/ow/input/right.png",
+      图标: ["images/ow/input/right.png", "images/ow/input/gray/right.png"],
     },
 
     终极技能: {
       标签: ["按钮"],
       提示: "绑定终极技能的按钮。",
-      图标: "images/ow/input/button.png",
+      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
     },
   },
 
@@ -2581,22 +2589,34 @@ let 常量 = {
       },
       技能: {
         生化步枪: {
-          图标: "images/ow/hero/support/ana/weapon.png",
+          图标: [
+            "images/ow/hero/support/ana/weapon.png",
+            "images/ow/hero/support/ana/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "安娜的步枪能够射出治疗队友和对敌人造成持续伤害的子弹。而她步枪上的瞄准镜能够让她进行更加精确的射击。",
         },
         纳米激素: {
-          图标: "images/ow/hero/support/ana/ultimate.png",
+          图标: [
+            "images/ow/hero/support/ana/ultimate.png",
+            "images/ow/hero/support/ana/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
           提示: "安娜在给一名队友注射战斗激素后，造成的伤害更高，而受到敌人的伤害更少。",
         },
         麻醉镖: {
-          图标: "images/ow/hero/support/ana/ability1.png",
+          图标: [
+            "images/ow/hero/support/ana/ability1.png",
+            "images/ow/hero/support/ana/gray/ability1.png",
+          ],
           绑定: ["技能1"],
           提示: "安娜用她的手枪发射飞镖，而飞镖能够让敌人失去意识(但任何的伤害都能唤醒敌人)。",
         },
         生物手雷: {
-          图标: "images/ow/hero/support/ana/ability2.png",
+          图标: [
+            "images/ow/hero/support/ana/ability2.png",
+            "images/ow/hero/support/ana/gray/ability2.png",
+          ],
           绑定: ["技能2"],
           提示: "受到手雷影响的队友在一段时间内所受到的治疗量增加，而受到手雷影响的敌人在一段时间内无法接受治疗。",
         },
@@ -2613,19 +2633,31 @@ let 常量 = {
       },
       技能: {
         "“毒蛇”": {
-          图标: "images/ow/hero/damage/ashe/weapon.png",
+          图标: [
+            "images/ow/hero/damage/ashe/weapon.png",
+            "images/ow/hero/damage/ashe/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         召唤鲍勃: {
-          图标: "images/ow/hero/damage/ashe/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/ashe/ultimate.png",
+            "images/ow/hero/damage/ashe/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         短筒猎枪: {
-          图标: "images/ow/hero/damage/ashe/ability1.png",
+          图标: [
+            "images/ow/hero/damage/ashe/ability1.png",
+            "images/ow/hero/damage/ashe/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         延时雷管: {
-          图标: "images/ow/hero/damage/ashe/ability2.png",
+          图标: [
+            "images/ow/hero/damage/ashe/ability2.png",
+            "images/ow/hero/damage/ashe/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -2641,24 +2673,39 @@ let 常量 = {
       },
       技能: {
         生化榴弹枪: {
-          图标: "images/ow/hero/support/baptiste/weapon.png",
+          图标: [
+            "images/ow/hero/support/baptiste/weapon1.png",
+            "images/ow/hero/support/baptiste/gray/weapon1.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "使用不同的弹药索引。攻击为 0，治疗为 1。",
         },
         增幅矩阵: {
-          图标: "images/ow/hero/support/baptiste/ultimate.png",
+          图标: [
+            "images/ow/hero/support/baptiste/ultimate.png",
+            "images/ow/hero/support/baptiste/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         愈合冲击: {
-          图标: "images/ow/hero/support/baptiste/ability1.png",
+          图标: [
+            "images/ow/hero/support/baptiste/ability1.png",
+            "images/ow/hero/support/baptiste/gray/bility1.png",
+          ],
           绑定: ["技能1"],
         },
         维生力场: {
-          图标: "images/ow/hero/support/baptiste/ability2.png",
+          图标: [
+            "images/ow/hero/support/baptiste/ability2.png",
+            "images/ow/hero/support/baptiste/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         动力战靴: {
-          图标: "images/ow/hero/support/baptiste/passive.png",
+          图标: [
+            "images/ow/hero/support/baptiste/passive.png",
+            "images/ow/hero/support/baptiste/gray/passive.png",
+          ],
           绑定: ["跳跃", "被动"],
           提示: "在蓄力后可以跳得更高。",
         },
@@ -2676,28 +2723,46 @@ let 常量 = {
       },
       技能: {
         侦察模式: {
-          图标: "images/ow/hero/damage/bastion/weapon1.png",
+          图标: [
+            "images/ow/hero/damage/bastion/weapon1.png",
+            "images/ow/hero/damage/bastion/gray/weapon1.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         强攻模式: {
-          图标: "images/ow/hero/damage/bastion/weapon2.png",
+          图标: [
+            "images/ow/hero/damage/bastion/weapon2.png",
+            "images/ow/hero/damage/bastion/gray/weapon2.png",
+          ],
           绑定: ["主要攻击模式"],
           提示: "切换模式状态下的武器。无需装弹，故无法设置弹药。",
         },
         "A-36战术榴弹": {
-          图标: "images/ow/hero/damage/bastion/secondaryfire.png",
+          图标: [
+            "images/ow/hero/damage/bastion/secondaryfire.png",
+            "images/ow/hero/damage/bastion/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         火炮模式: {
-          图标: "images/ow/hero/damage/bastion/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/bastion/ultimate.png",
+            "images/ow/hero/damage/bastion/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         切换模式: {
-          图标: "images/ow/hero/damage/bastion/ability1.png",
+          图标: [
+            "images/ow/hero/damage/bastion/ability1.png",
+            "images/ow/hero/damage/bastion/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         抗击装甲: {
-          图标: "images/ow/hero/damage/bastion/passive.png",
+          图标: [
+            "images/ow/hero/damage/bastion/passive.png",
+            "images/ow/hero/damage/bastion/gray/passive.png",
+          ],
           绑定: ["被动"],
           提示: "降低切换模式后所受的伤害。",
         },
@@ -2716,33 +2781,54 @@ let 常量 = {
       },
       技能: {
         火箭连枷: {
-          图标: "images/ow/hero/support/brigitte/weapon.png",
+          图标: [
+            "images/ow/hero/support/brigitte/weapon.png",
+            "images/ow/hero/support/brigitte/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
           提示: "举盾时不可用。",
         },
         屏障护盾: {
-          图标: "images/ow/hero/support/brigitte/secondaryfire1.png",
+          图标: [
+            "images/ow/hero/support/brigitte/secondaryfire1.png",
+            "images/ow/hero/support/brigitte/gray/secondaryfire1.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         能量盾击: {
-          图标: "images/ow/hero/support/brigitte/secondaryfire2.png",
+          图标: [
+            "images/ow/hero/support/brigitte/secondaryfire2.png",
+            "images/ow/hero/support/brigitte/gray/secondaryfire2.png",
+          ],
           绑定: ["辅助攻击模式 + 主要攻击模式"],
           提示: "仅在举盾时可用。作为事件技能时为“主要攻击模式”。",
         },
         集结号令: {
-          图标: "images/ow/hero/support/brigitte/ultimate.png",
+          图标: [
+            "images/ow/hero/support/brigitte/ultimate.png",
+            "images/ow/hero/support/brigitte/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         流星飞锤: {
-          图标: "images/ow/hero/support/brigitte/ability1.png",
+          图标: [
+            "images/ow/hero/support/brigitte/ability1.png",
+            "images/ow/hero/support/brigitte/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         恢复包: {
-          图标: "images/ow/hero/support/brigitte/ability2.png",
+          图标: [
+            "images/ow/hero/support/brigitte/ability2.png",
+            "images/ow/hero/support/brigitte/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         鼓舞士气: {
-          图标: "images/ow/hero/support/brigitte/passive.png",
+          图标: [
+            "images/ow/hero/support/brigitte/passive.png",
+            "images/ow/hero/support/brigitte/gray/passive.png",
+          ],
           绑定: ["被动"],
         },
       },
@@ -2758,28 +2844,46 @@ let 常量 = {
       },
       技能: {
         手炮: {
-          图标: "images/ow/hero/tank/doomfist/weapon.png",
+          图标: [
+            "images/ow/hero/tank/doomfist/weapon.png",
+            "images/ow/hero/tank/doomfist/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
           提示: "无法手动装填，但可以设置弹药。",
         },
         火箭重拳: {
-          图标: "images/ow/hero/tank/doomfist/secondaryfire.png",
+          图标: [
+            "images/ow/hero/tank/doomfist/secondaryfire.png",
+            "images/ow/hero/tank/doomfist/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         毁天灭地: {
-          图标: "images/ow/hero/tank/doomfist/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/doomfist/ultimate.png",
+            "images/ow/hero/tank/doomfist/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         裂地重拳: {
-          图标: "images/ow/hero/tank/doomfist/ability1.png",
+          图标: [
+            "images/ow/hero/tank/doomfist/ability1.png",
+            "images/ow/hero/tank/doomfist/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         悍猛格挡: {
-          图标: "images/ow/hero/tank/doomfist/ability2.png",
+          图标: [
+            "images/ow/hero/tank/doomfist/ability2.png",
+            "images/ow/hero/tank/doomfist/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         最佳防守: {
-          图标: "images/ow/hero/tank/doomfist/passive.png",
+          图标: [
+            "images/ow/hero/tank/doomfist/passive.png",
+            "images/ow/hero/tank/doomfist/gray/passive.png",
+          ],
           绑定: ["被动"],
           提示: "用技能命中敌人后，自身可生成临时生命值。",
         },
@@ -2797,39 +2901,63 @@ let 常量 = {
       },
       技能: {
         聚变机炮: {
-          图标: "images/ow/hero/tank/dva/weapon1.png",
+          图标: [
+            "images/ow/hero/tank/dva/weapon1.png",
+            "images/ow/hero/tank/dva/gray/weapon1.png",
+          ],
           绑定: ["主要攻击模式"],
           提示: "使用时会降低D.Va的移动速度。",
         },
         光枪: {
-          图标: "images/ow/hero/tank/dva/weapon2.png",
+          图标: [
+            "images/ow/hero/tank/dva/weapon2.png",
+            "images/ow/hero/tank/dva/gray/weapon2.png",
+          ],
           绑定: ["主要攻击模式"],
           提示: "不在机甲内时为光枪。",
         },
         防御矩阵: {
-          图标: "images/ow/hero/tank/dva/secondaryfire.png",
+          图标: [
+            "images/ow/hero/tank/dva/secondaryfire.png",
+            "images/ow/hero/tank/dva/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         自毁: {
-          图标: "images/ow/hero/tank/dva/ultimate1.png",
+          图标: [
+            "images/ow/hero/tank/dva/ultimate1.png",
+            "images/ow/hero/tank/dva/gray/ultimate1.png",
+          ],
           绑定: ["终极技能"],
           提示: "将机甲设定为自爆模式，爆炸会对附近大范围的敌人造成巨额伤害。。",
         },
         呼叫机甲: {
-          图标: "images/ow/hero/tank/dva/ultimate2.png",
+          图标: [
+            "images/ow/hero/tank/dva/ultimate2.png",
+            "images/ow/hero/tank/dva/gray/ultimate2.png",
+          ],
           绑定: ["终极技能"],
           提示: "不在机甲内时为召唤机甲。",
         },
         推进器: {
-          图标: "images/ow/hero/tank/dva/ability1.png",
+          图标: [
+            "images/ow/hero/tank/dva/ability1.png",
+            "images/ow/hero/tank/dva/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         微型飞弹: {
-          图标: "images/ow/hero/tank/dva/ability2.png",
+          图标: [
+            "images/ow/hero/tank/dva/ability2.png",
+            "images/ow/hero/tank/dva/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         弹射: {
-          图标: "images/ow/hero/tank/dva/passive.png",
+          图标: [
+            "images/ow/hero/tank/dva/passive.png",
+            "images/ow/hero/tank/dva/gray/passive.png",
+          ],
           绑定: ["被动"],
         },
       },
@@ -2845,27 +2973,45 @@ let 常量 = {
       },
       技能: {
         三角射击: {
-          图标: "images/ow/hero/damage/echo/weapon.png",
+          图标: [
+            "images/ow/hero/damage/echo/weapon.png",
+            "images/ow/hero/damage/echo/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         黏性炸弹: {
-          图标: "images/ow/hero/damage/echo/secondaryfire.png",
+          图标: [
+            "images/ow/hero/damage/echo/secondaryfire.png",
+            "images/ow/hero/damage/echo/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         人格复制: {
-          图标: "images/ow/hero/damage/echo/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/echo/ultimate.png",
+            "images/ow/hero/damage/echo/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         飞行: {
-          图标: "images/ow/hero/damage/echo/ability1.png",
+          图标: [
+            "images/ow/hero/damage/echo/ability1.png",
+            "images/ow/hero/damage/echo/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         聚焦光线: {
-          图标: "images/ow/hero/damage/echo/ability2.png",
+          图标: [
+            "images/ow/hero/damage/echo/ability2.png",
+            "images/ow/hero/damage/echo/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         滑翔: {
-          图标: "images/ow/hero/damage/echo/passive.png",
+          图标: [
+            "images/ow/hero/damage/echo/passive.png",
+            "images/ow/hero/damage/echo/gray/passive.png",
+          ],
           绑定: ["跳跃", "被动"],
         },
       },
@@ -2881,23 +3027,38 @@ let 常量 = {
       },
       技能: {
         镖: {
-          图标: "images/ow/hero/damage/genji/weapon.png",
+          图标: [
+            "images/ow/hero/damage/genji/weapon.png",
+            "images/ow/hero/damage/genji/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         斩: {
-          图标: "images/ow/hero/damage/genji/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/genji/ultimate.png",
+            "images/ow/hero/damage/genji/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         影: {
-          图标: "images/ow/hero/damage/genji/ability1.png",
+          图标: [
+            "images/ow/hero/damage/genji/ability1.png",
+            "images/ow/hero/damage/genji/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         闪: {
-          图标: "images/ow/hero/damage/genji/ability2.png",
+          图标: [
+            "images/ow/hero/damage/genji/ability2.png",
+            "images/ow/hero/damage/genji/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         灵: {
-          图标: "images/ow/hero/damage/genji/passive.png",
+          图标: [
+            "images/ow/hero/damage/genji/passive.png",
+            "images/ow/hero/damage/genji/gray/passive.png",
+          ],
           绑定: ["跳跃", "被动"],
           提示: "可以攀爬墙壁并且在空中二段跳。正在攀爬时视为“在墙上”。",
         },
@@ -2916,27 +3077,45 @@ let 常量 = {
       },
       技能: {
         四联火炮: {
-          图标: "images/ow/hero/tank/wrecking-ball/weapon.png",
+          图标: [
+            "images/ow/hero/tank/wrecking-ball/weapon.png",
+            "images/ow/hero/tank/wrecking-ball/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         工程抓钩: {
-          图标: "images/ow/hero/tank/wrecking-ball/secondaryfire.png",
+          图标: [
+            "images/ow/hero/tank/wrecking-ball/secondaryfire.png",
+            "images/ow/hero/tank/wrecking-ball/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         地雷禁区: {
-          图标: "images/ow/hero/tank/wrecking-ball/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/wrecking-ball/ultimate.png",
+            "images/ow/hero/tank/wrecking-ball/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         动力铁球: {
-          图标: "images/ow/hero/tank/wrecking-ball/ability1.png",
+          图标: [
+            "images/ow/hero/tank/wrecking-ball/ability1.png",
+            "images/ow/hero/tank/wrecking-ball/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         感应护盾: {
-          图标: "images/ow/hero/tank/wrecking-ball/ability2.png",
+          图标: [
+            "images/ow/hero/tank/wrecking-ball/ability2.png",
+            "images/ow/hero/tank/wrecking-ball/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         重力坠击: {
-          图标: "images/ow/hero/tank/wrecking-ball/crouch.png",
+          图标: [
+            "images/ow/hero/tank/wrecking-ball/crouch.png",
+            "images/ow/hero/tank/wrecking-ball/gray/crouch.png",
+          ],
           绑定: ["蹲下"],
         },
       },
@@ -2952,28 +3131,46 @@ let 常量 = {
       },
       技能: {
         风: {
-          图标: "images/ow/hero/damage/hanzo/weapon.png",
+          图标: [
+            "images/ow/hero/damage/hanzo/weapon.png",
+            "images/ow/hero/damage/hanzo/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "用辅助攻击模式取消拉弓。",
         },
         竜: {
-          图标: "images/ow/hero/damage/hanzo/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/hanzo/ultimate.png",
+            "images/ow/hero/damage/hanzo/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         音: {
-          图标: "images/ow/hero/damage/hanzo/ability1.png",
+          图标: [
+            "images/ow/hero/damage/hanzo/ability1.png",
+            "images/ow/hero/damage/hanzo/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         岚: {
-          图标: "images/ow/hero/damage/hanzo/ability2.png",
+          图标: [
+            "images/ow/hero/damage/hanzo/ability2.png",
+            "images/ow/hero/damage/hanzo/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         跃: {
-          图标: "images/ow/hero/damage/hanzo/jump.png",
+          图标: [
+            "images/ow/hero/damage/hanzo/jump.png",
+            "images/ow/hero/damage/hanzo/gray/jump.png",
+          ],
           绑定: ["跳跃"],
         },
         攀: {
-          图标: "images/ow/hero/damage/hanzo/passive.png",
+          图标: [
+            "images/ow/hero/damage/hanzo/passive.png",
+            "images/ow/hero/damage/hanzo/gray/passive.png",
+          ],
           绑定: ["跳跃", "被动"],
           提示: "可以攀爬墙壁。正在攀爬时视为“在墙上”。",
         },
@@ -2990,28 +3187,46 @@ let 常量 = {
       },
       技能: {
         散弹枪: {
-          图标: "images/ow/hero/tank/junker-queen/weapon.png",
+          图标: [
+            "images/ow/hero/tank/junker-queen/weapon.png",
+            "images/ow/hero/tank/junker-queen/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         锯齿利刃: {
-          图标: "images/ow/hero/tank/junker-queen/secondaryfire.png",
+          图标: [
+            "images/ow/hero/tank/junker-queen/secondaryfire.png",
+            "images/ow/hero/tank/junker-queen/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式", "近身攻击"],
           提示: "仅在被丢出时可进行正常近战。",
         },
         轰翻天: {
-          图标: "images/ow/hero/tank/junker-queen/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/junker-queen/ultimate.png",
+            "images/ow/hero/tank/junker-queen/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         命令怒吼: {
-          图标: "images/ow/hero/tank/junker-queen/ability1.png",
+          图标: [
+            "images/ow/hero/tank/junker-queen/ability1.png",
+            "images/ow/hero/tank/junker-queen/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         血斩: {
-          图标: "images/ow/hero/tank/junker-queen/ability2.png",
+          图标: [
+            "images/ow/hero/tank/junker-queen/ability2.png",
+            "images/ow/hero/tank/junker-queen/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         狂血奔涌: {
-          图标: "images/ow/hero/tank/junker-queen/passive.png",
+          图标: [
+            "images/ow/hero/tank/junker-queen/passive.png",
+            "images/ow/hero/tank/junker-queen/gray/passive.png",
+          ],
           绑定: ["被动"],
         },
       },
@@ -3027,24 +3242,39 @@ let 常量 = {
       },
       技能: {
         榴弹发射器: {
-          图标: "images/ow/hero/damage/junkrat/weapon.png",
+          图标: [
+            "images/ow/hero/damage/junkrat/weapon.png",
+            "images/ow/hero/damage/junkrat/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         炸弹轮胎: {
-          图标: "images/ow/hero/damage/junkrat/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/junkrat/ultimate.png",
+            "images/ow/hero/damage/junkrat/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         震荡地雷: {
-          图标: "images/ow/hero/damage/junkrat/ability1.png",
+          图标: [
+            "images/ow/hero/damage/junkrat/ability1.png",
+            "images/ow/hero/damage/junkrat/gray/ability1.png",
+          ],
           绑定: ["技能1", "辅助攻击模式"],
           提示: "用 技能1 部署，按 辅助攻击模式 引爆。",
         },
         捕兽夹: {
-          图标: "images/ow/hero/damage/junkrat/ability2.png",
+          图标: [
+            "images/ow/hero/damage/junkrat/ability2.png",
+            "images/ow/hero/damage/junkrat/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         临别礼物: {
-          图标: "images/ow/hero/damage/junkrat/passive.png",
+          图标: [
+            "images/ow/hero/damage/junkrat/passive.png",
+            "images/ow/hero/damage/junkrat/gray/passive.png",
+          ],
           绑定: ["被动"],
           提示: "被击杀后，在原地丢下若干快速引爆的榴弹。",
         },
@@ -3061,29 +3291,47 @@ let 常量 = {
       },
       技能: {
         锥: {
-          图标: "images/ow/hero/support/kiriko/weapon2.png",
+          图标: [
+            "images/ow/hero/support/kiriko/weapon2.png",
+            "images/ow/hero/support/kiriko/gray/weapon2.png",
+          ],
           绑定: ["辅助攻击模式"],
           提示: "由于一个问题，无法通过地图工坊动作更改弹药。",
         },
         符: {
-          图标: "images/ow/hero/support/kiriko/weapon1.png",
+          图标: [
+            "images/ow/hero/support/kiriko/weapon1.png",
+            "images/ow/hero/support/kiriko/gray/weapon1.png",
+          ],
           绑定: ["主要攻击模式"],
           提示: "无法更改弹药。",
         },
         狐: {
-          图标: "images/ow/hero/support/kiriko/ultimate.png",
+          图标: [
+            "images/ow/hero/support/kiriko/ultimate.png",
+            "images/ow/hero/support/kiriko/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         瞬: {
-          图标: "images/ow/hero/support/kiriko/ability1.png",
+          图标: [
+            "images/ow/hero/support/kiriko/ability1.png",
+            "images/ow/hero/support/kiriko/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         铃: {
-          图标: "images/ow/hero/support/kiriko/ability2.png",
+          图标: [
+            "images/ow/hero/support/kiriko/ability2.png",
+            "images/ow/hero/support/kiriko/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         攀: {
-          图标: "images/ow/hero/support/kiriko/passive.png",
+          图标: [
+            "images/ow/hero/support/kiriko/passive.png",
+            "images/ow/hero/support/kiriko/gray/passive.png",
+          ],
           绑定: ["跳跃", "被动"],
           提示: "可以攀爬墙壁。正在攀爬时视为“在墙上”。",
         },
@@ -3100,27 +3348,45 @@ let 常量 = {
       },
       技能: {
         音速扩音器: {
-          图标: "images/ow/hero/support/lucio/weapon.png",
+          图标: [
+            "images/ow/hero/support/lucio/weapon.png",
+            "images/ow/hero/support/lucio/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         音波: {
-          图标: "images/ow/hero/support/lucio/secondaryfire.png",
+          图标: [
+            "images/ow/hero/support/lucio/secondaryfire.png",
+            "images/ow/hero/support/lucio/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         音障: {
-          图标: "images/ow/hero/support/lucio/ltimate.png",
+          图标: [
+            "images/ow/hero/support/lucio/ultimate.png",
+            "images/ow/hero/support/lucio/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         切歌: {
-          图标: "images/ow/hero/support/lucio/ability1.png",
+          图标: [
+            "images/ow/hero/support/lucio/ability1.png",
+            "images/ow/hero/support/lucio/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         强音: {
-          图标: "images/ow/hero/support/lucio/ability2.png",
+          图标: [
+            "images/ow/hero/support/lucio/ability2.png",
+            "images/ow/hero/support/lucio/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         滑墙: {
-          图标: "images/ow/hero/support/lucio/passive.png",
+          图标: [
+            "images/ow/hero/support/lucio/passive.png",
+            "images/ow/hero/support/lucio/gray/passive.png",
+          ],
           绑定: ["跳跃", "技能2"],
           提示: "跃上墙面并在其上滑动。滑墙时视为“在墙上”。",
         },
@@ -3137,19 +3403,31 @@ let 常量 = {
       },
       技能: {
         维和者: {
-          图标: "images/ow/hero/damage/cassidy/weapon.png",
+          图标: [
+            "images/ow/hero/damage/cassidy/weapon.png",
+            "images/ow/hero/damage/cassidy/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         神射手: {
-          图标: "images/ow/hero/damage/cassidy/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/cassidy/ultimate.png",
+            "images/ow/hero/damage/cassidy/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         战术翻滚: {
-          图标: "images/ow/hero/damage/cassidy/ability1.png",
+          图标: [
+            "images/ow/hero/damage/cassidy/ability1.png",
+            "images/ow/hero/damage/cassidy/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         磁性手雷: {
-          图标: "images/ow/hero/damage/cassidy/ability2.png",
+          图标: [
+            "images/ow/hero/damage/cassidy/ability2.png",
+            "images/ow/hero/damage/cassidy/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3165,19 +3443,31 @@ let 常量 = {
       },
       技能: {
         冰霜冲击枪: {
-          图标: "images/ow/hero/damage/mei/weapon.png",
+          图标: [
+            "images/ow/hero/damage/mei/weapon.png",
+            "images/ow/hero/damage/mei/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         暴雪: {
-          图标: "images/ow/hero/damage/mei/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/mei/ultimate.png",
+            "images/ow/hero/damage/mei/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         急冻: {
-          图标: "images/ow/hero/damage/mei/ability1.png",
+          图标: [
+            "images/ow/hero/damage/mei/ability1.png",
+            "images/ow/hero/damage/mei/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         冰墙: {
-          图标: "images/ow/hero/damage/mei/ability2.png",
+          图标: [
+            "images/ow/hero/damage/mei/ability2.png",
+            "images/ow/hero/damage/mei/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3193,27 +3483,45 @@ let 常量 = {
       },
       技能: {
         天使之杖: {
-          图标: "images/ow/hero/support/mercy/weapon1.png",
+          图标: [
+            "images/ow/hero/support/mercy/weapon1.png",
+            "images/ow/hero/support/mercy/gray/weapon1.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         天使冲击枪: {
-          图标: "images/ow/hero/support/mercy/weapon2.png",
+          图标: [
+            "images/ow/hero/support/mercy/weapon2.png",
+            "images/ow/hero/support/mercy/gray/weapon2.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         女武神: {
-          图标: "images/ow/hero/support/mercy/ultimate.png",
+          图标: [
+            "images/ow/hero/support/mercy/ultimate.png",
+            "images/ow/hero/support/mercy/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         守护天使: {
-          图标: "images/ow/hero/support/mercy/ability1.png",
+          图标: [
+            "images/ow/hero/support/mercy/ability1.png",
+            "images/ow/hero/support/mercy/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         重生: {
-          图标: "images/ow/hero/support/mercy/ability2.png",
+          图标: [
+            "images/ow/hero/support/mercy/ability2.png",
+            "images/ow/hero/support/mercy/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         同情愈疗: {
-          图标: "images/ow/hero/support/mercy/passive.png",
+          图标: [
+            "images/ow/hero/support/mercy/passive.png",
+            "images/ow/hero/support/mercy/gray/passive.png",
+          ],
           绑定: ["被动"],
         },
       },
@@ -3229,25 +3537,40 @@ let 常量 = {
       },
       技能: {
         生化之触: {
-          图标: "images/ow/hero/support/moira/weapon.png",
+          图标: [
+            "images/ow/hero/support/moira/weapon.png",
+            "images/ow/hero/support/moira/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "治疗队友，吸取敌人。",
         },
         "生化之触-光束": {
-          图标: "images/ow/hero/support/moira/secondaryfire.png",
+          图标: [
+            "images/ow/hero/support/moira/secondaryfire.png",
+            "images/ow/hero/support/moira/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
           提示: "吸取敌人。",
         },
         聚合射线: {
-          图标: "images/ow/hero/support/moira/ultimate.png",
+          图标: [
+            "images/ow/hero/support/moira/ultimate.png",
+            "images/ow/hero/support/moira/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         消散: {
-          图标: "images/ow/hero/support/moira/ability1.png",
+          图标: [
+            "images/ow/hero/support/moira/ability1.png",
+            "images/ow/hero/support/moira/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         生化之球: {
-          图标: "images/ow/hero/support/moira/ability2.png",
+          图标: [
+            "images/ow/hero/support/moira/ability2.png",
+            "images/ow/hero/support/moira/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3264,23 +3587,38 @@ let 常量 = {
       },
       技能: {
         强化聚变驱动器: {
-          图标: "images/ow/hero/tank/orisa/weapon.png",
+          图标: [
+            "images/ow/hero/tank/orisa/weapon.png",
+            "images/ow/hero/tank/orisa/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         能量标枪: {
-          图标: "images/ow/hero/tank/orisa/secondaryfire.png",
+          图标: [
+            "images/ow/hero/tank/orisa/secondaryfire.png",
+            "images/ow/hero/tank/orisa/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         撼地猛刺: {
-          图标: "images/ow/hero/tank/orisa/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/orisa/ultimate.png",
+            "images/ow/hero/tank/orisa/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         强固防御: {
-          图标: "images/ow/hero/tank/orisa/ability1.png",
+          图标: [
+            "images/ow/hero/tank/orisa/ability1.png",
+            "images/ow/hero/tank/orisa/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         标枪旋击: {
-          图标: "images/ow/hero/tank/orisa/ability2.png",
+          图标: [
+            "images/ow/hero/tank/orisa/ability2.png",
+            "images/ow/hero/tank/orisa/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3296,23 +3634,38 @@ let 常量 = {
       },
       技能: {
         火箭发射器: {
-          图标: "images/ow/hero/damage/pharah/weapon.png",
+          图标: [
+            "images/ow/hero/damage/pharah/weapon.png",
+            "images/ow/hero/damage/pharah/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         火箭弹幕: {
-          图标: "images/ow/hero/damage/pharah/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/pharah/ultimate.png",
+            "images/ow/hero/damage/pharah/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         推进背包: {
-          图标: "images/ow/hero/damage/pharah/ability1.png",
+          图标: [
+            "images/ow/hero/damage/pharah/ability1.png",
+            "images/ow/hero/damage/pharah/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         震荡冲击: {
-          图标: "images/ow/hero/damage/pharah/ability2.png",
+          图标: [
+            "images/ow/hero/damage/pharah/ability2.png",
+            "images/ow/hero/damage/pharah/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         悬浮背包: {
-          图标: "images/ow/hero/damage/pharah/passive.png",
+          图标: [
+            "images/ow/hero/damage/pharah/passive.png",
+            "images/ow/hero/damage/pharah/gray/passive.png",
+          ],
           绑定: ["辅助攻击模式", "跳跃", "被动"],
         },
       },
@@ -3328,23 +3681,38 @@ let 常量 = {
       },
       技能: {
         地狱火霰弹枪: {
-          图标: "images/ow/hero/damage/reaper/weapon.png",
+          图标: [
+            "images/ow/hero/damage/reaper/weapon.png",
+            "images/ow/hero/damage/reaper/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         死亡绽放: {
-          图标: "images/ow/hero/damage/reaper/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/reaper/ultimate.png",
+            "images/ow/hero/damage/reaper/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         暗影步: {
-          图标: "images/ow/hero/damage/reaper/ability1.png",
+          图标: [
+            "images/ow/hero/damage/reaper/ability1.png",
+            "images/ow/hero/damage/reaper/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         幽灵形态: {
-          图标: "images/ow/hero/damage/reaper/ability2.png",
+          图标: [
+            "images/ow/hero/damage/reaper/ability2.png",
+            "images/ow/hero/damage/reaper/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         收割: {
-          图标: "images/ow/hero/damage/reaper/passive.png",
+          图标: [
+            "images/ow/hero/damage/reaper/passive.png",
+            "images/ow/hero/damage/reaper/gray/passive.png",
+          ],
           绑定: ["被动"],
         },
       },
@@ -3362,23 +3730,38 @@ let 常量 = {
       },
       技能: {
         火箭重锤: {
-          图标: "images/ow/hero/tank/reinhardt/weapon.png",
+          图标: [
+            "images/ow/hero/tank/reinhardt/weapon.png",
+            "images/ow/hero/tank/reinhardt/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         屏障力场: {
-          图标: "images/ow/hero/tank/reinhardt/secondaryfire.png",
+          图标: [
+            "images/ow/hero/tank/reinhardt/secondaryfire.png",
+            "images/ow/hero/tank/reinhardt/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         裂地猛击: {
-          图标: "images/ow/hero/tank/reinhardt/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/reinhardt/ultimate.png",
+            "images/ow/hero/tank/reinhardt/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         冲锋: {
-          图标: "images/ow/hero/tank/reinhardt/ability1.png",
+          图标: [
+            "images/ow/hero/tank/reinhardt/ability1.png",
+            "images/ow/hero/tank/reinhardt/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         烈焰打击: {
-          图标: "images/ow/hero/tank/reinhardt/ability2.png",
+          图标: [
+            "images/ow/hero/tank/reinhardt/ability2.png",
+            "images/ow/hero/tank/reinhardt/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3394,19 +3777,31 @@ let 常量 = {
       },
       技能: {
         爆裂枪: {
-          图标: "images/ow/hero/tank/roadhog/weapon.png",
+          图标: [
+            "images/ow/hero/tank/roadhog/weapon.png",
+            "images/ow/hero/tank/roadhog/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         鸡飞狗跳: {
-          图标: "images/ow/hero/tank/roadhog/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/roadhog/ultimate.png",
+            "images/ow/hero/tank/roadhog/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         链钩: {
-          图标: "images/ow/hero/tank/roadhog/ability1.png",
+          图标: [
+            "images/ow/hero/tank/roadhog/ability1.png",
+            "images/ow/hero/tank/roadhog/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         呼吸器: {
-          图标: "images/ow/hero/tank/roadhog/ability2.png",
+          图标: [
+            "images/ow/hero/tank/roadhog/ability2.png",
+            "images/ow/hero/tank/roadhog/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3424,23 +3819,38 @@ let 常量 = {
       },
       技能: {
         超能之球: {
-          图标: "images/ow/hero/tank/sigma/weapon.png",
+          图标: [
+            "images/ow/hero/tank/sigma/weapon.png",
+            "images/ow/hero/tank/sigma/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         实验屏障: {
-          图标: "images/ow/hero/tank/sigma/secondaryfire.png",
+          图标: [
+            "images/ow/hero/tank/sigma/secondaryfire.png",
+            "images/ow/hero/tank/sigma/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         引力乱流: {
-          图标: "images/ow/hero/tank/sigma/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/sigma/ultimate.png",
+            "images/ow/hero/tank/sigma/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         动能俘获: {
-          图标: "images/ow/hero/tank/sigma/ability1.png",
+          图标: [
+            "images/ow/hero/tank/sigma/ability1.png",
+            "images/ow/hero/tank/sigma/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         质量吸附: {
-          图标: "images/ow/hero/tank/sigma/ability2.png",
+          图标: [
+            "images/ow/hero/tank/sigma/ability2.png",
+            "images/ow/hero/tank/sigma/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3456,20 +3866,32 @@ let 常量 = {
       },
       技能: {
         电磁炮: {
-          图标: "images/ow/hero/damage/sojourn/weapon.png",
+          图标: [
+            "images/ow/hero/damage/sojourn/weapon.png",
+            "images/ow/hero/damage/sojourn/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "无法通过修改技能资源或“伤害”动作来调整电磁炮的能量值。",
         },
         机体超频: {
-          图标: "images/ow/hero/damage/sojourn/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/sojourn/ultimate.png",
+            "images/ow/hero/damage/sojourn/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         机动滑铲: {
-          图标: "images/ow/hero/damage/sojourn/ability1.png",
+          图标: [
+            "images/ow/hero/damage/sojourn/ability1.png",
+            "images/ow/hero/damage/sojourn/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         干扰弹: {
-          图标: "images/ow/hero/damage/sojourn/ability2.png",
+          图标: [
+            "images/ow/hero/damage/sojourn/ability2.png",
+            "images/ow/hero/damage/sojourn/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3485,23 +3907,38 @@ let 常量 = {
       },
       技能: {
         重型脉冲步枪: {
-          图标: "images/ow/hero/damage/soldier-76/weapon.png",
+          图标: [
+            "images/ow/hero/damage/soldier-76/weapon.png",
+            "images/ow/hero/damage/soldier-76/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         螺旋飞弹: {
-          图标: "images/ow/hero/damage/soldier-76/secondaryfire.png",
+          图标: [
+            "images/ow/hero/damage/soldier-76/secondaryfire.png",
+            "images/ow/hero/damage/soldier-76/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         战术目镜: {
-          图标: "images/ow/hero/damage/soldier-76/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/soldier-76/ultimate.png",
+            "images/ow/hero/damage/soldier-76/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         疾跑: {
-          图标: "images/ow/hero/damage/soldier-76/ability1.png",
+          图标: [
+            "images/ow/hero/damage/soldier-76/ability1.png",
+            "images/ow/hero/damage/soldier-76/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         生物力场: {
-          图标: "images/ow/hero/damage/soldier-76/ability2.png",
+          图标: [
+            "images/ow/hero/damage/soldier-76/ability2.png",
+            "images/ow/hero/damage/soldier-76/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3517,27 +3954,45 @@ let 常量 = {
       },
       技能: {
         自动手枪: {
-          图标: "images/ow/hero/damage/sombra/weapon.png",
+          图标: [
+            "images/ow/hero/damage/sombra/weapon.png",
+            "images/ow/hero/damage/sombra/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         黑客入侵: {
-          图标: "images/ow/hero/damage/sombra/secondaryfire.png",
+          图标: [
+            "images/ow/hero/damage/sombra/secondaryfire.png",
+            "images/ow/hero/damage/sombra/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         电磁脉冲: {
-          图标: "images/ow/hero/damage/sombra/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/sombra/ultimate.png",
+            "images/ow/hero/damage/sombra/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         隐秘潜行: {
-          图标: "images/ow/hero/damage/sombra/ability1.png",
+          图标: [
+            "images/ow/hero/damage/sombra/ability1.png",
+            "images/ow/hero/damage/sombra/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         位移传动: {
-          图标: "images/ow/hero/damage/sombra/ability2.png",
+          图标: [
+            "images/ow/hero/damage/sombra/ability2.png",
+            "images/ow/hero/damage/sombra/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         相时而动: {
-          图标: "images/ow/hero/damage/sombra/passive.png",
+          图标: [
+            "images/ow/hero/damage/sombra/passive.png",
+            "images/ow/hero/damage/sombra/gray/passive.png",
+          ],
           绑定: ["被动"],
           提示: "可以透过墙体侦测到严重受伤的敌人。",
         },
@@ -3555,19 +4010,31 @@ let 常量 = {
       },
       技能: {
         光子发射器: {
-          图标: "images/ow/hero/damage/symmetra/weapon.png",
+          图标: [
+            "images/ow/hero/damage/symmetra/weapon.png",
+            "images/ow/hero/damage/symmetra/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         光子屏障: {
-          图标: "images/ow/hero/damage/symmetra/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/symmetra/ultimate.png",
+            "images/ow/hero/damage/symmetra/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         哨戒炮: {
-          图标: "images/ow/hero/damage/symmetra/ability1.png",
+          图标: [
+            "images/ow/hero/damage/symmetra/ability1.png",
+            "images/ow/hero/damage/symmetra/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         传送面板: {
-          图标: "images/ow/hero/damage/symmetra/ability2.png",
+          图标: [
+            "images/ow/hero/damage/symmetra/ability2.png",
+            "images/ow/hero/damage/symmetra/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3584,23 +4051,38 @@ let 常量 = {
       },
       技能: {
         铆钉枪: {
-          图标: "images/ow/hero/damage/torbjorn/weapon1.png",
+          图标: [
+            "images/ow/hero/damage/torbjorn/weapon1.png",
+            "images/ow/hero/damage/torbjorn/gray/weapon1.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         锻造锤: {
-          图标: "images/ow/hero/damage/torbjorn/weapon2.png",
+          图标: [
+            "images/ow/hero/damage/torbjorn/weapon2.png",
+            "images/ow/hero/damage/torbjorn/gray/weapon2.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         熔火核心: {
-          图标: "images/ow/hero/damage/torbjorn/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/torbjorn/ultimate.png",
+            "images/ow/hero/damage/torbjorn/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         热力过载: {
-          图标: "images/ow/hero/damage/torbjorn/ability1.png",
+          图标: [
+            "images/ow/hero/damage/torbjorn/ability1.png",
+            "images/ow/hero/damage/torbjorn/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         部署炮台: {
-          图标: "images/ow/hero/damage/torbjorn/ability2.png",
+          图标: [
+            "images/ow/hero/damage/torbjorn/ability2.png",
+            "images/ow/hero/damage/torbjorn/gray/ability2.png",
+          ],
           绑定: ["技能2"],
           提示: "按 互动 摧毁。部署到炮台可射击前无法主动摧毁。",
         },
@@ -3617,19 +4099,31 @@ let 常量 = {
       },
       技能: {
         脉冲双枪: {
-          图标: "images/ow/hero/damage/tracer/weapon.png",
+          图标: [
+            "images/ow/hero/damage/tracer/weapon.png",
+            "images/ow/hero/damage/tracer/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         脉冲炸弹: {
-          图标: "images/ow/hero/damage/tracer/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/tracer/ultimate.png",
+            "images/ow/hero/damage/tracer/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         闪现: {
-          图标: "images/ow/hero/damage/tracer/ability1.png",
+          图标: [
+            "images/ow/hero/damage/tracer/ability1.png",
+            "images/ow/hero/damage/tracer/gray/ability1.png",
+          ],
           绑定: ["辅助攻击模式", "技能1"],
         },
         闪回: {
-          图标: "images/ow/hero/damage/tracer/ability2.png",
+          图标: [
+            "images/ow/hero/damage/tracer/ability2.png",
+            "images/ow/hero/damage/tracer/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3645,19 +4139,31 @@ let 常量 = {
       },
       技能: {
         黑百合之吻: {
-          图标: "images/ow/hero/damage/widowmaker/weapon.png",
+          图标: [
+            "images/ow/hero/damage/widowmaker/weapon.png",
+            "images/ow/hero/damage/widowmaker/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         红外侦测: {
-          图标: "images/ow/hero/damage/widowmaker/ultimate.png",
+          图标: [
+            "images/ow/hero/damage/widowmaker/ultimate.png",
+            "images/ow/hero/damage/widowmaker/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         抓钩: {
-          图标: "images/ow/hero/damage/widowmaker/ability1.png",
+          图标: [
+            "images/ow/hero/damage/widowmaker/ability1.png",
+            "images/ow/hero/damage/widowmaker/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         剧毒诡雷: {
-          图标: "images/ow/hero/damage/widowmaker/ability2.png",
+          图标: [
+            "images/ow/hero/damage/widowmaker/ability2.png",
+            "images/ow/hero/damage/widowmaker/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3675,19 +4181,31 @@ let 常量 = {
       },
       技能: {
         特斯拉炮: {
-          图标: "images/ow/hero/tank/winston/weapon.png",
+          图标: [
+            "images/ow/hero/tank/winston/weapon.png",
+            "images/ow/hero/tank/winston/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         原始暴怒: {
-          图标: "images/ow/hero/tank/winston/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/winston/ultimate.png",
+            "images/ow/hero/tank/winston/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         喷射背包: {
-          图标: "images/ow/hero/tank/winston/ability1.png",
+          图标: [
+            "images/ow/hero/tank/winston/ability1.png",
+            "images/ow/hero/tank/winston/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         屏障发射器: {
-          图标: "images/ow/hero/tank/winston/ability2.png",
+          图标: [
+            "images/ow/hero/tank/winston/ability2.png",
+            "images/ow/hero/tank/winston/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3704,24 +4222,39 @@ let 常量 = {
       },
       技能: {
         粒子炮: {
-          图标: "images/ow/hero/tank/zarya/weapon.png",
+          图标: [
+            "images/ow/hero/tank/zarya/weapon.png",
+            "images/ow/hero/tank/zarya/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "无法通过修改技能资源或“伤害”动作来调整粒子炮的能量值。",
         },
         重力喷涌: {
-          图标: "images/ow/hero/tank/zarya/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/zarya/ultimate.png",
+            "images/ow/hero/tank/zarya/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         粒子屏障: {
-          图标: "images/ow/hero/tank/zarya/ability1.png",
+          图标: [
+            "images/ow/hero/tank/zarya/ability1.png",
+            "images/ow/hero/tank/zarya/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         投射屏障: {
-          图标: "images/ow/hero/tank/zarya/ability2.png",
+          图标: [
+            "images/ow/hero/tank/zarya/ability2.png",
+            "images/ow/hero/tank/zarya/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         能量转换: {
-          图标: "images/ow/hero/tank/zarya/passive.png",
+          图标: [
+            "images/ow/hero/tank/zarya/passive.png",
+            "images/ow/hero/tank/zarya/gray/passive.png",
+          ],
           绑定: ["被动"],
         },
       },
@@ -3738,23 +4271,38 @@ let 常量 = {
       },
       技能: {
         灭: {
-          图标: "images/ow/hero/support/zenyatta/weapon.png",
+          图标: [
+            "images/ow/hero/support/zenyatta/weapon.png",
+            "images/ow/hero/support/zenyatta/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         圣: {
-          图标: "images/ow/hero/support/zenyatta/ultimate.png",
+          图标: [
+            "images/ow/hero/support/zenyatta/ultimate.png",
+            "images/ow/hero/support/zenyatta/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         谐: {
-          图标: "images/ow/hero/support/zenyatta/ability1.png",
+          图标: [
+            "images/ow/hero/support/zenyatta/ability1.png",
+            "images/ow/hero/support/zenyatta/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         乱: {
-          图标: "images/ow/hero/support/zenyatta/ability2.png",
+          图标: [
+            "images/ow/hero/support/zenyatta/ability2.png",
+            "images/ow/hero/support/zenyatta/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
         蹬: {
-          图标: "images/ow/hero/support/zenyatta/passive.png",
+          图标: [
+            "images/ow/hero/support/zenyatta/passive.png",
+            "images/ow/hero/support/zenyatta/gray/passive.png",
+          ],
           绑定: ["近身攻击", "被动"],
           提示: "近身攻击伤害提高50%，击退效果大幅提高。",
         },
@@ -3772,31 +4320,52 @@ let 常量 = {
       },
       技能: {
         虚空加速器: {
-          图标: "images/ow/hero/tank/ramattra/weapon1.png",
+          图标: [
+            "images/ow/hero/tank/ramattra/weapon1.png",
+            "images/ow/hero/tank/ramattra/gray/weapon1.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         猛拳: {
-          图标: "images/ow/hero/tank/ramattra/weapon2.png",
+          图标: [
+            "images/ow/hero/tank/ramattra/weapon2.png",
+            "images/ow/hero/tank/ramattra/gray/weapon2.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         虚空屏障: {
-          图标: "images/ow/hero/tank/ramattra/secondaryfire1.png",
+          图标: [
+            "images/ow/hero/tank/ramattra/secondaryfire1.png",
+            "images/ow/hero/tank/ramattra/gray/secondaryfire1.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         铁臂: {
-          图标: "images/ow/hero/tank/ramattra/secondaryfire2.png",
+          图标: [
+            "images/ow/hero/tank/ramattra/secondaryfire2.png",
+            "images/ow/hero/tank/ramattra/gray/secondaryfire2.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         诛: {
-          图标: "images/ow/hero/tank/ramattra/ultimate.png",
+          图标: [
+            "images/ow/hero/tank/ramattra/ultimate.png",
+            "images/ow/hero/tank/ramattra/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         天罚形态: {
-          图标: "images/ow/hero/tank/ramattra/ability1.png",
+          图标: [
+            "images/ow/hero/tank/ramattra/ability1.png",
+            "images/ow/hero/tank/ramattra/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         吞噬漩涡: {
-          图标: "images/ow/hero/tank/ramattra/ability2.png",
+          图标: [
+            "images/ow/hero/tank/ramattra/ability2.png",
+            "images/ow/hero/tank/ramattra/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3812,27 +4381,45 @@ let 常量 = {
       },
       技能: {
         愈疗灵花: {
-          图标: "images/ow/hero/support/lifeweaver/weapon1.png",
+          图标: [
+            "images/ow/hero/support/lifeweaver/weapon1.png",
+            "images/ow/hero/support/lifeweaver/gray/weapon1.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         棘刺箭雨: {
-          图标: "images/ow/hero/support/lifeweaver/weapon2.png",
+          图标: [
+            "images/ow/hero/support/lifeweaver/weapon2.png",
+            "images/ow/hero/support/lifeweaver/gray/weapon2.png",
+          ],
           绑定: ["主要攻击模式"],
         },
         花瓣平台: {
-          图标: "images/ow/hero/support/lifeweaver/secondaryfire.png",
+          图标: [
+            "images/ow/hero/support/lifeweaver/secondaryfire.png",
+            "images/ow/hero/support/lifeweaver/gray/secondaryfire.png",
+          ],
           绑定: ["辅助攻击模式"],
         },
         生命之树: {
-          图标: "images/ow/hero/support/lifeweaver/ultimate.png",
+          图标: [
+            "images/ow/hero/support/lifeweaver/ultimate.png",
+            "images/ow/hero/support/lifeweaver/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         回春疾行: {
-          图标: "images/ow/hero/support/lifeweaver/ability1.png",
+          图标: [
+            "images/ow/hero/support/lifeweaver/ability1.png",
+            "images/ow/hero/support/lifeweaver/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         生命之握: {
-          图标: "images/ow/hero/support/lifeweaver/ability2.png",
+          图标: [
+            "images/ow/hero/support/lifeweaver/ability2.png",
+            "images/ow/hero/support/lifeweaver/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3841,26 +4428,38 @@ let 常量 = {
     伊拉锐: {
       标签: ["英雄", "支援"],
       提示: "接受过太阳丝线强化改造过的伊拉锐会用太阳之力瓦解敌人。",
-      图标: "images/ow/hero/support/illari/icon",
+      图标: "images/ow/hero/support/illari/icon.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         阳焰步枪: {
-          图标: "images/ow/hero/support/illari/weapon",
+          图标: [
+            "images/ow/hero/support/illari/weapon.png",
+            "images/ow/hero/support/illari/gray/weapon.png",
+          ],
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         桎梏灼日: {
-          图标: "images/ow/hero/support/illari/ultimate",
+          图标: [
+            "images/ow/hero/support/illari/ultimate.png",
+            "images/ow/hero/support/illari/gray/ultimate.png",
+          ],
           绑定: ["终极技能"],
         },
         烈日冲击: {
-          图标: "images/ow/hero/support/illari/ability1",
+          图标: [
+            "images/ow/hero/support/illari/ability1.png",
+            "images/ow/hero/support/illari/gray/ability1.png",
+          ],
           绑定: ["技能1"],
         },
         治疗光塔: {
-          图标: "images/ow/hero/support/illari/ability2",
+          图标: [
+            "images/ow/hero/support/illari/ability2.png",
+            "images/ow/hero/support/illari/gray/ability2.png",
+          ],
           绑定: ["技能2"],
         },
       },
@@ -3888,217 +4487,217 @@ let 常量 = {
     "箭头：向下": {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/1.png",
+      图标: ["images/ow/icon/1.png", "images/ow/icon/gray/1.png"],
     },
 
     "箭头：向左": {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/2.png",
+      图标: ["images/ow/icon/2.png", "images/ow/icon/gray/2.png"],
     },
 
     "箭头：向右": {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/3.png",
+      图标: ["images/ow/icon/3.png", "images/ow/icon/gray/3.png"],
     },
 
     "箭头：向上": {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/4.png",
+      图标: ["images/ow/icon/4.png", "images/ow/icon/gray/4.png"],
     },
 
     星形: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/5.png",
+      图标: ["images/ow/icon/5.png", "images/ow/icon/gray/5.png"],
     },
 
     箭矢: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/6.png",
+      图标: ["images/ow/icon/6.png", "images/ow/icon/gray/6.png"],
     },
 
     对号: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/7.png",
+      图标: ["images/ow/icon/7.png", "images/ow/icon/gray/7.png"],
     },
 
     圆圈: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/8.png",
+      图标: ["images/ow/icon/8.png", "images/ow/icon/gray/8.png"],
     },
 
     梅花: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/9.png",
+      图标: ["images/ow/icon/9.png", "images/ow/icon/gray/9.png"],
     },
 
     方块: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/10.png",
+      图标: ["images/ow/icon/10.png", "images/ow/icon/gray/10.png"],
     },
 
     晕眩: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/11.png",
+      图标: ["images/ow/icon/11.png", "images/ow/icon/gray/11.png"],
     },
 
     感叹号: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/12.png",
+      图标: ["images/ow/icon/12.png", "images/ow/icon/gray/12.png"],
     },
 
     眼睛: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/13.png",
+      图标: ["images/ow/icon/13.png", "images/ow/icon/gray/13.png"],
     },
 
     火焰: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/14.png",
+      图标: ["images/ow/icon/14.png", "images/ow/icon/gray/14.png"],
     },
 
     旗帜: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/15.png",
+      图标: ["images/ow/icon/15.png", "images/ow/icon/gray/15.png"],
     },
 
     光晕: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/16.png",
+      图标: ["images/ow/icon/16.png", "images/ow/icon/gray/16.png"],
     },
 
     高兴: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/17.png",
+      图标: ["images/ow/icon/17.png", "images/ow/icon/gray/17.png"],
     },
 
     红桃: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/18.png",
+      图标: ["images/ow/icon/18.png", "images/ow/icon/gray/18.png"],
     },
 
     满月: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/19.png",
+      图标: ["images/ow/icon/19.png", "images/ow/icon/gray/19.png"],
     },
 
     拒绝: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/20.png",
+      图标: ["images/ow/icon/20.png", "images/ow/icon/gray/20.png"],
     },
 
     加号: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/21.png",
+      图标: ["images/ow/icon/21.png", "images/ow/icon/gray/21.png"],
     },
 
     剧毒: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/22.png",
+      图标: ["images/ow/icon/22.png", "images/ow/icon/gray/22.png"],
     },
 
     剧毒2: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/23.png",
+      图标: ["images/ow/icon/23.png", "images/ow/icon/gray/23.png"],
     },
 
     问号: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/24.png",
+      图标: ["images/ow/icon/24.png", "images/ow/icon/gray/24.png"],
     },
 
     辐射: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/25.png",
+      图标: ["images/ow/icon/25.png", "images/ow/icon/gray/25.png"],
     },
 
     回收: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/26.png",
+      图标: ["images/ow/icon/26.png", "images/ow/icon/gray/26.png"],
     },
 
     宽环: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/27.png",
+      图标: ["images/ow/icon/27.png", "images/ow/icon/gray/27.png"],
     },
 
     细环: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/28.png",
+      图标: ["images/ow/icon/28.png", "images/ow/icon/gray/28.png"],
     },
 
     难过: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/29.png",
+      图标: ["images/ow/icon/29.png", "images/ow/icon/gray/29.png"],
     },
 
     骷髅: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/30.png",
+      图标: ["images/ow/icon/30.png", "images/ow/icon/gray/30.png"],
     },
 
     黑桃: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/31.png",
+      图标: ["images/ow/icon/31.png", "images/ow/icon/gray/31.png"],
     },
 
     螺旋: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/32.png",
+      图标: ["images/ow/icon/32.png", "images/ow/icon/gray/32.png"],
     },
 
     停止: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/33.png",
+      图标: ["images/ow/icon/33.png", "images/ow/icon/gray/33.png"],
     },
 
     垃圾箱: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/34.png",
+      图标: ["images/ow/icon/34.png", "images/ow/icon/gray/34.png"],
     },
 
     警告: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/35.png",
+      图标: ["images/ow/icon/35.png", "images/ow/icon/gray/35.png"],
     },
 
     X: {
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: "images/ow/icon/36.png",
+      图标: ["images/ow/icon/36.png", "images/ow/icon/gray/36.png"],
     },
   },
 
@@ -9275,82 +9874,82 @@ let 规则 = {
 
     玩家: Object.assign(
       {
-        "栏位 0": {
+        全部: {
           标签: ["事件", "玩家"],
           顺序: "000",
+          提示: "表示所有栏位的玩家。",
+        },
+
+        "栏位 0": {
+          标签: ["事件", "玩家"],
+          顺序: "001",
           提示: "表示第0个栏位的玩家。",
         },
 
         "栏位 1": {
           标签: ["事件", "玩家"],
-          顺序: "001",
+          顺序: "002",
           提示: "表示第1个栏位的玩家。",
         },
 
         "栏位 2": {
           标签: ["事件", "玩家"],
-          顺序: "002",
+          顺序: "003",
           提示: "表示第2个栏位的玩家。",
         },
 
         "栏位 3": {
           标签: ["事件", "玩家"],
-          顺序: "003",
+          顺序: "004",
           提示: "表示第3个栏位的玩家。",
         },
 
         "栏位 4": {
           标签: ["事件", "玩家"],
-          顺序: "004",
+          顺序: "005",
           提示: "表示第4个栏位的玩家。",
         },
 
         "栏位 5": {
           标签: ["事件", "玩家"],
-          顺序: "005",
+          顺序: "006",
           提示: "表示第5个栏位的玩家。",
         },
 
         "栏位 6": {
           标签: ["事件", "玩家"],
-          顺序: "006",
+          顺序: "007",
           提示: "表示第6个栏位的玩家。",
         },
 
         "栏位 7": {
           标签: ["事件", "玩家"],
-          顺序: "007",
+          顺序: "008",
           提示: "表示第7个栏位的玩家。",
         },
 
         "栏位 8": {
           标签: ["事件", "玩家"],
-          顺序: "008",
+          顺序: "009",
           提示: "表示第8个栏位的玩家。",
         },
 
         "栏位 9": {
           标签: ["事件", "玩家"],
-          顺序: "009",
+          顺序: "010",
           提示: "表示第9个栏位的玩家。",
         },
 
         "栏位 10": {
           标签: ["事件", "玩家"],
-          顺序: "010",
+          顺序: "011",
           提示: "表示第10个栏位的玩家。",
         },
 
         "栏位 11": {
           标签: ["事件", "玩家"],
-          顺序: "011",
-          提示: "表示第11个栏位的玩家。",
-        },
-
-        全部: {
-          标签: ["事件", "玩家"],
           顺序: "012",
-          提示: "表示所有栏位的玩家。",
+          提示: "表示第11个栏位的玩家。",
         },
       },
       常量.英雄
@@ -16116,57 +16715,218 @@ let 规则 = {
   },
 };
 
-function buildHovers(context) {
+function buildPinyin(text) {
+  let pinyin = "";
+  for (let i = 0; i < text.length; i++) {
+    if (拼音.hasOwnProperty(text[i])) {
+      pinyin += 拼音[text[i]];
+    } else if (/[\.a-zA-Z0-9： -“”]/.test(text[i])) {
+      pinyin += text[i];
+    } else {
+      console.log(`拼音缺失: ${text[i]}`);
+    }
+  }
+  //console.log(pinyin);
+  return pinyin;
+}
+
+function buildHover(PATH, name, tags, details) {
+  let hoverString = new vscode.MarkdownString();
+  hoverString.isTrusted = true;
+  hoverString.supportHtml = true;
+  hoverString.supportThemeIcons = true;
+  hoverString.baseUri = vscode.Uri.file(path.join(PATH, "", path.sep));
+  //标题
+  hoverString.appendMarkdown(`**<span>${name}</span>**\n\n`);
+  //标签
+  if (tags) {
+    for (t of tags) {
+      hoverString.appendMarkdown(`\`${t}\`&nbsp;`);
+    }
+    hoverString.appendMarkdown(`\n\n`);
+  }
+  //详情
+  if (details) {
+    hoverString.appendMarkdown(`${details}`);
+  }
+  return new vscode.Hover(hoverString);
+}
+
+function buildCompletion(
+  PATH,
+  label,
+  kind,
+  tags,
+  details,
+  filterText,
+  insertText,
+  sortText,
+  command
+) {
+  const item = new vscode.CompletionItem(label, kind);
+  item.documentation = new vscode.MarkdownString();
+  item.documentation.isTrusted = true;
+  item.documentation.supportHtml = true;
+  item.documentation.supportThemeIcons = true;
+  item.documentation.baseUri = vscode.Uri.file(path.join(PATH, "", path.sep));
+  item.documentation.appendMarkdown(`**<span>${label}</span>**\n\n`);
+  if (tags) {
+    for (t of tags) {
+      item.documentation.appendMarkdown(`\`${t}\`&nbsp;`);
+    }
+    item.documentation.appendMarkdown(`\n\n`);
+  }
+  if (details) {
+    item.documentation.appendMarkdown(details);
+  }
+  if (filterText) {
+    item.filterText = filterText;
+  }
+  if (insertText) {
+    item.insertText = new vscode.SnippetString(insertText);
+  }
+  if (sortText) {
+    item.sortText = sortText;
+  }
+  if (command) {
+    item.command = command;
+  }
+  return item;
+}
+
+function buildStaticModels(PATH) {
+  for (i in 常量) {
+    if (
+      i == "英雄" ||
+      i == "图标" ||
+      i == "颜色" ||
+      i == "按钮" ||
+      i == "字符串"
+    ) {
+      continue;
+    }
+    for (j in 常量[i]) {
+      常量[i][j].悬停 = buildHover(PATH, j, 常量[i][j].标签, 常量[i][j].提示);
+      常量[i][j].补全 = buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Constant,
+        常量[i][j].标签,
+        常量[i][j].提示,
+        (buildPinyin(i) + i).split("").join(" ")
+      );
+    }
+  }
   for (i in 常量.英雄) {
-    let details = `
+    let details = [``, ``].map(
+      (element) =>
+        (element += `
 |||
 |:--|:--|
-<img src="${常量.英雄[i].图标}" width=50 height=50/>&nbsp;&nbsp;|${常量.英雄[i].提示}\n\n`;
-
+<img src="${常量.英雄[i].图标}" width=50 height=50/>&nbsp;&nbsp;|${常量.英雄[i].提示}\n\n`)
+    );
     if (常量.英雄[i].生命.hasOwnProperty("自由")) {
-      details += `***自由***&nbsp;&nbsp;\`${常量.英雄[i].生命.自由}\`&nbsp;&nbsp;`;
+      details = details.map(
+        (element) =>
+          (element += `***自由***&nbsp;&nbsp;\`${常量.英雄[i].生命.自由}\`&nbsp;&nbsp;`)
+      );
     }
     if (常量.英雄[i].生命.hasOwnProperty("职责")) {
-      details += `***职责***&nbsp;&nbsp;\`${常量.英雄[i].生命.职责}\`&nbsp;&nbsp;`;
+      details = details.map(
+        (element) =>
+          (element += `***职责***&nbsp;&nbsp;\`${常量.英雄[i].生命.职责}\`&nbsp;&nbsp;`)
+      );
     }
     if (常量.英雄[i].生命.hasOwnProperty("护甲")) {
-      details += `***护甲***&nbsp;&nbsp;<span style="color:#C50;">\`${常量.英雄[i].生命.护甲}\`</span>&nbsp;&nbsp;`;
+      details = details.map(
+        (element) =>
+          (element += `***护甲***&nbsp;&nbsp;<span style="color:#C50;">\`${常量.英雄[i].生命.护甲}\`</span>&nbsp;&nbsp;`)
+      );
     }
     if (常量.英雄[i].生命.hasOwnProperty("护盾")) {
-      details += `***护盾***&nbsp;&nbsp;<span style="color:#0AC;">\`${常量.英雄[i].生命.护盾}\`</span>`;
+      details = details.map(
+        (element) =>
+          (element += `***护盾***&nbsp;&nbsp;<span style="color:#0AC;">\`${常量.英雄[i].生命.护盾}\`</span>`)
+      );
     }
-    details += `\n\n`;
+    details = details.map((element) => (element += `\n\n`));
     for (j in 常量.英雄[i].技能) {
-      details += `
+      details = details.map(
+        (element, index) =>
+          (element += `
 ||||
 |:-:|-:|:-|
-|<img src="${常量.英雄[i].技能[j].图标}" width=auto height=25/>&nbsp;&nbsp;|***${j}***&nbsp;&nbsp;|`;
+|<img src="${常量.英雄[i].技能[j].图标[index]}" width=auto height=25/>&nbsp;&nbsp;|***${j}***&nbsp;&nbsp;|`)
+      );
+
       for (k in 常量.英雄[i].技能[j].绑定) {
-        details += `\`${常量.英雄[i].技能[j].绑定[k]}\`&nbsp;`;
+        details = details.map(
+          (element) => (element += `\`${常量.英雄[i].技能[j].绑定[k]}\`&nbsp;`)
+        );
       }
-      details += `\n\n`;
+      details = details.map((element) => (element += `\n\n`));
     }
-    常量.英雄[i]["暗色悬停"] = getHover(
-      context,
-      i,
-      常量.英雄[i].标签,
-      details
+    常量.英雄[i].悬停 = details.map((element) =>
+      buildHover(PATH, i, 常量.英雄[i].标签, element)
+    );
+    常量.英雄[i].补全 = details.map((element) =>
+      buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Constant,
+        常量.英雄[i].标签,
+        element,
+        (buildPinyin(i) + i).split("").join(" ")
+      )
     );
   }
   for (i in 常量.图标) {
-    常量.图标[i]["暗色悬停"] = getHover(
-      context,
-      i,
-      常量.图标[i].标签,
-      `
+    let details = [``, ``].map(
+      (element, index) =>
+        (element += `
 |||
 |:-|:-|
-<img src="${常量.图标[i].图标}" width=30 height=30/>&nbsp;&nbsp;|${常量.图标[i].提示}`
+<img src="${常量.图标[i].图标[index]}" width=30 height=30/>&nbsp;&nbsp;|${常量.图标[i].提示}`)
+    );
+    常量.图标[i].悬停 = details.map((element) =>
+      buildHover(PATH, i, 常量.图标[i].标签, element)
+    );
+    常量.图标[i].补全 = details.map((element) =>
+      buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Constant,
+        常量.图标[i].标签,
+        element,
+        (buildPinyin(i) + i).split("").join(" ")
+      )
+    );
+  }
+  for (i in 常量.按钮) {
+    let details = [``, ``].map(
+      (element, index) =>
+        (element += `
+|||
+|:-|:-|
+<img src="${常量.按钮[i].图标[index]}" width=25 height=25/>&nbsp;&nbsp;|${常量.按钮[i].提示}`)
+    );
+    常量.按钮[i].悬停 = details.map((element) =>
+      buildHover(PATH, i, 常量.按钮[i].标签, element)
+    );
+    常量.按钮[i].补全 = details.map((element) =>
+      buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Constant,
+        常量.按钮[i].标签,
+        element,
+        (buildPinyin(i) + i).split("").join(" ")
+      )
     );
   }
   for (i in 常量.颜色) {
-    常量.颜色[i]["暗色悬停"] = getHover(
-      context,
+    常量.颜色[i].悬停 = buildHover(
+      PATH,
       i,
       常量.颜色[i].标签,
       `
@@ -16174,67 +16934,79 @@ function buildHovers(context) {
 |:-|:-|
 <img src="${常量.颜色[i].图标}" width=25 height=25/>&nbsp;&nbsp;|${常量.颜色[i].提示}`
     );
-  }
-  for (i in 常量.按钮) {
-    常量.按钮[i]["暗色悬停"] = getHover(
-      context,
+    常量.颜色[i].补全 = buildCompletion(
+      PATH,
       i,
-      常量.按钮[i].标签,
+      vscode.CompletionItemKind.Constant,
+      常量.颜色[i].标签,
       `
 |||
 |:-|:-|
-<img src="${常量.按钮[i].图标}" width=25 height=25/>&nbsp;&nbsp;|${常量.按钮[i].提示}`
+<img src="${常量.颜色[i].图标}" width=25 height=25/>&nbsp;&nbsp;|${常量.颜色[i].提示}`,
+      (buildPinyin(i) + i).split("").join(" ")
     );
   }
-  for (i in 常量) {
-    if (
-      i == 常量.英雄 ||
-      i == 常量.图标 ||
-      i == 常量.颜色 ||
-      i == 常量.按钮 ||
-      i == 常量.字符串
-    ) {
-      continue;
-    }
-    for (j in 常量[i]) {
-      常量[i][j]["暗色悬停"] = getHover(
-        context,
-        j,
-        常量[i][j].标签,
-        常量[i][j].提示
-      );
-    }
-  }
   for (i in 规则.事件.选项) {
-    规则.事件.选项[i]["暗色悬停"] = getHover(
-      context,
+    规则.事件.选项[i].悬停 = buildHover(
+      PATH,
       i,
       规则.事件.选项[i].标签,
       规则.事件.选项[i].提示
     );
+    规则.事件.选项[i].补全 = buildCompletion(
+      PATH,
+      i,
+      vscode.CompletionItemKind.Event,
+      规则.事件.选项[i].标签,
+      规则.事件.选项[i].提示,
+      (buildPinyin(i) + i).split("").join(" "),
+      `${i};`
+    );
   }
   for (i in 规则.事件.队伍) {
-    规则.事件.队伍[i]["暗色悬停"] = getHover(
-      context,
+    规则.事件.队伍[i].悬停 = buildHover(
+      PATH,
       i,
       规则.事件.队伍[i].标签,
       规则.事件.队伍[i].提示
     );
+    规则.事件.队伍[i].补全 = buildCompletion(
+      PATH,
+      i,
+      vscode.CompletionItemKind.Event,
+      规则.事件.队伍[i].标签,
+      规则.事件.队伍[i].提示,
+      (buildPinyin(i) + i).split("").join(" "),
+      `${i};`
+    );
   }
   for (i in 规则.事件.玩家) {
     if (常量.英雄.hasOwnProperty(i)) {
-      规则.事件.玩家[i]["暗色悬停"] = 常量.英雄[i]["暗色悬停"];
+      规则.事件.玩家[i].悬停 = 常量.英雄[i].悬停;
+      规则.事件.玩家[i].补全 = 常量.英雄[i].补全;
     } else {
-      规则.事件.玩家[i]["暗色悬停"] = getHover(
-        context,
+      规则.事件.玩家[i].悬停 = buildHover(
+        PATH,
         i,
         规则.事件.玩家[i].标签,
         规则.事件.玩家[i].提示
+      );
+      规则.事件.玩家[i].补全 = buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Event,
+        规则.事件.玩家[i].标签,
+        规则.事件.玩家[i].提示,
+        (buildPinyin(i) + i).split("").join(" "),
+        `${i};`,
+        规则.事件.玩家[i].顺序
       );
     }
   }
   for (i in 规则.条件) {
     let details = `${规则.条件[i].提示}`;
+    let insertText = `${i}`;
+    let command = undefined;
     //返回
     if (规则.条件[i].hasOwnProperty("返回")) {
       details += `\n\n---\n\n***<span style="color:#c50;">⬘</span>&nbsp;返回***\n\n`;
@@ -16245,56 +17017,93 @@ function buildHovers(context) {
     //参数
     if (规则.条件[i].hasOwnProperty("参数")) {
       details += `\n\n---\n\n***<span style="color:#0ac;">⬘</span>&nbsp;参数***\n\n`;
+      insertText += `(`;
       规则.条件[i].参数.forEach((element, index) => {
         details += `\`${index}\`&nbsp;\`${element.标签}\`&nbsp;-&nbsp;${element.提示}\n\n`;
+        insertText += `\$${index + 1}, `;
       });
+      insertText = insertText.slice(0, -2) + `)`;
+      command = {
+        command: "editor.action.triggerParameterHints",
+        title: "triggerParameterHints",
+        arguments: [],
+      };
     }
-    规则.条件[i]["暗色悬停"] = getHover(
-      context,
+    insertText += `;`;
+    规则.条件[i].悬停 = buildHover(PATH, i, 规则.条件[i].标签, details);
+    规则.条件[i].补全 = buildCompletion(
+      PATH,
       i,
+      vscode.CompletionItemKind.Class,
       规则.条件[i].标签,
-      details
+      details,
+      (buildPinyin(i) + i).split("").join(" "),
+      insertText,
+      undefined,
+      command
     );
   }
   for (i in 规则.动作) {
     let details = `${规则.动作[i].提示}`;
+    let insertText = `${i}`;
+    let command = undefined
     //参数
     if (规则.动作[i].hasOwnProperty("参数")) {
       details += `\n\n---\n\n***<span style="color:#0ac;">⬘</span>&nbsp;参数***\n\n`;
+      insertText += `(`;
       规则.动作[i].参数.forEach((element, index) => {
         details += `\`${index}\`&nbsp;\`${element.标签}\`&nbsp;-&nbsp;${element.提示}\n\n`;
+        insertText += `\$${index + 1}, `;
       });
+      insertText = insertText.slice(0, -2) + `)`;
+      command = {
+        command: "editor.action.triggerParameterHints",
+        title: "triggerParameterHints",
+        arguments: [],
+      };
     }
-    规则.动作[i]["暗色悬停"] = getHover(
-      context,
+    insertText += `;`;
+    规则.动作[i].悬停 = buildHover(PATH, i, 规则.动作[i].标签, details);
+    规则.动作[i].补全 = buildCompletion(
+      PATH,
       i,
+      vscode.CompletionItemKind.Method,
       规则.动作[i].标签,
-      details
+      details,
+      (buildPinyin(i) + i).split("").join(" "),
+      insertText,
+      undefined,
+      command
     );
   }
 }
 
-function getHover(context, name, tags, details) {
-  let hoverString = new vscode.MarkdownString();
-  hoverString.isTrusted = true;
-  hoverString.supportHtml = true;
-  hoverString.supportThemeIcons = true;
-  hoverString.baseUri = vscode.Uri.file(
-    path.join(context.extensionPath, "", path.sep)
-  );
-  //标题
-  hoverString.appendMarkdown(`**<span>${name}</span>**&nbsp;&nbsp;`);
-  //标签
-  if (tags) {
-    for (t of tags) {
-      hoverString.appendMarkdown(`\`${t}\`&nbsp;`);
+function getStaticCompletions(object, range) {
+  let completions = [];
+  for (const p in object) {
+    if (Array.isArray(object[p].补全)) {
+      const theme =
+        vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark
+          ? 0
+          : 1;
+      object[p].补全[theme].range = range;
+      completions.push(object[p].补全[theme]);
+    } else {
+      object[p].补全.range = range;
+      completions.push(object[p].补全);
     }
   }
-  //详情
-  if (details) {
-    hoverString.appendMarkdown(`\n\n${details}`);
-  }
-  return new vscode.Hover(hoverString);
+  console.log(completions);
+  return completions;
 }
 
-module.exports = { 规则, 常量, buildHover: getHover, buildHovers };
+module.exports = {
+  拼音,
+  常量,
+  规则,
+  buildHover,
+  buildCompletion,
+  buildStaticModels,
+  buildStaticModels,
+  getStaticCompletions,
+};

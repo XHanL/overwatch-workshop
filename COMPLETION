@@ -1,0 +1,42 @@
+try {
+      常量.英雄[i].补全 = details.map((element) =>
+        buildCompletion(
+          context,
+          i,
+          vscode.CompletionItemKind.Constant,
+          element,
+          (buildPinyin(i) + i).split("").join(" "),
+          i,
+          常量.英雄[i].hasOwnProperty("排序") ? 常量.英雄[i].排序 : undefined
+        )
+      );
+      console.log(常量.英雄[i].补全[0]);
+    } catch (error) {
+      console.log(error);
+}
+
+if (type == TEMPLATE) {
+  item.kind = vscode.CompletionItemKind.Module;
+} else if (type == RULES.EVENT) {
+  item.kind = vscode.CompletionItemKind.Event;
+} else if (type == RULES.EVENT_TEAM) {
+  item.kind = vscode.CompletionItemKind.Event;
+} else if (type == RULES.EVENT_PLAYER) {
+  item.kind = vscode.CompletionItemKind.Event;
+} else if (type == RULES.CONDITION) {
+  item.kind = vscode.CompletionItemKind.Class;
+  item.command = {
+    command: "editor.action.triggerParameterHints",
+    title: "triggerParameterHints",
+    arguments: [],
+  };
+} else if (type == RULES.ACTION) {
+  item.kind = vscode.CompletionItemKind.Method;
+  item.command = {
+    command: "editor.action.triggerParameterHints",
+    title: "triggerParameterHints",
+    arguments: [],
+  };
+} else if (CONSTS.hasOwnProperty(type)) {
+  item.kind = vscode.CompletionItemKind.Constant;
+}

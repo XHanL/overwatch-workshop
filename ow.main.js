@@ -1,16 +1,19 @@
 const vscode = require("vscode");
-const fs = require("fs");
 const path = require("path");
+const fs = require("fs");
 
+//语言模型
 const MODEL = require("./ow.model.js");
 
 //主函数
 function activate(context) {
-  //初始化模型
-  MODEL.buildHovers(context);
-  //MODEL.initModelLightHover(context)
-  //MODEL.initModelDarkCompletion(context)
-  //MODEL.initModelLightCompletion(context)
+  //buildPinYinArray();
+
+  //主路径
+  const PATH = context.extensionPath;
+
+  //静态模型
+  MODEL.buildStaticModels(PATH);
 
   //注册能力
   context.subscriptions.push(
@@ -217,7 +220,6 @@ function activate(context) {
           return;
         }
         const hoverText = document.getText(hoverRange);
-        console.log(hoverText);
         let rightBracesCount = 0;
         for (let i = position.line; i >= 0; i--) {
           const line = document.lineAt(i);
@@ -231,47 +233,56 @@ function activate(context) {
               const theme =
                 vscode.window.activeColorTheme.kind ===
                 vscode.ColorThemeKind.Dark
-                  ? "暗色"
-                  : "亮色";
+                  ? 0
+                  : 1;
               if (prevLineText === "事件") {
                 if (MODEL.规则.事件.选项.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.事件.选项[hoverText][`${theme}悬停`];
+                  return MODEL.规则.事件.选项[hoverText].悬停;
                 }
                 if (MODEL.规则.事件.队伍.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.事件.队伍[hoverText][`${theme}悬停`];
+                  return MODEL.规则.事件.队伍[hoverText].悬停;
                 }
                 if (MODEL.规则.事件.玩家.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.事件.玩家[hoverText][`${theme}悬停`];
+                  if (Array.isArray(MODEL.规则.事件.玩家[hoverText].悬停)) {
+                    return MODEL.规则.事件.玩家[hoverText].悬停[theme];
+                  }
+                  return MODEL.规则.事件.玩家[hoverText].悬停;
                 }
                 if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
-                  return getCustomNameHover();
+                  return getDynamicHover();
                 }
               } else if (prevLineText === "条件") {
                 if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.条件[hoverText][`${theme}悬停`];
+                  return MODEL.规则.条件[hoverText].悬停;
                 }
                 for (i in MODEL.常量) {
                   if (MODEL.常量[i].hasOwnProperty(hoverText)) {
-                    return MODEL.常量[i][hoverText][`${theme}悬停`];
+                    if (Array.isArray(MODEL.常量[i][hoverText].悬停)) {
+                      return MODEL.常量[i][hoverText].悬停[theme];
+                    }
+                    return MODEL.常量[i][hoverText].悬停;
                   }
                 }
                 if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
-                  return getCustomNameHover();
+                  return getDynamicHover();
                 }
               } else if (prevLineText === "动作") {
                 if (MODEL.规则.动作.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.动作[hoverText][`${theme}悬停`];
+                  return MODEL.规则.动作[hoverText].悬停;
                 }
                 if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.条件[hoverText][`${theme}悬停`];
+                  return MODEL.规则.条件[hoverText].悬停;
                 }
                 for (i in MODEL.常量) {
                   if (MODEL.常量[i].hasOwnProperty(hoverText)) {
-                    return MODEL.常量[i][hoverText][`${theme}悬停`];
+                    if (Array.isArray(MODEL.常量[i][hoverText].悬停)) {
+                      return MODEL.常量[i][hoverText].悬停[theme];
+                    }
+                    return MODEL.常量[i][hoverText].悬停;
                   }
                 }
                 if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
-                  return getCustomNameHover();
+                  return getDynamicHover();
                 }
               } else {
                 return;
@@ -282,33 +293,55 @@ function activate(context) {
           }
         }
 
-        function getCustomNameHover() {
-          const customs = getCustoms(document);
-          let prefix =
-            document.offsetAt(document.getWordRangeAtPosition(position).start) -
-            1;
-          let prefixText = document.getText()[prefix];
-          if (prefixText === ".") {
-            prefixText = document.getText(
-              document.getWordRangeAtPosition(document.positionAt(prefix - 1))
-            );
-            if (prefixText === "全局") {
-              for (i in customs.全局变量) {
-                if (hoverText === customs.全局变量[i]) {
-                  return MODEL.buildHover(context, hoverText, ["全局变量", i]);
+        function getDynamicHover() {
+          //(全局|For 全局变量|设置全局变量|修改全局变量|在索引处设置全局变量|在索引处修改全局变量|持续追踪全局变量|追踪全局变量频率|停止追踪全局变量)/;
+          //(子程序|调用子程序|开始规则)/;
+          //(For 玩家变量|设置玩家变量|修改玩家变量|在索引处设置玩家变量|在索引处修改玩家变量|持续追踪玩家变量|追踪玩家变量频率|停止追踪玩家变量)/;
+          const dynamicList = getDynamicList(document);
+          function getCustomTypeRange() {
+            let pos = document
+              .getWordRangeAtPosition(position)
+              .start.translate(0, -1);
+            let i = pos.line;
+            let j = pos.character;
+            while (i > 0) {
+              while (j > 0) {
+                const range = document.getWordRangeAtPosition(
+                  new vscode.Position(i, j)
+                );
+                if (range) {
+                  return range;
                 }
+                j--;
               }
-            } else {
-              for (i in customs.玩家变量) {
-                if (hoverText === customs.玩家变量[i]) {
-                  return MODEL.buildHover(context, hoverText, ["玩家变量", i]);
-                }
+              pos = document.lineAt(i - 1).range.end;
+              i = pos.line;
+              j = pos.character;
+            }
+            return undefined;
+          }
+          let range = getCustomTypeRange();
+          let text = document.getText(range);
+          if (
+            (match = text.match(
+              /全局|For 全局变量|设置全局变量|修改全局变量|在索引处设置全局变量|在索引处修改全局变量|持续追踪全局变量|追踪全局变量频率|停止追踪全局变量/
+            ))
+          ) {
+            for (i in dynamicList.全局变量) {
+              if (hoverText === dynamicList.全局变量[i]) {
+                return MODEL.buildHover(PATH, hoverText, ["全局变量", i]);
+              }
+            }
+          } else if ((match = text.match(/子程序|调用子程序|开始规则/))) {
+            for (i in dynamicList.子程序) {
+              if (hoverText === dynamicList.子程序[i]) {
+                return MODEL.buildHover(PATH, hoverText, ["子程序", i]);
               }
             }
           } else {
-            for (i in customs.子程序) {
-              if (hoverText === customs.子程序[i]) {
-                return MODEL.buildHover(context, hoverText, ["子程序", i]);
+            for (i in dynamicList.玩家变量) {
+              if (hoverText === dynamicList.玩家变量[i]) {
+                return MODEL.buildHover(PATH, hoverText, ["玩家变量", i]);
               }
             }
           }
@@ -320,104 +353,149 @@ function activate(context) {
     vscode.languages.registerCompletionItemProvider(
       "ow",
       {
-        provideCompletionItems(document, position, context) {
-          const completionText = document.getText(
-            document.getWordRangeAtPosition(position)
-          );
-          let rightBracesCount = 0;
-          let semicolonCount = 0;
-          for (let i = position.line; i >= 0; i--) {
-            const line = document.lineAt(i);
-            const lineText = line.text.trim();
-            if (lineText.startsWith("{")) {
-              if (rightBracesCount > 0) {
-                rightBracesCount--;
-              } else {
-                const prevLine = document.lineAt(i - 1);
-                const prevLineText = prevLine.text.trim();
-                const theme =
-                  vscode.window.activeColorTheme.kind ===
-                  vscode.ColorThemeKind.Dark
-                    ? "暗色"
-                    : "亮色";
-                if (prevLineText === "事件") {
-                  const nextLine = document.lineAt(i + 1);
-                  const nextLineText = nextLine.text.trim();
-                  if (nextLineText === "子程序;") {
+        provideCompletionItems(document, position, token, context) {
+          try {
+            //补全范围
+            const range = getCompletionRange();
+            //作用范围
+            let rightBracesCount = 0;
+            let semicolonCount = 0;
+            for (let i = position.line; i >= 0; i--) {
+              const line = document.lineAt(i);
+              const lineText = line.text.trim();
+              if (lineText.startsWith("{")) {
+                if (rightBracesCount > 0) {
+                  rightBracesCount--;
+                } else {
+                  const prevLine = document.lineAt(i - 1);
+                  const prevLineText = prevLine.text.trim();
+                  if (prevLineText === "事件") {
                     if (semicolonCount === 0) {
-                      return MODEL.规则.事件.选项[`${theme}补全`];
-                    } else {
-                      let completionItems = [];
-                      const customs = getCustoms(document);
-                      for (const i in customs.子程序) {
-                        const item = new vscode.CompletionItem(
-                          i.padStart(3, "0") + ": " + customs.子程序[i],
-                          vscode.CompletionItemKind.Variable
-                        );
-                        item.documentation = new vscode.MarkdownString();
-                        item.documentation.appendMarkdown(
-                          `***${customs.子程序[i]}***\n\n\`子程序\`&nbsp;\`${i}\` `
-                        );
-                        item.filterText = (
-                          i.padStart(3, "0") + customs.子程序[i]
-                        )
-                          .split("")
-                          .join(" ");
-                        item.insertText = customs.子程序[i];
-                        completionItems.push(item);
-                      }
-                      return completionItems;
-                    }
-                  } else {
-                    if (semicolonCount === 0) {
-                      return MODEL.规则.事件.选项[`${theme}补全`];
+                      return MODEL.getStaticCompletions(
+                        MODEL.规则.事件.选项,
+                        range
+                      );
                     } else if (semicolonCount === 1) {
-                      return MODEL.规则.事件.队伍[`${theme}补全`];
+                      const nextLine = document.lineAt(i + 1);
+                      const nextLineText = nextLine.text.trim();
+                      if (nextLineText.startsWith("子程序")) {
+                        return buildSubroutineCompletions(range);
+                      } else {
+                        return MODEL.getStaticCompletions(
+                          MODEL.规则.事件.队伍,
+                          range
+                        );
+                      }
                     } else if (semicolonCount === 2) {
-                      return MODEL.规则.事件.玩家[`${theme}补全`];
+                      return MODEL.getStaticCompletions(
+                        MODEL.规则.事件.玩家,
+                        range
+                      );
                     }
+                  } else if (prevLineText === "条件") {
+                    return MODEL.getStaticCompletions(MODEL.规则.条件, range);
+                  } else if (prevLineText === "动作") {
+                    // 设置玩家变量 => (条件 = 条件);
+                    return MODEL.getStaticCompletions(MODEL.规则.动作, range);
                   }
-                } else if (prevLineText === "条件") {
-                  getPrefix();
-                } else if (prevLineText === "动作") {
-                  // 匹配 ACTION;
-                  // 匹配 ACTION(0, 0);
-
-                  // 匹配 COND
-                  // 匹配 COND(0, 0)
-
-                  // 匹配 全局.A / 事件玩家.B;
-
-                  // 匹配
-
-                  if (
-                    (wordRange = document.getWordRangeAtPosition(
-                      position,
-                      /([^\s{;]*)\s*=\s*(.*)\s*;/g
-                    ))
-                  ) {
-                    console.log(document.getText(wordRange));
-                  } else if (
-                    (wordRange = document.getWordRangeAtPosition(
-                      position,
-                      /([^\s{;]*)\s*(?:\((?:(.*)(?:,\s*)?)*\))?\s*;/g
-                    ))
-                  ) {
-                    console.log(document.getText(wordRange));
-                  }
-                  //变量
                 }
+              } else if (lineText.endsWith("}")) {
+                rightBracesCount++;
+              } else if (lineText.endsWith(";")) {
+                semicolonCount++;
               }
-            } else if (lineText.endsWith("}")) {
-              rightBracesCount++;
-            } else if (lineText.endsWith(";")) {
-              semicolonCount++;
             }
-          }
 
-          let item = new vscode.CompletionItem("无建议");
-          item.insertText = "";
-          return [item];
+            let item = new vscode.CompletionItem("无建议");
+            item.insertText = "";
+            return [item];
+
+            function getCompletionRange() {
+              for (let i = position.character; i >= 0; i--) {
+                let range = document.getWordRangeAtPosition(
+                  position.with(undefined, i)
+                );
+                if (!range) {
+                  continue;
+                }
+                return range.with(undefined, position);
+              }
+              return undefined;
+            }
+
+            function getCompletionType() {
+              for (let i = document.offsetAt(position) - 1; i >= 0; i--) {
+                let wordRange = document.getWordRangeAtPosition(
+                  document.positionAt(i),
+                  type > 0 ? undefined : /{|}|\[\(|\)|;|,/
+                );
+                if (!wordRange) {
+                  continue;
+                }
+                const word = document.getText(wordRange);
+                if (type == 1) {
+                  console.log(`单个条件/动作 ${word} 参数索引 ${commasCount}`);
+                  return;
+                }
+                console.log(`${word}`);
+                if (word == "{") {
+                  if (rightParenthesesCount > 0) {
+                    rightParenthesesCount--;
+                  } else {
+                    console.log(`条件/动作列表`);
+                    return;
+                  }
+                } else if (word == "}") {
+                  rightBracesCount++;
+                } else if (word == "(") {
+                  if (rightParenthesesCount > 0) {
+                    rightParenthesesCount--;
+                  } else {
+                    // 参数列表 等待扫描函数名
+                    type = 1;
+                  }
+                } else if (word == ")") {
+                  rightParenthesesCount++;
+                } else if (word == ";") {
+                  // 条件/动作列表 直接返回
+                  console.log(`条件/动作列表`);
+                  return;
+                } else if (word == "[") {
+                  // 条件列表 直接返回
+                  console.log(`条件列表`);
+                  return;
+                } else if (word == ",") {
+                  if (rightParenthesesCount == 0) {
+                    commasCount++;
+                  }
+                }
+                i = document.offsetAt(wordRange.start);
+              }
+            }
+
+            function buildSubroutineCompletions(range) {
+              let completionItems = [];
+              const dynamicList = getDynamicList(document);
+              for (const i in dynamicList.子程序) {
+                let item = MODEL.buildCompletion(
+                  PATH,
+                  i.padStart(3, "0") + ": " + dynamicList.子程序[i],
+                  vscode.CompletionItemKind.Function,
+                  ["子程序", i],
+                  `一个预定义的子程序。`,
+                  (i.padStart(3, "0") + dynamicList.子程序[i])
+                    .split("")
+                    .join(" "),
+                  `${dynamicList.子程序[i]};`
+                );
+                item.range = range;
+                completionItems.push(item);
+              }
+              return completionItems;
+            }
+          } catch (error) {
+            console.log(error);
+          }
         },
       },
       "(",
@@ -442,9 +520,7 @@ function activate(context) {
       resolveWebviewView(webviewView) {
         const theme =
           vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark;
-        const extensionUri = vscode.Uri.file(
-          path.join(context.extensionPath, "", path.sep)
-        );
+        const extensionUri = vscode.Uri.file(path.join(PATH, "", path.sep));
         const themeUri = theme ? "" : "gray/";
         const styleUri = webviewView.webview.asWebviewUri(
           vscode.Uri.joinPath(
@@ -3809,7 +3885,7 @@ function activate(context) {
 }
 
 //扩展，全局变量，玩家变量，和子程序列表
-function getCustoms(document) {
+function getDynamicList(document) {
   let type = 0;
   let extensions = [];
   let globalVariables = {};
@@ -3981,6 +4057,44 @@ function convertObjectToArray() {
 
     const outputString = JSON.stringify(transformedOutput, null, 2);
 
+    fs.writeFileSync(
+      "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
+      outputString,
+      "utf-8"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//工具：多音字数组 (npm install pinyinlite)
+function buildPinYinArray() {
+  try {
+    const pinyinlite = require("pinyinlite");
+
+    const chineseDict = MODEL.拼音;
+
+    const sortedKeys = Object.keys(chineseDict).sort((a, b) => {
+      return a.localeCompare(b, "zh-CN"); // Sort Chinese characters
+    });
+
+    const pinyinDict = {};
+
+    for (const char of sortedKeys) {
+      const pinyinArray = pinyinlite(char, { noTone: true });
+
+      let pinyinString = pinyinArray.join(",");
+      pinyinString = pinyinString
+        .split(",")
+        .map(
+          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join("");
+
+      pinyinDict[char] = pinyinString;
+    }
+
+    const outputString = JSON.stringify(pinyinDict, null, 2);
     fs.writeFileSync(
       "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
       outputString,

@@ -196,6 +196,8 @@
         ]
     },
     "dependencies": {
+        "pinyin": "^3.0.0-alpha.5",
+        "pinyinlite": "^1.2.1",
         "split-string": "^6.1.0"
     }
 }
