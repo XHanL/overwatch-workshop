@@ -22,9 +22,6 @@
         "Programming Languages"
     ],
     "main": "ow.main.js",
-    "activationEvents": [
-        "onLanguage:json"
-    ],
     "contributes": {
         "configuration": {
             "title": "高亮引擎",
@@ -62,47 +59,23 @@
         "commands": [
             {
                 "command": "ow.command.suggest",
-                "title": "建议",
+                "title": "提供建议",
                 "icon": {
                     "light": "images/extension/command/black/suggest.png",
                     "dark": "images/extension/command/suggest.png"
                 }
             },
             {
-                "command": "ow.command.undo",
-                "title": "撤销",
-                "icon": {
-                    "light": "images/extension/command/black/undo.png",
-                    "dark": "images/extension/command/undo.png"
-                }
-            },
-            {
-                "command": "ow.command.redo",
-                "title": "恢复",
-                "icon": {
-                    "light": "images/extension/command/black/redo.png",
-                    "dark": "images/extension/command/redo.png"
-                }
-            },
-            {
                 "command": "ow.command.line",
-                "title": "换行",
+                "title": "自动换行",
                 "icon": {
                     "light": "images/extension/command/black/line.png",
                     "dark": "images/extension/command/line.png"
                 }
             },
             {
-                "command": "ow.command.format",
-                "title": "整理",
-                "icon": {
-                    "light": "images/extension/command/black/format.png",
-                    "dark": "images/extension/command/format.png"
-                }
-            },
-            {
                 "command": "ow.command.copy",
-                "title": "复制",
+                "title": "修复后导出",
                 "icon": {
                     "light": "images/extension/command/black/copy.png",
                     "dark": "images/extension/command/copy.png"
@@ -110,18 +83,10 @@
             },
             {
                 "command": "ow.command.paste",
-                "title": "粘贴",
+                "title": "导入并修复",
                 "icon": {
                     "light": "images/extension/command/black/paste.png",
                     "dark": "images/extension/command/paste.png"
-                }
-            },
-            {
-                "command": "ow.command.blur",
-                "title": "混淆",
-                "icon": {
-                    "light": "images/extension/command/black/blur.png",
-                    "dark": "images/extension/command/blur.png"
                 }
             }
         ],
@@ -156,11 +121,6 @@
                     "group": "navigation@101"
                 },
                 {
-                    "command": "ow.command.format",
-                    "when": "editorLangId == ow",
-                    "group": "navigation@102"
-                },
-                {
                     "command": "ow.command.copy",
                     "when": "editorLangId == ow",
                     "group": "navigation@103"
@@ -169,6 +129,28 @@
                     "command": "ow.command.paste",
                     "when": "editorLangId == ow",
                     "group": "navigation@104"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "ow.command.suggest",
+                    "when": "editorLangId == ow",
+                    "group": "0@0"
+                },
+                {
+                    "command": "ow.command.line",
+                    "when": "editorLangId == ow",
+                    "group": "0@1"
+                },
+                {
+                    "command": "ow.command.copy",
+                    "when": "editorLangId == ow",
+                    "group": "0@2"
+                },
+                {
+                    "command": "ow.command.paste",
+                    "when": "editorLangId == ow",
+                    "group": "0@3"
                 }
             ]
         },
@@ -194,10 +176,5 @@
                 "path": "themes/ow.crystal_light.json"
             }
         ]
-    },
-    "dependencies": {
-        "pinyin": "^3.0.0-alpha.5",
-        "pinyinlite": "^1.2.1",
-        "split-string": "^6.1.0"
     }
 }

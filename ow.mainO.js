@@ -377,6 +377,8 @@ function sortAndFilterChineseKeyword() {
 function setTheme() {
     const availableThemes = ['OW Dark', 'OW Crystal Dark', 'OW Light (实验性)', 'OW Crystal Light (实验性)']
     const currentTheme = vscode.workspace.getConfiguration('workbench').get('colorTheme')
+    const currentEnter = vscode.workspace.getConfiguration('workbench').get('colorTheme')
+    autoInsertOnEnter', false
     if (vscode.window.activeTextEditor && vscode.window.activeTextEditor.document.languageId === 'ow') {
         if (!availableThemes.includes(currentTheme)) {
             vscode.window.showQuickPick(availableThemes, {
@@ -1330,6 +1332,11 @@ function activate(context) {
         vscode.commands.registerCommand('ow.command.redo', () => {
             vscode.commands.executeCommand('redo')
             vscode.window.setStatusBarMessage("✦ 已恢复", 1000)
+        }),
+        //换行
+        vscode.commands.registerCommand('ow.command.line', () => {
+            vscode.commands.executeCommand('editor.action.toggleWordWrap')
+            vscode.window.setStatusBarMessage("✦ 已切换", 1000)
         }),
         //复制
         vscode.commands.registerCommand('ow.command.copy', () => {
