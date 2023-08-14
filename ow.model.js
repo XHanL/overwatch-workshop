@@ -16715,7 +16715,7 @@ let 规则 = {
   },
 };
 
-function buildPinyin(text) {
+function buildPinyinFilterText(text) {
   let pinyin = "";
   for (let i = 0; i < text.length; i++) {
     if (拼音.hasOwnProperty(text[i])) {
@@ -16813,7 +16813,7 @@ function buildStaticModels(PATH) {
         vscode.CompletionItemKind.Constant,
         常量[i][j].标签,
         常量[i][j].提示,
-        (buildPinyin(i) + i).split("").join(" ")
+        (buildPinyinFilterText(i) + i).split("").join(" ")
       );
     }
   }
@@ -16876,7 +16876,7 @@ function buildStaticModels(PATH) {
         vscode.CompletionItemKind.Constant,
         常量.英雄[i].标签,
         element,
-        (buildPinyin(i) + i).split("").join(" ")
+        (buildPinyinFilterText(i) + i).split("").join(" ")
       )
     );
   }
@@ -16898,7 +16898,7 @@ function buildStaticModels(PATH) {
         vscode.CompletionItemKind.Constant,
         常量.图标[i].标签,
         element,
-        (buildPinyin(i) + i).split("").join(" ")
+        (buildPinyinFilterText(i) + i).split("").join(" ")
       )
     );
   }
@@ -16920,7 +16920,7 @@ function buildStaticModels(PATH) {
         vscode.CompletionItemKind.Constant,
         常量.按钮[i].标签,
         element,
-        (buildPinyin(i) + i).split("").join(" ")
+        (buildPinyinFilterText(i) + i).split("").join(" ")
       )
     );
   }
@@ -16943,7 +16943,7 @@ function buildStaticModels(PATH) {
 |||
 |:-|:-|
 <img src="${常量.颜色[i].图标}" width=25 height=25/>&nbsp;&nbsp;|${常量.颜色[i].提示}`,
-      (buildPinyin(i) + i).split("").join(" ")
+      (buildPinyinFilterText(i) + i).split("").join(" ")
     );
   }
   for (i in 规则.事件.选项) {
@@ -16959,7 +16959,7 @@ function buildStaticModels(PATH) {
       vscode.CompletionItemKind.Event,
       规则.事件.选项[i].标签,
       规则.事件.选项[i].提示,
-      (buildPinyin(i) + i).split("").join(" "),
+      (buildPinyinFilterText(i) + i).split("").join(" "),
       `${i};`
     );
   }
@@ -16976,7 +16976,7 @@ function buildStaticModels(PATH) {
       vscode.CompletionItemKind.Event,
       规则.事件.队伍[i].标签,
       规则.事件.队伍[i].提示,
-      (buildPinyin(i) + i).split("").join(" "),
+      (buildPinyinFilterText(i) + i).split("").join(" "),
       `${i};`
     );
   }
@@ -16997,7 +16997,7 @@ function buildStaticModels(PATH) {
         vscode.CompletionItemKind.Event,
         规则.事件.玩家[i].标签,
         规则.事件.玩家[i].提示,
-        (buildPinyin(i) + i).split("").join(" "),
+        (buildPinyinFilterText(i) + i).split("").join(" "),
         `${i};`,
         规则.事件.玩家[i].顺序
       );
@@ -17037,7 +17037,7 @@ function buildStaticModels(PATH) {
       vscode.CompletionItemKind.Class,
       规则.条件[i].标签,
       details,
-      (buildPinyin(i) + i).split("").join(" "),
+      (buildPinyinFilterText(i) + i).split("").join(" "),
       insertText,
       undefined,
       command
@@ -17070,7 +17070,7 @@ function buildStaticModels(PATH) {
       vscode.CompletionItemKind.Method,
       规则.动作[i].标签,
       details,
-      (buildPinyin(i) + i).split("").join(" "),
+      (buildPinyinFilterText(i) + i).split("").join(" "),
       insertText,
       undefined,
       command
@@ -17084,6 +17084,5 @@ module.exports = {
   规则,
   buildHover,
   buildCompletion,
-  buildStaticModels,
   buildStaticModels,
 };

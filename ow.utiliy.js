@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 
-//获取扩展，全局变量，玩家变量，和子程序
+//获取动态列表：扩展，全局变量，玩家变量，子程序
 function getDynamicList(document) {
   let type = 0;
   let extensions = [];
@@ -69,52 +69,62 @@ function getDynamicList(document) {
   };
 }
 
-//获取合法前缀范围
-function getPrefixRange(document, position, pattern) {
+//获取前一个合法位置
+function getPrevValidPosition(document, pos) {
+  if (pos.character > 0) {
+    return pos.translate(0, -1);
+  } else if (pos.line > 0) {
+    return document.lineAt(pos.line - 1).range.end;
+  } else {
+    console.log(`警告：已是最前的 Valid Position`);
+    return undefined;
+  }
+}
+
+//获取后一个合法位置
+function getNextValidPosition(document, pos) {
+  if (pos.character < document.lineAt(pos.line).range.end.character) {
+    return pos.translate(0, 1);
+  } else if (pos.line < document.lineCount) {
+    return document.lineAt(pos.line + 1).range.start;
+  } else {
+    console.log(`警告：已是最后的 Valid Position`);
+    return undefined;
+  }
+}
+
+//获取前一个合法单词范围
+function getPrevValidWordRange(document, position, pattern) {
   let pos = position;
-  let range = document.getWordRangeAtPosition(pos);
-  while (!range) {
-    if (pos.character > 0) {
-      pos = pos.translate(0, -1);
-    } else if (pos.line > 0) {
-      pos = document.lineAt(pos.line - 1).range.end;
-    } else {
+  let range = document.getWordRangeAtPosition(pos, pattern);
+  do {
+    pos = getPrevValidPosition(document, range ? range.start : pos);
+    if (!pos) {
       return undefined;
     }
     range = document.getWordRangeAtPosition(pos, pattern);
-  }
+  } while (!range);
   return range;
 }
 
-//获取合法上一个词范围
-function getPrevWordRange(document, position, pattern) {
+//获取后一个合法单词范围
+function getNextValidWordRange(document, position, pattern) {
   let pos = position;
-  let range = document.getWordRangeAtPosition(pos);
-  if (range) {
-    pos = range.start;
-    if (pos.character > 0) {
-      pos = pos.translate(0, -1);
-    } else if (pos.line > 0) {
-      pos = document.lineAt(pos.line - 1).range.end;
-    } else {
-      return undefined
-    }
-    range = document.getWordRangeAtPosition(pos);
-  }
-  while (!range) {
-    if (pos.character > 0) {
-      pos = pos.translate(0, -1);
-    } else if (pos.line > 0) {
-      pos = document.lineAt(pos.line - 1).range.end;
-    } else {
+  let range = document.getWordRangeAtPosition(pos, pattern);
+  do {
+    pos = getNextValidPosition(document, range ? range.end : pos);
+    if (!pos) {
       return undefined;
     }
     range = document.getWordRangeAtPosition(pos, pattern);
-  }
+  } while (!range);
   return range;
 }
 
 module.exports = {
   getDynamicList,
-  getPrefixPatternRange: getPrevWordRange,
+  getPrevValidPosition,
+  getNextValidPosition,
+  getPrevValidWordRange,
+  getNextValidWordRange,
 };

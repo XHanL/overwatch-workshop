@@ -2,29 +2,29 @@ const vscode = require("vscode");
 const path = require("path");
 const fs = require("fs");
 
-//语言模型
+//静态数据模型
 const MODEL = require("./ow.model.js");
+
+//辅助函数集合
 const UTIL = require("./ow.utiliy.js");
 
 //主函数
 function activate(context) {
-  //buildPinYinArray();
-
-  //主路径
+  //初始化路径
   const PATH = context.extensionPath;
 
-  //静态模型
+  //初始化模型
   MODEL.buildStaticModels(PATH);
 
-  //注册能力
+  //初始化能力
   context.subscriptions.push(
-    //建议
+    //主动建议能力
     vscode.commands.registerCommand("ow.command.suggest", () => {
       vscode.commands.executeCommand("editor.action.triggerSuggest");
       vscode.commands.executeCommand("editor.action.triggerParameterHints");
     }),
 
-    //折叠
+    //折叠能力
     vscode.languages.registerFoldingRangeProvider("ow", {
       provideFoldingRanges(document) {
         let foldingRanges = [];
@@ -58,7 +58,7 @@ function activate(context) {
       },
     }),
 
-    //大纲
+    //大纲能力
     vscode.languages.registerDocumentSymbolProvider("ow", {
       provideDocumentSymbols(document) {
         let documentSymbols = [];
@@ -91,7 +91,10 @@ function activate(context) {
                   ];
                 } else if (prevLineText === "事件") {
                   const nextLine = document.lineAt(i + 1);
-                  const nextLineText = nextLine.text.trim().replace(";", "");
+                  let nextLineText = nextLine.text.trim();
+                  if ((match = nextLineText.match(/^([^;]*);.*$/))) {
+                    nextLineText = match[1];
+                  }
                   symbol = [
                     prevLineText,
                     nextLineText,
@@ -169,7 +172,7 @@ function activate(context) {
       },
     }),
 
-    //取色
+    //取色能力
     vscode.languages.registerColorProvider("ow", {
       provideDocumentColors(document) {
         let colors = [];
@@ -213,7 +216,7 @@ function activate(context) {
       },
     }),
 
-    //悬停
+    //悬停能力
     vscode.languages.registerHoverProvider("ow", {
       provideHover(document, position) {
         const hoverRange = document.getWordRangeAtPosition(position);
@@ -299,7 +302,7 @@ function activate(context) {
           //(子程序|调用子程序|开始规则)/;
           //(For 玩家变量|设置玩家变量|修改玩家变量|在索引处设置玩家变量|在索引处修改玩家变量|持续追踪玩家变量|追踪玩家变量频率|停止追踪玩家变量)/;
           const dynamicList = UTIL.getDynamicList(document);
-          const range = UTIL.getPrefixPatternRange(document, position);
+          const range = UTIL.getPrevValidWordRange(document, position);
           const text = document.getText(range);
           if (
             (match = text.match(
@@ -308,19 +311,34 @@ function activate(context) {
           ) {
             for (i in dynamicList.全局变量) {
               if (hoverText === dynamicList.全局变量[i]) {
-                return MODEL.buildHover(PATH, hoverText, ["全局变量", i]);
+                return MODEL.buildHover(
+                  PATH,
+                  hoverText,
+                  ["全局变量", i],
+                  `一个已定义的全局变量。`
+                );
               }
             }
           } else if ((match = text.match(/子程序|调用子程序|开始规则/))) {
             for (i in dynamicList.子程序) {
               if (hoverText === dynamicList.子程序[i]) {
-                return MODEL.buildHover(PATH, hoverText, ["子程序", i]);
+                return MODEL.buildHover(
+                  PATH,
+                  hoverText,
+                  ["子程序", i],
+                  `一个已定义的子程序。`
+                );
               }
             }
           } else {
             for (i in dynamicList.玩家变量) {
               if (hoverText === dynamicList.玩家变量[i]) {
-                return MODEL.buildHover(PATH, hoverText, ["玩家变量", i]);
+                return MODEL.buildHover(
+                  PATH,
+                  hoverText,
+                  ["玩家变量", i],
+                  `一个已定义的玩家变量。`
+                );
               }
             }
           }
@@ -328,14 +346,12 @@ function activate(context) {
       },
     }),
 
-    //补全
+    //补全能力
     vscode.languages.registerCompletionItemProvider(
       "ow",
       {
         provideCompletionItems(document, position, token, context) {
           try {
-            //补全范围
-            const range = getCompletionRange();
             //作用范围
             let rightBracesCount = 0;
             let semicolonCount = 0;
@@ -350,56 +366,34 @@ function activate(context) {
                   const prevLineText = prevLine.text.trim();
                   if (prevLineText === "事件") {
                     if (semicolonCount === 0) {
-                      return getStaticCompletions(MODEL.规则.事件.选项, range);
+                      return getStaticCompletions(MODEL.规则.事件.选项);
                     } else if (semicolonCount === 1) {
                       const nextLine = document.lineAt(i + 1);
                       const nextLineText = nextLine.text.trim();
                       if (nextLineText.startsWith("子程序")) {
-                        return buildSubroutineCompletions(range);
+                        return getDynamicCompletions();
                       } else {
-                        return getStaticCompletions(
-                          MODEL.规则.事件.队伍,
-                          range
-                        );
+                        return getStaticCompletions(MODEL.规则.事件.队伍);
                       }
                     } else if (semicolonCount === 2) {
-                      return getStaticCompletions(MODEL.规则.事件.玩家, range);
+                      return getStaticCompletions(MODEL.规则.事件.玩家);
                     }
                   } else if (prevLineText === "条件") {
                     let commasCount = 0;
                     let rightParenthesesCount = 0;
                     let pos = position;
                     while (pos.line > 0 || pos.character > 0) {
-                      const range = UTIL.getPrefixPatternRange(
+                      const range = UTIL.getPrevValidWordRange(
                         document,
                         pos,
-                        /\{|\[|;|\(|\)|,|./
+                        /[\{\}\[\]\(\)\;\,\.]/
                       );
                       const symbol = document.getText(range);
                       console.log(symbol);
                       if (symbol == "{" || symbol == "[" || symbol == ";") {
                         return getStaticCompletions(MODEL.规则.条件);
                       } else if (symbol == "(") {
-                        if (rightParenthesesCount > 0) {
-                          rightParenthesesCount--;
-                        } else {
-                          pos = range.start;
-                          if (pos.character > 0) {
-                            pos = pos.translate(0, -1);
-                          } else if (pos.line > 0) {
-                            pos = document.lineAt(pos.line - 1).range.end;
-                          } else {
-                            return undefined;
-                          }
-                          const nameRange = UTIL.getPrefixPatternRange(
-                            document,
-                            pos
-                          );
-                          const nameText = document.getText(nameRange);
-                          if (MODEL.规则.条件.hasOwnProperty(nameText)) {
-                            return new vscode.CompletionItem(nameText);
-                          }
-                        }
+                        return new vscode.CompletionItem("参数");
                       } else if (symbol == ")") {
                         rightParenthesesCount++;
                       } else if (symbol == ",") {
@@ -409,19 +403,16 @@ function activate(context) {
                       } else if (symbol == ".") {
                         return new vscode.CompletionItem("变量");
                       }
-                      pos = range.start;
-                      if (pos.character > 0) {
-                        pos = pos.translate(0, -1);
-                      } else if (pos.line > 0) {
-                        pos = document.lineAt(pos.line - 1).range.end;
-                      } else {
-                        return undefined;
-                      }
+                      pos = UTIL.getPrevValidPosition(
+                        document,
+                        range ? range.start : pos
+                      );
                     }
-                    return getStaticCompletions(MODEL.规则.条件, range);
+
+                    return getStaticCompletions(MODEL.规则.条件);
                   } else if (prevLineText === "动作") {
                     // 设置玩家变量 => (条件 = 条件);
-                    return getStaticCompletions(MODEL.规则.动作, range);
+                    return getStaticCompletions(MODEL.规则.动作);
                   }
                 }
               } else if (lineText.endsWith("}")) {
@@ -436,40 +427,63 @@ function activate(context) {
             item.insertText = "";
             return [item];
 
-            function getCompletionRange() {
-              for (let i = position.character; i >= 0; i--) {
-                const range = document.getWordRangeAtPosition(
-                  position.with(undefined, i)
-                );
-                if (range) {
-                  return range.with(undefined, position);
-                }
-              }
-              return undefined;
-            }
-
-            function buildSubroutineCompletions(range) {
-              let completionItems = [];
+            //获取动态补全列表：全局变量，玩家变量，子程序
+            function getDynamicCompletions(type, range) {
               const dynamicList = UTIL.getDynamicList(document);
-              console.log(dynamicList);
-              for (const i in dynamicList.子程序) {
-                let item = MODEL.buildCompletion(
-                  PATH,
-                  i.padStart(3, "0") + ": " + dynamicList.子程序[i],
-                  vscode.CompletionItemKind.Function,
-                  ["子程序", i],
-                  `一个预定义的子程序。`,
-                  (i.padStart(3, "0") + dynamicList.子程序[i])
-                    .split("")
-                    .join(" "),
-                  `${dynamicList.子程序[i]};`
-                );
-                item.range = range;
-                completionItems.push(item);
+              let completionItems = [];
+              if (type == "全局变量") {
+                for (const i in dynamicList.全局变量) {
+                  let item = MODEL.buildCompletion(
+                    PATH,
+                    i.padStart(3, "0") + ": " + dynamicList.全局变量[i],
+                    vscode.CompletionItemKind.Function,
+                    ["全局变量", i],
+                    `一个已定义的全局变量。`,
+                    (i.padStart(3, "0") + dynamicList.全局变量[i])
+                      .split("")
+                      .join(" "),
+                    `${dynamicList.全局变量[i]};`
+                  );
+                  item.range = range;
+                  completionItems.push(item);
+                }
+              } else if (type == "玩家变量") {
+                for (const i in dynamicList.玩家变量) {
+                  let item = MODEL.buildCompletion(
+                    PATH,
+                    i.padStart(3, "0") + ": " + dynamicList.玩家变量[i],
+                    vscode.CompletionItemKind.Function,
+                    ["玩家变量", i],
+                    `一个已定义的玩家变量。`,
+                    (i.padStart(3, "0") + dynamicList.玩家变量[i])
+                      .split("")
+                      .join(" "),
+                    `${dynamicList.玩家变量[i]};`
+                  );
+                  item.range = range;
+                  completionItems.push(item);
+                }
+              } else if (type == "子程序") {
+                for (const i in dynamicList.子程序) {
+                  let item = MODEL.buildCompletion(
+                    PATH,
+                    i.padStart(3, "0") + ": " + dynamicList.子程序[i],
+                    vscode.CompletionItemKind.Function,
+                    ["子程序", i],
+                    `一个已定义的子程序。`,
+                    (i.padStart(3, "0") + dynamicList.子程序[i])
+                      .split("")
+                      .join(" "),
+                    `${dynamicList.子程序[i]};`
+                  );
+                  item.range = range;
+                  completionItems.push(item);
+                }
               }
               return completionItems;
             }
 
+            //获取静态补全列表：条件，动作，常量
             function getStaticCompletions(object, range) {
               let completions = [];
               for (const p in object) {
@@ -499,7 +513,7 @@ function activate(context) {
       " "
     ),
 
-    //参数
+    //参数提示能力
     vscode.languages.registerSignatureHelpProvider(
       "ow",
       {
@@ -510,7 +524,7 @@ function activate(context) {
       " "
     ),
 
-    //手册
+    //手册面板能力
     vscode.window.registerWebviewViewProvider("ow.view.manual", {
       resolveWebviewView(webviewView) {
         const theme =
@@ -3942,7 +3956,7 @@ module.exports = {
   activate,
 };
 
-//工具：正则排序
+//调试工具：正则排序
 function sortAndFilterChineseKeyword(s) {
   const str = s.split("|");
   const set = new Set(str);
@@ -3950,7 +3964,7 @@ function sortAndFilterChineseKeyword(s) {
   console.log(arr.join("|"));
 }
 
-//工具：正则字符串
+//调试工具：正则字符串
 function getModelString() {
   let str = "";
   for (i in MODEL.规则.动作) {
@@ -3959,7 +3973,7 @@ function getModelString() {
   sortAndFilterChineseKeyword(str.slice(1));
 }
 
-//工具：对象转数组
+//调试工具：对象转数组
 function convertObjectToArray() {
   try {
     const input = MODEL.规则.条件;
@@ -3993,7 +4007,7 @@ function convertObjectToArray() {
   }
 }
 
-//工具：多音字数组 (npm install pinyinlite)
+//调试工具：多音字数组 (npm install pinyinlite)
 function buildPinYinArray() {
   try {
     const pinyinlite = require("pinyinlite");
