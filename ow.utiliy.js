@@ -1,6 +1,21 @@
 const vscode = require("vscode");
 
-//获取动态列表：扩展，全局变量，玩家变量，子程序
+//获取动态类型
+function getDynamicType(text) {
+  if (
+    (match = text.match(
+      /全局|For 全局变量|设置全局变量|修改全局变量|在索引处设置全局变量|在索引处修改全局变量|持续追踪全局变量|追踪全局变量频率|停止追踪全局变量/
+    ))
+  ) {
+    return "全局变量";
+  } else if ((match = text.match(/子程序|调用子程序|开始规则/))) {
+    return "子程序";
+  } else {
+    return "玩家变量";
+  }
+}
+
+//获取动态列表：[0]扩展，[1]全局变量，[2]玩家变量，[3]子程序
 function getDynamicList(document) {
   let type = 0;
   let extensions = [];
@@ -94,34 +109,49 @@ function getNextValidPosition(document, pos) {
 }
 
 //获取前一个合法单词范围
-function getPrevValidWordRange(document, position, pattern) {
+function getPrevValidWordRange(document, position, pattern, includingSelf) {
   let pos = position;
   let range = document.getWordRangeAtPosition(pos, pattern);
-  do {
+  if (!includingSelf) {
     pos = getPrevValidPosition(document, range ? range.start : pos);
     if (!pos) {
       return undefined;
     }
     range = document.getWordRangeAtPosition(pos, pattern);
-  } while (!range);
+  }
+  while (!range) {
+    pos = getPrevValidPosition(document, range ? range.start : pos);
+    if (!pos) {
+      return undefined;
+    }
+    range = document.getWordRangeAtPosition(pos, pattern);
+  }
   return range;
 }
 
 //获取后一个合法单词范围
-function getNextValidWordRange(document, position, pattern) {
+function getNextValidWordRange(document, position, pattern, includingSelf) {
   let pos = position;
   let range = document.getWordRangeAtPosition(pos, pattern);
-  do {
+  if (!includingSelf) {
     pos = getNextValidPosition(document, range ? range.end : pos);
     if (!pos) {
       return undefined;
     }
     range = document.getWordRangeAtPosition(pos, pattern);
-  } while (!range);
+  }
+  while (!range) {
+    pos = getNextValidPosition(document, range ? range.end : pos);
+    if (!pos) {
+      return undefined;
+    }
+    range = document.getWordRangeAtPosition(pos, pattern);
+  }
   return range;
 }
 
 module.exports = {
+  getDynamicType,
   getDynamicList,
   getPrevValidPosition,
   getNextValidPosition,
