@@ -686,7 +686,126 @@ function activate(context) {
     vscode.languages.registerSignatureHelpProvider(
       "ow",
       {
-        provideSignatureHelp(document, position, token, context) {},
+        provideSignatureHelp(document, position, token, context) {
+          try {
+            // TODO
+            const offset = document.offsetAt(position) - 1;
+            const block = getBlock(document, offset);
+            if (block[0] == "条件" || block[0] == "动作") {
+              let funct = getFunction(document, offset);
+              for (i in RULES.ACTION) {
+                if (i == funct[0]) {
+                  const signHelp = new vscode.SignatureHelp();
+                  const signInfo = new vscode.SignatureInformation();
+                  let name = i;
+                  let n = 0;
+                  if (RULES.ACTION[i].hasOwnProperty("参数")) {
+                    name += "(";
+                    for (j in RULES.ACTION[i].参数) {
+                      let param = new vscode.ParameterInformation();
+                      param.label = [name.length, name.length + j.length];
+                      //构造Markdown
+                      let info = new vscode.MarkdownString();
+                      info.isTrusted = true;
+                      info.supportHtml = true;
+                      info.supportThemeIcons = true;
+                      info.appendMarkdown(
+                        `***<span style="color:#0ac;">⬘</span>&nbsp;参数&nbsp;:&nbsp;${j}***\n\n`
+                      );
+                      info.appendMarkdown(
+                        `\`${funct[1]}\` \`${RULES.ACTION[i].参数[j].类型}\`&nbsp;\n\n`
+                      );
+                      info.appendMarkdown(
+                        `${RULES.ACTION[i].参数[j].提示}&nbsp;\n\n`
+                      );
+                      param.documentation = info;
+                      signInfo.parameters.push(param);
+                      name += j + ", ";
+                    }
+                    name = name.slice(0, name.length - 2) + ")";
+                  }
+                  signInfo.label = name;
+
+                  let info = new vscode.MarkdownString();
+                  info.isTrusted = true;
+                  info.supportHtml = true;
+                  info.supportThemeIcons = true;
+                  info.appendMarkdown(
+                    `\n\n***<span style="color:#c0c;">⬘</span>&nbsp;方法&nbsp;:&nbsp;${i}***\n\n`
+                  );
+                  //标签
+                  for (j in RULES.ACTION[i].标签) {
+                    info.appendMarkdown(`\`${RULES.ACTION[i].标签[j]}\`&nbsp;`);
+                  }
+                  //提示
+                  info.appendMarkdown(`\n\n${RULES.ACTION[i].提示}`);
+
+                  signInfo.documentation = info;
+                  signHelp.signatures = [signInfo];
+                  signInfo.activeParameter = funct[1];
+                  return signHelp;
+                }
+              }
+              for (i in RULES.CONDITION) {
+                if (i == funct[0]) {
+                  const signHelp = new vscode.SignatureHelp();
+                  const signInfo = new vscode.SignatureInformation();
+                  let name = i;
+                  if (RULES.CONDITION[i].hasOwnProperty("参数")) {
+                    name += "(";
+                    for (j in RULES.CONDITION[i].参数) {
+                      let param = new vscode.ParameterInformation();
+                      param.label = [name.length, name.length + j.length];
+
+                      //构造Markdown
+                      let info = new vscode.MarkdownString();
+                      info.isTrusted = true;
+                      info.supportHtml = true;
+                      info.supportThemeIcons = true;
+                      info.appendMarkdown(
+                        `***<span style="color:#0ac;">⬘</span>&nbsp;参数&nbsp;:&nbsp;${j}***\n\n`
+                      );
+                      info.appendMarkdown(
+                        `\`${funct[1]}\` \`${RULES.CONDITION[i].参数[j].类型}\`&nbsp;\n\n`
+                      );
+                      info.appendMarkdown(
+                        `${RULES.CONDITION[i].参数[j].提示}&nbsp;\n\n`
+                      );
+                      param.documentation = info;
+                      signInfo.parameters.push(param);
+                      name += j + ", ";
+                    }
+                    name = name.slice(0, name.length - 2) + ")";
+                  }
+                  signInfo.label = name;
+
+                  let info = new vscode.MarkdownString();
+                  info.isTrusted = true;
+                  info.supportHtml = true;
+                  info.supportThemeIcons = true;
+                  info.appendMarkdown(
+                    `\n\n***<span style="color:#c0c;">⬘</span>&nbsp;方法&nbsp;:&nbsp;${i}***\n\n`
+                  );
+                  //标签
+                  for (j in RULES.CONDITION[i].标签) {
+                    info.appendMarkdown(
+                      `\`${RULES.CONDITION[i].标签[j]}\`&nbsp;`
+                    );
+                  }
+                  //提示
+                  info.appendMarkdown(`\n\n${RULES.CONDITION[i].提示}`);
+
+                  signInfo.documentation = info;
+                  signHelp.signatures = [signInfo];
+                  signInfo.activeParameter = funct[1];
+                  return signHelp;
+                }
+              }
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        },
       },
       "(",
       ",",
