@@ -261,11 +261,13 @@ function activate(context) {
                   return MODEL.规则.条件[hoverText].悬停;
                 }
                 for (i in MODEL.常量) {
-                  if (MODEL.常量[i].hasOwnProperty(hoverText)) {
-                    if (Array.isArray(MODEL.常量[i][hoverText].悬停)) {
-                      return MODEL.常量[i][hoverText].悬停[theme];
+                  for (j in MODEL.常量[i]) {
+                    if (MODEL.常量[i][j].名称 == hoverText) {
+                      if (Array.isArray(MODEL.常量[i][j].悬停)) {
+                        return MODEL.常量[i][j].悬停[theme];
+                      }
+                      return MODEL.常量[i][j].悬停;
                     }
-                    return MODEL.常量[i][hoverText].悬停;
                   }
                 }
                 if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
@@ -281,11 +283,13 @@ function activate(context) {
                   return MODEL.规则.条件[hoverText].悬停;
                 }
                 for (i in MODEL.常量) {
-                  if (MODEL.常量[i].hasOwnProperty(hoverText)) {
-                    if (Array.isArray(MODEL.常量[i][hoverText].悬停)) {
-                      return MODEL.常量[i][hoverText].悬停[theme];
+                  for (j in MODEL.常量[i]) {
+                    if (MODEL.常量[i][j].名称 == hoverText) {
+                      if (Array.isArray(MODEL.常量[i][j].悬停)) {
+                        return MODEL.常量[i][j].悬停[theme];
+                      }
+                      return MODEL.常量[i][j].悬停;
                     }
-                    return MODEL.常量[i][hoverText].悬停;
                   }
                 }
                 if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
@@ -485,11 +489,9 @@ function activate(context) {
                   if (rightParenthesesCount > 0) {
                     rightParenthesesCount--;
                   } else {
-
                     const nameRange = UTIL.getPrevValidWordRange(document, pos);
                     const name = document.getText(nameRange);
                     if (MODEL.规则.条件.hasOwnProperty(name)) {
-                      
                       return getStaticCompletions(
                         MODEL.规则.条件[name].参数[commasCount].选项
                       );
