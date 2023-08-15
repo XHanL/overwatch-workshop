@@ -3569,10 +3569,7 @@ let 常量 = {
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         天使冲击枪: {
-          图标: [
-            "images/ow/hero/support/mercy/weapon2.png",
-            "images/ow/hero/support/mercy/gray/weapon2.png",
-          ],
+          图标: "images/ow/hero/support/mercy/weapon2.png",
           绑定: ["主要攻击模式"],
         },
         女武神: {
