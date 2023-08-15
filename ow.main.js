@@ -309,17 +309,18 @@ function activate(context) {
             : 1;
         const scope = UTIL.getScope(document, position);
         if (scope.name === "事件") {
-          if (MODEL.规则.事件.选项.hasOwnProperty(hoverText)) {
-            return MODEL.规则.事件.选项[hoverText].悬停;
+          const event = MODEL.规则.事件;
+          if (event.选项.hasOwnProperty(hoverText)) {
+            return event.选项[hoverText].悬停;
           }
-          if (MODEL.规则.事件.队伍.hasOwnProperty(hoverText)) {
-            return MODEL.规则.事件.队伍[hoverText].悬停;
+          if (event.队伍.hasOwnProperty(hoverText)) {
+            return event.队伍[hoverText].悬停;
           }
-          if (MODEL.规则.事件.玩家.hasOwnProperty(hoverText)) {
-            if (Array.isArray(MODEL.规则.事件.玩家[hoverText].悬停)) {
-              return MODEL.规则.事件.玩家[hoverText].悬停[theme];
+          if (event.玩家.hasOwnProperty(hoverText)) {
+            if (Array.isArray(event.玩家[hoverText].悬停)) {
+              return event.玩家[hoverText].悬停[theme];
             }
-            return MODEL.规则.事件.玩家[hoverText].悬停;
+            return event.玩家[hoverText].悬停;
           }
           return matchDynamicHover();
         } else if (scope.name === "条件") {
@@ -444,12 +445,11 @@ function activate(context) {
                 if (entry.name == "数组") {
                   return getStaticCompletions(MODEL.规则.条件);
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  const option =
-                    MODEL.规则.条件[entry.name].参数[entry.index].选项;
-                  if (option == "条件") {
+                  const param = MODEL.规则.条件[entry.name].参数[entry.index];
+                  if (param.类型 == "条件") {
                     return getStaticCompletions(MODEL.规则.条件);
-                  } else if (option instanceof Object) {
-                    return getStaticCompletions(option);
+                  } else if (param.hasOwnProperty("选项")) {
+                    return getStaticCompletions(param.选项);
                   }
                 }
               } else if (entry == "条件") {
@@ -469,22 +469,20 @@ function activate(context) {
                 if (entry.name == "数组") {
                   return getStaticCompletions(MODEL.规则.条件);
                 } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
-                  const option =
-                    MODEL.规则.动作[entry.name].参数[entry.index].选项;
-                  if (option == "条件") {
+                  const param = MODEL.规则.动作[entry.name].参数[entry.index];
+                  if (param.类型 == "条件") {
                     return getStaticCompletions(MODEL.规则.条件);
-                  } else if (option instanceof Object) {
-                    return getStaticCompletions(option);
-                  } else if (option.match(/全局变量|玩家变量|子程序/)) {
-                    return getDynamicCompletions(option);
+                  } else if (param.类型.match(/全局变量|玩家变量|子程序/)) {
+                    return getDynamicCompletions(param.类型);
+                  } else if (param.hasOwnProperty("选项")) {
+                    return getStaticCompletions(param.选项);
                   }
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  const option =
-                    MODEL.规则.条件[entry.name].参数[entry.index].选项;
-                  if (option == "条件") {
+                  const param = MODEL.规则.条件[entry.name].参数[entry.index];
+                  if (param.类型 == "条件") {
                     return getStaticCompletions(MODEL.规则.条件);
-                  } else if (option instanceof Object) {
-                    return getStaticCompletions(option);
+                  } else if (param.hasOwnProperty("选项")) {
+                    return getStaticCompletions(param.选项);
                   }
                 }
               } else if (entry == "动作") {
@@ -496,7 +494,7 @@ function activate(context) {
               }
             }
 
-            //获取动态补全列表：全局变量，玩家变量，子程序
+            //获取动态补全列表：全局变量/玩家变量/子程序
             function getDynamicCompletions(type) {
               const dynamicList = UTIL.getDynamicList(document);
               let completionItems = [];
@@ -549,7 +547,7 @@ function activate(context) {
               return completionItems;
             }
 
-            //获取静态补全列表：条件，动作，常量
+            //获取静态补全列表：条件/动作/常量
             function getStaticCompletions(object) {
               let completions = [];
               for (const p in object) {
@@ -585,70 +583,43 @@ function activate(context) {
           try {
             const scope = UTIL.getScope(document, position);
             if (scope.name === "条件") {
-              return getConditionHelp();
+              return getConditionSignature();
             } else if (scope.name === "动作") {
-              return getActionHelp();
+              return getActionSignature();
             }
 
-            //获取条件参数帮助
-            function getConditionHelp() {
+            //获取条件参数签名
+            function getConditionSignature() {
               const entry = UTIL.getEntry(document, position, scope);
               if (!entry) {
                 return;
               }
               if (entry instanceof Object) {
                 if (entry.name == "数组") {
-                  //return getStaticCompletions(MODEL.规则.条件);
+                  return;
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  const option =
-                    MODEL.规则.条件[entry.name].参数[entry.index].选项;
-                  if (option == "条件") {
-                    //return getStaticCompletions(MODEL.规则.条件);
-                  } else if (option instanceof Object) {
-                    //return getStaticCompletions(option);
-                  }
+                  const param = MODEL.规则.条件[entry.name].参数[entry.index];
+                  console.log(param);
                 }
-              } else if (entry == "条件") {
-                //return getStaticCompletions(MODEL.规则.条件);
-              } else if (entry.match(/全局变量|玩家变量|子程序/)) {
-                //return getDynamicCompletions(entry);
               }
             }
 
-            //获取动作参数帮助
-            function getActionHelp() {
+            //获取动作参数签名
+            function getActionSignature() {
               const entry = UTIL.getEntry(document, position, scope);
               if (!entry) {
                 return;
               }
               if (entry instanceof Object) {
                 if (entry.name == "数组") {
-                  //return getStaticCompletions(MODEL.规则.条件);
+                  return;
                 } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
-                  const option =
-                    MODEL.规则.动作[entry.name].参数[entry.index].选项;
-                  if (option == "条件") {
-                    //return getStaticCompletions(MODEL.规则.条件);
-                  } else if (option instanceof Object) {
-                    //return getStaticCompletions(option);
-                  } else if (option.match(/全局变量|玩家变量|子程序/)) {
-                    //return getDynamicCompletions(option);
-                  }
+                  const param = MODEL.规则.动作[entry.name].参数[entry.index];
+                  console.log(param);
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  const option =
-                    MODEL.规则.条件[entry.name].参数[entry.index].选项;
-                  if (option == "条件") {
-                    //return getStaticCompletions(MODEL.规则.条件);
-                  } else if (option instanceof Object) {
-                    //return getStaticCompletions(option);
-                  }
+                  const param = MODEL.规则.条件[entry.name].参数[entry.index];
+                  console.log(param);
                 }
-              } else if (entry == "动作") {
-                //return getStaticCompletions(MODEL.规则.动作);
-              } else if (entry == "条件") {
-                //return getStaticCompletions(MODEL.规则.条件);
-              } else if (entry.match(/全局变量|玩家变量|子程序/)) {
-                //return getDynamicCompletions(entry);
               }
             }
 
