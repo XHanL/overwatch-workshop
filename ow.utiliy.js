@@ -188,6 +188,7 @@ function getScope(document, position) {
   console.log(`警告：getScope 性能问题`);
 }
 
+//获取当前条目
 function getEntry(document, position, scope) {
   const text = document.getText();
   const offset = document.offsetAt(position);
