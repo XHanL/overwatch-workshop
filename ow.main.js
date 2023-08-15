@@ -529,7 +529,7 @@ function activate(context) {
                 }
               } else if (entry == "条件") {
                 return buildStaticCompletions(MODEL.规则.条件);
-              } else if (entry.match(/^(全局变量|玩家变量|子程序)$/)) {
+              } else if (entry.match(/^全局变量|玩家变量|子程序$/)) {
                 return buildDynamicCompletions(entry);
               }
             }
@@ -549,7 +549,7 @@ function activate(context) {
                     return buildStaticCompletions(MODEL.规则.条件);
                   } else if (param.hasOwnProperty("选项")) {
                     return buildStaticCompletions(param.选项);
-                  } else if (param.类型.match(/^(全局变量|玩家变量|子程序)$/)) {
+                  } else if (param.类型.match(/^全局变量|玩家变量|子程序$/)) {
                     return buildDynamicCompletions(param.类型);
                   }
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
@@ -566,7 +566,7 @@ function activate(context) {
                 );
               } else if (entry == "条件") {
                 return buildStaticCompletions(MODEL.规则.条件);
-              } else if (entry.match(/^(全局变量|玩家变量|子程序)$/)) {
+              } else if (entry.match(/^全局变量|玩家变量|子程序$/)) {
                 return buildDynamicCompletions(entry);
               }
             }
