@@ -150,6 +150,81 @@ function getNextValidWordRange(document, position, pattern, includingSelf) {
   return range;
 }
 
+//获取当前作用域
+function getScope(document, position) {
+  let rightBracesCount = 0;
+  let semicolonCount = 0;
+  const text = document.getText();
+  const offset = document.offsetAt(position);
+  for (let i = offset; i >= 0; i--) {
+    const symbol = text[i];
+    if (symbol == "{") {
+      if (rightBracesCount > 0) {
+        rightBracesCount--;
+      } else {
+        const pos = document.positionAt(i);
+        const prevRange = getPrevValidWordRange(document, pos);
+        const prevText = document.getText(prevRange);
+        const nextRange = getNextValidWordRange(document, pos);
+        const nextText = document.getText(nextRange);
+        return {
+          name: prevText,
+          first: nextText,
+          index: semicolonCount,
+        };
+      }
+    } else if (symbol == "}") {
+      rightBracesCount++;
+    } else if (symbol == ";") {
+      semicolonCount++;
+    }
+  }
+  console.log(`警告：etScope 性能问题`);
+}
+
+function getEntry(document, position, scope) {
+  const text = document.getText();
+  const offset = document.offsetAt(position);
+  let commasCount = 0;
+  let rightParenthesesCount = 0;
+  for (let i = offset; i >= 0; i--) {
+    const symbol = text[i];
+    if (symbol == ".") {
+      const pos = document.positionAt(i);
+      const range = getPrevValidWordRange(document, pos);
+      const text = document.getText(range);
+      return getDynamicType(text);
+    } else if (symbol == "{" || symbol == "[" || symbol == ";") {
+      return scope.name;
+    } else if (symbol == "[") {
+      return "条件";
+    } else if (symbol == "(") {
+      if (rightParenthesesCount < 0) {
+        return "条件";
+      } else if (rightParenthesesCount == 0) {
+        const pos = document.positionAt(i);
+        const range = getPrevValidWordRange(document, pos, undefined, true);
+        const text = document.getText(range);
+        return {
+          name: text,
+          index: commasCount,
+        };
+      } else {
+        rightParenthesesCount--;
+      }
+    } else if (symbol == ")") {
+      if (i != offset) {
+        rightParenthesesCount++;
+      }
+    } else if (symbol == ",") {
+      if (i != offset && rightParenthesesCount == 0) {
+        commasCount++;
+      }
+    }
+  }
+  console.log(`警告：getEntry 性能问题`);
+}
+
 module.exports = {
   getDynamicType,
   getDynamicList,
@@ -157,4 +232,6 @@ module.exports = {
   getNextValidPosition,
   getPrevValidWordRange,
   getNextValidWordRange,
+  getScope,
+  getEntry,
 };

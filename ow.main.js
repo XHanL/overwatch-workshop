@@ -303,85 +303,58 @@ function activate(context) {
           return;
         }
         const hoverText = document.getText(hoverRange);
-        let rightBracesCount = 0;
-        for (let i = position.line; i >= 0; i--) {
-          const line = document.lineAt(i);
-          const lineText = line.text.trim();
-          if (lineText.startsWith("{")) {
-            if (rightBracesCount > 0) {
-              rightBracesCount--;
-            } else {
-              const prevLine = document.lineAt(i - 1);
-              const prevLineText = prevLine.text.trim();
-              const theme =
-                vscode.window.activeColorTheme.kind ===
-                vscode.ColorThemeKind.Dark
-                  ? 0
-                  : 1;
-              if (prevLineText === "事件") {
-                if (MODEL.规则.事件.选项.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.事件.选项[hoverText].悬停;
+        const theme =
+          vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark
+            ? 0
+            : 1;
+        const scope = UTIL.getScope(document, position);
+        if (scope.name === "事件") {
+          if (MODEL.规则.事件.选项.hasOwnProperty(hoverText)) {
+            return MODEL.规则.事件.选项[hoverText].悬停;
+          }
+          if (MODEL.规则.事件.队伍.hasOwnProperty(hoverText)) {
+            return MODEL.规则.事件.队伍[hoverText].悬停;
+          }
+          if (MODEL.规则.事件.玩家.hasOwnProperty(hoverText)) {
+            if (Array.isArray(MODEL.规则.事件.玩家[hoverText].悬停)) {
+              return MODEL.规则.事件.玩家[hoverText].悬停[theme];
+            }
+            return MODEL.规则.事件.玩家[hoverText].悬停;
+          }
+          return matchDynamicHover();
+        } else if (scope.name === "条件") {
+          if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
+            return MODEL.规则.条件[hoverText].悬停;
+          }
+          for (i in MODEL.常量) {
+            for (j in MODEL.常量[i]) {
+              if (MODEL.常量[i][j].名称 == hoverText) {
+                if (Array.isArray(MODEL.常量[i][j].悬停)) {
+                  return MODEL.常量[i][j].悬停[theme];
                 }
-                if (MODEL.规则.事件.队伍.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.事件.队伍[hoverText].悬停;
-                }
-                if (MODEL.规则.事件.玩家.hasOwnProperty(hoverText)) {
-                  if (Array.isArray(MODEL.规则.事件.玩家[hoverText].悬停)) {
-                    return MODEL.规则.事件.玩家[hoverText].悬停[theme];
-                  }
-                  return MODEL.规则.事件.玩家[hoverText].悬停;
-                }
-                if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
-                  return getDynamicHover();
-                }
-              } else if (prevLineText === "条件") {
-                if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.条件[hoverText].悬停;
-                }
-                for (i in MODEL.常量) {
-                  for (j in MODEL.常量[i]) {
-                    if (MODEL.常量[i][j].名称 == hoverText) {
-                      if (Array.isArray(MODEL.常量[i][j].悬停)) {
-                        return MODEL.常量[i][j].悬停[theme];
-                      }
-                      return MODEL.常量[i][j].悬停;
-                    }
-                  }
-                }
-                if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
-                  const range = UTIL.getPrevValidWordRange(document, position);
-                  const text = document.getText(range);
-                  return getDynamicHover(UTIL.getDynamicType(text));
-                }
-              } else if (prevLineText === "动作") {
-                if (MODEL.规则.动作.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.动作[hoverText].悬停;
-                }
-                if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
-                  return MODEL.规则.条件[hoverText].悬停;
-                }
-                for (i in MODEL.常量) {
-                  for (j in MODEL.常量[i]) {
-                    if (MODEL.常量[i][j].名称 == hoverText) {
-                      if (Array.isArray(MODEL.常量[i][j].悬停)) {
-                        return MODEL.常量[i][j].悬停[theme];
-                      }
-                      return MODEL.常量[i][j].悬停;
-                    }
-                  }
-                }
-                if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
-                  const range = UTIL.getPrevValidWordRange(document, position);
-                  const text = document.getText(range);
-                  return getDynamicHover(UTIL.getDynamicType(text));
-                }
-              } else {
-                return;
+                return MODEL.常量[i][j].悬停;
               }
             }
-          } else if (lineText.endsWith("}")) {
-            rightBracesCount++;
           }
+          return matchDynamicHover();
+        } else if (scope.name === "动作") {
+          if (MODEL.规则.动作.hasOwnProperty(hoverText)) {
+            return MODEL.规则.动作[hoverText].悬停;
+          }
+          if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
+            return MODEL.规则.条件[hoverText].悬停;
+          }
+          for (i in MODEL.常量) {
+            for (j in MODEL.常量[i]) {
+              if (MODEL.常量[i][j].名称 == hoverText) {
+                if (Array.isArray(MODEL.常量[i][j].悬停)) {
+                  return MODEL.常量[i][j].悬停[theme];
+                }
+                return MODEL.常量[i][j].悬停;
+              }
+            }
+          }
+          return matchDynamicHover();
         }
 
         function getDynamicHover(type) {
@@ -421,6 +394,14 @@ function activate(context) {
             }
           }
         }
+
+        function matchDynamicHover() {
+          if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
+            const range = UTIL.getPrevValidWordRange(document, position);
+            const text = document.getText(range);
+            return getDynamicHover(UTIL.getDynamicType(text));
+          }
+        }
       },
     }),
 
@@ -430,51 +411,90 @@ function activate(context) {
       {
         provideCompletionItems(document, position, token, context) {
           try {
-            let rightBracesCount = 0;
-            let semicolonCount = 0;
-            for (let i = position.line; i >= 0; i--) {
-              const line = document.lineAt(i);
-              const lineText = line.text.trim();
-              if (lineText.startsWith("{")) {
-                if (rightBracesCount > 0) {
-                  rightBracesCount--;
-                } else {
-                  const prevLine = document.lineAt(i - 1);
-                  const prevLineText = prevLine.text.trim();
-                  if (prevLineText === "事件") {
-                    if (semicolonCount === 0) {
-                      return getStaticCompletions(MODEL.规则.事件.选项);
-                    } else if (semicolonCount === 1) {
-                      if (
-                        document
-                          .lineAt(i + 1)
-                          .text.trim()
-                          .startsWith("子程序")
-                      ) {
-                        return getDynamicCompletions("子程序");
-                      } else {
-                        return getStaticCompletions(MODEL.规则.事件.队伍);
-                      }
-                    } else if (semicolonCount === 2) {
-                      return getStaticCompletions(MODEL.规则.事件.玩家);
-                    }
-                  } else if (prevLineText === "条件") {
-                    return getConditionCompletions();
-                  } else if (prevLineText === "动作") {
-                    return getActionCompletions(MODEL.规则.动作);
-                  }
+            const scope = UTIL.getScope(document, position);
+            if (scope.name === "事件") {
+              return getEventCompletions(scope.index, scope.first);
+            } else if (scope.name === "条件") {
+              return getConditionCompletions();
+            } else if (scope.name === "动作") {
+              return getActionCompletions();
+            }
+
+            //获取事件补全
+            function getEventCompletions(index, first) {
+              if (index === 0) {
+                return getStaticCompletions(MODEL.规则.事件.选项);
+              } else if (index === 1) {
+                if (first.startsWith("子程序")) {
+                  return getDynamicCompletions("子程序");
                 }
-              } else if (lineText.endsWith("}")) {
-                rightBracesCount++;
-              } else if (lineText.endsWith(";")) {
-                semicolonCount++;
+                return getStaticCompletions(MODEL.规则.事件.队伍);
+              } else if (index === 2) {
+                return getStaticCompletions(MODEL.规则.事件.玩家);
               }
             }
 
-            //调试：无建议
-            let item = new vscode.CompletionItem("无建议");
-            item.insertText = "";
-            return [item];
+            //获取条件补全
+            function getConditionCompletions() {
+              const entry = UTIL.getEntry(document, position, scope);
+              if (!entry) {
+                return;
+              }
+              if (entry instanceof Object) {
+                if (entry.name == "数组") {
+                  return getStaticCompletions(MODEL.规则.条件);
+                } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
+                  const option =
+                    MODEL.规则.条件[entry.name].参数[entry.index].选项;
+                  if (option == "条件") {
+                    return getStaticCompletions(MODEL.规则.条件);
+                  } else if (option instanceof Object) {
+                    return getStaticCompletions(option);
+                  }
+                }
+              } else if (entry == "条件") {
+                return getStaticCompletions(MODEL.规则.条件);
+              } else if (entry.match(/全局变量|玩家变量|子程序/)) {
+                return getDynamicCompletions(entry);
+              }
+            }
+
+            //获取动作补全
+            function getActionCompletions() {
+              const entry = UTIL.getEntry(document, position, scope);
+              if (!entry) {
+                return;
+              }
+              if (entry instanceof Object) {
+                if (entry.name == "数组") {
+                  return getStaticCompletions(MODEL.规则.条件);
+                } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
+                  const option =
+                    MODEL.规则.动作[entry.name].参数[entry.index].选项;
+                  if (option == "条件") {
+                    return getStaticCompletions(MODEL.规则.条件);
+                  } else if (option instanceof Object) {
+                    return getStaticCompletions(option);
+                  } else if (option.match(/全局变量|玩家变量|子程序/)) {
+                    return getDynamicCompletions(option);
+                  }
+                } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
+                  const option =
+                    MODEL.规则.条件[entry.name].参数[entry.index].选项;
+                  if (option == "条件") {
+                    return getStaticCompletions(MODEL.规则.条件);
+                  } else if (option instanceof Object) {
+                    return getStaticCompletions(option);
+                  }
+                }
+              } else if (entry == "动作") {
+                return getStaticCompletions(MODEL.规则.动作);
+              } else if (entry == "条件") {
+                return getStaticCompletions(MODEL.规则.条件);
+              } else if (entry.match(/全局变量|玩家变量|子程序/)) {
+                return getDynamicCompletions(entry);
+              }
+            }
 
             //获取动态补全列表：全局变量，玩家变量，子程序
             function getDynamicCompletions(type) {
@@ -546,131 +566,6 @@ function activate(context) {
               }
               return completions;
             }
-
-            //获取条件补全
-            function getConditionCompletions() {
-              const text = document.getText();
-              const offset = document.offsetAt(position);
-              let commasCount = 0;
-              let rightParenthesesCount = 0;
-              for (let i = offset; i >= 0; i--) {
-                const symbol = text[i];
-                if (symbol == ".") {
-                  const pos = document.positionAt(i);
-                  const range = UTIL.getPrevValidWordRange(document, pos);
-                  const text = document.getText(range);
-                  return getDynamicCompletions(UTIL.getDynamicType(text));
-                } else if (symbol == "{" || symbol == "[" || symbol == ";") {
-                  return getStaticCompletions(MODEL.规则.条件);
-                } else if (symbol == "(") {
-                  if (rightParenthesesCount < 0) {
-                    return getStaticCompletions(MODEL.规则.条件);
-                  } else if (rightParenthesesCount == 0) {
-                    const pos = document.positionAt(i);
-                    const range = UTIL.getPrevValidWordRange(
-                      document,
-                      pos,
-                      undefined,
-                      true
-                    );
-                    const text = document.getText(range);
-                    if (text == "数组") {
-                      return getStaticCompletions(MODEL.规则.条件);
-                    } else if (MODEL.规则.条件.hasOwnProperty(text)) {
-                      const option =
-                        MODEL.规则.条件[text].参数[commasCount].选项;
-                      console.log(option);
-                      if (option == "条件") {
-                        return getStaticCompletions(MODEL.规则.条件);
-                      } else if (option instanceof Object) {
-                        return getStaticCompletions(option);
-                      }
-                    }
-                  } else {
-                    rightParenthesesCount--;
-                  }
-                } else if (symbol == ")") {
-                  if (i != offset) {
-                    rightParenthesesCount++;
-                  }
-                } else if (symbol == ",") {
-                  if (i != offset && rightParenthesesCount == 0) {
-                    commasCount++;
-                  }
-                }
-              }
-            }
-
-            //获取动作补全 (range符号匹配不准确，将修改为offset)
-            function getActionCompletions() {
-              const text = document.getText();
-              const offset = document.offsetAt(position);
-              let commasCount = 0;
-              let rightParenthesesCount = 0;
-              for (let i = offset; i >= 0; i--) {
-                const symbol = text[i];
-                if (symbol == ".") {
-                  const pos = document.positionAt(i);
-                  const range = UTIL.getPrevValidWordRange(document, pos);
-                  const text = document.getText(range);
-                  return getDynamicCompletions(UTIL.getDynamicType(text));
-                } else if (symbol == "{" || symbol == ";") {
-                  return getStaticCompletions(MODEL.规则.条件).concat(
-                    getStaticCompletions(MODEL.规则.动作)
-                  );
-                } else if (symbol == "[") {
-                  return getStaticCompletions(MODEL.规则.动作);
-                } else if (symbol == "(") {
-                  if (rightParenthesesCount < 0) {
-                    return getStaticCompletions(MODEL.规则.动作);
-                  } else if (rightParenthesesCount == 0) {
-                    const pos = document.positionAt(i);
-                    const range = UTIL.getPrevValidWordRange(
-                      document,
-                      pos,
-                      undefined,
-                      true
-                    );
-                    const text = document.getText(range);
-                    if (MODEL.规则.动作.hasOwnProperty(text)) {
-                      const option =
-                        MODEL.规则.动作[text].参数[commasCount].选项;
-                      //console.log(`option: ${option}`);
-                      if (option == "条件") {
-                        return getStaticCompletions(MODEL.规则.条件);
-                      } else if (
-                        (match = option.match(/全局变量|玩家变量|子程序/))
-                      ) {
-                        return getDynamicCompletions(match[0]);
-                      } else if (option instanceof Object) {
-                        return getStaticCompletions(option);
-                      }
-                    } else if (text == "数组") {
-                      return getStaticCompletions(MODEL.规则.条件);
-                    } else if (MODEL.规则.条件.hasOwnProperty(text)) {
-                      const option =
-                        MODEL.规则.条件[text].参数[commasCount].选项;
-                      console.log(option);
-                      if (option == "条件") {
-                        return getStaticCompletions(MODEL.规则.条件);
-                      } else if (option instanceof Object) {
-                        return getStaticCompletions(option);
-                      }
-                    }
-                  } else {
-                    rightParenthesesCount--;
-                  }
-                } else if (symbol == ")") {
-                  if (i != offset) {
-                    rightParenthesesCount++;
-                  }
-                } else if (symbol == ",") {
-                  if (i != offset && rightParenthesesCount == 0) {
-                    commasCount++;
-                  }
-                }
-              }
-            }
           } catch (error) {
             console.log(error);
           }
@@ -688,6 +583,75 @@ function activate(context) {
       {
         provideSignatureHelp(document, position, token, context) {
           try {
+            const scope = UTIL.getScope(document, position);
+            if (scope.name === "条件") {
+              return getConditionHelp();
+            } else if (scope.name === "动作") {
+              return getActionHelp();
+            }
+
+            //获取条件参数帮助
+            function getConditionHelp() {
+              const entry = UTIL.getEntry(document, position, scope);
+              if (!entry) {
+                return;
+              }
+              if (entry instanceof Object) {
+                if (entry.name == "数组") {
+                  //return getStaticCompletions(MODEL.规则.条件);
+                } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
+                  const option =
+                    MODEL.规则.条件[entry.name].参数[entry.index].选项;
+                  if (option == "条件") {
+                    //return getStaticCompletions(MODEL.规则.条件);
+                  } else if (option instanceof Object) {
+                    //return getStaticCompletions(option);
+                  }
+                }
+              } else if (entry == "条件") {
+                //return getStaticCompletions(MODEL.规则.条件);
+              } else if (entry.match(/全局变量|玩家变量|子程序/)) {
+                //return getDynamicCompletions(entry);
+              }
+            }
+
+            //获取动作参数帮助
+            function getActionHelp() {
+              const entry = UTIL.getEntry(document, position, scope);
+              if (!entry) {
+                return;
+              }
+              if (entry instanceof Object) {
+                if (entry.name == "数组") {
+                  //return getStaticCompletions(MODEL.规则.条件);
+                } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
+                  const option =
+                    MODEL.规则.动作[entry.name].参数[entry.index].选项;
+                  if (option == "条件") {
+                    //return getStaticCompletions(MODEL.规则.条件);
+                  } else if (option instanceof Object) {
+                    //return getStaticCompletions(option);
+                  } else if (option.match(/全局变量|玩家变量|子程序/)) {
+                    //return getDynamicCompletions(option);
+                  }
+                } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
+                  const option =
+                    MODEL.规则.条件[entry.name].参数[entry.index].选项;
+                  if (option == "条件") {
+                    //return getStaticCompletions(MODEL.规则.条件);
+                  } else if (option instanceof Object) {
+                    //return getStaticCompletions(option);
+                  }
+                }
+              } else if (entry == "动作") {
+                //return getStaticCompletions(MODEL.规则.动作);
+              } else if (entry == "条件") {
+                //return getStaticCompletions(MODEL.规则.条件);
+              } else if (entry.match(/全局变量|玩家变量|子程序/)) {
+                //return getDynamicCompletions(entry);
+              }
+            }
+
             // TODO
             const offset = document.offsetAt(position) - 1;
             const block = getBlock(document, offset);
