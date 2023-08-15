@@ -657,7 +657,7 @@ function activate(context) {
       for (const change of changes) {
         if (change.text === "" && change.rangeLength > 0) {
           const deletedText = event.document.getText(change.range);
-          if (deletedText.trim() !== "") {
+          if (deletedText.trim() !== "" && deletedText !== "规则(") {
             vscode.commands.executeCommand("ow.command.suggest");
           }
         }
