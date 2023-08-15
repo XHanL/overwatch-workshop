@@ -1,5 +1,5 @@
 {
-  "name": "Overwatch Workshop 未来亮色",
+  "name": "Overwatch Workshop 亮色",
   "colors": {
     "focusBorder": "#2188ff",
     "foreground": "#444d56",
@@ -183,6 +183,56 @@
   },
   "semanticHighlighting": true,
   "tokenColors": [
+    {
+      "scope": [
+        "entity.name.type.rule.event.type.ow",
+        "entity.name.type.rule.event.team.ow",
+        "entity.name.type.rule.event.player.ow"
+      ],
+      "settings": {
+        "foreground": "#6f42c1"
+      }
+    },
+    {
+      "scope": [
+        "keyword.control.rule.action.ow",
+        "keyword.operator.ow",
+        "keyword.operator.new.ow"
+      ],
+      "settings": {
+        "foreground": "#f44747"
+      }
+    },
+    {
+      "scope": ["entity.name.class.rule.action.ow"],
+      "settings": {
+        "foreground": "#d7ba7d"
+      }
+    },
+    {
+      "scope": ["entity.name.function.rule.condition.ow"],
+      "settings": {
+        "foreground": "#032f62"
+      }
+    },
+    {
+      "scope": ["constant.character.ow"],
+      "settings": {
+        "foreground": "#ce9178"
+      }
+    },
+    {
+      "scope": ["variable.ow"],
+      "settings": {
+        "foreground": "#4FC1FF"
+      }
+    },
+    {
+      "scope": ["constant.numeric.ow"],
+      "settings": {
+        "foreground": "#DCDCAA"
+      }
+    },
     {
       "scope": ["comment", "punctuation.definition.comment", "string.comment"],
       "settings": {
