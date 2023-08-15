@@ -174,12 +174,18 @@ function getScope(document, position) {
         };
       }
     } else if (symbol == "}") {
-      rightBracesCount++;
+      if (rightBracesCount == 1) {
+        return {
+          name: "全局"
+        };
+      } else {
+        rightBracesCount++;
+      }
     } else if (symbol == ";") {
       semicolonCount++;
     }
   }
-  console.log(`警告：etScope 性能问题`);
+  console.log(`警告：getScope 性能问题`);
 }
 
 function getEntry(document, position, scope) {

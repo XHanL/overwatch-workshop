@@ -3,6 +3,7 @@ const path = require("path");
 
 let 拼音 = {
   阿: "AE",
+  啊: "EA",
   埃: "ZhiAi",
   艾: "YiAi",
   碍: "Ai",
@@ -13,26 +14,34 @@ let 拼音 = {
   巴: "Ba",
   靶: "Ba",
   霸: "PoBa",
+  吧: "PaBa",
   白: "BoBai",
   百: "MoBaiBo",
+  败: "Bai",
   坂: "Ban",
   板: "Ban",
   半: "PanBan",
   帮: "Bang",
   绑: "Bang",
+  棒: "Bang",
   包: "PaoBaoFu",
   保: "Bao",
   堡: "PuBuBao",
+  报: "Bao",
   抱: "PouPaoBao",
   暴: "BoPuBao",
   爆: "BoBao",
+  北: "Bei",
   备: "Bei",
   背: "Bei",
   被: "BeiPiBi",
   本: "Ben",
   比: "BiPi",
+  币: "YinBi",
   闭: "Bi",
   蔽: "BiePieBi",
+  壁: "Bi",
+  避: "Bi",
   边: "Bian",
   变: "Bian",
   标: "Biao",
@@ -54,6 +63,7 @@ let 拼音 = {
   查: "ZhaChaChai",
   差: "ChaiJieChaCiCuo",
   禅: "ChanShan",
+  尝: "Chang",
   场: "Chang",
   超: "ChaoTiao",
   朝: "ZhuChaoZhao",
@@ -70,6 +80,8 @@ let 拼音 = {
   持: "Chi",
   充: "Chong",
   冲: "Chong",
+  宠: "Chong",
+  抽: "Chou",
   仇: "JuQiuChou",
   出: "Chu",
   初: "Chu",
@@ -86,8 +98,11 @@ let 拼音 = {
   此: "Ci",
   次: "CiZi",
   从: "Cong",
+  摧: "CuiCuoZui",
   村: "Cun",
   存: "Cun",
+  错: "Cuo",
+  达: "TiTaDa",
   打: "Da",
   大: "TaiDaDai",
   带: "Dai",
@@ -110,21 +125,30 @@ let 拼音 = {
   等: "Deng",
   迪: "Di",
   敌: "DiHua",
+  抵: "QiZhiDi",
   蒂: "Di",
   典: "DianTian",
   点: "Dian",
   电: "Dian",
+  店: "Dian",
   殿: "Dian",
   调: "DiaoTiao",
+  掉: "NuoDiao",
+  跌: "DieTu",
   顶: "Ding",
   定: "Ding",
+  东: "Dong",
   动: "Dong",
   冻: "Dong",
   斗: "ZhuDou",
   毒: "DuDai",
   独: "Du",
+  读: "DuDou",
   度: "ZhaiDuDuo",
+  端: "Duan",
+  段: "Duan",
   断: "Duan",
+  堆: "ZuiDui",
   队: "Dui",
   对: "Dui",
   蹲: "ZunCuanDunQunCun",
@@ -132,8 +156,13 @@ let 拼音 = {
   顿: "DuDun",
   多: "Duo",
   夺: "Duo",
+  朵: "Duo",
+  躲: "Duo",
+  呃: "AiE",
   恩: "En",
+  儿: "RenEr",
   尔: "Er",
+  饵: "Er",
   发: "Fa",
   法: "Fa",
   反: "Fan",
@@ -150,6 +179,7 @@ let 拼音 = {
   峰: "Feng",
   锋: "Feng",
   否: "PiFou",
+  孵: "Fu",
   弗: "Fu",
   服: "FuBiBo",
   符: "Fu",
@@ -157,6 +187,7 @@ let 拼音 = {
   辐: "Fu",
   釜: "Fu",
   辅: "Fu",
+  腐: "Fu",
   负: "Fu",
   附: "BuFu",
   复: "Fu",
@@ -164,6 +195,7 @@ let 拼音 = {
   改: "Gai",
   赶: "QianGan",
   感: "GanHan",
+  干: "GanAn",
   港: "HongGang",
   高: "Gao",
   告: "GaoJuGu",
@@ -175,9 +207,12 @@ let 拼音 = {
   更: "Geng",
   工: "Gong",
   公: "Gong",
+  功: "Gong",
   攻: "Gong",
+  恭: "Gong",
   勾: "Gou",
   钩: "Gou",
+  购: "Gou",
   怪: "Guai",
   关: "Guan",
   观: "Guan",
@@ -198,6 +233,7 @@ let 拼音 = {
   耗: "HaoMao",
   合: "HeGe",
   和: "HuoHuHe",
+  河: "He",
   黑: "Hei",
   红: "GongHong",
   后: "Hou",
@@ -208,6 +244,7 @@ let 拼音 = {
   花: "Hua",
   化: "HuaHuo",
   坏: "PeiPiHuai",
+  欢: "Huan",
   环: "Huan",
   换: "Huan",
   皇: "HuangWang",
@@ -220,6 +257,7 @@ let 拼音 = {
   活: "HuoGuo",
   火: "Huo",
   或: "YuHuo",
+  货: "Huo",
   获: "Huo",
   击: "Ji",
   圾: "JieJi",
@@ -229,6 +267,8 @@ let 拼音 = {
   激: "JiJiao",
   及: "Ji",
   吉: "Ji",
+  级: "Ji",
+  即: "Ji",
   极: "Ji",
   急: "Ji",
   疾: "Ji",
@@ -236,6 +276,7 @@ let 拼音 = {
   计: "Ji",
   记: "Ji",
   技: "JiQi",
+  际: "Ji",
   继: "Ji",
   加: "Jia",
   夹: "GaJia",
@@ -244,6 +285,7 @@ let 拼音 = {
   家: "JiaGuJie",
   甲: "Jia",
   假: "JiaJieGeXia",
+  价: "JieJia",
   间: "Jian",
   监: "Jian",
   减: "Jian",
@@ -254,11 +296,16 @@ let 拼音 = {
   键: "Jian",
   箭: "Jian",
   江: "Jiang",
+  将: "QiangJiang",
+  奖: "Jiang",
+  降: "JiangXiang",
   交: "Jiao",
   焦: "QiaoJiao",
   角: "JiaoGuLuJue",
   较: "Jiao",
+  阶: "Jie",
   接: "XieShaJieCha",
+  揭: "JieHeQi",
   街: "Jie",
   节: "Jie",
   杰: "Jie",
@@ -268,6 +315,7 @@ let 拼音 = {
   戒: "Jie",
   界: "Jie",
   金: "Jin",
+  尽: "Jin",
   锦: "Jin",
   近: "Jin",
   进: "Jin",
@@ -277,11 +325,13 @@ let 拼音 = {
   井: "Jing",
   阱: "Jing",
   警: "Jing",
+  净: "JingCheng",
   径: "Jing",
   竞: "Jing",
   境: "Jing",
   镜: "Jing",
   救: "Jiu",
+  就: "Jiu",
   局: "Ju",
   拒: "Ju",
   具: "Ju",
@@ -302,8 +352,10 @@ let 拼音 = {
   控: "QiangKong",
   骷: "Ku",
   块: "KuaiYue",
+  快: "Kuai",
   宽: "Kuan",
   狂: "JueKuang",
+  扩: "Kuo",
   廓: "Kuo",
   垃: "La",
   拉: "La",
@@ -327,6 +379,7 @@ let 拼音 = {
   立: "WeiLi",
   丽: "Li",
   利: "Li",
+  励: "Li",
   莉: "ChiLi",
   粒: "Li",
   连: "Lian",
@@ -339,6 +392,7 @@ let 拼音 = {
   料: "Liao",
   烈: "Lie",
   猎: "QueXiLie",
+  裂: "Lie",
   林: "Lin",
   灵: "Ling",
   领: "Ling",
@@ -356,9 +410,11 @@ let 拼音 = {
   轮: "Lun",
   罗: "Luo",
   螺: "Luo",
+  落: "LaLaoLuo",
   麻: "Ma",
   马: "Ma",
   玛: "Ma",
+  买: "Mai",
   脉: "MaiMo",
   满: "Man",
   慢: "Man",
@@ -366,10 +422,13 @@ let 拼音 = {
   梅: "Mei",
   每: "Mei",
   美: "Mei",
+  魅: "Mei",
+  盟: "MengMing",
   米: "Mi",
   面: "Mian",
   描: "MaoMiao",
   瞄: "Miao",
+  秒: "Miao",
   灭: "Mie",
   名: "Ming",
   命: "Ming",
@@ -380,6 +439,7 @@ let 拼音 = {
   目: "Mu",
   墓: "Mu",
   幕: "ManMu",
+  嗯: "NgN",
   那: "NaNaiNuoNeiNe",
   纳: "Na",
   娜: "NaNuo",
@@ -394,40 +454,57 @@ let 拼音 = {
   努: "Nu",
   怒: "Nu",
   女: "RuNv",
+  噢: "OYuAo",
+  哦: "EO",
   帕: "MoPa",
   排: "BaiPai",
+  牌: "Pai",
+  叛: "Pan",
   跑: "BoPao",
   炮: "BaoPao",
   佩: "Pei",
   喷: "Pen",
   碰: "Peng",
+  批: "Pi",
   频: "Pin",
+  品: "Pin",
   平: "PingBengBingPian",
   屏: "PingBing",
   泊: "BoPo",
   破: "Po",
+  普: "Pu",
   漆: "QieQi",
   旗: "Qi",
   启: "Qi",
+  起: "Qi",
+  弃: "Qi",
   器: "Qi",
   前: "QianJian",
+  钱: "Qian",
   歉: "Qian",
   枪: "Qiang",
   强: "JiangQiang",
   墙: "Qiang",
+  巧: "Qiao",
   切: "QiQie",
   侵: "Qin",
   青: "JingQing",
+  轻: "Qing",
   清: "Qing",
   情: "Qing",
+  求: "Qiu",
   球: "Qiu",
   区: "QuOu",
+  驱: "Qu",
   取: "Qu",
+  去: "Qu",
   圈: "JuanQuan",
   全: "Quan",
   拳: "Quan",
   却: "Que",
+  群: "Qun",
   燃: "Ran",
+  扰: "YouRao",
   热: "Re",
   人: "Ren",
   认: "Ren",
@@ -449,9 +526,11 @@ let 拼音 = {
   闪: "Shan",
   善: "Shan",
   伤: "Shang",
+  商: "Shang",
   赏: "Shang",
   上: "Shang",
   烧: "Shao",
+  少: "Shao",
   哨: "ShaoSaoXiao",
   设: "She",
   射: "SheYiYe",
@@ -459,14 +538,17 @@ let 拼音 = {
   深: "Shen",
   什: "ShenShi",
   神: "Shen",
+  升: "Sheng",
   生: "Sheng",
   声: "ShengQing",
   圣: "ShengKu",
   胜: "ShengQingXing",
+  剩: "Sheng",
   失: "YiShi",
   施: "ShiYi",
   时: "Shi",
   实: "Shi",
+  拾: "SheJieShi",
   矢: "Shi",
   使: "Shi",
   始: "Shi",
@@ -479,8 +561,11 @@ let 拼音 = {
   事: "ZiShi",
   势: "Shi",
   视: "Shi",
+  试: "Shi",
   室: "Shi",
   是: "ShiTi",
+  适: "ShiKuo",
+  噬: "Shi",
   收: "Shou",
   手: "Shou",
   守: "Shou",
@@ -488,8 +573,10 @@ let 拼音 = {
   受: "ShouDao",
   狩: "Shou",
   兽: "Shou",
+  售: "ShuShou",
   输: "Shu",
   鼠: "Shu",
+  术: "ShuZhu",
   束: "Shu",
   述: "Shu",
   数: "ShuShuo",
@@ -499,12 +586,14 @@ let 拼音 = {
   睡: "Shui",
   瞬: "Shun",
   斯: "ShiSi",
+  撕: "XiSi",
   死: "Si",
   寺: "ShiSi",
   送: "Song",
   苏: "Su",
   素: "Su",
   速: "Su",
+  算: "Suan",
   随: "Sui",
   梭: "SuoXun",
   所: "Suo",
@@ -513,10 +602,12 @@ let 拼音 = {
   塔: "TaDa",
   胎: "Tai",
   台: "SiTaiYi",
+  太: "TaTai",
   态: "Tai",
   坛: "Tan",
   坦: "Tan",
   叹: "YouYiTan",
+  探: "XianTan",
   桃: "ZhaoTiaoTao",
   特: "Te",
   提: "ShiChiDiTi",
@@ -525,6 +616,7 @@ let 拼音 = {
   天: "Tian",
   添: "Tian",
   填: "ChenZhenTian",
+  挑: "TaoDiaoTiao",
   条: "Tiao",
   跳: "TiaoDiaoTao",
   铁: "Tie",
@@ -535,12 +627,15 @@ let 拼音 = {
   头: "Tou",
   突: "Tu",
   图: "Tu",
+  徒: "Tu",
   团: "QiuTuan",
   推: "Tui",
   退: "Tui",
+  吞: "TianTun",
   托: "Tuo",
   陀: "TuoDuo",
   瓦: "Wa",
+  哇: "HuaGuiWa",
   外: "Wai",
   完: "WanKuan",
   玩: "Wan",
@@ -548,6 +643,9 @@ let 拼音 = {
   亡: "WangWu",
   王: "YuWang",
   往: "Wang",
+  望: "Wang",
+  危: "Wei",
+  威: "Wei",
   微: "Wei",
   围: "Wei",
   维: "Wei",
@@ -556,7 +654,9 @@ let 拼音 = {
   位: "WeiLi",
   温: "WenYun",
   文: "Wen",
+  稳: "Wen",
   问: "Wen",
+  涡: "GuoWo",
   我: "Wo",
   沃: "Wo",
   无: "MoWu",
@@ -565,18 +665,22 @@ let 拼音 = {
   务: "Wu",
   坞: "Wu",
   物: "Wu",
+  误: "Wu",
   雾: "Wu",
   吸: "Xi",
   西: "Xi",
   息: "Xi",
   悉: "Xi",
   袭: "Xi",
+  洗: "XiXian",
+  喜: "ChiXi",
   戏: "HuXi",
   细: "Xi",
   下: "Xia",
   先: "Xian",
   弦: "Xian",
   显: "Xian",
+  险: "Xian",
   现: "Xian",
   线: "Xian",
   限: "WenXian",
@@ -588,10 +692,13 @@ let 拼音 = {
   象: "Xiang",
   像: "Xiang",
   消: "Xiao",
+  销: "Xiao",
   小: "Xiao",
   效: "Xiao",
   协: "Xie",
+  胁: "Xie",
   携: "Xie",
+  械: "Xie",
   谢: "Xie",
   心: "Xin",
   新: "Xin",
@@ -605,23 +712,31 @@ let 拼音 = {
   性: "Xing",
   雄: "Xiong",
   修: "Xiu",
+  秀: "Xiu",
   墟: "Xu",
   需: "RuNuoRuanXu",
   序: "Xu",
+  绪: "Xu",
   续: "Xu",
   宣: "Xuan",
   旋: "Xuan",
+  漩: "Xuan",
   选: "Xuan",
   眩: "HuanJuanXuan",
   学: "Xue",
   雪: "Xue",
+  寻: "XunXin",
   循: "Xun",
   训: "Xun",
   雅: "Ya",
   娅: "Ya",
+  呀: "XiaYa",
+  烟: "YinYan",
   延: "Yan",
+  严: "Yan",
   颜: "Yan",
   眼: "WenYan",
+  验: "Yan",
   焰: "Yan",
   药: "Yao",
   要: "Yao",
@@ -635,24 +750,32 @@ let 拼音 = {
   已: "SiYi",
   以: "SiYi",
   义: "Yi",
+  易: "Yi",
   益: "Yi",
   意: "Yi",
   因: "Yin",
   音: "Yin",
+  银: "Yin",
   引: "Yin",
   隐: "Yin",
   应: "Ying",
   英: "YingYang",
   鹰: "Ying",
+  迎: "Ying",
+  营: "Ying",
   影: "Ying",
   映: "YangYing",
   勇: "Yong",
+  涌: "YongChong",
   用: "Yong",
+  优: "You",
   幽: "You",
   游: "LiuYou",
+  鱿: "You",
   友: "You",
   有: "YouWei",
   右: "You",
+  诱: "You",
   于: "XuWeiYu",
   余: "TuXuYu",
   与: "Yu",
@@ -662,6 +785,7 @@ let 拼音 = {
   预: "Yu",
   域: "Yu",
   阈: "Yu",
+  御: "YaYu",
   元: "Yuan",
   园: "WanYuan",
   原: "Yuan",
@@ -679,6 +803,7 @@ let 拼音 = {
   在: "Zai",
   载: "Zai",
   暂: "Zan",
+  赞: "Zan",
   造: "CaoZao",
   则: "Ze",
   择: "ZhaiZe",
@@ -691,8 +816,11 @@ let 拼音 = {
   长: "ZhangChang",
   障: "Zhang",
   爪: "ZhuaZhao",
+  找: "ZhaoHua",
+  罩: "Zhao",
   遮: "Zhe",
   者: "Zhe",
+  这: "ZheZhei",
   着: "ZhuoZhaoZhe",
   真: "Zhen",
   阵: "Zhen",
@@ -703,6 +831,7 @@ let 拼音 = {
   帧: "Zheng",
   之: "ZhuZhi",
   支: "ZhiQi",
+  知: "Zhi",
   直: "Zhi",
   值: "Zhi",
   止: "Zhi",
@@ -714,16 +843,20 @@ let 拼音 = {
   治: "ZhiChi",
   质: "Zhi",
   秩: "Zhi",
+  智: "Zhi",
   置: "Zhi",
   中: "Zhong",
   终: "Zhong",
+  衷: "Zhong",
   重: "TongZhongChong",
   洲: "Zhou",
   逐: "ZhouZhuDiTun",
   主: "Zhu",
   住: "Zhu",
   助: "ChuZhu",
+  注: "ZhuZhou",
   柱: "Zhu",
+  筑: "Zhu",
   抓: "Zhua",
   转: "ZhuanZhuai",
   庄: "PengZhuang",
@@ -731,6 +864,7 @@ let 拼音 = {
   状: "Zhuang",
   撞: "Zhuang",
   追: "TuiDuiZhui",
+  锥: "Zhui",
   坠: "Zhui",
   准: "Zhun",
   资: "Zi",
@@ -744,9 +878,11 @@ let 拼音 = {
   阻: "ZuZhu",
   组: "Zu",
   最: "CuoZui",
+  罪: "Zui",
   醉: "Zui",
   左: "Zuo",
   作: "Zuo",
+  坐: "Zuo",
   做: "Zuo",
 };
 
@@ -5103,6 +5239,21 @@ let 常量 = {
     },
     {
       名称: "爪兰蒂斯",
+      标签: ["地图"],
+      提示: "一张地图。",
+    },
+    {
+      名称: "南极半岛",
+      标签: ["地图"],
+      提示: "一张地图。",
+    },
+    {
+      名称: "新渣客城",
+      标签: ["地图"],
+      提示: "一张地图。",
+    },
+    {
+      名称: "苏拉瓦萨",
       标签: ["地图"],
       提示: "一张地图。",
     },
@@ -9769,88 +9920,85 @@ let 规则 = {
       },
     },
 
-    玩家: Object.assign(
-      {
-        全部: {
-          标签: ["事件", "玩家"],
-          顺序: "000",
-          提示: "表示所有栏位的玩家。",
-        },
-
-        "栏位 0": {
-          标签: ["事件", "玩家"],
-          顺序: "001",
-          提示: "表示第0个栏位的玩家。",
-        },
-
-        "栏位 1": {
-          标签: ["事件", "玩家"],
-          顺序: "002",
-          提示: "表示第1个栏位的玩家。",
-        },
-
-        "栏位 2": {
-          标签: ["事件", "玩家"],
-          顺序: "003",
-          提示: "表示第2个栏位的玩家。",
-        },
-
-        "栏位 3": {
-          标签: ["事件", "玩家"],
-          顺序: "004",
-          提示: "表示第3个栏位的玩家。",
-        },
-
-        "栏位 4": {
-          标签: ["事件", "玩家"],
-          顺序: "005",
-          提示: "表示第4个栏位的玩家。",
-        },
-
-        "栏位 5": {
-          标签: ["事件", "玩家"],
-          顺序: "006",
-          提示: "表示第5个栏位的玩家。",
-        },
-
-        "栏位 6": {
-          标签: ["事件", "玩家"],
-          顺序: "007",
-          提示: "表示第6个栏位的玩家。",
-        },
-
-        "栏位 7": {
-          标签: ["事件", "玩家"],
-          顺序: "008",
-          提示: "表示第7个栏位的玩家。",
-        },
-
-        "栏位 8": {
-          标签: ["事件", "玩家"],
-          顺序: "009",
-          提示: "表示第8个栏位的玩家。",
-        },
-
-        "栏位 9": {
-          标签: ["事件", "玩家"],
-          顺序: "010",
-          提示: "表示第9个栏位的玩家。",
-        },
-
-        "栏位 10": {
-          标签: ["事件", "玩家"],
-          顺序: "011",
-          提示: "表示第10个栏位的玩家。",
-        },
-
-        "栏位 11": {
-          标签: ["事件", "玩家"],
-          顺序: "012",
-          提示: "表示第11个栏位的玩家。",
-        },
+    玩家: {
+      全部: {
+        标签: ["事件", "玩家"],
+        顺序: "000",
+        提示: "表示所有栏位的玩家。",
       },
-      常量.英雄
-    ),
+
+      "栏位 0": {
+        标签: ["事件", "玩家"],
+        顺序: "001",
+        提示: "表示第0个栏位的玩家。",
+      },
+
+      "栏位 1": {
+        标签: ["事件", "玩家"],
+        顺序: "002",
+        提示: "表示第1个栏位的玩家。",
+      },
+
+      "栏位 2": {
+        标签: ["事件", "玩家"],
+        顺序: "003",
+        提示: "表示第2个栏位的玩家。",
+      },
+
+      "栏位 3": {
+        标签: ["事件", "玩家"],
+        顺序: "004",
+        提示: "表示第3个栏位的玩家。",
+      },
+
+      "栏位 4": {
+        标签: ["事件", "玩家"],
+        顺序: "005",
+        提示: "表示第4个栏位的玩家。",
+      },
+
+      "栏位 5": {
+        标签: ["事件", "玩家"],
+        顺序: "006",
+        提示: "表示第5个栏位的玩家。",
+      },
+
+      "栏位 6": {
+        标签: ["事件", "玩家"],
+        顺序: "007",
+        提示: "表示第6个栏位的玩家。",
+      },
+
+      "栏位 7": {
+        标签: ["事件", "玩家"],
+        顺序: "008",
+        提示: "表示第7个栏位的玩家。",
+      },
+
+      "栏位 8": {
+        标签: ["事件", "玩家"],
+        顺序: "009",
+        提示: "表示第8个栏位的玩家。",
+      },
+
+      "栏位 9": {
+        标签: ["事件", "玩家"],
+        顺序: "010",
+        提示: "表示第9个栏位的玩家。",
+      },
+
+      "栏位 10": {
+        标签: ["事件", "玩家"],
+        顺序: "011",
+        提示: "表示第10个栏位的玩家。",
+      },
+
+      "栏位 11": {
+        标签: ["事件", "玩家"],
+        顺序: "012",
+        提示: "表示第11个栏位的玩家。",
+      },
+    },
   },
 
   条件: {
@@ -17367,15 +17515,139 @@ let 规则 = {
   },
 };
 
+let 扩展 = {
+  光束效果: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
+  光束声音: { 标签: ["扩展", "∴ 1"], 提示: "一个工坊扩展选项。" },
+  增益状态效果: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
+  减益状态效果: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
+  增益效果和减益效果声音: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
+  能量爆炸效果: { 标签: ["扩展", "∴ 4"], 提示: "一个工坊扩展选项。" },
+  运动爆炸效果: { 标签: ["扩展", "∴ 4"], 提示: "一个工坊扩展选项。" },
+  爆炸声音: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
+  播放更多效果: { 标签: ["扩展", "∴ 1"], 提示: "一个工坊扩展选项。" },
+  生成更多机器人: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
+  弹道: { 标签: ["扩展", "∴ 4"], 提示: "一个工坊扩展选项。" },
+};
+
+let 模版 = {
+  全局: {
+    设置: {
+      格式: `设置
+{
+    主程序
+    {
+        描述: \${1:新游戏}
+        模式名称: \${2:新模式}
+    }
+
+    大厅
+    {
+        \${3}
+    }
+
+    模式
+    {
+        \${4}
+    }
+
+    英雄
+    {
+        \${5}
+    }
+
+    扩展
+    {
+        \${6}
+    }
+}`,
+      标签: ["模板", "全局"],
+      提示: "一个全局中的设置模板。",
+    },
+
+    变量: {
+      格式: `变量
+{
+    全局:
+        \${1:0: A}
+
+    玩家:
+        \${1:0: A}
+}`,
+      标签: ["模板", "全局"],
+      提示: "一个全局中的变量模板。",
+    },
+
+    子程序: {
+      格式: `子程序
+{
+    \${1:0: Sub0}
+}`,
+      标签: ["模板", "全局"],
+      提示: "一个全局中的子程序模板。",
+    },
+
+    规则: {
+      格式: `规则("\${1}")
+{
+    事件
+    {
+        \${2:持续 - 全局;}
+    }
+
+    条件
+    {
+        \${3}
+    }
+
+    动作
+    {
+        \${4}
+    }
+}`,
+      标签: ["模板", "全局"],
+      提示: "一个全局中的规则模板。",
+    },
+  },
+
+  规则: {
+    事件: {
+      格式: `事件
+{
+    \${1}
+}`,
+      标签: ["模板", "规则"],
+      提示: "一个规则中的事件模板。",
+    },
+
+    条件: {
+      格式: `条件
+{
+    \${1}
+}`,
+      标签: ["模板", "规则"],
+      提示: "一个规则中的条件模板。",
+    },
+
+    动作: {
+      格式: `动作
+{
+    \${1}
+}`,
+      标签: ["模板", "规则"],
+      提示: "一个规则中的动作模板。",
+    },
+  },
+};
+
 function buildPinyinFilterText(text) {
   let pinyin = "";
   for (let i = 0; i < text.length; i++) {
     if (拼音.hasOwnProperty(text[i])) {
       pinyin += 拼音[text[i]];
-    } else if (/[\.a-zA-Z0-9： -“”]/.test(text[i])) {
+    } else if (/[\.a-zA-Z0-9： -，“”（）！？…]/.test(text[i])) {
       pinyin += text[i];
     } else {
-      console.log(`拼音缺失: ${text[i]}`);
+      console.log(`拼音缺失: ${text[i]}: "",`);
     }
   }
   //console.log(pinyin);
@@ -17432,7 +17704,13 @@ function buildCompletion(
     item.documentation.appendMarkdown(details);
   }
   if (filterText) {
-    item.filterText = filterText;
+    item.filterText = (filterText + buildPinyinFilterText(filterText))
+      .split("")
+      .join(" ");
+  } else {
+    item.filterText = (label + buildPinyinFilterText(label))
+      .split("")
+      .join(" ");
   }
   if (insertText) {
     item.insertText = insertText;
@@ -17446,29 +17724,28 @@ function buildCompletion(
   return item;
 }
 
-function buildSignature(name, object) {
-  const signatureHelp = new vscode.SignatureHelp();
-  const signatureInfo = new vscode.SignatureInformation();
-  name += "(";
-
-  for (i in object.参数) {
-    const parameterInformation = new vscode.ParameterInformation();
-    parameterInformation.label = [name.length, name.length + j.length];
-    parameterInformation.documentation = new vscode.MarkdownString();
-    parameterInformation.documentation.isTrusted = true;
-    parameterInformation.documentation.supportHtml = true;
-    parameterInformation.documentation.supportThemeIcons = true;
-    parameterInformation.documentation.appendMarkdown(
-      `***<span style="color:#0ac;">⬘</span>&nbsp;参数&nbsp;:&nbsp;${object.参数[i].名称}***\n\n`
-    );
-    parameterInformation.documentation.appendMarkdown(
-      `\`${i}\` \`${object.参数[i].类型}\`&nbsp;\n\n`
-    );
-    parameterInformation.documentation.appendMarkdown(
-      `${RULES.ACTION[i].参数[j].提示}&nbsp;\n\n`
-    );
-    signatureInfo.parameters.push(parameterInformation);
-  }
+function buildParameter(
+  functName,
+  paramName,
+  paramIndex,
+  paramType,
+  paramDetails
+) {
+  const parameterInformation = new vscode.ParameterInformation();
+  parameterInformation.documentation = new vscode.MarkdownString();
+  parameterInformation.documentation.isTrusted = true;
+  parameterInformation.documentation.supportHtml = true;
+  parameterInformation.documentation.supportThemeIcons = true;
+  parameterInformation.documentation.appendMarkdown(
+    `***<span style="color:#0ac;">⬘</span>&nbsp;参数&nbsp;:&nbsp;${paramName}***\n\n`
+  );
+  parameterInformation.documentation.appendMarkdown(
+    `\`${paramIndex}\` \`${paramType}\`&nbsp;\n\n`
+  );
+  parameterInformation.documentation.appendMarkdown(
+    `${paramDetails}&nbsp;\n\n`
+  );
+  return parameterInformation;
 }
 
 function buildStaticModels(PATH) {
@@ -17494,8 +17771,7 @@ function buildStaticModels(PATH) {
         常量[i][j].名称,
         vscode.CompletionItemKind.Constant,
         常量[i][j].标签,
-        常量[i][j].提示,
-        (i + buildPinyinFilterText(i)).split("").join(" ")
+        常量[i][j].提示
       );
     }
   }
@@ -17557,8 +17833,7 @@ function buildStaticModels(PATH) {
         常量.英雄[i].名称,
         vscode.CompletionItemKind.Constant,
         常量.英雄[i].标签,
-        element,
-        (i + buildPinyinFilterText(i)).split("").join(" ")
+        element
       )
     );
   }
@@ -17579,8 +17854,7 @@ function buildStaticModels(PATH) {
         常量.图标[i].名称,
         vscode.CompletionItemKind.Constant,
         常量.图标[i].标签,
-        element,
-        (i + buildPinyinFilterText(i)).split("").join(" ")
+        element
       )
     );
   }
@@ -17601,8 +17875,7 @@ function buildStaticModels(PATH) {
         常量.按钮[i].名称,
         vscode.CompletionItemKind.Constant,
         常量.按钮[i].标签,
-        element,
-        (i + buildPinyinFilterText(i)).split("").join(" ")
+        element
       )
     );
   }
@@ -17624,8 +17897,7 @@ function buildStaticModels(PATH) {
       `
 |||
 |:-|:-|
-<img src="${常量.颜色[i].图标}" width=25 height=25/>&nbsp;&nbsp;|${常量.颜色[i].提示}`,
-      (i + buildPinyinFilterText(i)).split("").join(" ")
+<img src="${常量.颜色[i].图标}" width=25 height=25/>&nbsp;&nbsp;|${常量.颜色[i].提示}`
     );
   }
   for (i in 常量.字符串) {
@@ -17634,8 +17906,7 @@ function buildStaticModels(PATH) {
       常量.字符串[i].名称,
       vscode.CompletionItemKind.Constant,
       常量.字符串[i].标签,
-      常量.字符串[i].提示,
-      (i + buildPinyinFilterText(i)).split("").join(" ")
+      常量.字符串[i].提示
     );
   }
   for (i in 规则.事件.选项) {
@@ -17651,7 +17922,7 @@ function buildStaticModels(PATH) {
       vscode.CompletionItemKind.Event,
       规则.事件.选项[i].标签,
       规则.事件.选项[i].提示,
-      (i + buildPinyinFilterText(i)).split("").join(" "),
+      undefined,
       `${i};`
     );
   }
@@ -17668,32 +17939,27 @@ function buildStaticModels(PATH) {
       vscode.CompletionItemKind.Event,
       规则.事件.队伍[i].标签,
       规则.事件.队伍[i].提示,
-      (i + buildPinyinFilterText(i)).split("").join(" "),
+      undefined,
       `${i};`
     );
   }
   for (i in 规则.事件.玩家) {
-    if (常量.英雄.hasOwnProperty(i)) {
-      规则.事件.玩家[i].悬停 = 常量.英雄[i].悬停;
-      规则.事件.玩家[i].补全 = 常量.英雄[i].补全;
-    } else {
-      规则.事件.玩家[i].悬停 = buildHover(
-        PATH,
-        i,
-        规则.事件.玩家[i].标签,
-        规则.事件.玩家[i].提示
-      );
-      规则.事件.玩家[i].补全 = buildCompletion(
-        PATH,
-        i,
-        vscode.CompletionItemKind.Event,
-        规则.事件.玩家[i].标签,
-        规则.事件.玩家[i].提示,
-        (i + buildPinyinFilterText(i)).split("").join(" "),
-        `${i};`,
-        规则.事件.玩家[i].顺序
-      );
-    }
+    规则.事件.玩家[i].悬停 = buildHover(
+      PATH,
+      i,
+      规则.事件.玩家[i].标签,
+      规则.事件.玩家[i].提示
+    );
+    规则.事件.玩家[i].补全 = buildCompletion(
+      PATH,
+      i,
+      vscode.CompletionItemKind.Event,
+      规则.事件.玩家[i].标签,
+      规则.事件.玩家[i].提示,
+      undefined,
+      `${i};`,
+      规则.事件.玩家[i].顺序
+    );
   }
   for (i in 规则.条件) {
     let details = `${规则.条件[i].提示}`;
@@ -17722,8 +17988,14 @@ function buildStaticModels(PATH) {
         if (index < params.length - 1) {
           insertText.appendText(`, `);
         }
+        element.签名 = buildParameter(
+          i,
+          element.名称,
+          index,
+          element.类型,
+          element.提示
+        );
         details += `\`${index}\`&nbsp;\`${element.名称}\`&nbsp;-&nbsp;${element.提示}\n\n`;
-        //规则.条件[i].参数[index].签名 = buildSignature();
       });
       insertText.appendText(`)`);
       command = {
@@ -17738,8 +18010,8 @@ function buildStaticModels(PATH) {
       i,
       vscode.CompletionItemKind.Class,
       规则.条件[i].标签,
-      details,
-      (i + buildPinyinFilterText(i)).split("").join(" "),
+      details.replace(/---/g, ""),
+      undefined,
       insertText,
       undefined,
       command
@@ -17765,8 +18037,14 @@ function buildStaticModels(PATH) {
         if (index < params.length - 1) {
           insertText.appendText(`, `);
         }
+        element.签名 = buildParameter(
+          i,
+          element.名称,
+          index,
+          element.类型,
+          element.提示
+        );
         details += `\`${index}\`&nbsp;\`${element.名称}\`&nbsp;-&nbsp;${element.提示}\n\n`;
-        //规则.动作[i].参数[index].签名 = buildSignature();
       });
       insertText.appendText(`)`);
       command = {
@@ -17782,8 +18060,8 @@ function buildStaticModels(PATH) {
       i,
       vscode.CompletionItemKind.Method,
       规则.动作[i].标签,
-      details,
-      (i + buildPinyinFilterText(i)).split("").join(" "),
+      details.replace(/---/g, ""),
+      undefined,
       insertText,
       undefined,
       command
@@ -17795,6 +18073,8 @@ module.exports = {
   拼音,
   常量,
   规则,
+  扩展,
+  模版,
   buildHover,
   buildCompletion,
   buildStaticModels,

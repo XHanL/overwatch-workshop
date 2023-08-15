@@ -2,16 +2,12 @@ const vscode = require("vscode");
 const path = require("path");
 const fs = require("fs");
 
-//静态模型
 const MODEL = require("./ow.model.js");
-
-//工具集合
 const UTIL = require("./ow.utiliy.js");
 
-//插件配置
+//配置
 const CONFIG = vscode.workspace.getConfiguration();
 
-//入口函数
 function activate(context) {
   //初始化路径
   const PATH = context.extensionPath;
@@ -308,7 +304,16 @@ function activate(context) {
             ? 0
             : 1;
         const scope = UTIL.getScope(document, position);
-        if (scope.name === "事件") {
+        if (scope.name === "扩展") {
+          if (MODEL.扩展.hasOwnProperty(hoverText)) {
+            return MODEL.buildHover(
+              PATH,
+              hoverText,
+              MODEL.扩展[hoverText].标签,
+              MODEL.扩展[hoverText].提示
+            );
+          }
+        } else if (scope.name === "事件") {
           const event = MODEL.规则.事件;
           if (event.选项.hasOwnProperty(hoverText)) {
             return event.选项[hoverText].悬停;
@@ -317,10 +322,12 @@ function activate(context) {
             return event.队伍[hoverText].悬停;
           }
           if (event.玩家.hasOwnProperty(hoverText)) {
-            if (Array.isArray(event.玩家[hoverText].悬停)) {
-              return event.玩家[hoverText].悬停[theme];
-            }
             return event.玩家[hoverText].悬停;
+          }
+          for (i of MODEL.常量.英雄) {
+            if (i.名称 == hoverText) {
+              return i.悬停[theme];
+            }
           }
           return matchDynamicHover();
         } else if (scope.name === "条件") {
@@ -358,7 +365,17 @@ function activate(context) {
           return matchDynamicHover();
         }
 
-        function getDynamicHover(type) {
+        //匹配动态悬停
+        function matchDynamicHover() {
+          if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
+            const range = UTIL.getPrevValidWordRange(document, position);
+            const text = document.getText(range);
+            return buildDynamicHover(UTIL.getDynamicType(text));
+          }
+        }
+
+        //构建动态悬停
+        function buildDynamicHover(type) {
           const dynamicList = UTIL.getDynamicList(document);
           if (type == "全局变量") {
             for (i in dynamicList.全局变量) {
@@ -395,14 +412,6 @@ function activate(context) {
             }
           }
         }
-
-        function matchDynamicHover() {
-          if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
-            const range = UTIL.getPrevValidWordRange(document, position);
-            const text = document.getText(range);
-            return getDynamicHover(UTIL.getDynamicType(text));
-          }
-        }
       },
     }),
 
@@ -413,7 +422,13 @@ function activate(context) {
         provideCompletionItems(document, position, token, context) {
           try {
             const scope = UTIL.getScope(document, position);
-            if (scope.name === "事件") {
+            if (scope.name === "全局") {
+              return getGlobalCompletions();
+            } else if (scope.name === "扩展") {
+              return getExtensionCompletions();
+            } else if (scope.name.startsWith("规则")) {
+              return getRuleCompletions();
+            } else if (scope.name === "事件") {
               return getEventCompletions(scope.index, scope.first);
             } else if (scope.name === "条件") {
               return getConditionCompletions();
@@ -421,17 +436,74 @@ function activate(context) {
               return getActionCompletions();
             }
 
+            //获取全局补全
+            function getGlobalCompletions() {
+              let completionItems = [];
+              for (const i in MODEL.模版.全局) {
+                completionItems.push(
+                  MODEL.buildCompletion(
+                    PATH,
+                    i,
+                    vscode.CompletionItemKind.Module,
+                    MODEL.模版.全局[i].标签,
+                    MODEL.模版.全局[i].提示,
+                    undefined,
+                    new vscode.SnippetString(`${MODEL.模版.全局[i].格式}`)
+                  )
+                );
+              }
+              return completionItems;
+            }
+
+            //获取扩展补全
+            function getExtensionCompletions() {
+              let completionItems = [];
+              for (const i in MODEL.扩展) {
+                completionItems.push(
+                  MODEL.buildCompletion(
+                    PATH,
+                    i,
+                    vscode.CompletionItemKind.Property,
+                    MODEL.扩展[i].标签,
+                    MODEL.扩展[i].提示
+                  )
+                );
+              }
+              return completionItems;
+            }
+
+            //获取规则补全
+            function getRuleCompletions() {
+              let completionItems = [];
+              for (const i in MODEL.模版.规则) {
+                completionItems.push(
+                  MODEL.buildCompletion(
+                    PATH,
+                    i,
+                    vscode.CompletionItemKind.Module,
+                    MODEL.模版.规则[i].标签,
+                    MODEL.模版.规则[i].提示,
+                    undefined,
+                    new vscode.SnippetString(`${MODEL.模版.规则[i].格式}`)
+                  )
+                );
+              }
+              return completionItems;
+            }
+
             //获取事件补全
             function getEventCompletions(index, first) {
               if (index === 0) {
-                return getStaticCompletions(MODEL.规则.事件.选项);
+                return buildStaticCompletions(MODEL.规则.事件.选项);
               } else if (index === 1) {
                 if (first.startsWith("子程序")) {
-                  return getDynamicCompletions("子程序");
+                  return buildDynamicCompletions("子程序");
                 }
-                return getStaticCompletions(MODEL.规则.事件.队伍);
+                return buildStaticCompletions(MODEL.规则.事件.队伍);
               } else if (index === 2) {
-                return getStaticCompletions(MODEL.规则.事件.玩家);
+                return buildStaticCompletions(MODEL.规则.事件.玩家).concat(
+                  buildStaticCompletions(MODEL.常量.英雄)
+                );
               }
             }
 
@@ -443,19 +515,19 @@ function activate(context) {
               }
               if (entry instanceof Object) {
                 if (entry.name == "数组") {
-                  return getStaticCompletions(MODEL.规则.条件);
+                  return buildStaticCompletions(MODEL.规则.条件);
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
                   const param = MODEL.规则.条件[entry.name].参数[entry.index];
                   if (param.类型 == "条件") {
-                    return getStaticCompletions(MODEL.规则.条件);
+                    return buildStaticCompletions(MODEL.规则.条件);
                   } else if (param.hasOwnProperty("选项")) {
-                    return getStaticCompletions(param.选项);
+                    return buildStaticCompletions(param.选项);
                   }
                 }
               } else if (entry == "条件") {
-                return getStaticCompletions(MODEL.规则.条件);
+                return buildStaticCompletions(MODEL.规则.条件);
               } else if (entry.match(/全局变量|玩家变量|子程序/)) {
-                return getDynamicCompletions(entry);
+                return buildDynamicCompletions(entry);
               }
             }
 
@@ -467,35 +539,55 @@ function activate(context) {
               }
               if (entry instanceof Object) {
                 if (entry.name == "数组") {
-                  return getStaticCompletions(MODEL.规则.条件);
+                  return buildStaticCompletions(MODEL.规则.条件);
                 } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
                   const param = MODEL.规则.动作[entry.name].参数[entry.index];
                   if (param.类型 == "条件") {
-                    return getStaticCompletions(MODEL.规则.条件);
+                    return buildStaticCompletions(MODEL.规则.条件);
                   } else if (param.类型.match(/全局变量|玩家变量|子程序/)) {
-                    return getDynamicCompletions(param.类型);
+                    return buildDynamicCompletions(param.类型);
                   } else if (param.hasOwnProperty("选项")) {
-                    return getStaticCompletions(param.选项);
+                    return buildStaticCompletions(param.选项);
                   }
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
                   const param = MODEL.规则.条件[entry.name].参数[entry.index];
                   if (param.类型 == "条件") {
-                    return getStaticCompletions(MODEL.规则.条件);
+                    return buildStaticCompletions(MODEL.规则.条件);
                   } else if (param.hasOwnProperty("选项")) {
-                    return getStaticCompletions(param.选项);
+                    return buildStaticCompletions(param.选项);
                   }
                 }
               } else if (entry == "动作") {
-                return getStaticCompletions(MODEL.规则.动作);
+                return buildStaticCompletions(MODEL.规则.动作).concat(
+                  buildStaticCompletions(MODEL.规则.条件)
+                );
               } else if (entry == "条件") {
-                return getStaticCompletions(MODEL.规则.条件);
+                return buildStaticCompletions(MODEL.规则.条件);
               } else if (entry.match(/全局变量|玩家变量|子程序/)) {
-                return getDynamicCompletions(entry);
+                return buildDynamicCompletions(entry);
               }
             }
 
-            //获取动态补全列表：全局变量/玩家变量/子程序
-            function getDynamicCompletions(type) {
+            //构建静态补全列表：条件/动作/常量
+            function buildStaticCompletions(object) {
+              let completions = [];
+              for (const p in object) {
+                if (Array.isArray(object[p].补全)) {
+                  const theme =
+                    vscode.window.activeColorTheme.kind ===
+                    vscode.ColorThemeKind.Dark
+                      ? 0
+                      : 1;
+                  completions.push(object[p].补全[theme]);
+                } else {
+                  completions.push(object[p].补全);
+                }
+              }
+              return completions;
+            }
+
+            //构建动态补全列表：全局变量/玩家变量/子程序
+            function buildDynamicCompletions(type) {
               const dynamicList = UTIL.getDynamicList(document);
               let completionItems = [];
               if (type == "全局变量") {
@@ -546,24 +638,6 @@ function activate(context) {
               }
               return completionItems;
             }
-
-            //获取静态补全列表：条件/动作/常量
-            function getStaticCompletions(object) {
-              let completions = [];
-              for (const p in object) {
-                if (Array.isArray(object[p].补全)) {
-                  const theme =
-                    vscode.window.activeColorTheme.kind ===
-                    vscode.ColorThemeKind.Dark
-                      ? 0
-                      : 1;
-                  completions.push(object[p].补全[theme]);
-                } else {
-                  completions.push(object[p].补全);
-                }
-              }
-              return completions;
-            }
           } catch (error) {
             console.log(error);
           }
@@ -598,8 +672,11 @@ function activate(context) {
                 if (entry.name == "数组") {
                   return;
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  const param = MODEL.规则.条件[entry.name].参数[entry.index];
-                  console.log(param);
+                  return buildSignatureHelp(
+                    entry.name,
+                    MODEL.规则.条件[entry.name],
+                    entry.index
+                  );
                 }
               }
             }
@@ -614,128 +691,63 @@ function activate(context) {
                 if (entry.name == "数组") {
                   return;
                 } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
-                  const param = MODEL.规则.动作[entry.name].参数[entry.index];
-                  console.log(param);
+                  console.log(
+                    buildSignatureHelp(
+                      entry.name,
+                      MODEL.规则.动作[entry.name],
+                      entry.index
+                    )
+                  );
+                  return buildSignatureHelp(
+                    entry.name,
+                    MODEL.规则.动作[entry.name],
+                    entry.index
+                  );
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  const param = MODEL.规则.条件[entry.name].参数[entry.index];
-                  console.log(param);
+                  return buildSignatureHelp(
+                    entry.name,
+                    MODEL.规则.条件[entry.name],
+                    entry.index
+                  );
                 }
               }
             }
 
-            // TODO
-            const offset = document.offsetAt(position) - 1;
-            const block = getBlock(document, offset);
-            if (block[0] == "条件" || block[0] == "动作") {
-              let funct = getFunction(document, offset);
-              for (i in RULES.ACTION) {
-                if (i == funct[0]) {
-                  const signHelp = new vscode.SignatureHelp();
-                  const signInfo = new vscode.SignatureInformation();
-                  let name = i;
-                  let n = 0;
-                  if (RULES.ACTION[i].hasOwnProperty("参数")) {
-                    name += "(";
-                    for (j in RULES.ACTION[i].参数) {
-                      let param = new vscode.ParameterInformation();
-                      param.label = [name.length, name.length + j.length];
-                      //构造Markdown
-                      let info = new vscode.MarkdownString();
-                      info.isTrusted = true;
-                      info.supportHtml = true;
-                      info.supportThemeIcons = true;
-                      info.appendMarkdown(
-                        `***<span style="color:#0ac;">⬘</span>&nbsp;参数&nbsp;:&nbsp;${j}***\n\n`
-                      );
-                      info.appendMarkdown(
-                        `\`${funct[1]}\` \`${RULES.ACTION[i].参数[j].类型}\`&nbsp;\n\n`
-                      );
-                      info.appendMarkdown(
-                        `${RULES.ACTION[i].参数[j].提示}&nbsp;\n\n`
-                      );
-                      param.documentation = info;
-                      signInfo.parameters.push(param);
-                      name += j + ", ";
-                    }
-                    name = name.slice(0, name.length - 2) + ")";
-                  }
-                  signInfo.label = name;
-
-                  let info = new vscode.MarkdownString();
-                  info.isTrusted = true;
-                  info.supportHtml = true;
-                  info.supportThemeIcons = true;
-                  info.appendMarkdown(
-                    `\n\n***<span style="color:#c0c;">⬘</span>&nbsp;方法&nbsp;:&nbsp;${i}***\n\n`
-                  );
-                  //标签
-                  for (j in RULES.ACTION[i].标签) {
-                    info.appendMarkdown(`\`${RULES.ACTION[i].标签[j]}\`&nbsp;`);
-                  }
-                  //提示
-                  info.appendMarkdown(`\n\n${RULES.ACTION[i].提示}`);
-
-                  signInfo.documentation = info;
-                  signHelp.signatures = [signInfo];
-                  signInfo.activeParameter = funct[1];
-                  return signHelp;
+            //构建参数签名
+            function buildSignatureHelp(name, object, index) {
+              const signatureHelp = new vscode.SignatureHelp();
+              const signatureInfo = new vscode.SignatureInformation();
+              let label = name + "(";
+              const params = object.参数;
+              for (i in params) {
+                const param = params[i].签名;
+                param.label = [
+                  label.length,
+                  label.length + params[i].名称.length,
+                ];
+                signatureInfo.parameters.push(param);
+                label += params[i].名称;
+                if (i < params.length - 1) {
+                  label += ", ";
                 }
               }
-              for (i in RULES.CONDITION) {
-                if (i == funct[0]) {
-                  const signHelp = new vscode.SignatureHelp();
-                  const signInfo = new vscode.SignatureInformation();
-                  let name = i;
-                  if (RULES.CONDITION[i].hasOwnProperty("参数")) {
-                    name += "(";
-                    for (j in RULES.CONDITION[i].参数) {
-                      let param = new vscode.ParameterInformation();
-                      param.label = [name.length, name.length + j.length];
-
-                      //构造Markdown
-                      let info = new vscode.MarkdownString();
-                      info.isTrusted = true;
-                      info.supportHtml = true;
-                      info.supportThemeIcons = true;
-                      info.appendMarkdown(
-                        `***<span style="color:#0ac;">⬘</span>&nbsp;参数&nbsp;:&nbsp;${j}***\n\n`
-                      );
-                      info.appendMarkdown(
-                        `\`${funct[1]}\` \`${RULES.CONDITION[i].参数[j].类型}\`&nbsp;\n\n`
-                      );
-                      info.appendMarkdown(
-                        `${RULES.CONDITION[i].参数[j].提示}&nbsp;\n\n`
-                      );
-                      param.documentation = info;
-                      signInfo.parameters.push(param);
-                      name += j + ", ";
-                    }
-                    name = name.slice(0, name.length - 2) + ")";
-                  }
-                  signInfo.label = name;
-
-                  let info = new vscode.MarkdownString();
-                  info.isTrusted = true;
-                  info.supportHtml = true;
-                  info.supportThemeIcons = true;
-                  info.appendMarkdown(
-                    `\n\n***<span style="color:#c0c;">⬘</span>&nbsp;方法&nbsp;:&nbsp;${i}***\n\n`
-                  );
-                  //标签
-                  for (j in RULES.CONDITION[i].标签) {
-                    info.appendMarkdown(
-                      `\`${RULES.CONDITION[i].标签[j]}\`&nbsp;`
-                    );
-                  }
-                  //提示
-                  info.appendMarkdown(`\n\n${RULES.CONDITION[i].提示}`);
-
-                  signInfo.documentation = info;
-                  signHelp.signatures = [signInfo];
-                  signInfo.activeParameter = funct[1];
-                  return signHelp;
-                }
+              signatureInfo.label = label + ")";
+              signatureInfo.documentation = new vscode.MarkdownString();
+              signatureInfo.documentation.isTrusted = true;
+              signatureInfo.documentation.supportHtml = true;
+              signatureInfo.documentation.supportThemeIcons = true;
+              signatureInfo.documentation.appendMarkdown(
+                `\n\n***<span style="color:#c0c;">⬘</span>&nbsp;方法&nbsp;:&nbsp;${name}***\n\n`
+              );
+              for (i in object.标签) {
+                signatureInfo.documentation.appendMarkdown(
+                  `\`${object.标签[i]}\`&nbsp;`
+                );
               }
+              signatureInfo.documentation.appendMarkdown(`\n\n${object.提示}`);
+              signatureInfo.activeParameter = index;
+              signatureHelp.signatures = [signatureInfo];
+              return signatureHelp;
             }
           } catch (error) {
             console.log(error);

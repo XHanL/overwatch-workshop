@@ -3,7 +3,7 @@
     "name": "overwatch-workshop",
     "displayName": "Overwatch Workshop",
     "publisher": "Xcrystal",
-    "description": "守望先锋® 高级工坊语言支持",
+    "description": "守望先锋® 工坊语言支持",
     "repository": {
         "url": "https://github.com/XHanL/overwatch-workshop"
     },
@@ -52,7 +52,7 @@
             {
                 "language": "ow",
                 "scopeName": "source.ow",
-                "path": "syntaxes/ow.tmLanguage.json"
+                "path": "ow.tmLanguage.json"
             }
         ],
         "keybindings": [],
@@ -176,5 +176,8 @@
                 "path": "themes/ow.crystal_light.json"
             }
         ]
+    },
+    "dependencies": {
+        "pinyinlite": "^1.2.1"
     }
 }
