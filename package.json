@@ -145,11 +145,15 @@
       ]
     },
     "themes": [
-
       {
         "label": "Overwatch Workshop 亮色",
         "uiTheme": "vs",
         "path": "themes/ow.light.json"
+      },
+      {
+        "label": "Overwatch Workshop 深色",
+        "uiTheme": "vs-dark",
+        "path": "themes/ow.dark.json"
       }
     ]
   }
