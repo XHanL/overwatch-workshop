@@ -6,47 +6,47 @@ body {
     font-size: 16px;
     line-height: 1.5;
   }
-  
+
   /* Headings */
   h1, h2, h3, h4, h5, h6 {
     color: #fff;
     font-weight: 600;
     line-height: 1.25;
   }
-  
+
   h1 {
     font-size: 2.5em;
   }
-  
+
   h2 {
     font-size: 2em;
   }
-  
+
   h3 {
     font-size: 1.5em;
   }
-  
+
   h4 {
     font-size: 1.25em;
   }
-  
+
   h5 {
     font-size: 1em;
   }
-  
+
   h6 {
     font-size: 0.875em;
   }
-  
+
   /* Links */
   a {
     color: #58a6ff;
   }
-  
+
   a:hover {
     text-decoration: none;
   }
-  
+
   /* Code blocks */
   pre {
     background-color: #0d1117;
@@ -57,12 +57,12 @@ body {
     padding: 16px;
     tab-size: 4;
   }
-  
+
   pre code {
     background-color: transparent;
     color: inherit;
   }
-  
+
   /* Inline code */
   code {
     background-color: rgba(255, 255, 255, 0.05);
@@ -72,7 +72,7 @@ body {
     margin: 0;
     padding: 0.2em 0.4em;
   }
-  
+
   /* Blockquotes */
   blockquote {
     background-color: #1f6feb;
@@ -82,25 +82,25 @@ body {
     margin: 0;
     padding: 16px;
   }
-  
+
   blockquote p {
     margin: 0;
   }
-  
+
   /* Lists */
   ul, ol {
     margin-bottom: 0;
   }
-  
+
   li {
     margin-bottom: calc(1.5 * 1.45rem);
   }
-  
+
   /* Images */
   img {
     max-width: 100%;
   }
-  
+
   /* Tables */
 table {
   background-color: #22272e;
@@ -156,7 +156,7 @@ button {
 button:hover,
 button:focus {
   box-shadow: rgba(255, 255, 255, 0.3) 0 2px 12px;
-  color: rgba(255, 255, 255, 0.85); 
+  color: rgba(255, 255, 255, 0.85);
 }
 
 button:hover {

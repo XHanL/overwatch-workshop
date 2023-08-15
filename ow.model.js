@@ -10246,7 +10246,7 @@ let 规则 = {
         {
           名称: "输入值",
           类型: "条件",
-          默认: "",
+          默认: "空",
           提示: "此值在每个动作或条件中只赋值一次。",
         },
       ],
@@ -11638,7 +11638,7 @@ let 规则 = {
         {
           名称: "条件",
           类型: "条件",
-          默认: "",
+          默认: "空",
           提示: "获取此数组中的元素。",
         },
       ],
@@ -13132,7 +13132,7 @@ let 规则 = {
         {
           名称: "值",
           类型: "条件",
-          默认: "",
+          默认: "空",
           提示: "此值的更新频率将从每几帧更新一次提高为每一帧更新一次。",
         },
       ],
@@ -13320,7 +13320,7 @@ let 规则 = {
         {
           名称: "条件",
           类型: "条件",
-          默认: "",
+          默认: "空",
           提示: "如果此值为真，则继续执行下一个行动。否则，跳转至当前层级的下一个 Else If ，Else 或 End 行动并执行。",
         },
       ],
@@ -13400,7 +13400,7 @@ let 规则 = {
         {
           名称: "条件",
           类型: "条件",
-          默认: "",
+          默认: "空",
           提示: "如果此值为真，则继续执行下一个行动。否则，跳转至当前层级的下一个 Else If ，Else 或 End 行动并执行。",
         },
       ],
@@ -17857,7 +17857,7 @@ function buildStaticModels(PATH) {
       insertText.appendText(`(`);
       const params = 规则.条件[i].参数;
       params.forEach((element, index) => {
-        if (element.类型.match(/条件|数字|布尔/)) {
+        if (element.类型.match(/^条件|数字|布尔$/)) {
           insertText.appendPlaceholder(`${element.默认}`);
         } else if (Array.isArray(element.选项)) {
           insertText.appendPlaceholder(`${element.选项[0].名称}`);
@@ -17906,11 +17906,11 @@ function buildStaticModels(PATH) {
       insertText.appendText(`(`);
       const params = 规则.动作[i].参数;
       params.forEach((element, index) => {
-        if (element.类型.match(/条件|数字|布尔/)) {
+        if (element.类型.match(/^条件|数字|布尔$/)) {
           insertText.appendPlaceholder(`${element.默认}`);
         } else if (Array.isArray(element.选项)) {
           insertText.appendPlaceholder(`${element.选项[0].名称}`);
-        } else if (element.类型.match(/全局变量|玩家变量/)) {
+        } else if (element.类型.match(/^全局变量|玩家变量$/)) {
           insertText.appendPlaceholder(`A`);
         } else if (element.类型.match("子程序")) {
           insertText.appendPlaceholder(`Sub0`);

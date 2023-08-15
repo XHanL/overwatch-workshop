@@ -1,0 +1,125 @@
+//DARK
+"foreground": "#C586C0"
+"foreground": "#4FC1FF"
+"foreground": "#000080"
+"foreground": "#646695"
+"foreground": "#d7ba7d"
+"foreground": "#f44747"
+"foreground": "#6796e6"
+"foreground": "#808080"
+"foreground": "#ce9178"
+"foreground": "#d16969"
+"foreground": "#b5cea8"
+"foreground": "#9cdcfe",
+"foreground": "#d4d4d4",
+"foreground": "#569cd6",
+"foreground": "#DCDCAA",
+"foreground": "#4EC9B0"
+"foreground": "#6A9955"
+
+"entity.name.section.variable.ow",
+"entity.name.section.variable.type.ow",
+"entity.name.section.subroutine.ow",
+"entity.name.section.rule.ow",
+"entity.name.section.rule.event.ow",
+"entity.name.section.rule.condition.ow",
+"entity.name.section.rule.action.ow",
+
+"comment.line.ow",
+"comment.block.ow",
+
+"string.ow",
+"string.quoted.double.ow",
+
+"entity.name.type.rule.event.type.ow",
+"entity.name.type.rule.event.team.ow",
+"entity.name.type.rule.event.player.ow",
+
+"keyword.operator.ow",
+"keyword.operator.new.ow",
+"keyword.control.rule.action.ow",
+
+"entity.name.function.rule.condition.ow",
+
+"entity.name.class.rule.action.ow",
+
+"constant.character.ow",
+
+"variable.ow",
+
+"constant.numeric.ow",
+
+//LIGHT
+"background": "#d73a49",
+"foreground": "#fafbfc",
+
+"background": "#ffeef0",
+"foreground": "#b31d28"
+
+"background": "#f0fff4",
+"foreground": "#22863a"
+
+"background": "#ffebda",
+"foreground": "#e36209"
+
+"foreground": "#6a737d" //comment
+"foreground": "#24292e"
+"foreground": "#6f42c1",
+"foreground": "#005cc5"
+"foreground": "#f6f8fa",
+"foreground": "#586069"
+"foreground": "#b31d28"
+"foreground": "#032f62",
+
+
+
+    {
+      "scope": [
+        "entity.name.type.rule.event.type.ow",
+        "entity.name.type.rule.event.team.ow",
+        "entity.name.type.rule.event.player.ow"
+      ],
+      "settings": {
+        "foreground": "#C586C0"
+      }
+    },
+    {
+      "scope": [
+        "keyword.control.rule.action.ow",
+        "keyword.operator.ow",
+        "keyword.operator.new.ow"
+      ],
+      "settings": {
+        "foreground": "#f44747"
+      }
+    },
+    {
+      "scope": ["entity.name.class.rule.action.ow"],
+      "settings": {
+        "foreground": "#d7ba7d"
+      }
+    },
+    {
+      "scope": ["entity.name.function.rule.condition.ow"],
+      "settings": {
+        "foreground": "#d4d4d4"
+      }
+    },
+    {
+      "scope": ["constant.character.ow"],
+      "settings": {
+        "foreground": "#ce9178"
+      }
+    },
+    {
+      "scope": ["variable.ow"],
+      "settings": {
+        "foreground": "#4FC1FF"
+      }
+    },
+    {
+      "scope": ["constant.numeric.ow"],
+      "settings": {
+        "foreground": "#DCDCAA"
+      }
+    },
