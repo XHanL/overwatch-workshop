@@ -787,6 +787,12 @@ function activate(context) {
                     </head>
                     <body>
                     <i><h3>参考</h3></i>
+                    <button style="width: 150px; height: auto;" onclick="navigate('Mode')">模式</button>
+                    <br>
+                    <br>
+                    <button style="width: 150px; height: auto;" onclick="navigate('Map')">地图</button>
+                    <br>
+                    <br>
                     <button style="width: 150px; height: auto;" onclick="navigate('String')">字符串</button>
                     <br>
                     <br>
@@ -796,17 +802,83 @@ function activate(context) {
                     <button style="width: 150px; height: auto;" onclick="navigate('Icon')">图标</button>
                     <br>
                     <br>
+                    <button style="width: 150px; height: auto;" onclick="navigate('Effect')">效果</button>
+                    <br>
+                    <br>
+                    <button style="width: 150px; height: auto;" onclick="navigate('Projectile')">弹道</button>
+                    <br>
+                    <br>
+                    </body>
+                    </html>`;
+        }
+
+        function getModeTableHtml() {
+          const mode = MODEL.常量.模式
+            .map((element, index) => {
+              if (index % 2 === 0) {
+                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+              } else {
+                return `<td style="text-align: center;">${element.名称}</td>`;
+              }
+            })
+            .join("");
+          return `<!DOCTYPE html>
+                    <html>
+                    <head>
+                    <link href="${styleUri}" rel="stylesheet">
+                    <script src="${scriptUri}"></script>
+                    <title>模式</title>
+                    </head>
+                    <body>
+                    <br>
+                    <button style="width: auto; height: 25px;" onclick="navigate('Home')">返回</button>
+                    <i><h3>模式</h3></i>
+                    <table style="min-width: 300px; max-width: 400px;">
+                    <tr>
+                    ${mode}
+                    </tr>
+                    </table>
+                    </body>
+                    </html>`;
+        }
+
+        function getMapTableHtml() {
+          const maps = MODEL.常量.地图
+            .map((element, index) => {
+              if (index % 2 === 0) {
+                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+              } else {
+                return `<td style="text-align: center;">${element.名称}</td>`;
+              }
+            })
+            .join("");
+          return `<!DOCTYPE html>
+                    <html>
+                    <head>
+                    <link href="${styleUri}" rel="stylesheet">
+                    <script src="${scriptUri}"></script>
+                    <title>地图</title>
+                    </head>
+                    <body>
+                    <br>
+                    <button style="width: auto; height: 25px;" onclick="navigate('Home')">返回</button>
+                    <i><h3>地图</h3></i>
+                    <table style="min-width: 300px; max-width: 500px;">
+                    <tr>
+                    ${maps}
+                    </tr>
+                    </table>
                     </body>
                     </html>`;
         }
 
         function getStringTableHtml() {
           const strings = MODEL.常量.字符串
-            .map((v, i) => {
-              if (i % 3 === 0) {
-                return `</tr><tr><td style="text-align: center;">${v}</td>`;
+            .map((element, index) => {
+              if (index % 2 === 0) {
+                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
               } else {
-                return `<td style="text-align: center;">${v}</td>`;
+                return `<td style="text-align: center;">${element.名称}</td>`;
               }
             })
             .join("");
@@ -1032,7 +1104,7 @@ function activate(context) {
                       `${themeUri}${imageNumber}.png`
                     )
                   );
-                  const icons = Object.getOwnPropertyNames(MODEL.常量.图标);
+                  const icons = MODEL.常量.图标.map((element) => element.名称);
                   return `<td style="text-align: center; font-weight: 500;"><img src="${imageSrc}" width="30" height="30"><br>${
                     icons[imageNumber - 1]
                   }</td>`;
@@ -4091,11 +4163,181 @@ function activate(context) {
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "support",
+                        "illari",
+                        "icon.png"
+                      )
+                    )}" width="auto" height="50"><br>伊拉锐<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "support",
+                        "illari",
+                        "weapon.png"
+                      )
+                    )}" width="60" height="auto"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "support",
+                        "illari",
+                        `weapon.png`
+                      )
+                    )}" width="auto" height="30"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "support",
+                        "illari",
+                        `${themeUri}ultimate.png`
+                      )
+                    )}" width="30" height="30"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "support",
+                        "illari",
+                        `${themeUri}ability1.png`
+                      )
+                    )}" width="30" height="30"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "support",
+                        "illari",
+                        `${themeUri}ability2.png`
+                      )
+                    )}" width="30" height="30"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        `${themeUri}melee.png`
+                      )
+                    )}" width="30" height="30"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
                     </tbody>
                     </table>
 
                     </body>
 
+                    </html>`;
+        }
+
+        function getProjectileTableHtml() {
+          const projectile = MODEL.常量.弹道
+            .map((element, index) => {
+              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+            })
+            .join("");
+          const projectileExplosion = MODEL.常量.弹道爆炸效果
+            .map((element, index) => {
+              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+            })
+            .join("");
+          const projectileExplosionSound = MODEL.常量.弹道爆炸声音
+            .map((element, index) => {
+              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+            })
+            .join("");
+          return `<!DOCTYPE html>
+                    <html>
+                    <head>
+                    <link href="${styleUri}" rel="stylesheet">
+                    <script src="${scriptUri}"></script>
+                    <title>弹道</title>
+                    </head>
+                    <body>
+                    <br>
+                    <button style="width: auto; height: 25px;" onclick="navigate('Home')">返回</button>
+                    <i><h3>弹道</h3></i>
+                    <table style="min-width: 300px; max-width: 525px;">
+                    <tr>
+                    ${projectile}
+                    </tr>
+                    </table>
+
+                    <i><h3>弹道爆炸效果</h3></i>
+                    <table style="min-width: 300px; max-width: 525px;">
+                    <tr>
+                    ${projectileExplosion}
+                    </tr>
+                    </table>
+
+                    <i><h3>弹道爆炸声音</h3></i>
+                    <table style="min-width: 300px; max-width: 525px;">
+                    <tr>
+                    ${projectileExplosionSound}
+                    </tr>
+                    </table>
+                    </body>
+                    </html>`;
+        }
+
+        function getEffectTableHtml() {
+          const effects = MODEL.常量.效果
+            .map((element, index) => {
+              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+            })
+            .join("");
+          const playerEffects = MODEL.常量.播放效果
+            .map((element, index) => {
+              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+            })
+            .join("");
+          return `<!DOCTYPE html>
+                    <html>
+                    <head>
+                    <link href="${styleUri}" rel="stylesheet">
+                    <script src="${scriptUri}"></script>
+                    <title>效果</title>
+                    </head>
+                    <body>
+                    <br>
+                    <button style="width: auto; height: 25px;" onclick="navigate('Home')">返回</button>
+
+                    <i><h3>效果</h3></i>
+                    <table style="min-width: 300px; max-width: 525px;">
+                    <tr>
+                    ${effects}
+                    </tr>
+                    </table>
+
+                    <i><h3>播放效果</h3></i>
+                    <table style="min-width: 300px; max-width: 525px;">
+                    <tr>
+                    ${playerEffects}
+                    </tr>
+                    </table>
+
+                    </body>
                     </html>`;
         }
 
@@ -4109,6 +4351,12 @@ function activate(context) {
             case "Home":
               webviewView.webview.html = getHomeHtml();
               return;
+            case "Mode":
+              webviewView.webview.html = getModeTableHtml();
+              return;
+            case "Map":
+              webviewView.webview.html = getMapTableHtml();
+              return;
             case "String":
               webviewView.webview.html = getStringTableHtml();
               return;
@@ -4117,6 +4365,12 @@ function activate(context) {
               return;
             case "Icon":
               webviewView.webview.html = getIconTableHtml();
+              return;
+            case "Projectile":
+              webviewView.webview.html = getProjectileTableHtml();
+              return;
+            case "Effect":
+              webviewView.webview.html = getEffectTableHtml();
               return;
             default:
               console.log("Unknown command: " + message.command);
