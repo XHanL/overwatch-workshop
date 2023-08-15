@@ -2726,10 +2726,7 @@ let 常量 = {
       },
       技能: {
         生化步枪: {
-          图标: [
-            "images/ow/hero/support/ana/weapon.png",
-            "images/ow/hero/support/ana/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/support/ana/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "安娜的步枪能够射出治疗队友和对敌人造成持续伤害的子弹。而她步枪上的瞄准镜能够让她进行更加精确的射击。",
         },
@@ -2770,10 +2767,7 @@ let 常量 = {
       },
       技能: {
         "“毒蛇”": {
-          图标: [
-            "images/ow/hero/damage/ashe/weapon.png",
-            "images/ow/hero/damage/ashe/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/ashe/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         召唤鲍勃: {
@@ -2810,12 +2804,14 @@ let 常量 = {
       },
       技能: {
         生化榴弹枪: {
-          图标: [
-            "images/ow/hero/support/baptiste/weapon1.png",
-            "images/ow/hero/support/baptiste/gray/weapon1.png",
-          ],
-          绑定: ["主要攻击模式", "辅助攻击模式"],
-          提示: "使用不同的弹药索引。攻击为 0，治疗为 1。",
+          图标: "images/ow/hero/support/baptiste/weapon1.png",
+          绑定: ["主要攻击模式"],
+          提示: "弹药索引为 0。",
+        },
+        生化榴弹: {
+          图标: "images/ow/hero/support/baptiste/weapon2.png",
+          绑定: ["辅助攻击模式"],
+          提示: "弹药索引为 1。",
         },
         增幅矩阵: {
           图标: [
@@ -2827,7 +2823,7 @@ let 常量 = {
         愈合冲击: {
           图标: [
             "images/ow/hero/support/baptiste/ability1.png",
-            "images/ow/hero/support/baptiste/gray/bility1.png",
+            "images/ow/hero/support/baptiste/gray/ability1.png",
           ],
           绑定: ["技能1"],
         },
@@ -2860,17 +2856,11 @@ let 常量 = {
       },
       技能: {
         侦察模式: {
-          图标: [
-            "images/ow/hero/damage/bastion/weapon1.png",
-            "images/ow/hero/damage/bastion/gray/weapon1.png",
-          ],
+          图标: "images/ow/hero/damage/bastion/weapon1.png",
           绑定: ["主要攻击模式"],
         },
         强攻模式: {
-          图标: [
-            "images/ow/hero/damage/bastion/weapon2.png",
-            "images/ow/hero/damage/bastion/gray/weapon2.png",
-          ],
+          图标: "images/ow/hero/damage/bastion/weapon2.png",
           绑定: ["主要攻击模式"],
           提示: "切换模式状态下的武器。无需装弹，故无法设置弹药。",
         },
@@ -2918,10 +2908,7 @@ let 常量 = {
       },
       技能: {
         火箭连枷: {
-          图标: [
-            "images/ow/hero/support/brigitte/weapon.png",
-            "images/ow/hero/support/brigitte/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/support/brigitte/weapon.png",
           绑定: ["主要攻击模式"],
           提示: "举盾时不可用。",
         },
@@ -2981,10 +2968,7 @@ let 常量 = {
       },
       技能: {
         手炮: {
-          图标: [
-            "images/ow/hero/tank/doomfist/weapon.png",
-            "images/ow/hero/tank/doomfist/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/tank/doomfist/weapon.png",
           绑定: ["主要攻击模式"],
           提示: "无法手动装填，但可以设置弹药。",
         },
@@ -3038,18 +3022,12 @@ let 常量 = {
       },
       技能: {
         聚变机炮: {
-          图标: [
-            "images/ow/hero/tank/dva/weapon1.png",
-            "images/ow/hero/tank/dva/gray/weapon1.png",
-          ],
+          图标: "images/ow/hero/tank/dva/weapon1.png",
           绑定: ["主要攻击模式"],
           提示: "使用时会降低D.Va的移动速度。",
         },
         光枪: {
-          图标: [
-            "images/ow/hero/tank/dva/weapon2.png",
-            "images/ow/hero/tank/dva/gray/weapon2.png",
-          ],
+          图标: "images/ow/hero/tank/dva/weapon2.png",
           绑定: ["主要攻击模式"],
           提示: "不在机甲内时为光枪。",
         },
@@ -3110,10 +3088,7 @@ let 常量 = {
       },
       技能: {
         三角射击: {
-          图标: [
-            "images/ow/hero/damage/echo/weapon.png",
-            "images/ow/hero/damage/echo/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/echo/weapon.png",
           绑定: ["主要攻击模式"],
         },
         黏性炸弹: {
@@ -3164,10 +3139,7 @@ let 常量 = {
       },
       技能: {
         镖: {
-          图标: [
-            "images/ow/hero/damage/genji/weapon.png",
-            "images/ow/hero/damage/genji/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/genji/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         斩: {
@@ -3214,10 +3186,7 @@ let 常量 = {
       },
       技能: {
         四联火炮: {
-          图标: [
-            "images/ow/hero/tank/wrecking-ball/weapon.png",
-            "images/ow/hero/tank/wrecking-ball/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/tank/wrecking-ball/weapon.png",
           绑定: ["主要攻击模式"],
         },
         工程抓钩: {
@@ -3268,10 +3237,7 @@ let 常量 = {
       },
       技能: {
         风: {
-          图标: [
-            "images/ow/hero/damage/hanzo/weapon.png",
-            "images/ow/hero/damage/hanzo/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/hanzo/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "用辅助攻击模式取消拉弓。",
         },
@@ -3324,10 +3290,7 @@ let 常量 = {
       },
       技能: {
         散弹枪: {
-          图标: [
-            "images/ow/hero/tank/junker-queen/weapon.png",
-            "images/ow/hero/tank/junker-queen/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/tank/junker-queen/weapon.png",
           绑定: ["主要攻击模式"],
         },
         锯齿利刃: {
@@ -3379,10 +3342,7 @@ let 常量 = {
       },
       技能: {
         榴弹发射器: {
-          图标: [
-            "images/ow/hero/damage/junkrat/weapon.png",
-            "images/ow/hero/damage/junkrat/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/junkrat/weapon.png",
           绑定: ["主要攻击模式"],
         },
         炸弹轮胎: {
@@ -3428,18 +3388,12 @@ let 常量 = {
       },
       技能: {
         锥: {
-          图标: [
-            "images/ow/hero/support/kiriko/weapon2.png",
-            "images/ow/hero/support/kiriko/gray/weapon2.png",
-          ],
+          图标: "images/ow/hero/support/kiriko/weapon2.png",
           绑定: ["辅助攻击模式"],
           提示: "由于一个问题，无法通过地图工坊动作更改弹药。",
         },
         符: {
-          图标: [
-            "images/ow/hero/support/kiriko/weapon1.png",
-            "images/ow/hero/support/kiriko/gray/weapon1.png",
-          ],
+          图标: "images/ow/hero/support/kiriko/weapon1.png",
           绑定: ["主要攻击模式"],
           提示: "无法更改弹药。",
         },
@@ -3485,10 +3439,7 @@ let 常量 = {
       },
       技能: {
         音速扩音器: {
-          图标: [
-            "images/ow/hero/support/lucio/weapon.png",
-            "images/ow/hero/support/lucio/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/support/lucio/weapon.png",
           绑定: ["主要攻击模式"],
         },
         音波: {
@@ -3540,10 +3491,7 @@ let 常量 = {
       },
       技能: {
         维和者: {
-          图标: [
-            "images/ow/hero/damage/cassidy/weapon.png",
-            "images/ow/hero/damage/cassidy/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/cassidy/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         神射手: {
@@ -3580,10 +3528,7 @@ let 常量 = {
       },
       技能: {
         冰霜冲击枪: {
-          图标: [
-            "images/ow/hero/damage/mei/weapon.png",
-            "images/ow/hero/damage/mei/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/mei/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         暴雪: {
@@ -3620,10 +3565,7 @@ let 常量 = {
       },
       技能: {
         天使之杖: {
-          图标: [
-            "images/ow/hero/support/mercy/weapon1.png",
-            "images/ow/hero/support/mercy/gray/weapon1.png",
-          ],
+          图标: "images/ow/hero/support/mercy/weapon1.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         天使冲击枪: {
@@ -3674,10 +3616,7 @@ let 常量 = {
       },
       技能: {
         生化之触: {
-          图标: [
-            "images/ow/hero/support/moira/weapon.png",
-            "images/ow/hero/support/moira/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/support/moira/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "治疗队友，吸取敌人。",
         },
@@ -3724,10 +3663,7 @@ let 常量 = {
       },
       技能: {
         强化聚变驱动器: {
-          图标: [
-            "images/ow/hero/tank/orisa/weapon.png",
-            "images/ow/hero/tank/orisa/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/tank/orisa/weapon.png",
           绑定: ["主要攻击模式"],
         },
         能量标枪: {
@@ -3771,10 +3707,7 @@ let 常量 = {
       },
       技能: {
         火箭发射器: {
-          图标: [
-            "images/ow/hero/damage/pharah/weapon.png",
-            "images/ow/hero/damage/pharah/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/pharah/weapon.png",
           绑定: ["主要攻击模式"],
         },
         火箭弹幕: {
@@ -3818,10 +3751,7 @@ let 常量 = {
       },
       技能: {
         地狱火霰弹枪: {
-          图标: [
-            "images/ow/hero/damage/reaper/weapon.png",
-            "images/ow/hero/damage/reaper/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/reaper/weapon.png",
           绑定: ["主要攻击模式"],
         },
         死亡绽放: {
@@ -3867,10 +3797,7 @@ let 常量 = {
       },
       技能: {
         火箭重锤: {
-          图标: [
-            "images/ow/hero/tank/reinhardt/weapon.png",
-            "images/ow/hero/tank/reinhardt/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/tank/reinhardt/weapon.png",
           绑定: ["主要攻击模式"],
         },
         屏障力场: {
@@ -3914,10 +3841,7 @@ let 常量 = {
       },
       技能: {
         爆裂枪: {
-          图标: [
-            "images/ow/hero/tank/roadhog/weapon.png",
-            "images/ow/hero/tank/roadhog/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/tank/roadhog/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         鸡飞狗跳: {
@@ -3956,10 +3880,7 @@ let 常量 = {
       },
       技能: {
         超能之球: {
-          图标: [
-            "images/ow/hero/tank/sigma/weapon.png",
-            "images/ow/hero/tank/sigma/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/tank/sigma/weapon.png",
           绑定: ["主要攻击模式"],
         },
         实验屏障: {
@@ -4003,10 +3924,7 @@ let 常量 = {
       },
       技能: {
         电磁炮: {
-          图标: [
-            "images/ow/hero/damage/sojourn/weapon.png",
-            "images/ow/hero/damage/sojourn/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/sojourn/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "无法通过修改技能资源或“伤害”动作来调整电磁炮的能量值。",
         },
@@ -4044,10 +3962,7 @@ let 常量 = {
       },
       技能: {
         重型脉冲步枪: {
-          图标: [
-            "images/ow/hero/damage/soldier-76/weapon.png",
-            "images/ow/hero/damage/soldier-76/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/soldier-76/weapon.png",
           绑定: ["主要攻击模式"],
         },
         螺旋飞弹: {
@@ -4091,10 +4006,7 @@ let 常量 = {
       },
       技能: {
         自动手枪: {
-          图标: [
-            "images/ow/hero/damage/sombra/weapon.png",
-            "images/ow/hero/damage/sombra/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/sombra/weapon.png",
           绑定: ["主要攻击模式"],
         },
         黑客入侵: {
@@ -4147,10 +4059,7 @@ let 常量 = {
       },
       技能: {
         光子发射器: {
-          图标: [
-            "images/ow/hero/damage/symmetra/weapon.png",
-            "images/ow/hero/damage/symmetra/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/symmetra/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         光子屏障: {
@@ -4188,17 +4097,11 @@ let 常量 = {
       },
       技能: {
         铆钉枪: {
-          图标: [
-            "images/ow/hero/damage/torbjorn/weapon1.png",
-            "images/ow/hero/damage/torbjorn/gray/weapon1.png",
-          ],
+          图标: "images/ow/hero/damage/torbjorn/weapon1.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         锻造锤: {
-          图标: [
-            "images/ow/hero/damage/torbjorn/weapon2.png",
-            "images/ow/hero/damage/torbjorn/gray/weapon2.png",
-          ],
+          图标: "images/ow/hero/damage/torbjorn/weapon2.png",
           绑定: ["主要攻击模式"],
         },
         熔火核心: {
@@ -4236,10 +4139,7 @@ let 常量 = {
       },
       技能: {
         脉冲双枪: {
-          图标: [
-            "images/ow/hero/damage/tracer/weapon.png",
-            "images/ow/hero/damage/tracer/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/tracer/weapon.png",
           绑定: ["主要攻击模式"],
         },
         脉冲炸弹: {
@@ -4276,10 +4176,7 @@ let 常量 = {
       },
       技能: {
         黑百合之吻: {
-          图标: [
-            "images/ow/hero/damage/widowmaker/weapon.png",
-            "images/ow/hero/damage/widowmaker/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/damage/widowmaker/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         红外侦测: {
@@ -4318,10 +4215,7 @@ let 常量 = {
       },
       技能: {
         特斯拉炮: {
-          图标: [
-            "images/ow/hero/tank/winston/weapon.png",
-            "images/ow/hero/tank/winston/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/tank/winston/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         原始暴怒: {
@@ -4359,10 +4253,7 @@ let 常量 = {
       },
       技能: {
         粒子炮: {
-          图标: [
-            "images/ow/hero/tank/zarya/weapon.png",
-            "images/ow/hero/tank/zarya/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/tank/zarya/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "无法通过修改技能资源或“伤害”动作来调整粒子炮的能量值。",
         },
@@ -4408,10 +4299,7 @@ let 常量 = {
       },
       技能: {
         灭: {
-          图标: [
-            "images/ow/hero/support/zenyatta/weapon.png",
-            "images/ow/hero/support/zenyatta/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/support/zenyatta/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         圣: {
@@ -4457,17 +4345,11 @@ let 常量 = {
       },
       技能: {
         虚空加速器: {
-          图标: [
-            "images/ow/hero/tank/ramattra/weapon1.png",
-            "images/ow/hero/tank/ramattra/gray/weapon1.png",
-          ],
+          图标: "images/ow/hero/tank/ramattra/weapon1.png",
           绑定: ["主要攻击模式"],
         },
         猛拳: {
-          图标: [
-            "images/ow/hero/tank/ramattra/weapon2.png",
-            "images/ow/hero/tank/ramattra/gray/weapon2.png",
-          ],
+          图标: "images/ow/hero/tank/ramattra/weapon2.png",
           绑定: ["主要攻击模式"],
         },
         虚空屏障: {
@@ -4518,17 +4400,11 @@ let 常量 = {
       },
       技能: {
         愈疗灵花: {
-          图标: [
-            "images/ow/hero/support/lifeweaver/weapon1.png",
-            "images/ow/hero/support/lifeweaver/gray/weapon1.png",
-          ],
+          图标: "images/ow/hero/support/lifeweaver/weapon1.png",
           绑定: ["主要攻击模式"],
         },
         棘刺箭雨: {
-          图标: [
-            "images/ow/hero/support/lifeweaver/weapon2.png",
-            "images/ow/hero/support/lifeweaver/gray/weapon2.png",
-          ],
+          图标: "images/ow/hero/support/lifeweaver/weapon2.png",
           绑定: ["主要攻击模式"],
         },
         花瓣平台: {
@@ -4572,10 +4448,7 @@ let 常量 = {
       },
       技能: {
         阳焰步枪: {
-          图标: [
-            "images/ow/hero/support/illari/weapon.png",
-            "images/ow/hero/support/illari/gray/weapon.png",
-          ],
+          图标: "images/ow/hero/support/illari/weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         桎梏灼日: {
@@ -17819,7 +17692,11 @@ function buildStaticModels(PATH) {
           (element += `
 ||||
 |:-:|-:|:-|
-|<img src="${常量.英雄[i].技能[j].图标[index]}" width=auto height=25/>&nbsp;&nbsp;|***${j}***&nbsp;&nbsp;|`)
+|<img src="${
+            Array.isArray(常量.英雄[i].技能[j].图标)
+              ? 常量.英雄[i].技能[j].图标[index]
+              : 常量.英雄[i].技能[j].图标
+          }" width=auto height=25/>&nbsp;&nbsp;|***${j}***&nbsp;&nbsp;|`)
       );
 
       for (k in 常量.英雄[i].技能[j].绑定) {
@@ -18036,6 +17913,10 @@ function buildStaticModels(PATH) {
           insertText.appendPlaceholder(`${element.默认}`);
         } else if (Array.isArray(element.选项)) {
           insertText.appendPlaceholder(`${element.选项[0].名称}`);
+        } else if (element.类型.match(/全局变量|玩家变量/)) {
+          insertText.appendPlaceholder(`A`);
+        } else if (element.类型.match("子程序")) {
+          insertText.appendPlaceholder(`Sub0`);
         } else {
           insertText.appendPlaceholder(``);
         }

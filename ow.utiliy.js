@@ -2,6 +2,7 @@ const vscode = require("vscode");
 
 //获取动态类型
 function getDynamicType(text) {
+  console.log(text);
   if (
     (match = text.match(
       /全局|For 全局变量|设置全局变量|修改全局变量|在索引处设置全局变量|在索引处修改全局变量|持续追踪全局变量|追踪全局变量频率|停止追踪全局变量/
@@ -197,7 +198,7 @@ function getEntry(document, position, scope) {
     const symbol = text[i];
     if (symbol == ".") {
       const pos = document.positionAt(i);
-      const range = getPrevValidWordRange(document, pos);
+      const range = getPrevValidWordRange(document, pos, undefined, true);
       const text = document.getText(range);
       return getDynamicType(text);
     } else if (symbol == "{" || symbol == "[" || symbol == ";") {

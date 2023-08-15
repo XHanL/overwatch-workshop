@@ -1,183 +1,159 @@
 {
-    "icon": "images/extension/background/icon.png",
-    "name": "overwatch-workshop",
-    "displayName": "Overwatch Workshop",
-    "publisher": "Xcrystal",
-    "description": "守望先锋® 工坊语言支持",
-    "repository": {
-        "url": "https://github.com/XHanL/overwatch-workshop"
-    },
-    "keywords": [
-        "ow",
-        "overwatch",
-        "workshop",
-        "守望先锋",
-        "工坊"
+  "icon": "images/extension/background/icon.png",
+  "name": "overwatch-workshop",
+  "displayName": "Overwatch Workshop",
+  "publisher": "Xcrystal",
+  "description": "守望先锋® 工坊语言支持",
+  "repository": {
+    "url": "https://github.com/XHanL/overwatch-workshop"
+  },
+  "keywords": [
+    "ow",
+    "overwatch",
+    "workshop",
+    "守望先锋",
+    "工坊"
+  ],
+  "version": "1.1.7",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "ow.main.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "ow",
+        "aliases": [
+          "OW",
+          "ow"
+        ],
+        "extensions": [
+          ".ow",
+          ".owl",
+          ".watch"
+        ],
+        "configuration": "ow.language-configuration.json"
+      }
     ],
-    "version": "1.1.7",
-    "engines": {
-        "vscode": "^1.75.0"
-    },
-    "categories": [
-        "Programming Languages"
+    "grammars": [
+      {
+        "language": "ow",
+        "scopeName": "source.ow",
+        "path": "ow.tmLanguage.json"
+      }
     ],
-    "main": "ow.main.js",
-    "contributes": {
-        "configuration": {
-            "title": "高亮引擎",
-            "properties": {
-                "启用语法分析（实验性）": {
-                    "type": "boolean",
-                    "default": "false",
-                    "description": "开启可提供更加精准着色和语法检查能力，但仍处于实验阶段并具有较多BUG。"
-                }
-            }
-        },
-        "languages": [
-            {
-                "id": "ow",
-                "aliases": [
-                    "OW",
-                    "ow"
-                ],
-                "extensions": [
-                    ".ow",
-                    ".owl",
-                    ".watch"
-                ],
-                "configuration": "ow.language-configuration.json"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "ow",
-                "scopeName": "source.ow",
-                "path": "ow.tmLanguage.json"
-            }
-        ],
-        "keybindings": [],
-        "commands": [
-            {
-                "command": "ow.command.suggest",
-                "title": "提供建议",
-                "icon": {
-                    "light": "images/extension/command/black/suggest.png",
-                    "dark": "images/extension/command/suggest.png"
-                }
-            },
-            {
-                "command": "ow.command.line",
-                "title": "自动换行",
-                "icon": {
-                    "light": "images/extension/command/black/line.png",
-                    "dark": "images/extension/command/line.png"
-                }
-            },
-            {
-                "command": "ow.command.copy",
-                "title": "修复后导出",
-                "icon": {
-                    "light": "images/extension/command/black/copy.png",
-                    "dark": "images/extension/command/copy.png"
-                }
-            },
-            {
-                "command": "ow.command.paste",
-                "title": "导入并修复",
-                "icon": {
-                    "light": "images/extension/command/black/paste.png",
-                    "dark": "images/extension/command/paste.png"
-                }
-            }
-        ],
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "ow_container",
-                    "title": "OW",
-                    "icon": "images/extension/command/outline.png"
-                }
-            ]
-        },
-        "views": {
-            "ow_container": [
-                {
-                    "id": "ow.view.manual",
-                    "name": "手册",
-                    "type": "webview"
-                }
-            ]
-        },
-        "menus": {
-            "editor/title": [
-                {
-                    "command": "ow.command.suggest",
-                    "when": "editorLangId == ow",
-                    "group": "navigation@100"
-                },
-                {
-                    "command": "ow.command.line",
-                    "when": "editorLangId == ow",
-                    "group": "navigation@101"
-                },
-                {
-                    "command": "ow.command.copy",
-                    "when": "editorLangId == ow",
-                    "group": "navigation@103"
-                },
-                {
-                    "command": "ow.command.paste",
-                    "when": "editorLangId == ow",
-                    "group": "navigation@104"
-                }
-            ],
-            "editor/context": [
-                {
-                    "command": "ow.command.suggest",
-                    "when": "editorLangId == ow",
-                    "group": "0@0"
-                },
-                {
-                    "command": "ow.command.line",
-                    "when": "editorLangId == ow",
-                    "group": "0@1"
-                },
-                {
-                    "command": "ow.command.copy",
-                    "when": "editorLangId == ow",
-                    "group": "0@2"
-                },
-                {
-                    "command": "ow.command.paste",
-                    "when": "editorLangId == ow",
-                    "group": "0@3"
-                }
-            ]
-        },
-        "themes": [
-            {
-                "label": "OW Dark",
-                "uiTheme": "vs-dark",
-                "path": "themes/ow.dark.json"
-            },
-            {
-                "label": "OW Crystal Dark",
-                "uiTheme": "vs-dark",
-                "path": "themes/ow.crystal_dark.json"
-            },
-            {
-                "label": "OW Light (实验性)",
-                "uiTheme": "vs",
-                "path": "themes/ow.light.json"
-            },
-            {
-                "label": "OW Crystal Light (实验性)",
-                "uiTheme": "vs",
-                "path": "themes/ow.crystal_light.json"
-            }
-        ]
+    "commands": [
+      {
+        "command": "ow.command.suggest",
+        "title": "提供建议",
+        "icon": {
+          "light": "images/extension/command/black/suggest.png",
+          "dark": "images/extension/command/suggest.png"
+        }
+      },
+      {
+        "command": "ow.command.line",
+        "title": "自动换行",
+        "icon": {
+          "light": "images/extension/command/black/line.png",
+          "dark": "images/extension/command/line.png"
+        }
+      },
+      {
+        "command": "ow.command.copy",
+        "title": "修复后导出",
+        "icon": {
+          "light": "images/extension/command/black/copy.png",
+          "dark": "images/extension/command/copy.png"
+        }
+      },
+      {
+        "command": "ow.command.paste",
+        "title": "导入并修复",
+        "icon": {
+          "light": "images/extension/command/black/paste.png",
+          "dark": "images/extension/command/paste.png"
+        }
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ow_container",
+          "title": "OW",
+          "icon": "images/extension/command/outline.png"
+        }
+      ]
     },
-    "dependencies": {
-        "pinyinlite": "^1.2.1"
-    }
+    "views": {
+      "ow_container": [
+        {
+          "id": "ow.view.manual",
+          "name": "手册",
+          "type": "webview"
+        }
+      ]
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "command": "ow.command.suggest",
+          "when": "editorLangId == ow",
+          "group": "navigation@100"
+        },
+        {
+          "command": "ow.command.line",
+          "when": "editorLangId == ow",
+          "group": "navigation@101"
+        },
+        {
+          "command": "ow.command.copy",
+          "when": "editorLangId == ow",
+          "group": "navigation@103"
+        },
+        {
+          "command": "ow.command.paste",
+          "when": "editorLangId == ow",
+          "group": "navigation@104"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "ow.command.suggest",
+          "when": "editorLangId == ow",
+          "group": "0@0"
+        },
+        {
+          "command": "ow.command.line",
+          "when": "editorLangId == ow",
+          "group": "0@1"
+        },
+        {
+          "command": "ow.command.copy",
+          "when": "editorLangId == ow",
+          "group": "0@2"
+        },
+        {
+          "command": "ow.command.paste",
+          "when": "editorLangId == ow",
+          "group": "0@3"
+        }
+      ]
+    },
+    "themes": [
+      {
+        "label": "Overwatch Workshop 默认亮色",
+        "uiTheme": "vs",
+        "path": "themes/ow.light.json"
+      },
+      {
+        "label": "Overwatch Workshop 默认深色",
+        "uiTheme": "vs-dark",
+        "path": "themes/ow.dark.json"
+      }
+    ]
+  }
 }

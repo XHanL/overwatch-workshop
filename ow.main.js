@@ -198,12 +198,12 @@ function activate(context) {
                     prevLine.range.start,
                   ];
                 } else if (
-                  (match = prevLineText.match(/^(禁用)?\s*规则\s*\("(.*)"\)$/))
+                  (match = prevLineText.match(/^(禁用\s*)?规则\s*\("(.*)"\)$/))
                 ) {
-                  if (match[1] === "禁用") {
+                  if (match[1] === undefined) {
                     symbol = [
                       "规则",
-                      `${match[2]} [禁用]`,
+                      match[2],
                       vscode.SymbolKind.Module,
                       prevLine.range.start,
                       [],
@@ -211,7 +211,7 @@ function activate(context) {
                   } else {
                     symbol = [
                       "规则",
-                      match[2],
+                      `${match[2]} [禁用]`,
                       vscode.SymbolKind.Module,
                       prevLine.range.start,
                       [],
@@ -250,29 +250,25 @@ function activate(context) {
     //取色能力
     vscode.languages.registerColorProvider("ow", {
       provideDocumentColors(document) {
-        let colors = [];
+        const text = document.getText();
         const pattern =
           /自定义颜色\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/g;
-        for (let i = 0; i < document.lineCount; i++) {
-          const line = document.lineAt(i);
-          while ((match = pattern.exec(line.text))) {
-            colors.push(
-              new vscode.ColorInformation(
-                new vscode.Range(
-                  i,
-                  match.index,
-                  i,
-                  match.index + match[0].length
-                ),
-                new vscode.Color(
-                  match[1] / 255,
-                  match[2] / 255,
-                  match[3] / 255,
-                  match[4] / 255
-                )
+        let colors = [];
+        while ((match = pattern.exec(text))) {
+          colors.push(
+            new vscode.ColorInformation(
+              new vscode.Range(
+                document.positionAt(match.index),
+                document.positionAt(match.index + match[0].length)
+              ),
+              new vscode.Color(
+                match[1] / 255,
+                match[2] / 255,
+                match[3] / 255,
+                match[4] / 255
               )
-            );
-          }
+            )
+          );
         }
         return colors;
       },
@@ -496,11 +492,18 @@ function activate(context) {
               if (index === 0) {
                 return buildStaticCompletions(MODEL.规则.事件.选项);
               } else if (index === 1) {
-                if (first.startsWith("子程序")) {
+                if (first.startsWith("持续 - 全局")) {
+                  return;
+                } else if (first.startsWith("子程序")) {
                   return buildDynamicCompletions("子程序");
                 }
                 return buildStaticCompletions(MODEL.规则.事件.队伍);
               } else if (index === 2) {
+                if (first.startsWith("持续 - 全局")) {
+                  return;
+                } else if (first.startsWith("子程序")) {
+                  return;
+                }
                 return buildStaticCompletions(MODEL.规则.事件.玩家).concat(
                   buildStaticCompletions(MODEL.常量.英雄)
                 );
@@ -526,7 +529,7 @@ function activate(context) {
                 }
               } else if (entry == "条件") {
                 return buildStaticCompletions(MODEL.规则.条件);
-              } else if (entry.match(/全局变量|玩家变量|子程序/)) {
+              } else if (entry.match(/^(全局变量|玩家变量|子程序)$/)) {
                 return buildDynamicCompletions(entry);
               }
             }
@@ -544,10 +547,10 @@ function activate(context) {
                   const param = MODEL.规则.动作[entry.name].参数[entry.index];
                   if (param.类型 == "条件") {
                     return buildStaticCompletions(MODEL.规则.条件);
-                  } else if (param.类型.match(/全局变量|玩家变量|子程序/)) {
-                    return buildDynamicCompletions(param.类型);
                   } else if (param.hasOwnProperty("选项")) {
                     return buildStaticCompletions(param.选项);
+                  } else if (param.类型.match(/^(全局变量|玩家变量|子程序)$/)) {
+                    return buildDynamicCompletions(param.类型);
                   }
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
                   const param = MODEL.规则.条件[entry.name].参数[entry.index];
@@ -563,7 +566,7 @@ function activate(context) {
                 );
               } else if (entry == "条件") {
                 return buildStaticCompletions(MODEL.规则.条件);
-              } else if (entry.match(/全局变量|玩家变量|子程序/)) {
+              } else if (entry.match(/^(全局变量|玩家变量|子程序)$/)) {
                 return buildDynamicCompletions(entry);
               }
             }
@@ -645,9 +648,21 @@ function activate(context) {
       },
       "(",
       ",",
-      ".",
-      " "
+      "."
     ),
+
+    //补全占位符监视
+    vscode.workspace.onDidChangeTextDocument((event) => {
+      const changes = event.contentChanges;
+      for (const change of changes) {
+        if (change.text === "" && change.rangeLength > 0) {
+          const deletedText = event.document.getText(change.range);
+          if (deletedText.trim() !== "") {
+            vscode.commands.executeCommand("ow.command.suggest");
+          }
+        }
+      }
+    }),
 
     //参数提示能力
     vscode.languages.registerSignatureHelpProvider(
@@ -691,13 +706,6 @@ function activate(context) {
                 if (entry.name == "数组") {
                   return;
                 } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
-                  console.log(
-                    buildSignatureHelp(
-                      entry.name,
-                      MODEL.规则.动作[entry.name],
-                      entry.index
-                    )
-                  );
                   return buildSignatureHelp(
                     entry.name,
                     MODEL.规则.动作[entry.name],
@@ -758,6 +766,43 @@ function activate(context) {
       ",",
       " "
     ),
+
+    //切换开关能力
+    vscode.languages.registerCodeLensProvider("ow", {
+      provideCodeLenses(document, token) {
+        let codeLens = [];
+        const text = document.getText();
+        const pattern = /(禁用\s*)?规则\s*\("(.*)"\)/g;
+        while ((match = pattern.exec(text))) {
+          const matchText = match[0];
+          const startPos = document.positionAt(match.index);
+          const endPos = document.positionAt(match.index + matchText.length);
+          const range = new vscode.Range(startPos, endPos);
+          const toggleCommand = {
+            title: `切换开关`,
+            command: "ow.toggle.disableRule",
+            arguments: [{ document, range }],
+          };
+          const newCodeLens = new vscode.CodeLens(range, toggleCommand);
+          codeLens.push(newCodeLens);
+        }
+        return codeLens;
+      },
+    }),
+
+    //切换开关行为
+    vscode.commands.registerCommand("ow.toggle.disableRule", (args) => {
+      const { document, range } = args;
+      let text = document.getText(range);
+      if (text.startsWith("禁用")) {
+        text = text.replace(/禁用\s*/, "");
+      } else {
+        text = `禁用 ${text}`;
+      }
+      const edit = new vscode.WorkspaceEdit();
+      edit.replace(document.uri, range, text);
+      vscode.workspace.applyEdit(edit);
+    }),
 
     //面板手册能力
     vscode.window.registerWebviewViewProvider("ow.view.manual", {
@@ -4185,8 +4230,7 @@ function activate(context) {
                         "illari",
                         "weapon.png"
                       )
-                    )}" width="60" height="auto"></td>
-                    <td style="text-align: center;"></td>
+                    )}" width="auto" height="30"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,

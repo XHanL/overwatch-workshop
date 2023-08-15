@@ -1,5 +1,5 @@
 {
-    "name": "OW Light",
+    "name": "Overwatch Workshop 默认亮色",
     "colors": {
 		"activityBar.activeBorder": "#005FB8",
 		"activityBar.background": "#ffffff",
@@ -539,39 +539,5 @@
 			  "foreground": "#0a3069"
 			}
 		  }
-    ],
-	"semanticHighlighting": true,
-	"semanticTokenColors": {
-		"comment": {
-			"foreground": "#00bb19"
-		},
-		"string": {
-			"foreground": "#a250df"
-		},
-		"number": {
-			"foreground": "#0550ae"
-		},
-		"variable": {
-            "foreground": "#969600",
-			"fontStyle": "italic"
-		},
-		"symbol": {
-			"foreground": "#cf222e"
-		},
-		"action": {
-			"foreground": "#cf3f22"
-		},
-		"condition": {
-            "foreground": "#000000"
-		},
-		"constant": {
-			"foreground": "#a250df"
-		},
-		"event": {
-
-		},
-		"other": {
-
-		}
-	}
+    ]
 }
