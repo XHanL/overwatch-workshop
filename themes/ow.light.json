@@ -1,6 +1,7 @@
 {
-  "name": "Overwatch Workshop 亮色",
+  "name": "Overwatch Workshop 明亮",
   "colors": {
+    "textCodeBlock.background": "#e1e4e8",
     "focusBorder": "#2188ff",
     "foreground": "#444d56",
     "descriptionForeground": "#6a737d",
@@ -9,12 +10,11 @@
     "textLink.activeForeground": "#005cc5",
     "textBlockQuote.background": "#fafbfc",
     "textBlockQuote.border": "#e1e4e8",
-    "textCodeBlock.background": "#f6f8fa",
     "textPreformat.foreground": "#586069",
     "textSeparator.foreground": "#d1d5da",
-    "button.background": "#159739",
+    "button.background": "#0366d6",
     "button.foreground": "#fff",
-    "button.hoverBackground": "#138934",
+    "button.hoverBackground": "#2188ff",
     "button.secondaryBackground": "#e1e4e8",
     "button.secondaryForeground": "#1b1f23",
     "button.secondaryHoverBackground": "#d1d5da",
@@ -190,7 +190,7 @@
         "entity.name.type.rule.event.player.ow"
       ],
       "settings": {
-        "foreground": "#6f42c1"
+        "foreground": "#b31d28"
       }
     },
     {
@@ -200,37 +200,38 @@
         "keyword.operator.new.ow"
       ],
       "settings": {
-        "foreground": "#f44747"
+        "foreground": "#d73a49"
       }
     },
     {
       "scope": ["entity.name.class.rule.action.ow"],
       "settings": {
-        "foreground": "#d7ba7d"
+        "foreground": "#005cc5"
       }
     },
     {
       "scope": ["entity.name.function.rule.condition.ow"],
       "settings": {
-        "foreground": "#032f62"
+        "foreground": "#6f42c1"
       }
     },
     {
       "scope": ["constant.character.ow"],
       "settings": {
-        "foreground": "#ce9178"
+        "foreground": "#cf9c2f"
       }
     },
     {
       "scope": ["variable.ow"],
       "settings": {
-        "foreground": "#4FC1FF"
+        "background": "#ffebda",
+        "foreground": "#e36209"
       }
     },
     {
       "scope": ["constant.numeric.ow"],
       "settings": {
-        "foreground": "#DCDCAA"
+        "foreground": "#005cc5"
       }
     },
     {

@@ -1,6 +1,7 @@
 {
-  "name": "Overwatch Workshop 深色",
+  "name": "Overwatch Workshop 深邃",
   "colors": {
+    "editor.hoverBackground": "#fefb9c",
     "focusBorder": "#005cc5",
     "foreground": "#d1d5da",
     "descriptionForeground": "#959da5",
@@ -12,9 +13,9 @@
     "textCodeBlock.background": "#2f363d",
     "textPreformat.foreground": "#d1d5da",
     "textSeparator.foreground": "#586069",
-    "button.background": "#176f2c",
+    "button.background": "#005cc5",
     "button.foreground": "#dcffe4",
-    "button.hoverBackground": "#22863a",
+    "button.hoverBackground": "#0366d6",
     "button.secondaryBackground": "#444d56",
     "button.secondaryForeground": "#fff",
     "button.secondaryHoverBackground": "#586069",

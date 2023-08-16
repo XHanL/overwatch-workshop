@@ -91,6 +91,9 @@
             },
             {
               "include": "#events"
+            },
+            {
+              "include": "#variables"
             }
           ]
         },
