@@ -196,14 +196,17 @@ function getEntry(document, position, scope) {
   let rightParenthesesCount = 0;
   for (let i = offset; i >= 0; i--) {
     const symbol = text[i];
-    if (symbol == ".") {
+    if (commasCount == 0 && symbol == ".") {
       const pos = document.positionAt(i);
       const range = getPrevValidWordRange(document, pos, undefined, true);
       const text = document.getText(range);
       return getDynamicType(text);
-    } else if (symbol.match(/[\{\[\;]/)) {
+    } else if (symbol.match(/[\{\;]/)) {
       return scope.name;
-    } else if (symbol.match(/[\+\-\*\/\^\%\<\>\=\!\?\|\&]/)) {
+    } else if (
+      commasCount == 0 &&
+      symbol.match(/[\[\+\-\*\/\^\%\<\>\=\!\?\|\&]/)
+    ) {
       return "条件";
     } else if (symbol == "(") {
       if (rightParenthesesCount < 0) {

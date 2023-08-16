@@ -14,7 +14,7 @@
     "守望先锋",
     "工坊"
   ],
-  "version": "2.1.0",
+  "version": "2.1.2",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -146,12 +146,12 @@
     },
     "themes": [
       {
-        "label": "Overwatch Workshop 亮色",
+        "label": "Overwatch Workshop 明亮",
         "uiTheme": "vs",
         "path": "themes/ow.light.json"
       },
       {
-        "label": "Overwatch Workshop 深色",
+        "label": "Overwatch Workshop 深邃",
         "uiTheme": "vs-dark",
         "path": "themes/ow.dark.json"
       }
