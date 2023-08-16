@@ -176,7 +176,7 @@ function getScope(document, position) {
     } else if (symbol == "}") {
       if (rightBracesCount == 1) {
         return {
-          name: "全局"
+          name: "全局",
         };
       } else {
         rightBracesCount++;
@@ -193,32 +193,49 @@ function getEntry(document, position, scope) {
   const text = document.getText();
   const offset = document.offsetAt(position);
   let commasCount = 0;
+  let leftParenthesesOffset = undefined;
   let rightParenthesesCount = 0;
   for (let i = offset; i >= 0; i--) {
     const symbol = text[i];
+    //决定条目
+    if (
+      leftParenthesesOffset !== undefined &&
+      symbol.match(/[\{\}\[\]\(\)\+\-\*\/\^\%\<\>\=\!\?\|\&\:\.\;\,]/)
+    ) {
+      const range = new vscode.Range(
+        document.positionAt(i + 1),
+        document.positionAt(leftParenthesesOffset)
+      );
+      const text = document.getText(range).trim();
+      if (text !== "") {
+        return {
+          name: text,
+          index: commasCount,
+        };
+      } else {
+        return "条件";
+      }
+    }
+    //决定变量
     if (commasCount == 0 && symbol == ".") {
       const pos = document.positionAt(i);
       const range = getPrevValidWordRange(document, pos, undefined, true);
       const text = document.getText(range);
       return getDynamicType(text);
-    } else if (symbol.match(/[\{\;]/)) {
+    }
+    //正在决定
+    if (symbol.match(/[\{\;]/)) {
       return scope.name;
     } else if (
       commasCount == 0 &&
-      symbol.match(/[\[\+\-\*\/\^\%\<\>\=\!\?\|\&]/)
+      symbol.match(/[\[\+\-\*\/\^\%\<\>\=\!\?\|\&\:]/)
     ) {
       return "条件";
     } else if (symbol == "(") {
       if (rightParenthesesCount < 0) {
         return "条件";
       } else if (rightParenthesesCount == 0) {
-        const pos = document.positionAt(i);
-        const range = getPrevValidWordRange(document, pos, undefined, true);
-        const text = document.getText(range);
-        return {
-          name: text,
-          index: commasCount,
-        };
+        leftParenthesesOffset = i;
       } else {
         rightParenthesesCount--;
       }

@@ -137,7 +137,6 @@ function activate(context) {
     vscode.languages.registerDocumentSymbolProvider("ow", {
       provideDocumentSymbols(document) {
         let documentSymbols = [];
-
         let i = 0;
         while (i < document.lineCount) {
           const line = document.lineAt(i);
@@ -658,7 +657,13 @@ function activate(context) {
         if (change.text === "" && change.rangeLength > 0) {
           const deletedText = event.document.getText(change.range);
           if (deletedText.trim() !== "" && deletedText !== "规则(") {
-            vscode.commands.executeCommand("ow.command.suggest");
+            const prevChar =
+              event.document.getText()[
+                event.document.offsetAt(change.range.start) - 1
+              ];
+            if (deletedText !== ";") {
+              vscode.commands.executeCommand("ow.command.suggest");
+            }
           }
         }
       }
