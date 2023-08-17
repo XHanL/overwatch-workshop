@@ -685,7 +685,6 @@ function activate(context) {
     vscode.workspace.onDidChangeTextDocument((event) => {
       const changes = event.contentChanges;
       for (const change of changes) {
-        console.log(change.text);
         if (
           (change.text === "" && change.rangeLength > 0) ||
           change.text == " "

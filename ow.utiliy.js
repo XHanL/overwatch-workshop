@@ -195,13 +195,20 @@ function getEntry(document, position, scope) {
   let commasCount = 0;
   let leftParenthesesOffset = undefined;
   let rightParenthesesCount = 0;
+  let isString = false;
   for (let i = offset; i >= 0; i--) {
     const symbol = text[i];
-    //决定条目
+    if (symbol == '"') {
+      isString = !isString;
+    }
+    if (isString) {
+      continue
+    }
     if (
       leftParenthesesOffset !== undefined &&
       symbol.match(/[\{\}\[\]\(\)\+\-\*\/\^\%\<\>\=\!\?\|\&\:\.\;\,]/)
     ) {
+      //决定条目
       const range = new vscode.Range(
         document.positionAt(i + 1),
         document.positionAt(leftParenthesesOffset)
