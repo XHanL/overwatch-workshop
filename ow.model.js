@@ -17635,7 +17635,7 @@ function buildCompletion(
       .split("")
       .join(" ");
   } else {
-    item.filterText = (label + buildPinyinFilterText(label))
+    item.filterText = (buildPinyinFilterText(label) + label)
       .split("")
       .join(" ");
   }
@@ -17644,6 +17644,8 @@ function buildCompletion(
   }
   if (sortText) {
     item.sortText = sortText;
+  } else {
+    item.sortText = `${label.length}`.padStart(3, "0");
   }
   if (command) {
     item.command = command;
