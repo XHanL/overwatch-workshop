@@ -4,6 +4,7 @@ const fs = require("fs");
 
 const MODEL = require("./ow.model.js");
 const UTIL = require("./ow.utiliy.js");
+const { getScope } = require("./ow.utiliy.js");
 
 //配置
 const CONFIG = vscode.workspace.getConfiguration();
@@ -517,10 +518,22 @@ function activate(context) {
               }
               if (entry instanceof Object) {
                 if (entry.name == "数组") {
+                  if (
+                    context.triggerCharacter == "(" ||
+                    context.triggerCharacter == ","
+                  ) {
+                    return;
+                  }
                   return buildStaticCompletions(MODEL.规则.条件);
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
                   const param = MODEL.规则.条件[entry.name].参数[entry.index];
                   if (param.类型 == "条件") {
+                    if (
+                      context.triggerCharacter == "(" ||
+                      context.triggerCharacter == ","
+                    ) {
+                      return;
+                    }
                     return buildStaticCompletions(MODEL.规则.条件);
                   } else if (param.hasOwnProperty("选项")) {
                     return buildStaticCompletions(param.选项);
@@ -541,10 +554,22 @@ function activate(context) {
               }
               if (entry instanceof Object) {
                 if (entry.name == "数组") {
+                  if (
+                    context.triggerCharacter == "(" ||
+                    context.triggerCharacter == ","
+                  ) {
+                    return;
+                  }
                   return buildStaticCompletions(MODEL.规则.条件);
                 } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
                   const param = MODEL.规则.动作[entry.name].参数[entry.index];
                   if (param.类型 == "条件") {
+                    if (
+                      context.triggerCharacter == "(" ||
+                      context.triggerCharacter == ","
+                    ) {
+                      return;
+                    }
                     return buildStaticCompletions(MODEL.规则.条件);
                   } else if (param.hasOwnProperty("选项")) {
                     return buildStaticCompletions(param.选项);
@@ -554,6 +579,12 @@ function activate(context) {
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
                   const param = MODEL.规则.条件[entry.name].参数[entry.index];
                   if (param.类型 == "条件") {
+                    if (
+                      context.triggerCharacter == "(" ||
+                      context.triggerCharacter == ","
+                    ) {
+                      return;
+                    }
                     return buildStaticCompletions(MODEL.规则.条件);
                   } else if (param.hasOwnProperty("选项")) {
                     return buildStaticCompletions(param.选项);
@@ -654,15 +685,33 @@ function activate(context) {
     vscode.workspace.onDidChangeTextDocument((event) => {
       const changes = event.contentChanges;
       for (const change of changes) {
-        if (change.text === "" && change.rangeLength > 0) {
-          const deletedText = event.document.getText(change.range);
-          if (deletedText.trim() !== "" && deletedText !== "规则(") {
-            const prevChar =
-              event.document.getText()[
-                event.document.offsetAt(change.range.start) - 1
-              ];
-            if (deletedText !== ";") {
-              vscode.commands.executeCommand("ow.command.suggest");
+        console.log(change.text);
+        if (
+          (change.text === "" && change.rangeLength > 0) ||
+          change.text == " "
+        ) {
+          const scope = UTIL.getScope(event.document, change.range.start);
+          if (scope.name == "条件" || scope.name == "动作") {
+            const entry = UTIL.getEntry(
+              event.document,
+              change.range.start,
+              scope
+            );
+            if (!entry) {
+              return;
+            }
+            if (entry instanceof Object) {
+              if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
+                const param = MODEL.规则.动作[entry.name].参数[entry.index];
+                if (param.hasOwnProperty("选项")) {
+                  vscode.commands.executeCommand("ow.command.suggest");
+                }
+              } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
+                const param = MODEL.规则.条件[entry.name].参数[entry.index];
+                if (param.hasOwnProperty("选项")) {
+                  vscode.commands.executeCommand("ow.command.suggest");
+                }
+              }
             }
           }
         }

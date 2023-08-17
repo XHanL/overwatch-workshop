@@ -10470,7 +10470,7 @@ let 规则 = {
         {
           名称: "开始位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "用于进行视线检测的起点位置。如果此处填入一名玩家, 则使用从此玩家脚部向上2米的位置。",
         },
         {
@@ -11102,7 +11102,7 @@ let 规则 = {
         {
           名称: "开始位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "射线开始施放的位置。如果此处填入一名玩家，则使用从此玩家脚部向上2米的位置。",
         },
         {
@@ -11139,7 +11139,7 @@ let 规则 = {
         {
           名称: "开始位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "射线开始施放的位置。如果此处填入一名玩家，则使用从此玩家脚部向上2米的位置。",
         },
         {
@@ -11176,7 +11176,7 @@ let 规则 = {
         {
           名称: "开始位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "射线开始施放的位置。如果此处填入一名玩家，则使用从此玩家脚部向上2米的位置。",
         },
         {
@@ -12707,7 +12707,7 @@ let 规则 = {
         {
           名称: "位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "获取第一人称视角的位置（用于瞄准）的玩家。",
         },
       ],
@@ -14114,7 +14114,7 @@ let 规则 = {
         {
           名称: "开始位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "效果开始的位置。如果此值为一名玩家，那么效果将随此玩家移动。否则，此值将代表地图中的一个位置。",
         },
         {
@@ -14150,7 +14150,7 @@ let 规则 = {
         {
           名称: "位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "图标所在的位置。如果此值为一名玩家，那么图标将显示在这名玩家的头顶上方。否则，此值将代表地图中的一个位置。",
         },
         {
@@ -14198,7 +14198,7 @@ let 规则 = {
         {
           名称: "位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "文本所在位置。如果此值为一名玩家，那么文本将显示在这名玩家的头顶上方。否则，此值将代表地图中的一个位置。",
         },
         {
@@ -14258,7 +14258,7 @@ let 规则 = {
         {
           名称: "位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "效果终点所在的位置。如果此值为一名玩家，那么该效果将与玩家一起移动。否则，此值将代表地图中的一个位置。",
         },
         {
@@ -14360,7 +14360,7 @@ let 规则 = {
         {
           名称: "位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "文本所在位置。如果此值为一名玩家，那么文本将显示在这名玩家的头顶上方。否则，此值将代表地图中的一个位置。",
         },
         {
@@ -15525,7 +15525,7 @@ let 规则 = {
         {
           名称: "位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "事件玩家",
           提示: "效果所在位置。如果此值为一名玩家，那么效果将在此玩家所在位置播放。否则，此值将代表地图中的一个位置。",
         },
         {
@@ -16420,13 +16420,13 @@ let 规则 = {
         {
           名称: "开始位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "空",
           提示: "弹道的起始位置。若为“空”，则使用玩家的眼睛位置。",
         },
         {
           名称: "方向",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "空",
           提示: "弹道的行动方向。若为“空”，则使用玩家的面朝方向。",
         },
         {
@@ -16582,13 +16582,13 @@ let 规则 = {
         {
           名称: "开始位置",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "空",
           提示: "弹道的起始位置。若为“空”，则使用玩家的眼睛位置。",
         },
         {
           名称: "方向",
           类型: "条件",
-          默认: "矢量(0, 0, 0)",
+          默认: "空",
           提示: "弹道的行动方向。若为“空”，则使用玩家的面朝方向。",
         },
         {
@@ -17895,6 +17895,7 @@ function buildStaticModels(PATH) {
   for (i in 规则.条件) {
     let details = `${规则.条件[i].提示}`;
     let insertText = new vscode.SnippetString(i);
+    let insertPlaceHolder = 1;
     let command = undefined;
     //返回
     if (规则.条件[i].hasOwnProperty("返回")) {
@@ -17906,18 +17907,39 @@ function buildStaticModels(PATH) {
     //参数
     if (规则.条件[i].hasOwnProperty("参数")) {
       details += `\n\n---\n\n***<span style="color:#0ac;">⬘</span>&nbsp;参数***\n\n`;
-      insertText.appendText(`(`);
+      insertText.value += "(";
       const params = 规则.条件[i].参数;
       params.forEach((element, index) => {
         if (element.类型.match(/^条件|数字|布尔$/)) {
-          insertText.appendPlaceholder(`${element.默认}`);
+          const match = element.默认.match(/([^(]*)(?:\(([^)]*)\))?/);
+          insertText.value += "${" + insertPlaceHolder++ + ":" + match[1];
+          if (match[2]) {
+            const paramParams = match[2]
+              .split(",")
+              .map((param) => param.trim());
+            insertText.value += "(";
+            for (const paramIndex in paramParams) {
+              insertText.value +=
+                "${" +
+                insertPlaceHolder++ +
+                ":" +
+                paramParams[paramIndex] +
+                "}";
+              if (paramIndex < paramParams.length - 1) {
+                insertText.value += ", ";
+              }
+            }
+            insertText.value += ")";
+          }
+          insertText.value += "}";
         } else if (Array.isArray(element.选项)) {
-          insertText.appendPlaceholder(`${element.选项[0].名称}`);
+          insertText.value +=
+            "${" + insertPlaceHolder++ + ":" + element.选项[0].名称 + "}";
         } else {
-          insertText.appendPlaceholder(``);
+          insertText.value += "${" + insertPlaceHolder++ + "}";
         }
         if (index < params.length - 1) {
-          insertText.appendText(`, `);
+          insertText.value += ", ";
         }
         element.签名 = buildParameter(
           i,
@@ -17928,7 +17950,7 @@ function buildStaticModels(PATH) {
         );
         details += `\`${index}\`&nbsp;\`${element.名称}\`&nbsp;-&nbsp;${element.提示}\n\n`;
       });
-      insertText.appendText(`)`);
+      insertText.value += ")";
       command = {
         command: "editor.action.triggerParameterHints",
         title: "triggerParameterHints",
@@ -17953,26 +17975,48 @@ function buildStaticModels(PATH) {
   for (i in 规则.动作) {
     let details = `${规则.动作[i].提示}`;
     let insertText = new vscode.SnippetString(i);
+    let insertPlaceHolder = 1;
     let command = undefined;
     //参数
     if (规则.动作[i].hasOwnProperty("参数")) {
       details += `\n\n---\n\n***<span style="color:#0ac;">⬘</span>&nbsp;参数***\n\n`;
-      insertText.appendText(`(`);
+      insertText.value += "(";
       const params = 规则.动作[i].参数;
       params.forEach((element, index) => {
         if (element.类型.match(/^条件|数字|布尔$/)) {
-          insertText.appendPlaceholder(`${element.默认}`);
+          const match = element.默认.match(/([^(]*)(?:\(([^)]*)\))?/);
+          insertText.value += "${" + insertPlaceHolder++ + ":" + match[1];
+          if (match[2]) {
+            const paramParams = match[2]
+              .split(",")
+              .map((param) => param.trim());
+            insertText.value += "(";
+            for (const paramIndex in paramParams) {
+              insertText.value +=
+                "${" +
+                insertPlaceHolder++ +
+                ":" +
+                paramParams[paramIndex] +
+                "}";
+              if (paramIndex < paramParams.length - 1) {
+                insertText.value += ", ";
+              }
+            }
+            insertText.value += ")";
+          }
+          insertText.value += "}";
         } else if (Array.isArray(element.选项)) {
-          insertText.appendPlaceholder(`${element.选项[0].名称}`);
+          insertText.value +=
+            "${" + insertPlaceHolder++ + ":" + element.选项[0].名称 + "}";
         } else if (element.类型.match(/^全局变量|玩家变量$/)) {
-          insertText.appendPlaceholder(`A`);
+          insertText.value += "${" + insertPlaceHolder++ + ":A}";
         } else if (element.类型.match("子程序")) {
-          insertText.appendPlaceholder(`Sub0`);
+          insertText.value += "${" + insertPlaceHolder++ + ":Sub0}";
         } else {
-          insertText.appendPlaceholder(``);
+          insertText.value += "${" + insertPlaceHolder++ + "}";
         }
         if (index < params.length - 1) {
-          insertText.appendText(`, `);
+          insertText.value += ", ";
         }
         element.签名 = buildParameter(
           i,
@@ -17983,7 +18027,7 @@ function buildStaticModels(PATH) {
         );
         details += `\`${index}\`&nbsp;\`${element.名称}\`&nbsp;-&nbsp;${element.提示}\n\n`;
       });
-      insertText.appendText(`)`);
+      insertText.value += ")";
       command = {
         command: "editor.action.triggerParameterHints",
         title: "triggerParameterHints",
