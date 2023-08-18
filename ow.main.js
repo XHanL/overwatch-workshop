@@ -58,7 +58,7 @@ function activate(context) {
       }
     }),
 
-    //导入修复能力
+    //修复导入能力
     vscode.commands.registerCommand("ow.command.paste", () => {
       let activeEditor = vscode.window.activeTextEditor;
       if (activeEditor) {
