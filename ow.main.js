@@ -1,13 +1,9 @@
 const vscode = require("vscode");
-const path = require("path");
 const fs = require("fs");
+const path = require("path");
 
 const MODEL = require("./ow.model.js");
 const UTIL = require("./ow.utiliy.js");
-const { getScope } = require("./ow.utiliy.js");
-
-//配置
-const CONFIG = vscode.workspace.getConfiguration();
 
 function activate(context) {
   //初始化路径
@@ -634,7 +630,8 @@ function activate(context) {
                     (i.padStart(3, "0") + dynamicList.全局变量[i])
                       .split("")
                       .join(" "),
-                    dynamicList.全局变量[i]
+                    dynamicList.全局变量[i],
+                    i.padStart(3, "0")
                   );
                   completionItems.push(item);
                 }
@@ -649,7 +646,8 @@ function activate(context) {
                     (i.padStart(3, "0") + dynamicList.玩家变量[i])
                       .split("")
                       .join(" "),
-                    dynamicList.玩家变量[i]
+                    dynamicList.玩家变量[i],
+                    i.padStart(3, "0")
                   );
                   completionItems.push(item);
                 }
@@ -664,7 +662,8 @@ function activate(context) {
                     (i.padStart(3, "0") + dynamicList.子程序[i])
                       .split("")
                       .join(" "),
-                    dynamicList.子程序[i]
+                    dynamicList.子程序[i],
+                    i.padStart(3, "0")
                   );
                   completionItems.push(item);
                 }
@@ -703,6 +702,8 @@ function activate(context) {
               if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
                 const param = MODEL.规则.动作[entry.name].参数[entry.index];
                 if (param.hasOwnProperty("选项")) {
+                  vscode.commands.executeCommand("ow.command.suggest");
+                } else if (param.类型.match(/^全局变量|玩家变量|子程序$/)) {
                   vscode.commands.executeCommand("ow.command.suggest");
                 }
               } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
@@ -4503,24 +4504,34 @@ function getModelString() {
 //调试工具：对象属性数组化
 function convertObjectToArray() {
   try {
-    const transformedObject = {};
-    const originalObject = MODEL.常量;
+    const inputObject = MODEL.规则.条件;
 
-    for (const key in originalObject) {
-      if (Object.hasOwnProperty.call(originalObject, key)) {
-        transformedObject[key] = Object.keys(originalObject[key]).map(
-          (subKey) => {
-            const newObj = {
-              名称: subKey,
-              ...originalObject[key][subKey],
-            };
-            return newObj;
-          }
-        );
+    const outputArray = [];
+
+    // Sort the property names
+    const sortedPropNames = Object.keys(inputObject).sort((b, a) =>
+      a.localeCompare(b, "zh-Hans-CN")
+    );
+
+    for (const propName of sortedPropNames) {
+      const prop = inputObject[propName];
+
+      const outputItem = {
+        match: propName,
+      };
+
+      if (prop.hasOwnProperty("参数")) {
+        outputItem.patterns = prop["参数"].map((param) => {
+          return {
+            include: `#${param["类型"]}`,
+          };
+        });
       }
+
+      outputArray.push(outputItem);
     }
 
-    const outputString = JSON.stringify(transformedObject, null, 2);
+    const outputString = JSON.stringify(outputArray, null, 2);
 
     fs.writeFileSync(
       "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
