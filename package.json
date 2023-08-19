@@ -1,5 +1,5 @@
 {
-  "icon": "images/extension/background/icon.png",
+  "icon": "images/extension/icon.png",
   "name": "overwatch-workshop",
   "displayName": "Overwatch Workshop",
   "publisher": "Xcrystal",
@@ -83,14 +83,14 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "ow_container",
+          "id": "manualView",
           "title": "OW",
           "icon": "images/extension/command/outline.png"
         }
       ]
     },
     "views": {
-      "ow_container": [
+      "manualView": [
         {
           "id": "ow.view.manual",
           "name": "手册",
@@ -159,6 +159,11 @@
         "label": "Overwatch Workshop 深邃",
         "uiTheme": "vs-dark",
         "path": "themes/ow.dark.json"
+      },
+      {
+        "label": "踏足的定制主题：深井",
+        "uiTheme": "vs-dark",
+        "path": "themes/TaZu.deep.json"
       }
     ]
   }

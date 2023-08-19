@@ -856,7 +856,6 @@ function activate(context) {
                       const param =
                         MODEL.规则.条件[entry.name].参数[entry.index];
                       if (param && param.hasOwnProperty("选项")) {
-                        console.log(word, param.选项);
                         builder.push(
                           range.start.line,
                           range.start.character,
@@ -881,7 +880,6 @@ function activate(context) {
           } catch (error) {
             console.log(error);
           } finally {
-            console.log(builder);
             return builder.build();
           }
         },
@@ -912,7 +910,7 @@ function activate(context) {
       },
     }),
 
-    //切换开关行为
+    //切换开关行为命令
     vscode.commands.registerCommand("ow.toggle.disableRule", (args) => {
       const { document, range } = args;
       let text = document.getText(range);
