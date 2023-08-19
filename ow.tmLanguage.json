@@ -106,6 +106,9 @@
             },
             {
               "include": "#conditions"
+            },
+            {
+              "include": "#symbols"
             }
           ]
         },
@@ -120,10 +123,13 @@
               "include": "#strings"
             },
             {
+              "include": "#actions"
+            },
+            {
               "include": "#conditions"
             },
             {
-              "include": "#actions"
+              "include": "#symbols"
             }
           ]
         }
@@ -194,15 +200,6 @@
         },
         {
           "include": "#conditionParams"
-        },
-        {
-          "include": "#symbols"
-        },
-        {
-          "include": "#numbers"
-        },
-        {
-          "include": "#variables"
         }
       ]
     },
@@ -225,6 +222,15 @@
             },
             {
               "include": "#constants"
+            },
+            {
+              "include": "#symbols"
+            },
+            {
+              "include": "#numbers"
+            },
+            {
+              "include": "#variables"
             }
           ]
         }
@@ -243,15 +249,6 @@
         },
         {
           "include": "#actionParams"
-        },
-        {
-          "include": "#symbols"
-        },
-        {
-          "include": "#numbers"
-        },
-        {
-          "include": "#variables"
         }
       ]
     },
@@ -276,6 +273,15 @@
         },
         {
           "include": "#constants"
+        },
+        {
+          "include": "#symbols"
+        },
+        {
+          "include": "#numbers"
+        },
+        {
+          "include": "#variables"
         }
       ]
     },

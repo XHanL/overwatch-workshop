@@ -821,28 +821,73 @@ function activate(context) {
       " "
     ),
 
-    //切换开关能力
-    vscode.languages.registerCodeLensProvider("ow", {
-      provideCodeLenses(document, token) {
-        let codeLens = [];
-        const text = document.getText();
-        const pattern = /(禁用\s*)?规则\s*\("(.*)"\)/g;
-        while ((match = pattern.exec(text))) {
-          const matchText = match[0];
-          const startPos = document.positionAt(match.index);
-          const endPos = document.positionAt(match.index + matchText.length);
-          const range = new vscode.Range(startPos, endPos);
-          const toggleCommand = {
-            title: `切换开关`,
-            command: "ow.toggle.disableRule",
-            arguments: [{ document, range }],
-          };
-          const newCodeLens = new vscode.CodeLens(range, toggleCommand);
-          codeLens.push(newCodeLens);
-        }
-        return codeLens;
+    //语法高亮能力：仅纠正Textmate重复项
+    vscode.languages.registerDocumentSemanticTokensProvider(
+      "ow",
+      {
+        provideDocumentSemanticTokens(document) {
+          const builder = new vscode.SemanticTokensBuilder();
+          try {
+            let pos = new vscode.Position(0, 0);
+            while (document.validatePosition(pos)) {
+              const range = document.getWordRangeAtPosition(pos);
+              if (range) {
+                const word = document.getText(range);
+                if (
+                  (match = word.match(
+                    /^(字符串|正在防守|颜色|添加至数组|受治疗者，治疗者及治疗百分比|生命值|上|方向，速率，及最大速度)$/
+                  ))
+                ) {
+                  const scope = UTIL.getScope(document, pos);
+                  const entry = UTIL.getEntry(document, pos, scope);
+                  if (entry instanceof Object) {
+                    if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
+                      const param =
+                        MODEL.规则.动作[entry.name].参数[entry.index];
+                      if (param && param.hasOwnProperty("选项")) {
+                        builder.push(
+                          range.start.line,
+                          range.start.character,
+                          word.length,
+                          0
+                        );
+                      }
+                    } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
+                      const param =
+                        MODEL.规则.条件[entry.name].参数[entry.index];
+                      if (param && param.hasOwnProperty("选项")) {
+                        console.log(word, param.选项);
+                        builder.push(
+                          range.start.line,
+                          range.start.character,
+                          word.length,
+                          0
+                        );
+                      }
+                    }
+                  }
+                }
+                pos = UTIL.getNextValidPosition(document, range.end);
+                if (!pos) {
+                  break;
+                }
+                continue;
+              }
+              pos = UTIL.getNextValidPosition(document, pos);
+              if (!pos) {
+                break;
+              }
+            }
+          } catch (error) {
+            console.log(error);
+          } finally {
+            console.log(builder);
+            return builder.build();
+          }
+        },
       },
-    }),
+      new vscode.SemanticTokensLegend([`constants`])
+    ),
 
     //切换开关行为
     vscode.commands.registerCommand("ow.toggle.disableRule", (args) => {

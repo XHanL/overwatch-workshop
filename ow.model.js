@@ -9781,79 +9781,79 @@ let 规则 = {
     玩家: {
       全部: {
         标签: ["事件", "玩家"],
-        顺序: "000",
+        顺序: "0",
         提示: "表示所有栏位的玩家。",
       },
 
       "栏位 0": {
         标签: ["事件", "玩家"],
-        顺序: "001",
+        顺序: "1",
         提示: "表示第0个栏位的玩家。",
       },
 
       "栏位 1": {
         标签: ["事件", "玩家"],
-        顺序: "002",
+        顺序: "2",
         提示: "表示第1个栏位的玩家。",
       },
 
       "栏位 2": {
         标签: ["事件", "玩家"],
-        顺序: "003",
+        顺序: "3",
         提示: "表示第2个栏位的玩家。",
       },
 
       "栏位 3": {
         标签: ["事件", "玩家"],
-        顺序: "004",
+        顺序: "4",
         提示: "表示第3个栏位的玩家。",
       },
 
       "栏位 4": {
         标签: ["事件", "玩家"],
-        顺序: "005",
+        顺序: "5",
         提示: "表示第4个栏位的玩家。",
       },
 
       "栏位 5": {
         标签: ["事件", "玩家"],
-        顺序: "006",
+        顺序: "6",
         提示: "表示第5个栏位的玩家。",
       },
 
       "栏位 6": {
         标签: ["事件", "玩家"],
-        顺序: "007",
+        顺序: "7",
         提示: "表示第6个栏位的玩家。",
       },
 
       "栏位 7": {
         标签: ["事件", "玩家"],
-        顺序: "008",
+        顺序: "8",
         提示: "表示第7个栏位的玩家。",
       },
 
       "栏位 8": {
         标签: ["事件", "玩家"],
-        顺序: "009",
+        顺序: "9",
         提示: "表示第8个栏位的玩家。",
       },
 
       "栏位 9": {
         标签: ["事件", "玩家"],
-        顺序: "010",
+        顺序: "10",
         提示: "表示第9个栏位的玩家。",
       },
 
       "栏位 10": {
         标签: ["事件", "玩家"],
-        顺序: "011",
+        顺序: "11",
         提示: "表示第10个栏位的玩家。",
       },
 
       "栏位 11": {
         标签: ["事件", "玩家"],
-        顺序: "012",
+        顺序: "12",
         提示: "表示第11个栏位的玩家。",
       },
     },
@@ -10281,7 +10281,7 @@ let 规则 = {
         {
           名称: "输入值",
           类型: "条件",
-          默认: "空",
+          默认: "",
           提示: "此值在每个动作或条件中只赋值一次。",
         },
       ],
@@ -11673,7 +11673,7 @@ let 规则 = {
         {
           名称: "条件",
           类型: "条件",
-          默认: "空",
+          默认: "",
           提示: "获取此数组中的元素。",
         },
       ],
@@ -13167,7 +13167,7 @@ let 规则 = {
         {
           名称: "值",
           类型: "条件",
-          默认: "空",
+          默认: "",
           提示: "此值的更新频率将从每几帧更新一次提高为每一帧更新一次。",
         },
       ],
@@ -13342,7 +13342,7 @@ let 规则 = {
         {
           名称: "条件",
           类型: "条件",
-          默认: "空",
+          默认: "",
           提示: "如果此值为真，则继续执行下一个行动。否则，跳转至当前层级的下一个 Else If ，Else 或 End 行动并执行。",
         },
       ],
@@ -13422,7 +13422,7 @@ let 规则 = {
         {
           名称: "条件",
           类型: "条件",
-          默认: "空",
+          默认: "",
           提示: "如果此值为真，则继续执行下一个行动。否则，跳转至当前层级的下一个 Else If ，Else 或 End 行动并执行。",
         },
       ],
@@ -13434,7 +13434,7 @@ let 规则 = {
         {
           名称: "条件",
           类型: "条件",
-          默认: "假",
+          默认: "",
           提示: "如果此值为真，则继续执行下一个行动。否则，跳转至当前层级的下一个 Else If ，Else 或 End 行动并执行。",
         },
       ],
@@ -17536,7 +17536,7 @@ let 模版 = {
   },
 };
 
-function buildPinyinFilterText(text) {
+function buildFilterText(text) {
   let pinyin = "";
   for (let i = 0; i < text.length; i++) {
     if (拼音.hasOwnProperty(text[i])) {
@@ -17547,8 +17547,7 @@ function buildPinyinFilterText(text) {
       console.log(`拼音缺失: ${text[i]}: "",`);
     }
   }
-  //console.log(pinyin);
-  return pinyin;
+  return `${pinyin} ${text}`;
 }
 
 function buildHover(PATH, name, tags, details) {
@@ -17601,17 +17600,20 @@ function buildCompletion(
     item.documentation.appendMarkdown(details);
   }
   if (filterText) {
-    item.filterText = buildPinyinFilterText(filterText) + " " + filterText;
+    item.filterText = buildFilterText(filterText);
   } else {
-    item.filterText = buildPinyinFilterText(label) + " " + label;
+    item.filterText = buildFilterText(label);
   }
   if (insertText) {
     item.insertText = insertText;
   }
   if (sortText) {
-    item.sortText = sortText;
+    item.sortText = `${sortText}`.padStart(3, "0");
   } else {
-    item.sortText = `${label.length}`.padStart(3, "0");
+    item.sortText =
+      `${kind}`.padStart(2, "0") +
+      `${label[0]}` +
+      `${label.length}`.padStart(2, "0");
   }
   if (command) {
     item.command = command;

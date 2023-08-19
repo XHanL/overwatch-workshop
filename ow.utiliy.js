@@ -97,6 +97,10 @@ function getDynamicList(document) {
 //获取前一个合法位置
 function getPrevValidPosition(document, pos) {
   try {
+    if (!document.validatePosition(pos)) {
+      console.log(`pos无效：getPrevValidPosition 获取前一个合法位置`);
+      return undefined;
+    }
     if (pos.character > 0) {
       return pos.translate(0, -1);
     } else if (pos.line > 0) {
@@ -114,9 +118,13 @@ function getPrevValidPosition(document, pos) {
 //获取后一个合法位置
 function getNextValidPosition(document, pos) {
   try {
+    if (!document.validatePosition(pos)) {
+      console.log(`pos无效：getNextValidPosition 获取后一个合法位置`);
+      return undefined;
+    }
     if (pos.character < document.lineAt(pos.line).range.end.character) {
       return pos.translate(0, 1);
-    } else if (pos.line < document.lineCount) {
+    } else if (pos.line < document.lineCount - 1) {
       return document.lineAt(pos.line + 1).range.start;
     } else {
       console.log(`越位警告：getNextValidPosition 获取后一个合法位置`);
@@ -131,6 +139,10 @@ function getNextValidPosition(document, pos) {
 //获取前一个合法单词范围
 function getPrevValidWordRange(document, position, pattern, includingSelf) {
   try {
+    if (!document.validatePosition(position)) {
+      console.log(`position无效：getPrevValidWordRange 获取前一个合法单词范围`);
+      return undefined;
+    }
     let pos = position;
     let range = document.getWordRangeAtPosition(pos, pattern);
     if (!includingSelf) {
@@ -157,6 +169,10 @@ function getPrevValidWordRange(document, position, pattern, includingSelf) {
 //获取后一个合法单词范围
 function getNextValidWordRange(document, position, pattern, includingSelf) {
   try {
+    if (!document.validatePosition(position)) {
+      console.log(`position无效：getNextValidWordRange 获取后一个合法单词范围`);
+      return undefined;
+    }
     let pos = position;
     let range = document.getWordRangeAtPosition(pos, pattern);
     if (!includingSelf) {

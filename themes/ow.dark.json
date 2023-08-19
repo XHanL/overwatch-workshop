@@ -134,7 +134,6 @@
     "welcomePage.progress.foreground": "#0078D4",
     "widget.border": "#313131"
   },
-  "semanticHighlighting": true,
   "tokenColors": [
     {
       "scope": [
@@ -508,5 +507,11 @@
         "fontStyle": "underline"
       }
     }
-  ]
+  ],
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "constants": {
+      "foreground": "#ce9178"
+    }
+  }
 }
