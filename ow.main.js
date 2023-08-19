@@ -199,7 +199,7 @@ function activate(context) {
                   if (match[1] === undefined) {
                     symbol = [
                       "规则",
-                      match[2],
+                      `${match[2]}`,
                       vscode.SymbolKind.Module,
                       prevLine.range.start,
                       [],
@@ -207,7 +207,7 @@ function activate(context) {
                   } else {
                     symbol = [
                       "规则",
-                      `${match[2]} [禁用]`,
+                      `⟁ ${match[2]}`,
                       vscode.SymbolKind.Module,
                       prevLine.range.start,
                       [],
@@ -821,7 +821,7 @@ function activate(context) {
       " "
     ),
 
-    //语法高亮能力：仅纠正Textmate重复项
+    //语法高亮能力：仅纠正Textmate错误项
     vscode.languages.registerDocumentSemanticTokensProvider(
       "ow",
       {
@@ -888,6 +888,29 @@ function activate(context) {
       },
       new vscode.SemanticTokensLegend([`constants`])
     ),
+
+    //切换开关行为
+    vscode.languages.registerCodeLensProvider("ow", {
+      provideCodeLenses(document) {
+        const codeLens = [];
+        const text = document.getText();
+        const pattern = /(禁用\s*)?规则\s*\("(.*)"\)/g;
+        while ((match = pattern.exec(text))) {
+          const matchText = match[0];
+          const startPos = document.positionAt(match.index);
+          const endPos = document.positionAt(match.index + matchText.length);
+          const range = new vscode.Range(startPos, endPos);
+          const toggleCommand = {
+            title: `切换开关`,
+            command: "ow.toggle.disableRule",
+            arguments: [{ document, range }],
+          };
+          const newCodeLens = new vscode.CodeLens(range, toggleCommand);
+          codeLens.push(newCodeLens);
+        }
+        return codeLens;
+      },
+    }),
 
     //切换开关行为
     vscode.commands.registerCommand("ow.toggle.disableRule", (args) => {
