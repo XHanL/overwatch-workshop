@@ -146,6 +146,11 @@
     },
     "themes": [
       {
+        "label": "Overwatch Workshop 深邃",
+        "uiTheme": "vs-dark",
+        "path": "themes/ow.dark.json"
+      },
+      {
         "label": "Overwatch Workshop 明亮",
         "uiTheme": "vs",
         "path": "themes/ow.light.json"
@@ -154,11 +159,6 @@
         "label": "Overwatch Workshop 静谧",
         "uiTheme": "vs-dark",
         "path": "themes/ow.gray.json"
-      },
-      {
-        "label": "Overwatch Workshop 深邃",
-        "uiTheme": "vs-dark",
-        "path": "themes/ow.dark.json"
       },
       {
         "label": "踏足的定制主题：深井",
