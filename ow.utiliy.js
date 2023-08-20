@@ -205,7 +205,12 @@ function getScope(document, position) {
     while (document.validatePosition(range.start)) {
       const symbol = document.getText(range);
       if (symbol == '"') {
-        range = getPrevValidWordRange(document, range.start, /\"[^"]*\"/, true);
+        range = getPrevValidWordRange(
+          document,
+          range.start,
+          /\"(?:\\\\.|[^\\\\\"])*\"/,
+          true
+        );
       } else if (symbol == "{") {
         if (rightBracesCount > 0) {
           rightBracesCount--;
@@ -248,83 +253,87 @@ function getEntry(document, position, scope) {
   try {
     let rightParenthesesCount = 0;
     let commasCount = 0;
+    let isString = false;
     let dotPosition = undefined;
     let leftParenthesesPosition = undefined;
     let range = getPrevValidWordRange(
       document,
       position,
-      /[\{\}\[\]\(\)\+\-\*\/\^\%\<\>\=\!\?\|\&\:\.\;\,\"]/,
+      /\\\"|[\{\[\(\)\+\-\*\/\^\%\<\>\=\!\?\|\&\:\.\;\,\"]/,
       true
     );
     while (document.validatePosition(range.start)) {
       const symbol = document.getText(range);
+      console.log(symbol);
       if (symbol == '"') {
-        //识别字符串
-        range = getPrevValidWordRange(document, range.start, /\"[^"]*\"/, true);
-      } else if (dotPosition !== undefined) {
-        //决定变量
-        const nameRange = new vscode.Range(range.start, dotPosition);
-        const name = document
-          .getText(nameRange)
-          .replace(/\"[^"]*\"/g, "")
-          .slice(1)
-          .trim();
-        console.log(name);
-        if (name === "" || name.match(/^-?\d+$/)) {
-          return;
-        }
-        return getDynamicType(name);
-      } else if (leftParenthesesPosition !== undefined) {
-        //决定条目
-        const nameRange = new vscode.Range(
-          range.start,
-          leftParenthesesPosition
-        );
-        const name = document
-          .getText(nameRange)
-          .replace(/\"[^"]*\"/g, "")
-          .slice(1)
-          .trim();
-        console.log(name);
-        if (name !== "") {
-          return {
-            name: name,
-            index: commasCount,
-          };
-        } else {
+        isString = !isString;
+        console.log(isString);
+      }
+      if (!isString) {
+        if (dotPosition !== undefined) {
+          //决定变量
+          const nameRange = new vscode.Range(range.start, dotPosition);
+          const name = document
+            .getText(nameRange)
+            .replace(/\"(?:\\\\.|[^\\\\\"])*\"/g, "")
+            .slice(1)
+            .trim();
+          if (name === "" || name.match(/^-?\d+$/)) {
+            return;
+          }
+          return getDynamicType(name);
+        } else if (leftParenthesesPosition !== undefined) {
+          //决定条目
+          const nameRange = new vscode.Range(
+            range.start,
+            leftParenthesesPosition
+          );
+          const name = document
+            .getText(nameRange)
+            .replace(/\"(?:\\\\.|[^\\\\\"])*\"/g, "")
+            .slice(1)
+            .trim();
+          console.log(name);
+          if (name !== "") {
+            return {
+              name: name,
+              index: commasCount,
+            };
+          } else {
+            return "条件";
+          }
+        } else if (symbol == "." && commasCount == 0) {
+          //识别变量
+          dotPosition = range.start;
+        } else if (symbol.match(/[\{\;]/)) {
+          return scope.name;
+        } else if (
+          commasCount == 0 &&
+          symbol.match(/[\[\+\-\*\/\^\%\<\>\=\!\?\|\&\:]/)
+        ) {
+          console.log("???: " + symbol);
           return "条件";
-        }
-      } else if (symbol == "." && commasCount == 0) {
-        //识别变量
-        dotPosition = range.start;
-      } else if (symbol.match(/[\{\;]/)) {
-        return scope.name;
-      } else if (
-        commasCount == 0 &&
-        symbol.match(/[\[\+\-\*\/\^\%\<\>\=\!\?\|\&\:]/)
-      ) {
-        return "条件";
-      } else if (symbol == "(") {
-        if (rightParenthesesCount < 0) {
-          return "条件";
-        } else if (rightParenthesesCount == 0) {
-          leftParenthesesPosition = range.start;
-        } else {
+        } else if (symbol == "(") {
+          if (rightParenthesesCount < 0) {
+            return "条件";
+          } else if (rightParenthesesCount == 0) {
+            leftParenthesesPosition = range.start;
+          }
           rightParenthesesCount--;
-        }
-      } else if (symbol == ")") {
-        if (range.start != position) {
-          rightParenthesesCount++;
-        }
-      } else if (symbol == ",") {
-        if (range.start != position && rightParenthesesCount == 0) {
-          commasCount++;
+        } else if (symbol == ")") {
+          if (range.start != position) {
+            rightParenthesesCount++;
+          }
+        } else if (symbol == ",") {
+          if (range.start != position && rightParenthesesCount == 0) {
+            commasCount++;
+          }
         }
       }
       range = getPrevValidWordRange(
         document,
         range.start,
-        /[\{\}\[\]\(\)\+\-\*\/\^\%\<\>\=\!\?\|\&\:\.\;\,\"]/
+        /\\\"|[\{\[\(\)\+\-\*\/\^\%\<\>\=\!\?\|\&\:\.\;\,\"]/
       );
     }
     console.log(`性能警告：getEntry 获取当前条目`);
