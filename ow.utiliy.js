@@ -283,7 +283,6 @@ function getEntry(document, position, scope) {
           .replace(/"((?:\\.|[^"\\])*)"/g, "")
           .slice(1)
           .trim();
-        console.log(name);
         if (name !== "") {
           return {
             name: name,
@@ -301,7 +300,6 @@ function getEntry(document, position, scope) {
         commasCount == 0 &&
         symbol.match(/[\[\+\-\*\/\^\%\<\>\=\!\?\|\&\:]/)
       ) {
-        console.log("???: " + symbol);
         return "条件";
       } else if (symbol == "(") {
         if (rightParenthesesCount < 0) {
