@@ -202,6 +202,11 @@ function getScope(document, position) {
     let rightBracesCount = 0;
     let semicolonCount = 0;
     let range = getPrevValidWordRange(document, position, /[\{\}\;\"]/, true);
+    if (!range) {
+      return {
+        name: "全局",
+      };
+    }
     while (document.validatePosition(range.start)) {
       const symbol = document.getText(range);
       if (symbol == '"') {
