@@ -4,147 +4,167 @@
 
 <br/>
 
-# **_关键特性_**
+# **_快速入门_**
 
-### **代码大纲**
+- 新建一个文本文件并将后缀改为 `.ow`。
 
-在资源管理器的大纲视图提供详细大纲。具备跟踪光标和跳转能力。
+- 从工坊复制完整代码到该文件内。
 
+<br>
 <details>
-    <summary>演示</summary>
-    <img src="images/extension/gif/outlines.gif" align=center />
+  <summary>复制样例代码</summary>
+  <br>
+
+    规则("你好，世界！")
+    {
+        事件
+        {
+            持续 - 全局;
+        }
+
+        条件
+        {
+            按钮被按下(主机玩家, 按钮(互动)) == 真;
+        }
+
+        动作
+        {
+            小字体信息(主机玩家, 自定义字符串("HELLO WORLD!"));
+        }
+    }
+
 </details>
 <br/>
 
-### **代码折叠**
+# **_主要特性_**
 
-代码折叠能力，包括代码块和流程控制。
+_比内置编辑器更好用。_
 
-<details>
-    <summary>演示</summary>
-    <img src="images/extension/gif/fold.gif" align=center />
-</details>
-<br/>
+- ### **代码大纲**
 
-### **悬停提示**
+  在资源管理器的大纲视图提供详细大纲。具备跟踪光标和跳转能力。
 
-将光标放置在关键词之上可获得详细提示。
+  <details>
+      <summary>演示</summary>
+      <img src="images/extension/gif/outlines.gif" align=center />
+  </details>
+  <br/>
 
-<details>
-    <summary>演示</summary>
-    <img src="images/extension/gif/hover.gif" align=center />
-</details>
-<br/>
+- ### **代码折叠**
 
-### **调色盘**
+  代码折叠能力，包括代码块和流程控制。
 
-针对自定义颜色的预览和调制能力。
+  <details>
+      <summary>演示</summary>
+      <img src="images/extension/gif/fold.gif" align=center />
+  </details>
+  <br/>
 
-<details>
-    <summary>演示</summary>
-    <img src="images/extension/gif/color.gif" align=center />
-</details>
-<br/>
+- ### **悬停提示**
 
-### **补全建议**
+  将光标放置在关键词之上可获得详细提示。
 
-汉字或拼音输入展开建议列表，可使用建议按钮强制触发。
+  <details>
+      <summary>演示</summary>
+      <img src="images/extension/gif/hover.gif" align=center />
+  </details>
+  <br/>
 
-<details>
-    <summary>演示</summary>
-    <img src="images/extension/gif/suggestion.gif" align=center />
-</details>
-<br/>
+- ### **调色盘**
 
-### **参数提示**
+  针对自定义颜色的预览和调制能力。
 
-填充参数时会指示参数位和参数详情。
+  <details>
+      <summary>演示</summary>
+      <img src="images/extension/gif/color.gif" align=center />
+  </details>
+  <br/>
 
-<details>
-    <summary>演示</summary>
-    <img src="images/extension/gif/sign.gif" align=center />
-</details>
-<br/>
+- ### **补全建议**
 
-### **参考手册**
+  汉字或拼音输入展开建议列表，可使用建议按钮强制触发。
 
-侧边栏增加可收纳的参考手册视图。
+  <details>
+      <summary>演示</summary>
+      <img src="images/extension/gif/suggestion.gif" align=center />
+  </details>
+  <br/>
 
-<details>
-    <summary>演示</summary>
-    <img src="images/extension/gif/manual.gif" align=center />
-</details>
-<br/>
+- ### **参数提示**
 
-### **语法高亮**
+  填充参数时会指示参数位和参数详情。
 
-代码的精准上色能力。
+  <details>
+      <summary>演示</summary>
+      <img src="images/extension/gif/sign.gif" align=center />
+  </details>
+  <br/>
 
-<br/>
+- ### **参考手册**
 
-### **禁用开关**
+  侧边栏增加可收纳的参考手册视图。
 
-自动在每条规则前生成一个可点击的禁用切换开关。
+  <details>
+      <summary>演示</summary>
+      <img src="images/extension/gif/manual.gif" align=center />
+  </details>
+  <br/>
 
-<br/>
+- ### **语法高亮**
 
-# **_快捷面板_**
+  代码的精准上色能力。
 
-### **<img src="images/extension/command/background/suggest.png" width="20" height="20" align=center /> 建议**
+  <br/>
 
-主动触发光标处的补全建议。
+* ### **禁用开关**
 
-<br/>
+  自动在每条规则前生成一个可点击的禁用切换开关。
 
-### **<img src="images/extension/command/background/line.png" width="20" height="20" align=center /> 换行**
+  <br/>
 
-切换自动换行行为。
+# **_快捷功能_**
 
-<br/>
+_功能位于标签栏右侧以及右键菜单中。_
 
-### **<img src="images/extension/command/background/format.png" width="20" height="20" align=center /> 整理**
+- ### **功能介绍**
 
-对编辑器内代码进行格式化。
+  | 功能           | 描述                                    |
+  | :------------- | :-------------------------------------- |
+  | **提供建议**   | 主动触发光标处的补全建议。              |
+  | **自动换行**   | 切换自动换行行为。                      |
+  | **修复后导出** | 导入到剪切板，同时修复已知的工坊错误。❶ |
+  | **导入并修复** | 导入到编辑器，同时修复已知的工坊错误。❶ |
 
-<br/>
+- ### **❶ 已知的工坊错误**
 
-### **<img src="images/extension/command/background/copy.png" width="20" height="20" align=center /> 复制**
+     <details>
+         <summary>错误详情</summary>
+         <br/>
 
-导入到剪切板，同时修复已知的工坊错误。❶
+  _~~设置不可见(事件玩家, 无);~~_
 
-<br/>
+         设置不可见(事件玩家, 全部禁用);
 
-### **<img src="images/extension/command/background/paste.png" width="20" height="20" align=center /> 粘贴**
+  _~~追踪全局变量频率(A, 0, 1, 无);~~_
 
-导入到编辑器，同时修复已知的工坊错误。❶
+         追踪全局变量频率(A, 0, 1, 全部禁用);
 
-<br/>
+  _~~追踪玩家变量频率(事件玩家, A, 0, 1, 无);~~_
 
-### **❶ 已知的工坊错误**
+         追踪玩家变量频率(事件玩家, A, 0, 1, 全部禁用);
 
-_~~设置不可见(事件玩家, 无);~~_
+  _~~持续追踪全局变量( A, 0, 1, 无);~~_
 
-    设置不可见(事件玩家, 全部禁用);
+         持续追踪全局变量(A, 0, 1, 全部禁用);
 
-_~~追踪全局变量频率(A, 0, 1, 无);~~_
+  _~~持续追踪玩家变量(事件玩家, A, 0, 1, 无);~~_
 
-    追踪全局变量频率(A, 0, 1, 全部禁用);
+         持续追踪玩家变量(事件玩家, A, 0, 1, 全部禁用);
 
-_~~追踪玩家变量频率(事件玩家, A, 0, 1, 无);~~_
+     </details>
+    <br/>
 
-    追踪玩家变量频率(事件玩家, A, 0, 1, 全部禁用);
-
-_~~持续追踪全局变量( A, 0, 1, 无);~~_
-
-    持续追踪全局变量(A, 0, 1, 全部禁用);
-
-_~~持续追踪玩家变量(事件玩家, A, 0, 1, 无);~~_
-
-    持续追踪玩家变量(事件玩家, A, 0, 1, 全部禁用);
-
-<br/>
-
-# **_联络_**
+# **_联络方式_**
 
 **如果你发现任何错误或有任何建议，可通过以下方式与开发人员取得联络。**
 |平台|描述|代码|链接|
