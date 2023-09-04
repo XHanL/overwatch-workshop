@@ -726,9 +726,9 @@ function activate(context) {
           try {
             const scope = UTIL.getScope(document, position);
             if (scope.name === "条件") {
-              return getConditionSignature();
+              //return getConditionSignature();
             } else if (scope.name === "动作") {
-              return getActionSignature();
+              //return getActionSignature();
             }
 
             //获取条件参数签名
@@ -4561,6 +4561,9 @@ function sortAndFilterChineseKeyword(s) {
 //调试工具：正则字符串
 function getModelString() {
   let str = "";
+  for (i in MODEL.规则.条件) {
+    str += "|" + i;
+  }
   for (i in MODEL.规则.动作) {
     str += "|" + i;
   }
