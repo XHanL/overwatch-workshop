@@ -261,6 +261,7 @@ function getEntry(document, position, scope) {
   try {
     let rightParenthesesCount = 0;
     let commasCount = 0;
+    let isString = false;
     for (let i = position.line; i >= 0; i--) {
       //当前行
       const line = document.lineAt(i);
@@ -278,6 +279,24 @@ function getEntry(document, position, scope) {
         const charEnd = charStart.translate(0, 1);
         const charRange = new vscode.Range(charStart, charEnd);
         const charText = document.getText(charRange);
+
+        if (charText == '"') {
+          if (j > 0) {
+            const prevStart = charEnd;
+            const prevEnd = charEnd.translate(0, 1);
+            const prevRange = new vscode.Range(prevStart, prevEnd);
+            const prevText = document.getText(prevRange);
+            if (prevText == "\\") {
+              continue;
+            }
+          }
+          isString = !isString;
+        }
+
+        if (isString) {
+          continue;
+        }
+
         if ((match = charText.match(/[\{\;]/))) {
           return scope.name;
         } else if (charText == "(") {
@@ -313,11 +332,14 @@ function getEntry(document, position, scope) {
           commasCount++;
         } else if (charText == "." && commasCount == 0) {
           //决定变量
-          const nameRange = new vscode.Range(
-            document.lineAt(charStart.line).range.start,
-            charStart.line
+          const range = getPrevValidWordRange(
+            document,
+            charStart,
+            undefined,
+            true
           );
-          const name = document.getText(nameRange).split(".").pop().trim();
+          const name = document.getText(range);
+          console.log(name);
           if (name === "" || name.match(/^-?\d+$/)) {
             return;
           }

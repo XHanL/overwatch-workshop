@@ -27,6 +27,7 @@ function activate(context) {
 
     //导出修复能力
     vscode.commands.registerCommand("ow.command.copy", () => {
+
       let activeEditor = vscode.window.activeTextEditor;
       if (activeEditor) {
         let document = activeEditor.document;
