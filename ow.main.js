@@ -27,7 +27,6 @@ function activate(context) {
 
     //导出修复能力
     vscode.commands.registerCommand("ow.command.copy", () => {
-
       let activeEditor = vscode.window.activeTextEditor;
       if (activeEditor) {
         let document = activeEditor.document;
@@ -727,9 +726,9 @@ function activate(context) {
           try {
             const scope = UTIL.getScope(document, position);
             if (scope.name === "条件") {
-              //return getConditionSignature();
+              return getConditionSignature();
             } else if (scope.name === "动作") {
-              //return getActionSignature();
+              return getActionSignature();
             }
 
             //获取条件参数签名

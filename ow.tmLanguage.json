@@ -109,6 +109,9 @@
             },
             {
               "include": "#symbols"
+            },
+            {
+              "include": "#variables"
             }
           ]
         },
@@ -130,6 +133,9 @@
             },
             {
               "include": "#symbols"
+            },
+            {
+              "include": "#variables"
             }
           ]
         }
@@ -223,9 +229,6 @@
         },
         {
           "include": "#numbers"
-        },
-        {
-          "include": "#variables"
         }
       ]
     },
@@ -248,6 +251,9 @@
             },
             {
               "include": "#constants"
+            },
+            {
+              "include": "#variables"
             }
           ]
         }
@@ -272,9 +278,6 @@
         },
         {
           "include": "#numbers"
-        },
-        {
-          "include": "#variables"
         }
       ]
     },
@@ -299,6 +302,9 @@
         },
         {
           "include": "#constants"
+        },
+        {
+          "include": "#variables"
         }
       ]
     },
