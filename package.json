@@ -14,7 +14,7 @@
     "守望先锋",
     "工坊"
   ],
-  "version": "2.4.6",
+  "version": "2.5.0",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -161,7 +161,7 @@
         "path": "themes/ow.gray.json"
       },
       {
-        "label": "踏足的定制主题：深井",
+        "label": "Overwatch Workshop 深井 - By 踏足",
         "uiTheme": "vs-dark",
         "path": "themes/TaZu.deep.json"
       }
