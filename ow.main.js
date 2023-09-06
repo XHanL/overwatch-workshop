@@ -821,7 +821,7 @@ function activate(context) {
       " "
     ),
 
-    //语法高亮能力：仅纠正Textmate错误项
+    //语法高亮能力：仅纠正Textmate冲突项
     vscode.languages.registerDocumentSemanticTokensProvider(
       "ow",
       {

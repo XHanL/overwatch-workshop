@@ -17630,7 +17630,6 @@ function buildCompletion(
 }
 
 function buildParameter(
-  functName,
   paramName,
   paramIndex,
   paramType,
@@ -17939,7 +17938,6 @@ function buildStaticModels(PATH) {
           insertText.value += ", ";
         }
         element.签名 = buildParameter(
-          i,
           element.名称,
           index,
           element.类型,
@@ -18027,7 +18025,6 @@ function buildStaticModels(PATH) {
           insertText.value += ", ";
         }
         element.签名 = buildParameter(
-          i,
           element.名称,
           index,
           element.类型,
