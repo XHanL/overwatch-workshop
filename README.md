@@ -117,7 +117,7 @@
 
 >  <details>
 >      <summary>演示</summary>
->      <img src="showcases/switch.mov" align=center />
+>      <img src="showcases/switch.gif" align=center />
 >  </details>
 
 ## **_⬘ 快捷功能_**
