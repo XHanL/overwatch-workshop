@@ -37,7 +37,7 @@
 
 ## **_⬘ 主要特性_**
 
-**以下 `GIF演示` 由 `Github` 托管，请确保网络具备严谨的科学性。**
+**以下 `演示` 由 `Github` 托管，请确保网络具备严谨的科学性。**
 
 ### **代码大纲**
 
@@ -45,7 +45,7 @@
 
 >  <details>
 >      <summary>演示</summary>
->      <img src="gifs/outlines.gif" align=center />
+>      <img src="showcases/outlines.gif" align=center />
 >  </details>
 
 ### **代码折叠**
@@ -54,7 +54,7 @@
 
 >  <details>
 >      <summary>演示</summary>
->      <img src="gifs/fold.gif" align=center />
+>      <img src="showcases/fold.gif" align=center />
 >  </details>
 
 ### **悬停提示**
@@ -63,7 +63,7 @@
 
 >  <details>
 >      <summary>演示</summary>
->      <img src="gifs/hover.gif" align=center />
+>      <img src="showcases/hover.gif" align=center />
 >  </details>
 
 ### **调色盘**
@@ -72,7 +72,7 @@
 
 >  <details>
 >      <summary>演示</summary>
->      <img src="gifs/color.gif" align=center />
+>      <img src="showcases/color.gif" align=center />
 >  </details>
 
 ### **补全建议**
@@ -81,7 +81,7 @@
 
 >  <details>
 >      <summary>演示</summary>
->      <img src="gifs/suggestion.gif" align=center />
+>      <img src="showcases/suggestion.gif" align=center />
 >  </details>
 
 ### **参数提示**
@@ -90,7 +90,7 @@
 
 >  <details>
 >      <summary>演示</summary>
->      <img src="gifs/sign.gif" align=center />
+>      <img src="showcases/sign.gif" align=center />
 >  </details>
 
 ### **参考手册**
@@ -99,18 +99,26 @@
 
 >  <details>
 >      <summary>演示</summary>
->      <img src="gifs/manual.gif" align=center />
+>      <img src="showcases/manual.gif" align=center />
 >  </details>
 
 ### **语法高亮**
 
 代码的精准上色能力。
 
+>  <details>
+>      <summary>演示</summary>
+>      <img src="showcases/highlight.png" align=center />
+>  </details>
+
 ### **规则开关**
 
 自动在每条规则前生成一个可点击的禁用切换开关。
 
-<br>
+>  <details>
+>      <summary>演示</summary>
+>      <img src="showcases/switch.mov" align=center />
+>  </details>
 
 ## **_⬘ 快捷功能_**
 
