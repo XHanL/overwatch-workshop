@@ -120,6 +120,8 @@
 >      <img src="showcases/switch.gif" align=center />
 >  </details>
 
+<br>
+
 ## **_⬘ 快捷功能_**
 
 **_功能位于标签栏右侧以及右键菜单中。_**
