@@ -293,7 +293,7 @@ function getEntry(document, position, scope) {
           isString = !isString;
         }
 
-        if (isString) {
+        if (isString || charText == " ") {
           continue;
         }
 
@@ -304,21 +304,20 @@ function getEntry(document, position, scope) {
             return "条件";
           } else if (rightParenthesesCount == 0) {
             //决定条目
-            const range = getPrevValidWordRange(
-              document,
+            const range = document.getWordRangeAtPosition(
               charStart,
-              entryPattern,
-              true
+              entryPattern
             );
-            const name = document.getText(range);
-            if (name !== "") {
-              return {
-                name: name,
-                index: commasCount,
-              };
-            } else {
-              return "条件";
+            if (range) {
+              const name = document.getText(range);
+              if (name !== "") {
+                return {
+                  name: name,
+                  index: commasCount,
+                };
+              }
             }
+            return "条件";
           } else {
             rightParenthesesCount--;
           }

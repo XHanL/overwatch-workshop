@@ -760,17 +760,21 @@ function activate(context) {
                 if (entry.name == "数组") {
                   return;
                 } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
-                  return buildSignatureHelp(
-                    entry.name,
-                    MODEL.规则.动作[entry.name],
-                    entry.index
-                  );
+                  if (MODEL.规则.动作[entry.name].hasOwnProperty("参数")) {
+                    return buildSignatureHelp(
+                      entry.name,
+                      MODEL.规则.动作[entry.name],
+                      entry.index
+                    );
+                  }
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  return buildSignatureHelp(
-                    entry.name,
-                    MODEL.规则.条件[entry.name],
-                    entry.index
-                  );
+                  if (MODEL.规则.条件[entry.name].hasOwnProperty("参数")) {
+                    return buildSignatureHelp(
+                      entry.name,
+                      MODEL.规则.条件[entry.name],
+                      entry.index
+                    );
+                  }
                 }
               }
             }
@@ -4634,7 +4638,7 @@ function buildPinYinArray() {
         .map(
           (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
         )
-        .join("");
+        .join(" ");
 
       pinyinDict[char] = pinyinString;
     }
