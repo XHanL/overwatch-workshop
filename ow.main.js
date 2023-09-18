@@ -522,17 +522,19 @@ function activate(context) {
                   }
                   return buildStaticCompletions(MODEL.规则.条件);
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  const param = MODEL.规则.条件[entry.name].参数[entry.index];
-                  if (param.类型 == "条件") {
-                    if (
-                      context.triggerCharacter == "(" ||
-                      context.triggerCharacter == ","
-                    ) {
-                      return;
+                  if (MODEL.规则.条件[entry.name].hasOwnProperty("参数")) {
+                    const param = MODEL.规则.条件[entry.name].参数[entry.index];
+                    if (param.类型 == "条件") {
+                      if (
+                        context.triggerCharacter == "(" ||
+                        context.triggerCharacter == ","
+                      ) {
+                        return;
+                      }
+                      return buildStaticCompletions(MODEL.规则.条件);
+                    } else if (param.hasOwnProperty("选项")) {
+                      return buildStaticCompletions(param.选项);
                     }
-                    return buildStaticCompletions(MODEL.规则.条件);
-                  } else if (param.hasOwnProperty("选项")) {
-                    return buildStaticCompletions(param.选项);
                   }
                 }
               } else if (entry == "条件") {
@@ -544,56 +546,68 @@ function activate(context) {
 
             //获取动作补全
             function getActionCompletions() {
-              const entry = UTIL.getEntry(document, position, scope);
-              if (!entry) {
-                return;
-              }
-              if (entry instanceof Object) {
-                if (entry.name == "数组") {
-                  if (
-                    context.triggerCharacter == "(" ||
-                    context.triggerCharacter == ","
-                  ) {
-                    return;
-                  }
-                  return buildStaticCompletions(MODEL.规则.条件);
-                } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
-                  const param = MODEL.规则.动作[entry.name].参数[entry.index];
-                  if (param.类型 == "条件") {
-                    if (
-                      context.triggerCharacter == "(" ||
-                      context.triggerCharacter == ","
-                    ) {
-                      return;
-                    }
-                    return buildStaticCompletions(MODEL.规则.条件);
-                  } else if (param.hasOwnProperty("选项")) {
-                    return buildStaticCompletions(param.选项);
-                  } else if (param.类型.match(/^全局变量|玩家变量|子程序$/)) {
-                    return buildDynamicCompletions(param.类型);
-                  }
-                } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  const param = MODEL.规则.条件[entry.name].参数[entry.index];
-                  if (param.类型 == "条件") {
-                    if (
-                      context.triggerCharacter == "(" ||
-                      context.triggerCharacter == ","
-                    ) {
-                      return;
-                    }
-                    return buildStaticCompletions(MODEL.规则.条件);
-                  } else if (param.hasOwnProperty("选项")) {
-                    return buildStaticCompletions(param.选项);
-                  }
+              try {
+                const entry = UTIL.getEntry(document, position, scope);
+                if (!entry) {
+                  return;
                 }
-              } else if (entry == "动作") {
-                return buildStaticCompletions(MODEL.规则.动作).concat(
-                  buildStaticCompletions(MODEL.规则.条件)
-                );
-              } else if (entry == "条件") {
-                return buildStaticCompletions(MODEL.规则.条件);
-              } else if (entry.match(/^全局变量|玩家变量|子程序$/)) {
-                return buildDynamicCompletions(entry);
+                if (entry instanceof Object) {
+                  if (entry.name == "数组") {
+                    if (
+                      context.triggerCharacter == "(" ||
+                      context.triggerCharacter == ","
+                    ) {
+                      return;
+                    }
+                    return buildStaticCompletions(MODEL.规则.条件);
+                  } else if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
+                    if (MODEL.规则.动作[entry.name].hasOwnProperty("参数")) {
+                      const param =
+                        MODEL.规则.动作[entry.name].参数[entry.index];
+                      if (param.类型 == "条件") {
+                        if (
+                          context.triggerCharacter == "(" ||
+                          context.triggerCharacter == ","
+                        ) {
+                          return;
+                        }
+                        return buildStaticCompletions(MODEL.规则.条件);
+                      } else if (param.hasOwnProperty("选项")) {
+                        return buildStaticCompletions(param.选项);
+                      } else if (
+                        param.类型.match(/^全局变量|玩家变量|子程序$/)
+                      ) {
+                        return buildDynamicCompletions(param.类型);
+                      }
+                    }
+                  } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
+                    if (MODEL.规则.条件[entry.name].hasOwnProperty("参数")) {
+                      const param =
+                        MODEL.规则.条件[entry.name].参数[entry.index];
+                      if (param.类型 == "条件") {
+                        if (
+                          context.triggerCharacter == "(" ||
+                          context.triggerCharacter == ","
+                        ) {
+                          return;
+                        }
+                        return buildStaticCompletions(MODEL.规则.条件);
+                      } else if (param.hasOwnProperty("选项")) {
+                        return buildStaticCompletions(param.选项);
+                      }
+                    }
+                  }
+                } else if (entry == "动作") {
+                  return buildStaticCompletions(MODEL.规则.动作).concat(
+                    buildStaticCompletions(MODEL.规则.条件)
+                  );
+                } else if (entry == "条件") {
+                  return buildStaticCompletions(MODEL.规则.条件);
+                } else if (entry.match(/^全局变量|玩家变量|子程序$/)) {
+                  return buildDynamicCompletions(entry);
+                }
+              } catch (error) {
+                console.log(error);
               }
             }
 
@@ -741,11 +755,13 @@ function activate(context) {
                 if (entry.name == "数组") {
                   return;
                 } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                  return buildSignatureHelp(
-                    entry.name,
-                    MODEL.规则.条件[entry.name],
-                    entry.index
-                  );
+                  if (MODEL.规则.条件[entry.name].hasOwnProperty("参数")) {
+                    return buildSignatureHelp(
+                      entry.name,
+                      MODEL.规则.条件[entry.name],
+                      entry.index
+                    );
+                  }
                 }
               }
             }
