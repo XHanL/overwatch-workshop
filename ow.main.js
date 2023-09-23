@@ -101,18 +101,37 @@ function activate(context) {
       provideFoldingRanges(document) {
         let foldingRanges = [];
         let braces = [];
+        let brackets = [];
+        let parentheses = [];
         let controls = [];
+
         for (let i = 0; i < document.lineCount; i++) {
           const line = document.lineAt(i);
           const text = line.text.trim();
           if (text === "") {
             continue;
-          } else if (text.startsWith("{")) {
+          } else if (text.endsWith("{")) {
             braces.push(line.lineNumber - 1);
-          } else if (text.endsWith("}")) {
+          } else if (text.startsWith("}")) {
             foldingRanges.push(
               new vscode.FoldingRange(braces.pop(), line.lineNumber)
             );
+          } else if (text.endsWith("[")) {
+            brackets.push(line.lineNumber);
+          } else if (text.startsWith("]")) {
+            if ((pop = brackets.pop()) != line.lineNumber) {
+              foldingRanges.push(
+                new vscode.FoldingRange(pop, line.lineNumber - 1)
+              );
+            }
+          } else if (text.endsWith("(")) {
+            parentheses.push(line.lineNumber);
+          } else if (text.startsWith(")")) {
+            if ((pop = parentheses.pop()) != line.lineNumber) {
+              foldingRanges.push(
+                new vscode.FoldingRange(pop, line.lineNumber - 1)
+              );
+            }
           } else if (text.match(/^(For 全局变量|For 玩家变量|While|If)/)) {
             controls.push(line.lineNumber);
           } else if (text.match(/^(Else If|Else)/)) {
