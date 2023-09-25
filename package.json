@@ -14,9 +14,9 @@
     "守望先锋",
     "工坊"
   ],
-  "version": "2.7.1",
+  "version": "2.8.0",
   "engines": {
-    "vscode": "^1.75.0"
+    "vscode": "^1.39.0"
   },
   "categories": [
     "Programming Languages"
@@ -48,36 +48,24 @@
     ],
     "commands": [
       {
+        "command": "ow.command.newFile",
+        "title": "OW 文件"
+      },
+      {
         "command": "ow.command.suggest",
-        "title": "提供建议",
-        "icon": {
-          "light": "images/extension/command/black/suggest.png",
-          "dark": "images/extension/command/suggest.png"
-        }
+        "title": "建议"
       },
       {
         "command": "ow.command.line",
-        "title": "自动换行",
-        "icon": {
-          "light": "images/extension/command/black/line.png",
-          "dark": "images/extension/command/line.png"
-        }
+        "title": "换行"
       },
       {
         "command": "ow.command.copy",
-        "title": "修复后导出",
-        "icon": {
-          "light": "images/extension/command/black/copy.png",
-          "dark": "images/extension/command/copy.png"
-        }
+        "title": "导出"
       },
       {
         "command": "ow.command.paste",
-        "title": "导入并修复",
-        "icon": {
-          "light": "images/extension/command/black/paste.png",
-          "dark": "images/extension/command/paste.png"
-        }
+        "title": "导入"
       }
     ],
     "viewsContainers": {
@@ -85,7 +73,7 @@
         {
           "id": "manualView",
           "title": "OW",
-          "icon": "images/extension/command/outline.png"
+          "icon": "images/extension/command/manual.png"
         }
       ]
     },
@@ -93,12 +81,17 @@
       "manualView": [
         {
           "id": "ow.view.manual",
-          "name": "手册",
+          "name": "参考手册",
           "type": "webview"
         }
       ]
     },
     "menus": {
+      "file/newFile": [
+        {
+          "command": "ow.command.newFile"
+        }
+      ],
       "editor/title": [
         {
           "command": "ow.command.suggest",
@@ -113,12 +106,12 @@
         {
           "command": "ow.command.copy",
           "when": "editorLangId == ow",
-          "group": "navigation@103"
+          "group": "navigation@102"
         },
         {
           "command": "ow.command.paste",
           "when": "editorLangId == ow",
-          "group": "navigation@104"
+          "group": "navigation@103"
         }
       ],
       "editor/context": [

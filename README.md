@@ -6,32 +6,17 @@
 
 ## **_⬘ 快速入门_**
 
-**首先**，新建一份后缀改为 `.ow` 的文本文件。
+### ❶ 创建文件
 
-**然后**，从工坊复制`完整代码`，或复制以下`样例代码`，粘贴到该文件中。
+- 从顶部菜单依次选择 `文件 → 新建文件 → OW 文件`
 
-> <details>
->     <summary>样例代码</summary>
->
->     规则("你好")
->     {
->         事件
->         {
->             持续 - 全局;
->         }
->
->         条件
->         {
->             按钮被按下(主机玩家, 按钮(互动)) == 真;
->         }
->
->         动作
->         {
->             小字体信息(主机玩家, 自定义字符串("你好"));
->         }
->     }
->
-> </details>
+### ❷ 命名文件
+
+- 为新的 `.ow` 文件命名，不需要后缀，按 `Enter` 确认
+
+### ❸ 导入代码
+
+- 从工坊复制 `完整代码` 到剪切板，然后点击 `导入` 按钮
 
 <br>
 
@@ -39,86 +24,86 @@
 
 **以下 `演示` 由 `Github` 托管，请确保网络具备严谨的科学性。**
 
-### **代码大纲**
+### ❶ 代码大纲
 
-在资源管理器的大纲视图提供详细大纲。具备跟踪光标和跳转能力。
+- 在资源管理器的大纲视图提供详细大纲。具备跟踪光标和跳转能力。
 
->  <details>
->      <summary>演示</summary>
->      <img src="showcases/outlines.gif" align=center />
->  </details>
+  >  <details>
+  >      <summary>演示</summary>
+  >      <img src="showcases/outlines.gif" align=center />
+  >  </details>
 
-### **代码折叠**
+### ❷ 代码折叠
 
-代码折叠能力，包括跨行括号块和流程控制。
+- 代码折叠能力，包括跨行括号块和流程控制。
 
->  <details>
->      <summary>演示</summary>
->      <img src="showcases/fold.gif" align=center />
->  </details>
+  >  <details>
+  >      <summary>演示</summary>
+  >      <img src="showcases/fold.gif" align=center />
+  >  </details>
 
-### **悬停提示**
+### ❸ 悬停提示
 
-将光标放置在关键词之上可获得详细提示。
+- 将光标放置在关键词之上可获得详细提示。
 
->  <details>
->      <summary>演示</summary>
->      <img src="showcases/hover.gif" align=center />
->  </details>
+  >  <details>
+  >      <summary>演示</summary>
+  >      <img src="showcases/hover.gif" align=center />
+  >  </details>
 
-### **调色盘**
+### ❹ 调色盘
 
-针对自定义颜色的预览和调制能力。
+- 针对自定义颜色的预览和调制能力。
 
->  <details>
->      <summary>演示</summary>
->      <img src="showcases/color.gif" align=center />
->  </details>
+  >  <details>
+  >      <summary>演示</summary>
+  >      <img src="showcases/color.gif" align=center />
+  >  </details>
 
-### **补全建议**
+### ❺ 补全建议
 
-汉字或拼音输入展开建议列表，可使用建议按钮强制触发。
+- 汉字或拼音输入展开建议列表，可使用建议按钮强制触发。
 
->  <details>
->      <summary>演示</summary>
->      <img src="showcases/suggestion.gif" align=center />
->  </details>
+  >  <details>
+  >      <summary>演示</summary>
+  >      <img src="showcases/suggestion.gif" align=center />
+  >  </details>
 
-### **参数提示**
+### ❻ 参数提示
 
-填充参数时会指示参数位和参数详情。
+- 填充参数时会指示参数位和参数详情。
 
->  <details>
->      <summary>演示</summary>
->      <img src="showcases/sign.gif" align=center />
->  </details>
+  >  <details>
+  >      <summary>演示</summary>
+  >      <img src="showcases/sign.gif" align=center />
+  >  </details>
 
-### **参考手册**
+### ❼ 参考手册
 
-侧边栏增加可收纳的参考手册视图。
+- 侧边栏增加可收纳的参考手册视图。
 
->  <details>
->      <summary>演示</summary>
->      <img src="showcases/manual.gif" align=center />
->  </details>
+  >  <details>
+  >      <summary>演示</summary>
+  >      <img src="showcases/manual.gif" align=center />
+  >  </details>
 
-### **语法高亮**
+### ❽ 语法高亮
 
-代码的精准上色能力。
+- 代码的精准上色能力。
 
->  <details>
->      <summary>演示</summary>
->      <img src="showcases/highlight.png" align=center />
->  </details>
+  >  <details>
+  >      <summary>演示</summary>
+  >      <img src="showcases/highlight.png" align=center />
+  >  </details>
 
-### **规则开关**
+### ❾ 规则开关
 
-自动在每条规则前生成一个可点击的禁用切换开关。
+- 自动在每条规则前生成一个可点击的禁用切换开关。
 
->  <details>
->      <summary>演示</summary>
->      <img src="showcases/switch.gif" align=center />
->  </details>
+  >  <details>
+  >      <summary>演示</summary>
+  >      <img src="showcases/switch.gif" align=center />
+  >  </details>
 
 <br>
 
@@ -133,9 +118,7 @@
 | **修复后导出** | 导入到剪切板，同时修复已知的工坊错误。❶ |
 | **导入并修复** | 导入到编辑器，同时修复已知的工坊错误。❶ |
 
-<br>
-
-**❶ 已知的工坊错误**
+#### ❶ 已知的工坊错误
 
 _~~设置不可见(事件玩家, 无);~~_
 
@@ -159,18 +142,14 @@ _~~持续追踪玩家变量(事件玩家, A, 0, 1, 无);~~_
 
 <br>
 
-## **_⬘ 联络团队_**
+## **_⬘ 联络方式_**
 
 **_如果你发现任何错误或有任何建议，可通过以下方式与开发人员取得联络。_**
 |平台|描述|代码|链接|
 |:--|:--|:--|:--|
 |**QQ**|官方群|590621556|https://jq.qq.com/?_wv=1027&k=DTAuEetN|
-|~~**战网**~~|ID|你的对手#51441||
 |**BATTLE**|ID|LXH#11992||
-
-<br>
-
-## **_⬘ 友情链接_**
+|**战网**|ID|你的对手#51441||
 
 **_项目的支持人员与合作伙伴们！_**
 
@@ -200,7 +179,7 @@ _~~持续追踪玩家变量(事件玩家, A, 0, 1, 无);~~_
 
 ## **_⬘ 仓库_**
 
-**_如果喜欢这个项目，请为项目加一颗星，以及进行项目贡献！_**
+**_如果喜欢这个项目，请为项目加一颗星，或进行项目贡献！_**
 
 | 平台       | 链接                                          |
 | :--------- | :-------------------------------------------- |
@@ -208,7 +187,7 @@ _~~持续追踪玩家变量(事件玩家, A, 0, 1, 无);~~_
 
 <br>
 
-## **_⬘ 等待贡献_**
+## **_⬘ 待办_**
 
 | 任务               | 细节                                 |
 | :----------------- | :----------------------------------- |

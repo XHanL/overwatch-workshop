@@ -14,6 +14,28 @@ function activate(context) {
 
   //初始化能力
   context.subscriptions.push(
+    //新建文件能力
+    vscode.commands.registerCommand("ow.command.newFile", () => {
+      vscode.window
+        .showInputBox({ prompt: "为新的 .ow 文件命名" })
+        .then((fileName) => {
+          if (fileName) {
+            const filePath = vscode.workspace.rootPath + `/${fileName}.ow`;
+            if (fs.existsSync(filePath)) {
+              const document = vscode.workspace.openTextDocument(filePath);
+              vscode.window.showTextDocument(document);
+              vscode.window.showInformationMessage(`${fileName}.ow 已存在`);
+            } else {
+              fs.writeFile(filePath, "hello", "utf-8", () => {
+                const document = vscode.workspace.openTextDocument(filePath);
+                vscode.window.showTextDocument(document);
+                vscode.window.showInformationMessage(`${fileName}.ow 已创建`);
+              });
+            }
+          }
+        });
+    }),
+
     //主动建议能力
     vscode.commands.registerCommand("ow.command.suggest", () => {
       vscode.commands.executeCommand("editor.action.triggerSuggest");
@@ -989,10 +1011,10 @@ function activate(context) {
                     <head>
                     <link href="${styleUri}" rel="stylesheet">
                     <script src="${scriptUri}"></script>
-                    <title>参考</title>
+                    <title>参考手册</title>
                     </head>
                     <body>
-                    <i><h3>参考</h3></i>
+                    <i><h3>参考手册</h3></i>
                     <button style="width: 150px; height: auto;" onclick="navigate('Mode')">模式</button>
                     <br>
                     <br>
