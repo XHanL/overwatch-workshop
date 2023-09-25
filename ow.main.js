@@ -119,7 +119,8 @@ function activate(context) {
           } else if (text.endsWith("[")) {
             brackets.push(line.lineNumber);
           } else if (text.startsWith("]")) {
-            if ((pop = brackets.pop()) != line.lineNumber) {
+            const pop = brackets.pop();
+            if (pop != line.lineNumber) {
               foldingRanges.push(
                 new vscode.FoldingRange(pop, line.lineNumber - 1)
               );
@@ -127,7 +128,8 @@ function activate(context) {
           } else if (text.endsWith("(")) {
             parentheses.push(line.lineNumber);
           } else if (text.startsWith(")")) {
-            if ((pop = parentheses.pop()) != line.lineNumber) {
+            const pop = parentheses.pop();
+            if (pop != line.lineNumber) {
               foldingRanges.push(
                 new vscode.FoldingRange(pop, line.lineNumber - 1)
               );
