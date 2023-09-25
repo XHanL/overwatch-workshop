@@ -28,7 +28,6 @@ function activate(context) {
             fs.writeFile(filePath, MODEL.示例, "utf-8", () => {
               const document = vscode.workspace.openTextDocument(filePath);
               vscode.window.showTextDocument(document);
-              vscode.window.showInformationMessage(`${fileName}.ow 已创建`);
             });
           }
         });
