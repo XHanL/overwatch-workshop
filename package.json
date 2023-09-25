@@ -139,14 +139,14 @@
     },
     "themes": [
       {
-        "label": "Overwatch Workshop 静谧",
-        "uiTheme": "vs-dark",
-        "path": "themes/ow.gray.json"
-      },
-      {
         "label": "Overwatch Workshop 深邃",
         "uiTheme": "vs-dark",
         "path": "themes/ow.dark.json"
+      },
+      {
+        "label": "Overwatch Workshop 静谧",
+        "uiTheme": "vs-dark",
+        "path": "themes/ow.gray.json"
       },
       {
         "label": "Overwatch Workshop 深井 (by 踏足)",
