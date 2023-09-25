@@ -1,5 +1,3 @@
-#### ⟁ 页面图床由 `Github` 托管，请确保网络具备科学性
-
 # <img src="images/extension/icon.png" width="50" height="50" align=center /> **Overwatch®** Workshop
 
 ### **守望先锋 ®** 工坊语言支持
