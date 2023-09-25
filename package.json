@@ -146,24 +146,24 @@
     },
     "themes": [
       {
-        "label": "Overwatch Workshop 深邃",
-        "uiTheme": "vs-dark",
-        "path": "themes/ow.dark.json"
-      },
-      {
-        "label": "Overwatch Workshop 明亮",
-        "uiTheme": "vs",
-        "path": "themes/ow.light.json"
-      },
-      {
         "label": "Overwatch Workshop 静谧",
         "uiTheme": "vs-dark",
         "path": "themes/ow.gray.json"
       },
       {
-        "label": "Overwatch Workshop 深井 - By 踏足",
+        "label": "Overwatch Workshop 深邃",
         "uiTheme": "vs-dark",
-        "path": "themes/TaZu.deep.json"
+        "path": "themes/ow.dark.json"
+      },
+      {
+        "label": "Overwatch Workshop 深井 (by 踏足)",
+        "uiTheme": "vs-dark",
+        "path": "themes/ow.deep.TaZu.json"
+      },
+      {
+        "label": "Overwatch Workshop 明亮",
+        "uiTheme": "vs",
+        "path": "themes/ow.light.json"
       }
     ]
   }

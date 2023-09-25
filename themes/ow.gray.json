@@ -203,13 +203,13 @@
         "keyword.operator.new.ow"
       ],
       "settings": {
-        "foreground": "#f44747"
+        "foreground": "#f46050"
       }
     },
     {
       "scope": ["entity.name.class.rule.action.ow"],
       "settings": {
-        "foreground": "#d7ba7d"
+        "foreground": "#4aa5f0"
       }
     },
     {
@@ -221,19 +221,19 @@
     {
       "scope": ["constant.character.ow"],
       "settings": {
-        "foreground": "#ce9178"
+        "foreground": "#b392f0"
       }
     },
     {
       "scope": ["variable.ow"],
       "settings": {
-        "foreground": "#4FC1FF"
+        "foreground": "#C586C0"
       }
     },
     {
       "scope": ["constant.numeric.ow"],
       "settings": {
-        "foreground": "#DCDCAA"
+        "foreground": "#E6D69A"
       }
     },
     {
@@ -251,7 +251,7 @@
         "variable.language"
       ],
       "settings": {
-        "foreground": "#79b8ff"
+        "foreground": "#DCDCAA"
       }
     },
     {
@@ -301,7 +301,7 @@
         "string punctuation.section.embedded source"
       ],
       "settings": {
-        "foreground": "#9ecbff"
+        "foreground": "#4cd1e0"
       }
     },
     {
@@ -562,7 +562,7 @@
   "semanticHighlighting": true,
   "semanticTokenColors": {
     "constants": {
-      "foreground": "#ce9178"
+      "foreground": "#b392f0"
     }
   }
 }

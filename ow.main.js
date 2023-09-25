@@ -876,7 +876,7 @@ function activate(context) {
                 const word = document.getText(range);
                 if (
                   (match = word.match(
-                    /^(字符串|正在防守|颜色|添加至数组|受治疗者，治疗者及治疗百分比|生命值|上|方向，速率，及最大速度)$/
+                    /^(字符串|正在防守|颜色|添加至数组|受治疗者，治疗者及治疗百分比|生命值|上|下|方向，速率，及最大速度)$/
                   ))
                 ) {
                   const scope = UTIL.getScope(document, pos);
