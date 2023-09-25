@@ -25,17 +25,11 @@ function activate(context) {
         .then((fileUri) => {
           if (fileUri) {
             const filePath = fileUri.fsPath;
-            if (fs.existsSync(filePath)) {
+            fs.writeFile(filePath, MODEL.示例, "utf-8", () => {
               const document = vscode.workspace.openTextDocument(filePath);
               vscode.window.showTextDocument(document);
-              vscode.window.showErrorMessage(`${fileName}.ow 已存在`);
-            } else {
-              fs.writeFile(filePath, "hello", "utf-8", () => {
-                const document = vscode.workspace.openTextDocument(filePath);
-                vscode.window.showTextDocument(document);
-                vscode.window.showInformationMessage(`${fileName}.ow 已创建`);
-              });
-            }
+              vscode.window.showInformationMessage(`${fileName}.ow 已创建`);
+            });
           }
         });
     }),
