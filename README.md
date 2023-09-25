@@ -2,7 +2,7 @@
 
 # <img src="images/extension/icon.png" width="50" height="50" align=center /> **Overwatch®** Workshop
 
-### 守望先锋 ® 工坊语言支持
+### **守望先锋 ®** 工坊语言支持
 
 <br>
 

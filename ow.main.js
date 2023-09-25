@@ -18,7 +18,6 @@ function activate(context) {
     vscode.commands.registerCommand("ow.command.newFile", () => {
       vscode.window
         .showSaveDialog({
-          defaultUri: vscode.workspace.workspaceFolders[0].uri,
           filters: {
             "ow Files": ["ow"],
           },
