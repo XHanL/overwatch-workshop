@@ -73,7 +73,7 @@
         {
           "id": "manualView",
           "title": "OW",
-          "icon": "images/extension/command/manual.png"
+          "icon": "images/extension/manual.svg"
         }
       ]
     },

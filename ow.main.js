@@ -17,14 +17,19 @@ function activate(context) {
     //新建文件能力
     vscode.commands.registerCommand("ow.command.newFile", () => {
       vscode.window
-        .showInputBox({ prompt: "为新的 .ow 文件命名" })
-        .then((fileName) => {
-          if (fileName) {
-            const filePath = vscode.workspace.rootPath + `/${fileName}.ow`;
+        .showSaveDialog({
+          defaultUri: vscode.workspace.workspaceFolders[0].uri,
+          filters: {
+            "ow Files": ["ow"],
+          },
+        })
+        .then((fileUri) => {
+          if (fileUri) {
+            const filePath = fileUri.fsPath;
             if (fs.existsSync(filePath)) {
               const document = vscode.workspace.openTextDocument(filePath);
               vscode.window.showTextDocument(document);
-              vscode.window.showInformationMessage(`${fileName}.ow 已存在`);
+              vscode.window.showErrorMessage(`${fileName}.ow 已存在`);
             } else {
               fs.writeFile(filePath, "hello", "utf-8", () => {
                 const document = vscode.workspace.openTextDocument(filePath);
