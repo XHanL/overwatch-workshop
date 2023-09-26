@@ -347,7 +347,31 @@ function getEntry(document, position, scope) {
           (match = charText.match(/[\[\+\-\*\/\^\%\<\>\=\!\?\|\&\:]/)) &&
           commasCount == 0
         ) {
-          return "条件";
+          if (charText === "/" && j > 0) {
+            const prevCharText = document.getText(
+              new vscode.Range(
+                charStart.translate(0, -1),
+                charEnd.translate(0, -1)
+              )
+            );
+            if (prevCharText === "/") {
+              j -= 1;
+              continue;
+            } else if (prevCharText === "*") {
+              const commentRange = getPrevValidWordRange(
+                document,
+                charStart,
+                /\/\*/
+              );
+              i = commentRange.start.line;
+              j = commentRange.start.character;
+              continue;
+            } else {
+              return "条件";
+            }
+          } else {
+            return "条件";
+          }
         }
       }
     }
