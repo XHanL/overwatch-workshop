@@ -58,82 +58,55 @@
 
   在资源管理器的大纲视图提供详细大纲。具备跟踪光标和跳转能力
 
-  >  <details>
-  >      <summary>演示</summary>
-  >      <img src="showcases/outlines.gif" align=center />
-  >  </details>
+  <img src="images/unuse/readme/补全建议.png" align=center />
 
 - ### 代码折叠
 
   代码折叠能力，包括跨行括号块和流程控制
 
-  >  <details>
-  >      <summary>演示</summary>
-  >      <img src="showcases/fold.gif" align=center />
-  >  </details>
+  <img src="images/unuse/readme/代码折叠.png" align=center />
 
 - ### 悬停提示
 
   将光标放置在关键词之上可获得详细提示
 
-  >  <details>
-  >      <summary>演示</summary>
-  >      <img src="showcases/hover.gif" align=center />
-  >  </details>
+  <img src="images/unuse/readme/悬停提示.png" align=center />
 
 - ### 调色盘
 
   针对自定义颜色的预览和调制能力
 
-  >  <details>
-  >      <summary>演示</summary>
-  >      <img src="showcases/color.gif" align=center />
-  >  </details>
+  <img src="images/unuse/readme/调色盘.png" align=center />
 
 - ### 补全建议
 
   汉字或拼音输入展开建议列表，可使用建议按钮主动展开
 
-  >  <details>
-  >      <summary>演示</summary>
-  >      <img src="showcases/suggestion.gif" align=center />
-  >  </details>
+  <img src="images/unuse/readme/suggest.png" align=center />
 
 - ### 参数提示
 
   填充参数时会指示参数位和参数详情
 
-  >  <details>
-  >      <summary>演示</summary>
-  >      <img src="showcases/sign.gif" align=center />
-  >  </details>
+  <img src="images/unuse/readme/参数提示.png" align=center />
 
 - ### 参考手册
 
   侧边栏增加可收纳的参考手册视图
 
-  >  <details>
-  >      <summary>演示</summary>
-  >      <img src="showcases/manual.gif" align=center />
-  >  </details>
+  <img src="images/unuse/readme/参考手册.png" align=center />
 
 - ### 语法高亮
 
   代码的精准上色能力
 
-  >  <details>
-  >      <summary>演示</summary>
-  >      <img src="showcases/highlight.png" align=center />
-  >  </details>
+  <img src="images/unuse/readme/语法高亮.png" align=center />
 
 - ### 规则开关
 
   自动在每条规则前生成一个可点击的禁用切换开关
 
-  >  <details>
-  >      <summary>演示</summary>
-  >      <img src="showcases/switch.gif" align=center />
-  >  </details>
+  <img src="images/unuse/readme/规则开关.png" align=center />
 
   <br>
 

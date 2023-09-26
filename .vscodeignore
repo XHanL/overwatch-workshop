@@ -1,5 +1,3 @@
-images/extension/command/balck
-images/extension/command/white
-showcases
 docs
+.DS_Store
 *.vsix
