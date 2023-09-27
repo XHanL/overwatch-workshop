@@ -204,7 +204,8 @@
 
   | 平台       | 链接                                          |
   | :--------- | :-------------------------------------------- |
-  | **GitHub** | *https://github.com/XHanL/overwatch-workshop* |
+  | **GitHub** | *https://github.com/xhanl/overwatch-workshop* |
+  | **Gitee**  | *https://gitee.com/xhanl/overwatch-workshop*  |
 
 <br>
 
