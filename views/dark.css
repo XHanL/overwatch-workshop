@@ -156,9 +156,6 @@ button {
 button:hover,
 button:focus {
   box-shadow: var(--vscode-button-secondaryHoverBackground) 0 2px 12px;
-}
-
-button:hover {
   transform: translateY(-1px);
 }
 
