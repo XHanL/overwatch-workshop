@@ -897,99 +897,97 @@ function activate(context) {
       provideDocumentFormattingEdits(document, options) {
         try {
           let documentFormattingEdits = [];
-          let level = 0;
-          let brackets = [];
-          let parentheses = [];
+          let isString = false;
+          let scopeLevel = 0;
+          let entryLevel = 0;
+          let ignore = 0;
           for (let i = 0; i < document.lineCount; i++) {
             const line = document.lineAt(i);
-            const text = line.text.trim();
-            if (text === "") {
+            const trimText = line.text.trim();
+            const pureText = trimText.replace(/\/\/.*/, "");
+            if (pureText === "") {
               continue;
-            } else if (
-              text.endsWith("{") ||
-              text.endsWith("[") ||
-              text.endsWith("(") ||
-              text.startsWith("If") ||
-              text.startsWith("While") ||
-              text.startsWith("For 全局变量") ||
-              text.startsWith("For 玩家变量")
-            ) {
-              if (text.endsWith("[")) {
-                brackets.push(1);
-              } else if (text.endsWith("(")) {
-                parentheses.push(1);
-              }
+            }
 
-              documentFormattingEdits.push(
-                new vscode.TextEdit(
-                  line.range,
-                  " ".repeat(level * options.tabSize) + text
-                )
+            if (ignore > 0) {
+              for (let j = 0; j < pureText.length; j++) {
+                const symbol = pureText[j];
+                if (symbol == '"') {
+                  isString = !isString;
+                }
+                if (isString) {
+                  continue;
+                }
+                if (symbol == "[" || symbol == "(") {
+                  ignore++;
+                } else if (symbol == "]" || symbol == ")") {
+                  ignore--;
+                  ignore = Math.max(ignore, 0);
+                }
+              }
+            }
+
+            if (pureText.endsWith("[") || pureText.endsWith("(")) {
+              ignore++;
+            } else if (pureText.endsWith("{")) {
+              addDocumentFormattingEdits(line, trimText, scopeLevel);
+              scopeLevel++;
+            } else if (
+              pureText.startsWith("If") ||
+              pureText.startsWith("While") ||
+              pureText.startsWith("For 全局变量") ||
+              pureText.startsWith("For 玩家变量")
+            ) {
+              addDocumentFormattingEdits(
+                line,
+                trimText,
+                scopeLevel + entryLevel
               );
-              level++;
-            } else if (text.startsWith("Else") || text.startsWith("Else If")) {
-              level--;
-              level = Math.max(level, 0);
-              documentFormattingEdits.push(
-                new vscode.TextEdit(
-                  line.range,
-                  " ".repeat(level * options.tabSize) + text
-                )
+              entryLevel++;
+            } else if (
+              pureText.startsWith("Else") ||
+              pureText.startsWith("Else If")
+            ) {
+              entryLevel--;
+              entryLevel = Math.max(entryLevel, 0);
+              addDocumentFormattingEdits(
+                line,
+                trimText,
+                scopeLevel + entryLevel
               );
-              level++;
-            } else if (text.endsWith("}") || text.startsWith("End")) {
-              level--;
-              level = Math.max(level, 0);
-              documentFormattingEdits.push(
-                new vscode.TextEdit(
-                  line.range,
-                  " ".repeat(level * options.tabSize) + text
-                )
+              entryLevel++;
+            } else if (pureText.endsWith("}")) {
+              scopeLevel--;
+              scopeLevel = Math.max(scopeLevel, 0);
+              if (scopeLevel == 0) {
+                entryLevel = 0;
+              }
+              addDocumentFormattingEdits(line, trimText, scopeLevel);
+            } else if (pureText.startsWith("End")) {
+              entryLevel--;
+              entryLevel = Math.max(entryLevel, 0);
+              addDocumentFormattingEdits(
+                line,
+                trimText,
+                scopeLevel + entryLevel
               );
             } else {
-              //计算括号对 `[]`
-              if (brackets.length > 0) {
-                for (let j = 0; j < text.length; j++) {
-                  const symbol = text[j];
-                  if (symbol == "[") {
-                    brackets[brackets.length - 1]++;
-                  } else if (symbol == "]") {
-                    brackets[brackets.length - 1]--;
-                  }
-                  if (brackets[brackets.length - 1] <= 0) {
-                    level--;
-                    brackets.pop();
-                    break;
-                  }
-                }
-              }
-
-              //计算括号对 `()`
-              if (parentheses.length > 0) {
-                for (let j = 0; j < text.length; j++) {
-                  const symbol = text[j];
-                  if (symbol == "(") {
-                    parentheses[parentheses.length - 1]++;
-                  } else if (symbol == ")") {
-                    parentheses[parentheses.length - 1]--;
-                    if (parentheses[parentheses.length - 1] <= 0) {
-                      level--;
-                      parentheses.pop();
-                      break;
-                    }
-                  }
-                }
-              }
-
-              documentFormattingEdits.push(
-                new vscode.TextEdit(
-                  line.range,
-                  " ".repeat(level * options.tabSize) + text
-                )
+              addDocumentFormattingEdits(
+                line,
+                trimText,
+                scopeLevel + entryLevel
               );
             }
           }
           return documentFormattingEdits;
+          function addDocumentFormattingEdits(line, trimText, level) {
+            documentFormattingEdits.push(
+              new vscode.TextEdit(
+                line.range,
+                " ".repeat(level * options.tabSize) + trimText
+              )
+            );
+          }
         } catch (error) {
           console.log(error);
         }
