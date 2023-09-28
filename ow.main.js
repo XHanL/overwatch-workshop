@@ -899,6 +899,7 @@ function activate(context) {
           return vscode.window.activeTextEditor.edit((editBuilder) => {
             //保留光标
             let selection = vscode.window.activeTextEditor.selection;
+            let variable = false;
             let scopeLevel = 0;
             let entryLevel = 0;
             let ignore = 0;
@@ -959,8 +960,23 @@ function activate(context) {
                 addDocumentFormattingEdits(line, trimText, scopeLevel);
                 scopeLevel++;
               } else if (
+                pureText.startsWith("全局:") ||
+                pureText.startsWith("玩家:")
+              ) {
+                if (variable) {
+                  entryLevel--;
+                }
+                addDocumentFormattingEdits(
+                  line,
+                  trimText,
+                  scopeLevel + entryLevel
+                );
+                variable = true;
+                entryLevel++;
+              } else if (
                 pureText.startsWith("If") ||
                 pureText.startsWith("While") ||
+                pureText.startsWith("For 全局变量") ||
                 pureText.startsWith("For 全局变量") ||
                 pureText.startsWith("For 玩家变量")
               ) {
