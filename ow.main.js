@@ -898,18 +898,29 @@ function activate(context) {
         try {
           let documentFormattingEdits = [];
           let level = 0;
+          let brackets = 0;
+          let parentheses = 0;
           for (let i = 0; i < document.lineCount; i++) {
             const line = document.lineAt(i);
             const text = line.text.trim();
+            console.log(i);
             if (text === "") {
               continue;
             } else if (
               text.endsWith("{") ||
+              text.endsWith("[") ||
+              text.endsWith("(") ||
               text.startsWith("If") ||
               text.startsWith("While") ||
               text.startsWith("For 全局变量") ||
               text.startsWith("For 玩家变量")
             ) {
+              if (text.endsWith("[")) {
+                brackets++;
+              } else if (text.endsWith("(")) {
+                parentheses--;
+              }
+
               documentFormattingEdits.push(
                 new vscode.TextEdit(
                   line.range,
@@ -937,6 +948,41 @@ function activate(context) {
                 )
               );
             } else {
+              //计算括号对 `[]`
+              if (brackets > 0) {
+                for (let j = 0; j < text.length; j++) {
+                  const symbol = text[j];
+                  if (symbol == "[") {
+                    brackets++;
+                  } else if (symbol == "]") {
+                    brackets--;
+                  }
+                  if (brackets <= 0) {
+                    level--;
+                    brackets = Math.max(brackets, 0);
+                    break;
+                  }
+                }
+              }
+
+              //计算括号对 `()`
+              if (parentheses > 0) {
+                for (let j = 0; j < text.length; j++) {
+                  const symbol = text[j];
+                  console.log(parentheses);
+                  if (symbol == "(") {
+                    parentheses++;
+                  } else if (symbol == ")") {
+                    parentheses--;
+                    if (parentheses <= 0) {
+                      level--;
+                      parentheses = Math.max(parentheses, 0);
+                      break;
+                    }
+                  }
+                }
+              }
+
               documentFormattingEdits.push(
                 new vscode.TextEdit(
                   line.range,
