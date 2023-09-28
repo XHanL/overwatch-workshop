@@ -903,13 +903,26 @@ function activate(context) {
           for (let i = 0; i < document.lineCount; i++) {
             const line = document.lineAt(i);
             const trimText = line.text.trim();
+            //对齐整行注释
+            if (
+              trimText.startsWith("//") ||
+              (trimText.startsWith('"') && trimText.endsWith('"'))
+            ) {
+              addDocumentFormattingEdits(
+                line,
+                trimText,
+                scopeLevel + entryLevel
+              );
+              continue;
+            }
+            //过滤无关符号
             const pureText = trimText
               .replace(/\/\/.*/g, "")
               .replace(/\".*\"/g, "");
             if (pureText === "") {
               continue;
             }
-
+            //绕过`[]`和`()`内容
             if (ignore) {
               for (let j = 0; j < pureText.length; j++) {
                 const symbol = pureText[j];
