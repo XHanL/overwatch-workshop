@@ -1017,7 +1017,9 @@ function activate(context) {
             function addDocumentFormattingEdits(line, trimText, level) {
               editBuilder.replace(
                 line.range,
-                " ".repeat(level * options.tabSize) + trimText
+                (options.insertSpaces
+                  ? " ".repeat(level * options.tabSize)
+                  : "\t".repeat(level)) + trimText
               );
             }
           });
