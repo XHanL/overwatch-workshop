@@ -903,25 +903,17 @@ function activate(context) {
           for (let i = 0; i < document.lineCount; i++) {
             const line = document.lineAt(i);
             const trimText = line.text.trim();
-            //对齐整行注释
-            if (
-              trimText.startsWith("//") ||
-              (trimText.startsWith('"') && trimText.endsWith('"'))
-            ) {
-              addDocumentFormattingEdits(
-                line,
-                trimText,
-                scopeLevel + entryLevel
-              );
+
+            //绕过空行
+            if (trimText === "") {
               continue;
             }
+
             //过滤无关符号
             const pureText = trimText
               .replace(/\/\/.*/g, "")
               .replace(/\".*\"/g, "");
-            if (pureText === "") {
-              continue;
-            }
+
             //绕过`[]`和`()`内容
             if (ignore) {
               for (let j = 0; j < pureText.length; j++) {
@@ -938,6 +930,20 @@ function activate(context) {
               if (ignore > 0) {
                 continue;
               }
+            }
+
+            //对齐整行注释
+            if (
+              trimText.startsWith("//") ||
+              (trimText.startsWith('"') && trimText.endsWith('"'))
+            ) {
+              console.log("对齐整行注释");
+              addDocumentFormattingEdits(
+                line,
+                trimText,
+                scopeLevel + entryLevel
+              );
+              continue;
             }
 
             if (pureText.endsWith("[") || pureText.endsWith("(")) {
