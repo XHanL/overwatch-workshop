@@ -898,12 +898,11 @@ function activate(context) {
         try {
           let documentFormattingEdits = [];
           let level = 0;
-          let brackets = 0;
-          let parentheses = 0;
+          let brackets = [];
+          let parentheses = [];
           for (let i = 0; i < document.lineCount; i++) {
             const line = document.lineAt(i);
             const text = line.text.trim();
-            console.log(i);
             if (text === "") {
               continue;
             } else if (
@@ -916,9 +915,9 @@ function activate(context) {
               text.startsWith("For 玩家变量")
             ) {
               if (text.endsWith("[")) {
-                brackets++;
+                brackets.push(1);
               } else if (text.endsWith("(")) {
-                parentheses--;
+                parentheses.push(1);
               }
 
               documentFormattingEdits.push(
@@ -949,34 +948,33 @@ function activate(context) {
               );
             } else {
               //计算括号对 `[]`
-              if (brackets > 0) {
+              if (brackets.length > 0) {
                 for (let j = 0; j < text.length; j++) {
                   const symbol = text[j];
                   if (symbol == "[") {
-                    brackets++;
+                    brackets[brackets.length - 1]++;
                   } else if (symbol == "]") {
-                    brackets--;
+                    brackets[brackets.length - 1]--;
                   }
-                  if (brackets <= 0) {
+                  if (brackets[brackets.length - 1] <= 0) {
                     level--;
-                    brackets = Math.max(brackets, 0);
+                    brackets.pop();
                     break;
                   }
                 }
               }
 
               //计算括号对 `()`
-              if (parentheses > 0) {
+              if (parentheses.length > 0) {
                 for (let j = 0; j < text.length; j++) {
                   const symbol = text[j];
-                  console.log(parentheses);
                   if (symbol == "(") {
-                    parentheses++;
+                    parentheses[parentheses.length - 1]++;
                   } else if (symbol == ")") {
-                    parentheses--;
-                    if (parentheses <= 0) {
+                    parentheses[parentheses.length - 1]--;
+                    if (parentheses[parentheses.length - 1] <= 0) {
                       level--;
-                      parentheses = Math.max(parentheses, 0);
+                      parentheses.pop();
                       break;
                     }
                   }
