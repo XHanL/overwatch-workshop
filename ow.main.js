@@ -912,6 +912,17 @@ function activate(context) {
       new vscode.SemanticTokensLegend([`constants`])
     ),
 
+    //代码整理能力
+    vscode.languages.registerDocumentFormattingEditProvider("ow", {
+      provideDocumentFormattingEdits(document, options) {
+        let documentFormattingEdits = [];
+
+        
+
+        return documentFormattingEdits;
+      },
+    }),
+
     //切换开关能力
     vscode.languages.registerCodeLensProvider("ow", {
       provideCodeLenses(document) {
