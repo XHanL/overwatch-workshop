@@ -152,7 +152,6 @@
    <summary>预览图片</summary>
    <img src="docs/images/readme/switch.png" align=center width=400 />
   </details>
-  <br>
 
 <br>
 
