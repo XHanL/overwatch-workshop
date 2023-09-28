@@ -53,7 +53,7 @@
       },
       {
         "command": "ow.command.suggest",
-        "title": "建议"
+        "title": "展开"
       },
       {
         "command": "ow.command.line",

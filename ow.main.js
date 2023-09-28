@@ -115,27 +115,7 @@ function activate(context) {
       }
     }),
 
-    //折叠能力：仅补充 language-configuration 缺失项
-    vscode.languages.registerFoldingRangeProvider("ow", {
-      provideFoldingRanges(document) {
-        let foldingRanges = [];
-        let stack = [];
-        for (let i = 0; i < document.lineCount; i++) {
-          const line = document.lineAt(i);
-          const text = line.text.trim();
-          if (text.startsWith(/For 全局变量|For 玩家变量/)) {
-            stack.push(line.lineNumber);
-          } else if (text.startsWith(/End/)) {
-            foldingRanges.push(
-              new vscode.FoldingRange(stack.pop(), line.lineNumber - 1)
-            );
-          }
-        }
-        return foldingRanges;
-      },
-    }),
-
-    //大纲能力
+    //代码大纲能力
     vscode.languages.registerDocumentSymbolProvider("ow", {
       provideDocumentSymbols(document) {
         let documentSymbols = [];
@@ -915,11 +895,60 @@ function activate(context) {
     //代码整理能力
     vscode.languages.registerDocumentFormattingEditProvider("ow", {
       provideDocumentFormattingEdits(document, options) {
-        let documentFormattingEdits = [];
-
-        
-
-        return documentFormattingEdits;
+        try {
+          let documentFormattingEdits = [];
+          let level = 0;
+          for (let i = 0; i < document.lineCount; i++) {
+            const line = document.lineAt(i);
+            const text = line.text.trim();
+            if (text === "") {
+              continue;
+            } else if (
+              text.endsWith("{") ||
+              text.startsWith("If") ||
+              text.startsWith("While") ||
+              text.startsWith("For 全局变量") ||
+              text.startsWith("For 玩家变量")
+            ) {
+              documentFormattingEdits.push(
+                new vscode.TextEdit(
+                  line.range,
+                  " ".repeat(level * options.tabSize) + text
+                )
+              );
+              level++;
+            } else if (text.startsWith("Else") || text.startsWith("Else If")) {
+              level--;
+              level = Math.max(level, 0);
+              documentFormattingEdits.push(
+                new vscode.TextEdit(
+                  line.range,
+                  " ".repeat(level * options.tabSize) + text
+                )
+              );
+              level++;
+            } else if (text.endsWith("}") || text.startsWith("End")) {
+              level--;
+              level = Math.max(level, 0);
+              documentFormattingEdits.push(
+                new vscode.TextEdit(
+                  line.range,
+                  " ".repeat(level * options.tabSize) + text
+                )
+              );
+            } else {
+              documentFormattingEdits.push(
+                new vscode.TextEdit(
+                  line.range,
+                  " ".repeat(level * options.tabSize) + text
+                )
+              );
+            }
+          }
+          return documentFormattingEdits;
+        } catch (error) {
+          console.log(error);
+        }
       },
     }),
 
