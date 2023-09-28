@@ -898,8 +898,7 @@ function activate(context) {
         try {
           return vscode.window.activeTextEditor.edit((editBuilder) => {
             //保留光标
-            let cursor = vscode.window.activeTextEditor.selection.start;
-
+            let selection = vscode.window.activeTextEditor.selection;
             let scopeLevel = 0;
             let entryLevel = 0;
             let ignore = 0;
@@ -1008,10 +1007,7 @@ function activate(context) {
             }
 
             //还原光标
-            vscode.window.activeTextEditor.selection = new vscode.Selection(
-              cursor,
-              cursor
-            );
+            vscode.window.activeTextEditor.selection = selection;
 
             //添加新修改
             function addDocumentFormattingEdits(line, trimText, level) {
