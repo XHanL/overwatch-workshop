@@ -115,6 +115,26 @@ function activate(context) {
       }
     }),
 
+    //折叠能力
+    vscode.languages.registerFoldingRangeProvider("ow", {
+      provideFoldingRanges(document) {
+        let foldingRanges = [];
+        let stack = [];
+        for (let i = 0; i < document.lineCount; i++) {
+          const line = document.lineAt(i);
+          const text = line.text.trim();
+          if (text.startsWith(/For 全局变量|For 玩家变量/)) {
+            stack.push(line.lineNumber);
+          } else if (text.match(/^End/)) {
+            foldingRanges.push(
+              new vscode.FoldingRange(stack.pop(), line.lineNumber - 1)
+            );
+          }
+        }
+        return foldingRanges;
+      },
+    }),
+
     //大纲能力
     vscode.languages.registerDocumentSymbolProvider("ow", {
       provideDocumentSymbols(document) {
