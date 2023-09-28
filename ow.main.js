@@ -118,281 +118,299 @@ function activate(context) {
     //代码大纲能力
     vscode.languages.registerDocumentSymbolProvider("ow", {
       provideDocumentSymbols(document) {
-        let documentSymbols = [];
-        let i = 0;
-        while (i < document.lineCount) {
-          const line = document.lineAt(i);
-          const lineText = line.text.trim();
-          if (lineText.startsWith("{")) {
-            documentSymbols.push(getDocumentSymbol());
-          }
-          i++;
-        }
-
-        function getDocumentSymbol() {
-          let symbol = undefined;
+        try {
+          let documentSymbols = [];
+          let i = 0;
           while (i < document.lineCount) {
             const line = document.lineAt(i);
             const lineText = line.text.trim();
             if (lineText.startsWith("{")) {
-              const prevLine = document.lineAt(i - 1);
-              const prevLineText = prevLine.text.trim();
-              if (symbol === undefined) {
-                if (prevLineText === "动作") {
-                  symbol = [
-                    prevLineText,
-                    "",
-                    vscode.SymbolKind.Method,
-                    prevLine.range.start,
-                  ];
-                } else if (prevLineText === "事件") {
-                  const nextLine = document.lineAt(i + 1);
-                  let nextLineText = nextLine.text.trim();
-                  if ((match = nextLineText.match(/^([^;]*);.*$/))) {
-                    nextLineText = match[1];
-                  }
-                  symbol = [
-                    prevLineText,
-                    nextLineText,
-                    vscode.SymbolKind.Event,
-                    prevLine.range.start,
-                  ];
-                } else if (prevLineText === "条件") {
-                  symbol = [
-                    prevLineText,
-                    "",
-                    vscode.SymbolKind.Boolean,
-                    prevLine.range.start,
-                  ];
-                } else if (prevLineText === "变量") {
-                  symbol = [
-                    prevLineText,
-                    "",
-                    vscode.SymbolKind.Variable,
-                    prevLine.range.start,
-                  ];
-                } else if (prevLineText === "子程序") {
-                  symbol = [
-                    prevLineText,
-                    "",
-                    vscode.SymbolKind.Function,
-                    prevLine.range.start,
-                  ];
-                } else if (
-                  (match = prevLineText.match(/^(禁用\s*)?规则\s*\("(.*)"\)$/))
-                ) {
-                  if (match[1] === undefined) {
+              documentSymbols.push(getDocumentSymbol());
+            }
+            i++;
+          }
+
+          function getDocumentSymbol() {
+            let symbol = undefined;
+            while (i < document.lineCount) {
+              const line = document.lineAt(i);
+              const lineText = line.text.trim();
+              if (lineText.startsWith("{")) {
+                const prevLine = document.lineAt(i - 1);
+                const prevLineText = prevLine.text.trim();
+                if (symbol === undefined) {
+                  if (prevLineText === "动作") {
                     symbol = [
-                      "规则",
-                      `${match[2]}`,
-                      vscode.SymbolKind.Module,
+                      prevLineText,
+                      "",
+                      vscode.SymbolKind.Method,
                       prevLine.range.start,
-                      [],
                     ];
+                  } else if (prevLineText === "事件") {
+                    const nextLine = document.lineAt(i + 1);
+                    let nextLineText = nextLine.text.trim();
+                    if ((match = nextLineText.match(/^([^;]*);.*$/))) {
+                      nextLineText = match[1];
+                    }
+                    symbol = [
+                      prevLineText,
+                      nextLineText,
+                      vscode.SymbolKind.Event,
+                      prevLine.range.start,
+                    ];
+                  } else if (prevLineText === "条件") {
+                    symbol = [
+                      prevLineText,
+                      "",
+                      vscode.SymbolKind.Boolean,
+                      prevLine.range.start,
+                    ];
+                  } else if (prevLineText === "变量") {
+                    symbol = [
+                      prevLineText,
+                      "",
+                      vscode.SymbolKind.Variable,
+                      prevLine.range.start,
+                    ];
+                  } else if (prevLineText === "子程序") {
+                    symbol = [
+                      prevLineText,
+                      "",
+                      vscode.SymbolKind.Function,
+                      prevLine.range.start,
+                    ];
+                  } else if (
+                    (match = prevLineText.match(
+                      /^(禁用\s*)?规则\s*\("(.*)"\)$/
+                    ))
+                  ) {
+                    if (match[1] === undefined) {
+                      symbol = [
+                        "规则",
+                        `${match[2]}`,
+                        vscode.SymbolKind.Module,
+                        prevLine.range.start,
+                        [],
+                      ];
+                    } else {
+                      symbol = [
+                        "规则",
+                        `⟁ ${match[2]}`,
+                        vscode.SymbolKind.Module,
+                        prevLine.range.start,
+                        [],
+                      ];
+                    }
                   } else {
                     symbol = [
-                      "规则",
-                      `⟁ ${match[2]}`,
-                      vscode.SymbolKind.Module,
+                      prevLineText,
+                      "",
+                      vscode.SymbolKind.Property,
                       prevLine.range.start,
                       [],
                     ];
                   }
                 } else {
-                  symbol = [
-                    prevLineText,
-                    "",
-                    vscode.SymbolKind.Property,
-                    prevLine.range.start,
-                    [],
-                  ];
+                  symbol[4].push(getDocumentSymbol());
                 }
-              } else {
-                symbol[4].push(getDocumentSymbol());
+              } else if (lineText.endsWith("}")) {
+                const documentSymbol = new vscode.DocumentSymbol(
+                  symbol[0],
+                  symbol[1],
+                  symbol[2],
+                  new vscode.Range(symbol[3], line.range.end),
+                  new vscode.Range(symbol[3], line.range.end)
+                );
+                documentSymbol.children = symbol[4];
+                return documentSymbol;
               }
-            } else if (lineText.endsWith("}")) {
-              const documentSymbol = new vscode.DocumentSymbol(
-                symbol[0],
-                symbol[1],
-                symbol[2],
-                new vscode.Range(symbol[3], line.range.end),
-                new vscode.Range(symbol[3], line.range.end)
-              );
-              documentSymbol.children = symbol[4];
-              return documentSymbol;
+              i++;
             }
-            i++;
           }
+          return documentSymbols;
+        } catch (error) {
+          console.log("错误：provideDocumentSymbols 代码大纲能力" + error);
         }
-        return documentSymbols;
       },
     }),
 
-    //取色能力
+    //调色盘能力
     vscode.languages.registerColorProvider("ow", {
       provideDocumentColors(document) {
-        const text = document.getText();
-        const pattern =
-          /自定义颜色\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/g;
-        let colors = [];
-        while ((match = pattern.exec(text))) {
-          colors.push(
-            new vscode.ColorInformation(
-              new vscode.Range(
-                document.positionAt(match.index),
-                document.positionAt(match.index + match[0].length)
-              ),
-              new vscode.Color(
-                match[1] / 255,
-                match[2] / 255,
-                match[3] / 255,
-                match[4] / 255
+        try {
+          const text = document.getText();
+          const pattern =
+            /自定义颜色\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/g;
+          let colors = [];
+          while ((match = pattern.exec(text))) {
+            colors.push(
+              new vscode.ColorInformation(
+                new vscode.Range(
+                  document.positionAt(match.index),
+                  document.positionAt(match.index + match[0].length)
+                ),
+                new vscode.Color(
+                  match[1] / 255,
+                  match[2] / 255,
+                  match[3] / 255,
+                  match[4] / 255
+                )
               )
-            )
-          );
-        }
-        return colors;
-      },
-      provideColorPresentations(color) {
-        const newColor =
-          "自定义颜色(" +
-          Math.floor(color.red * 255) +
-          ", " +
-          Math.floor(color.green * 255) +
-          ", " +
-          Math.floor(color.blue * 255) +
-          ", " +
-          Math.floor(color.alpha * 255) +
-          ")";
-        return [new vscode.ColorPresentation(newColor)];
-      },
-    }),
-
-    //悬停能力
-    vscode.languages.registerHoverProvider("ow", {
-      provideHover(document, position) {
-        const hoverRange = document.getWordRangeAtPosition(position);
-        if (!hoverRange) {
-          return;
-        }
-        const hoverText = document.getText(hoverRange);
-        const theme =
-          vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark
-            ? 0
-            : 1;
-        const scope = UTIL.getScope(document, position);
-        if (scope.name === "扩展") {
-          if (MODEL.扩展.hasOwnProperty(hoverText)) {
-            return MODEL.buildHover(
-              PATH,
-              hoverText,
-              MODEL.扩展[hoverText].标签,
-              MODEL.扩展[hoverText].提示
             );
           }
-        } else if (scope.name === "事件") {
-          const event = MODEL.规则.事件;
-          if (event.选项.hasOwnProperty(hoverText)) {
-            return event.选项[hoverText].悬停;
-          }
-          if (event.队伍.hasOwnProperty(hoverText)) {
-            return event.队伍[hoverText].悬停;
-          }
-          if (event.玩家.hasOwnProperty(hoverText)) {
-            return event.玩家[hoverText].悬停;
-          }
-          for (i of MODEL.常量.英雄) {
-            if (i.名称 == hoverText) {
-              return i.悬停[theme];
-            }
-          }
-          return matchDynamicHover();
-        } else if (scope.name === "条件") {
-          if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
-            return MODEL.规则.条件[hoverText].悬停;
-          }
-          for (i in MODEL.常量) {
-            for (j in MODEL.常量[i]) {
-              if (MODEL.常量[i][j].名称 == hoverText) {
-                if (Array.isArray(MODEL.常量[i][j].悬停)) {
-                  return MODEL.常量[i][j].悬停[theme];
-                }
-                return MODEL.常量[i][j].悬停;
-              }
-            }
-          }
-          return matchDynamicHover();
-        } else if (scope.name === "动作") {
-          if (MODEL.规则.动作.hasOwnProperty(hoverText)) {
-            return MODEL.规则.动作[hoverText].悬停;
-          }
-          if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
-            return MODEL.规则.条件[hoverText].悬停;
-          }
-          for (i in MODEL.常量) {
-            for (j in MODEL.常量[i]) {
-              if (MODEL.常量[i][j].名称 == hoverText) {
-                if (Array.isArray(MODEL.常量[i][j].悬停)) {
-                  return MODEL.常量[i][j].悬停[theme];
-                }
-                return MODEL.常量[i][j].悬停;
-              }
-            }
-          }
-          return matchDynamicHover();
+          return colors;
+        } catch (error) {
+          console.log("错误：provideDocumentColors 调色盘能力" + error);
         }
-
-        //匹配动态悬停
-        function matchDynamicHover() {
-          if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
-            const range = UTIL.getPrevValidWordRange(document, position);
-            const text = document.getText(range);
-            return buildDynamicHover(UTIL.getDynamicType(text));
-          }
-        }
-
-        //构建动态悬停
-        function buildDynamicHover(type) {
-          const dynamicList = UTIL.getDynamicList(document);
-          if (type == "全局变量") {
-            for (i in dynamicList.全局变量) {
-              if (hoverText === dynamicList.全局变量[i]) {
-                return MODEL.buildHover(
-                  PATH,
-                  hoverText,
-                  ["全局变量", i],
-                  `一个已定义的全局变量。`
-                );
-              }
-            }
-          } else if (type == "玩家变量") {
-            for (i in dynamicList.玩家变量) {
-              if (hoverText === dynamicList.玩家变量[i]) {
-                return MODEL.buildHover(
-                  PATH,
-                  hoverText,
-                  ["玩家变量", i],
-                  `一个已定义的玩家变量。`
-                );
-              }
-            }
-          } else if (type == "子程序") {
-            for (i in dynamicList.子程序) {
-              if (hoverText === dynamicList.子程序[i]) {
-                return MODEL.buildHover(
-                  PATH,
-                  hoverText,
-                  ["子程序", i],
-                  `一个已定义的子程序。`
-                );
-              }
-            }
-          }
+      },
+      provideColorPresentations(color) {
+        try {
+          const newColor =
+            "自定义颜色(" +
+            Math.floor(color.red * 255) +
+            ", " +
+            Math.floor(color.green * 255) +
+            ", " +
+            Math.floor(color.blue * 255) +
+            ", " +
+            Math.floor(color.alpha * 255) +
+            ")";
+          return [new vscode.ColorPresentation(newColor)];
+        } catch (error) {
+          console.log("错误：provideColorPresentations 调色盘能力" + error);
         }
       },
     }),
 
-    //补全能力
+    //悬停提示能力
+    vscode.languages.registerHoverProvider("ow", {
+      provideHover(document, position) {
+        try {
+          const hoverRange = document.getWordRangeAtPosition(position);
+          if (!hoverRange) {
+            return;
+          }
+          const hoverText = document.getText(hoverRange);
+          const theme =
+            vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark
+              ? 0
+              : 1;
+          const scope = UTIL.getScope(document, position);
+          if (scope.name === "扩展") {
+            if (MODEL.扩展.hasOwnProperty(hoverText)) {
+              return MODEL.buildHover(
+                PATH,
+                hoverText,
+                MODEL.扩展[hoverText].标签,
+                MODEL.扩展[hoverText].提示
+              );
+            }
+          } else if (scope.name === "事件") {
+            const event = MODEL.规则.事件;
+            if (event.选项.hasOwnProperty(hoverText)) {
+              return event.选项[hoverText].悬停;
+            }
+            if (event.队伍.hasOwnProperty(hoverText)) {
+              return event.队伍[hoverText].悬停;
+            }
+            if (event.玩家.hasOwnProperty(hoverText)) {
+              return event.玩家[hoverText].悬停;
+            }
+            for (i of MODEL.常量.英雄) {
+              if (i.名称 == hoverText) {
+                return i.悬停[theme];
+              }
+            }
+            return matchDynamicHover();
+          } else if (scope.name === "条件") {
+            if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
+              return MODEL.规则.条件[hoverText].悬停;
+            }
+            for (i in MODEL.常量) {
+              for (j in MODEL.常量[i]) {
+                if (MODEL.常量[i][j].名称 == hoverText) {
+                  if (Array.isArray(MODEL.常量[i][j].悬停)) {
+                    return MODEL.常量[i][j].悬停[theme];
+                  }
+                  return MODEL.常量[i][j].悬停;
+                }
+              }
+            }
+            return matchDynamicHover();
+          } else if (scope.name === "动作") {
+            if (MODEL.规则.动作.hasOwnProperty(hoverText)) {
+              return MODEL.规则.动作[hoverText].悬停;
+            }
+            if (MODEL.规则.条件.hasOwnProperty(hoverText)) {
+              return MODEL.规则.条件[hoverText].悬停;
+            }
+            for (i in MODEL.常量) {
+              for (j in MODEL.常量[i]) {
+                if (MODEL.常量[i][j].名称 == hoverText) {
+                  if (Array.isArray(MODEL.常量[i][j].悬停)) {
+                    return MODEL.常量[i][j].悬停[theme];
+                  }
+                  return MODEL.常量[i][j].悬停;
+                }
+              }
+            }
+            return matchDynamicHover();
+          }
+
+          //匹配动态悬停
+          function matchDynamicHover() {
+            if ((match = hoverText.match(/\b[_a-zA-Z][_a-zA-Z0-9]*\b/))) {
+              const range = UTIL.getPrevValidWordRange(document, position);
+              const text = document.getText(range);
+              return buildDynamicHover(UTIL.getDynamicType(text));
+            }
+          }
+
+          //构建动态悬停
+          function buildDynamicHover(type) {
+            const dynamicList = UTIL.getDynamicList(document);
+            if (type == "全局变量") {
+              for (i in dynamicList.全局变量) {
+                if (hoverText === dynamicList.全局变量[i]) {
+                  return MODEL.buildHover(
+                    PATH,
+                    hoverText,
+                    ["全局变量", i],
+                    `一个已定义的全局变量。`
+                  );
+                }
+              }
+            } else if (type == "玩家变量") {
+              for (i in dynamicList.玩家变量) {
+                if (hoverText === dynamicList.玩家变量[i]) {
+                  return MODEL.buildHover(
+                    PATH,
+                    hoverText,
+                    ["玩家变量", i],
+                    `一个已定义的玩家变量。`
+                  );
+                }
+              }
+            } else if (type == "子程序") {
+              for (i in dynamicList.子程序) {
+                if (hoverText === dynamicList.子程序[i]) {
+                  return MODEL.buildHover(
+                    PATH,
+                    hoverText,
+                    ["子程序", i],
+                    `一个已定义的子程序。`
+                  );
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.log("错误：provideHover 悬停提示能力" + error);
+        }
+      },
+    }),
+
+    //补全建议能力
     vscode.languages.registerCompletionItemProvider(
       "ow",
       {
@@ -670,7 +688,7 @@ function activate(context) {
               return completionItems;
             }
           } catch (error) {
-            console.log(error);
+            console.log("错误：provideCompletionItems 补全建议能力" + error);
           }
         },
       },
@@ -681,39 +699,43 @@ function activate(context) {
 
     //补全占位符监视
     vscode.workspace.onDidChangeTextDocument((event) => {
-      const changes = event.contentChanges;
-      for (const change of changes) {
-        if (
-          (change.text === "" && change.rangeLength > 0) ||
-          change.text == " "
-        ) {
-          const scope = UTIL.getScope(event.document, change.range.start);
-          if (scope.name == "条件" || scope.name == "动作") {
-            const entry = UTIL.getEntry(
-              event.document,
-              change.range.start,
-              scope
-            );
-            if (!entry) {
-              return;
-            }
-            if (entry instanceof Object) {
-              if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
-                const param = MODEL.规则.动作[entry.name].参数[entry.index];
-                if (param.hasOwnProperty("选项")) {
-                  vscode.commands.executeCommand("ow.command.suggest");
-                } else if (param.类型.match(/^全局变量|玩家变量|子程序$/)) {
-                  vscode.commands.executeCommand("ow.command.suggest");
-                }
-              } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
-                const param = MODEL.规则.条件[entry.name].参数[entry.index];
-                if (param.hasOwnProperty("选项")) {
-                  vscode.commands.executeCommand("ow.command.suggest");
+      try {
+        const changes = event.contentChanges;
+        for (const change of changes) {
+          if (
+            (change.text === "" && change.rangeLength > 0) ||
+            change.text == " "
+          ) {
+            const scope = UTIL.getScope(event.document, change.range.start);
+            if (scope.name == "条件" || scope.name == "动作") {
+              const entry = UTIL.getEntry(
+                event.document,
+                change.range.start,
+                scope
+              );
+              if (!entry) {
+                return;
+              }
+              if (entry instanceof Object) {
+                if (MODEL.规则.动作.hasOwnProperty(entry.name)) {
+                  const param = MODEL.规则.动作[entry.name].参数[entry.index];
+                  if (param.hasOwnProperty("选项")) {
+                    vscode.commands.executeCommand("ow.command.suggest");
+                  } else if (param.类型.match(/^全局变量|玩家变量|子程序$/)) {
+                    vscode.commands.executeCommand("ow.command.suggest");
+                  }
+                } else if (MODEL.规则.条件.hasOwnProperty(entry.name)) {
+                  const param = MODEL.规则.条件[entry.name].参数[entry.index];
+                  if (param.hasOwnProperty("选项")) {
+                    vscode.commands.executeCommand("ow.command.suggest");
+                  }
                 }
               }
             }
           }
         }
+      } catch (error) {
+        console.log("错误：onDidChangeTextDocument 补全占位符监视" + error);
       }
     }),
 
@@ -817,7 +839,7 @@ function activate(context) {
               return signatureHelp;
             }
           } catch (error) {
-            console.log(error);
+            console.log("错误：provideSignatureHelp 参数提示能力" + error);
           }
         },
       },
@@ -883,7 +905,9 @@ function activate(context) {
               }
             }
           } catch (error) {
-            console.log(error);
+            console.log(
+              "错误：provideDocumentSemanticTokens 语法高亮能力" + error
+            );
           } finally {
             return builder.build();
           }
@@ -895,8 +919,8 @@ function activate(context) {
     //代码整理能力
     vscode.languages.registerDocumentFormattingEditProvider("ow", {
       provideDocumentFormattingEdits(document, options) {
-        try {
-          return vscode.window.activeTextEditor.edit((editBuilder) => {
+        return vscode.window.activeTextEditor.edit((editBuilder) => {
+          try {
             //保留光标
             let selection = vscode.window.activeTextEditor.selection;
             let variable = false;
@@ -940,7 +964,6 @@ function activate(context) {
                 trimText.startsWith("//") ||
                 (trimText.startsWith('"') && trimText.endsWith('"'))
               ) {
-                console.log("对齐整行注释");
                 addDocumentFormattingEdits(
                   line,
                   trimText,
@@ -1027,73 +1050,88 @@ function activate(context) {
 
             //添加新修改
             function addDocumentFormattingEdits(line, trimText, level) {
-              editBuilder.replace(
-                line.range,
-                (options.insertSpaces
-                  ? " ".repeat(level * options.tabSize)
-                  : "\t".repeat(level)) + trimText
-              );
+              try {
+                editBuilder.replace(
+                  line.range,
+                  (options.insertSpaces
+                    ? " ".repeat(level * options.tabSize)
+                    : "\t".repeat(level)) + trimText
+                );
+              } catch (error) {
+                console.log(error);
+              }
             }
-          });
-        } catch (error) {
-          console.log(error);
-        }
+          } catch (error) {
+            console.log(
+              "错误：provideDocumentFormattingEdits 代码整理能力" + error
+            );
+          }
+        });
       },
     }),
 
     //切换开关能力
     vscode.languages.registerCodeLensProvider("ow", {
       provideCodeLenses(document) {
-        const codeLens = [];
-        const text = document.getText();
-        const pattern = /(禁用\s*)?规则\s*\("(.*)"\)/g;
-        while ((match = pattern.exec(text))) {
-          const matchText = match[0];
-          const startPos = document.positionAt(match.index);
-          const endPos = document.positionAt(match.index + matchText.length);
-          const range = new vscode.Range(startPos, endPos);
-          const toggleCommand = {
-            title: `切换开关`,
-            command: "ow.toggle.disableRule",
-            arguments: [{ document, range }],
-          };
-          const newCodeLens = new vscode.CodeLens(range, toggleCommand);
-          codeLens.push(newCodeLens);
+        try {
+          const codeLens = [];
+          const text = document.getText();
+          const pattern = /(禁用\s*)?规则\s*\("(.*)"\)/g;
+          while ((match = pattern.exec(text))) {
+            const matchText = match[0];
+            const startPos = document.positionAt(match.index);
+            const endPos = document.positionAt(match.index + matchText.length);
+            const range = new vscode.Range(startPos, endPos);
+            const toggleCommand = {
+              title: `切换开关`,
+              command: "ow.toggle.disableRule",
+              arguments: [{ document, range }],
+            };
+            const newCodeLens = new vscode.CodeLens(range, toggleCommand);
+            codeLens.push(newCodeLens);
+          }
+          return codeLens;
+        } catch (error) {
+          console.log("错误：provideCodeLenses 切换开关能力" + error);
         }
-        return codeLens;
       },
     }),
 
     //切换开关行为
     vscode.commands.registerCommand("ow.toggle.disableRule", (args) => {
-      const { document, range } = args;
-      let text = document.getText(range);
-      if (text.startsWith("禁用")) {
-        text = text.replace(/禁用\s*/, "");
-      } else {
-        text = `禁用 ${text}`;
+      try {
+        const { document, range } = args;
+        let text = document.getText(range);
+        if (text.startsWith("禁用")) {
+          text = text.replace(/禁用\s*/, "");
+        } else {
+          text = `禁用 ${text}`;
+        }
+        const edit = new vscode.WorkspaceEdit();
+        edit.replace(document.uri, range, text);
+        vscode.workspace.applyEdit(edit);
+      } catch (error) {
+        console.log("错误：ow.toggle.disableRule 切换开关行为" + error);
       }
-      const edit = new vscode.WorkspaceEdit();
-      edit.replace(document.uri, range, text);
-      vscode.workspace.applyEdit(edit);
     }),
 
     //面板手册能力
     vscode.window.registerWebviewViewProvider("ow.view.manual", {
       resolveWebviewView(webviewView) {
-        const theme =
-          vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark;
-        const extensionUri = vscode.Uri.file(path.join(PATH, "", path.sep));
-        const themeUri = theme ? "" : "gray/";
-        const styleUri = webviewView.webview.asWebviewUri(
-          vscode.Uri.joinPath(extensionUri, "views", "view.css")
-        );
-        const scriptUri = webviewView.webview.asWebviewUri(
-          vscode.Uri.joinPath(extensionUri, "views", "script.js")
-        );
+        try {
+          const theme =
+            vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark;
+          const extensionUri = vscode.Uri.file(path.join(PATH, "", path.sep));
+          const themeUri = theme ? "" : "gray/";
+          const styleUri = webviewView.webview.asWebviewUri(
+            vscode.Uri.joinPath(extensionUri, "views", "view.css")
+          );
+          const scriptUri = webviewView.webview.asWebviewUri(
+            vscode.Uri.joinPath(extensionUri, "views", "script.js")
+          );
 
-        function getHomeHtml() {
-          return `<!DOCTYPE html>
+          function getHomeHtml() {
+            return `<!DOCTYPE html>
                     <html>
                     <head>
                     <link href="${styleUri}" rel="stylesheet">
@@ -1125,19 +1163,19 @@ function activate(context) {
                     <br>
                     </body>
                     </html>`;
-        }
+          }
 
-        function getModeTableHtml() {
-          const mode = MODEL.常量.模式
-            .map((element, index) => {
-              if (index % 2 === 0) {
-                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-              } else {
-                return `<td style="text-align: center;">${element.名称}</td>`;
-              }
-            })
-            .join("");
-          return `<!DOCTYPE html>
+          function getModeTableHtml() {
+            const mode = MODEL.常量.模式
+              .map((element, index) => {
+                if (index % 2 === 0) {
+                  return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+                } else {
+                  return `<td style="text-align: center;">${element.名称}</td>`;
+                }
+              })
+              .join("");
+            return `<!DOCTYPE html>
                     <html>
                     <head>
                     <link href="${styleUri}" rel="stylesheet">
@@ -1155,19 +1193,19 @@ function activate(context) {
                     </table>
                     </body>
                     </html>`;
-        }
+          }
 
-        function getMapTableHtml() {
-          const maps = MODEL.常量.地图
-            .map((element, index) => {
-              if (index % 2 === 0) {
-                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-              } else {
-                return `<td style="text-align: center;">${element.名称}</td>`;
-              }
-            })
-            .join("");
-          return `<!DOCTYPE html>
+          function getMapTableHtml() {
+            const maps = MODEL.常量.地图
+              .map((element, index) => {
+                if (index % 2 === 0) {
+                  return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+                } else {
+                  return `<td style="text-align: center;">${element.名称}</td>`;
+                }
+              })
+              .join("");
+            return `<!DOCTYPE html>
                     <html>
                     <head>
                     <link href="${styleUri}" rel="stylesheet">
@@ -1185,19 +1223,19 @@ function activate(context) {
                     </table>
                     </body>
                     </html>`;
-        }
+          }
 
-        function getStringTableHtml() {
-          const strings = MODEL.常量.字符串
-            .map((element, index) => {
-              if (index % 2 === 0) {
-                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-              } else {
-                return `<td style="text-align: center;">${element.名称}</td>`;
-              }
-            })
-            .join("");
-          return `<!DOCTYPE html>
+          function getStringTableHtml() {
+            const strings = MODEL.常量.字符串
+              .map((element, index) => {
+                if (index % 2 === 0) {
+                  return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+                } else {
+                  return `<td style="text-align: center;">${element.名称}</td>`;
+                }
+              })
+              .join("");
+            return `<!DOCTYPE html>
                     <html>
                     <head>
                     <link href="${styleUri}" rel="stylesheet">
@@ -1215,10 +1253,10 @@ function activate(context) {
                     </table>
                     </body>
                     </html>`;
-        }
+          }
 
-        function getColorTableHtml() {
-          return `<!DOCTYPE html>
+          function getColorTableHtml() {
+            return `<!DOCTYPE html>
                     <html>
                     <head>
                     <link href="${styleUri}" rel="stylesheet">
@@ -1396,41 +1434,46 @@ function activate(context) {
                     </table>
                     </body>
                     </html>`;
-        }
+          }
 
-        function getIconTableHtml() {
-          const numCols = 4;
-          const numRows = Math.ceil(36 / numCols);
-          const tableRows = Array(numRows)
-            .fill()
-            .map((_, rowIndex) => {
-              const startImageIndex = rowIndex * numCols + 1;
-              const endImageIndex = Math.min(startImageIndex + numCols - 1, 36);
-              const imageCells = Array(endImageIndex - startImageIndex + 1)
-                .fill()
-                .map((_, colIndex) => {
-                  const imageNumber = startImageIndex + colIndex;
-                  const imageSrc = webviewView.webview.asWebviewUri(
-                    vscode.Uri.joinPath(
-                      extensionUri,
-                      "images",
-                      "ow",
-                      "icon",
-                      `${themeUri}${imageNumber}.png`
-                    )
-                  );
-                  const icons = MODEL.常量.图标.map((element) => element.名称);
-                  return `<td style="text-align: center; font-weight: 500;"><img src="${imageSrc}" width="30" height="30"><br>${
-                    icons[imageNumber - 1]
-                  }</td>`;
-                })
-                .join("");
-              return `<tr>${imageCells}</tr>`;
-            });
-          const tableHtml = `<table style="min-width: 300px; max-width: 400px;">${tableRows.join(
-            ""
-          )}</table>`;
-          return `<!DOCTYPE html>
+          function getIconTableHtml() {
+            const numCols = 4;
+            const numRows = Math.ceil(36 / numCols);
+            const tableRows = Array(numRows)
+              .fill()
+              .map((_, rowIndex) => {
+                const startImageIndex = rowIndex * numCols + 1;
+                const endImageIndex = Math.min(
+                  startImageIndex + numCols - 1,
+                  36
+                );
+                const imageCells = Array(endImageIndex - startImageIndex + 1)
+                  .fill()
+                  .map((_, colIndex) => {
+                    const imageNumber = startImageIndex + colIndex;
+                    const imageSrc = webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "icon",
+                        `${themeUri}${imageNumber}.png`
+                      )
+                    );
+                    const icons = MODEL.常量.图标.map(
+                      (element) => element.名称
+                    );
+                    return `<td style="text-align: center; font-weight: 500;"><img src="${imageSrc}" width="30" height="30"><br>${
+                      icons[imageNumber - 1]
+                    }</td>`;
+                  })
+                  .join("");
+                return `<tr>${imageCells}</tr>`;
+              });
+            const tableHtml = `<table style="min-width: 300px; max-width: 400px;">${tableRows.join(
+              ""
+            )}</table>`;
+            return `<!DOCTYPE html>
                     <html>
                     <head>
                     <link href="${styleUri}" rel="stylesheet">
@@ -4563,25 +4606,25 @@ function activate(context) {
                     </body>
 
                     </html>`;
-        }
+          }
 
-        function getProjectileTableHtml() {
-          const projectile = MODEL.常量.弹道
-            .map((element, index) => {
-              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-            })
-            .join("");
-          const projectileExplosion = MODEL.常量.弹道爆炸效果
-            .map((element, index) => {
-              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-            })
-            .join("");
-          const projectileExplosionSound = MODEL.常量.弹道爆炸声音
-            .map((element, index) => {
-              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-            })
-            .join("");
-          return `<!DOCTYPE html>
+          function getProjectileTableHtml() {
+            const projectile = MODEL.常量.弹道
+              .map((element, index) => {
+                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+              })
+              .join("");
+            const projectileExplosion = MODEL.常量.弹道爆炸效果
+              .map((element, index) => {
+                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+              })
+              .join("");
+            const projectileExplosionSound = MODEL.常量.弹道爆炸声音
+              .map((element, index) => {
+                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+              })
+              .join("");
+            return `<!DOCTYPE html>
                     <html>
                     <head>
                     <link href="${styleUri}" rel="stylesheet">
@@ -4613,20 +4656,20 @@ function activate(context) {
                     </table>
                     </body>
                     </html>`;
-        }
+          }
 
-        function getEffectTableHtml() {
-          const effects = MODEL.常量.效果
-            .map((element, index) => {
-              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-            })
-            .join("");
-          const playerEffects = MODEL.常量.播放效果
-            .map((element, index) => {
-              return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-            })
-            .join("");
-          return `<!DOCTYPE html>
+          function getEffectTableHtml() {
+            const effects = MODEL.常量.效果
+              .map((element, index) => {
+                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+              })
+              .join("");
+            const playerEffects = MODEL.常量.播放效果
+              .map((element, index) => {
+                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+              })
+              .join("");
+            return `<!DOCTYPE html>
                     <html>
                     <head>
                     <link href="${styleUri}" rel="stylesheet">
@@ -4653,44 +4696,47 @@ function activate(context) {
 
                     </body>
                     </html>`;
-        }
-
-        webviewView.webview.html = getHomeHtml();
-        webviewView.webview.options = {
-          enableScripts: true,
-          localResourceRoots: [extensionUri],
-        };
-        webviewView.webview.onDidReceiveMessage((message) => {
-          switch (message) {
-            case "Home":
-              webviewView.webview.html = getHomeHtml();
-              return;
-            case "Mode":
-              webviewView.webview.html = getModeTableHtml();
-              return;
-            case "Map":
-              webviewView.webview.html = getMapTableHtml();
-              return;
-            case "String":
-              webviewView.webview.html = getStringTableHtml();
-              return;
-            case "Color":
-              webviewView.webview.html = getColorTableHtml();
-              return;
-            case "Icon":
-              webviewView.webview.html = getIconTableHtml();
-              return;
-            case "Projectile":
-              webviewView.webview.html = getProjectileTableHtml();
-              return;
-            case "Effect":
-              webviewView.webview.html = getEffectTableHtml();
-              return;
-            default:
-              console.log("Unknown command: " + message.command);
-              return;
           }
-        });
+
+          webviewView.webview.html = getHomeHtml();
+          webviewView.webview.options = {
+            enableScripts: true,
+            localResourceRoots: [extensionUri],
+          };
+          webviewView.webview.onDidReceiveMessage((message) => {
+            switch (message) {
+              case "Home":
+                webviewView.webview.html = getHomeHtml();
+                return;
+              case "Mode":
+                webviewView.webview.html = getModeTableHtml();
+                return;
+              case "Map":
+                webviewView.webview.html = getMapTableHtml();
+                return;
+              case "String":
+                webviewView.webview.html = getStringTableHtml();
+                return;
+              case "Color":
+                webviewView.webview.html = getColorTableHtml();
+                return;
+              case "Icon":
+                webviewView.webview.html = getIconTableHtml();
+                return;
+              case "Projectile":
+                webviewView.webview.html = getProjectileTableHtml();
+                return;
+              case "Effect":
+                webviewView.webview.html = getEffectTableHtml();
+                return;
+              default:
+                console.log("Unknown command: " + message.command);
+                return;
+            }
+          });
+        } catch (error) {
+          console.log("错误：resolveWebviewView 面板手册能力" + error);
+        }
       },
     })
   );
