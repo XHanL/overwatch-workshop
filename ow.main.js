@@ -115,61 +115,6 @@ function activate(context) {
       }
     }),
 
-    //折叠能力
-    vscode.languages.registerFoldingRangeProvider("ow", {
-      provideFoldingRanges(document) {
-        let foldingRanges = [];
-        let braces = [];
-        let brackets = [];
-        let parentheses = [];
-        let controls = [];
-
-        for (let i = 0; i < document.lineCount; i++) {
-          const line = document.lineAt(i);
-          const text = line.text.trim();
-          if (text === "") {
-            continue;
-          } else if (text.endsWith("{")) {
-            braces.push(line.lineNumber - 1);
-          } else if (text.startsWith("}")) {
-            foldingRanges.push(
-              new vscode.FoldingRange(braces.pop(), line.lineNumber)
-            );
-          } else if (text.endsWith("[")) {
-            brackets.push(line.lineNumber);
-          } else if (text.startsWith("]")) {
-            const pop = brackets.pop();
-            if (pop != line.lineNumber) {
-              foldingRanges.push(
-                new vscode.FoldingRange(pop, line.lineNumber - 1)
-              );
-            }
-          } else if (text.endsWith("(")) {
-            parentheses.push(line.lineNumber);
-          } else if (text.startsWith(")")) {
-            const pop = parentheses.pop();
-            if (pop != line.lineNumber) {
-              foldingRanges.push(
-                new vscode.FoldingRange(pop, line.lineNumber - 1)
-              );
-            }
-          } else if (text.match(/^(For 全局变量|For 玩家变量|While|If)/)) {
-            controls.push(line.lineNumber);
-          } else if (text.match(/^(Else If|Else)/)) {
-            foldingRanges.push(
-              new vscode.FoldingRange(controls.pop(), line.lineNumber - 1)
-            );
-            controls.push(line.lineNumber);
-          } else if (text.match(/^End/)) {
-            foldingRanges.push(
-              new vscode.FoldingRange(controls.pop(), line.lineNumber - 1)
-            );
-          }
-        }
-        return foldingRanges;
-      },
-    }),
-
     //大纲能力
     vscode.languages.registerDocumentSymbolProvider("ow", {
       provideDocumentSymbols(document) {
