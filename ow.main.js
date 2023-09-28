@@ -896,122 +896,131 @@ function activate(context) {
     vscode.languages.registerDocumentFormattingEditProvider("ow", {
       provideDocumentFormattingEdits(document, options) {
         try {
-          let documentFormattingEdits = [];
-          let scopeLevel = 0;
-          let entryLevel = 0;
-          let ignore = 0;
-          for (let i = 0; i < document.lineCount; i++) {
-            const line = document.lineAt(i);
-            const trimText = line.text.trim();
+          return vscode.window.activeTextEditor.edit((editBuilder) => {
+            //保留光标
+            let cursor = vscode.window.activeTextEditor.selection.start;
 
-            //绕过空行
-            if (trimText === "") {
-              continue;
-            }
+            let scopeLevel = 0;
+            let entryLevel = 0;
+            let ignore = 0;
+            for (let i = 0; i < document.lineCount; i++) {
+              const line = document.lineAt(i);
+              const trimText = line.text.trim();
 
-            //过滤无关符号
-            const pureText = trimText
-              .replace(/\/\/.*/g, "")
-              .replace(/\".*\"/g, "");
-
-            //绕过`[]`和`()`内容
-            if (ignore) {
-              for (let j = 0; j < pureText.length; j++) {
-                const symbol = pureText[j];
-                if (symbol == "[" || symbol == "(") {
-                  ignore++;
-                } else if (symbol == "]" || symbol == ")") {
-                  ignore--;
-                  if (ignore == 0) {
-                    break;
-                  }
-                }
-              }
-              if (ignore > 0) {
+              //绕过空行
+              if (trimText === "") {
                 continue;
               }
-            }
 
-            //对齐整行注释
-            if (
-              trimText.startsWith("//") ||
-              (trimText.startsWith('"') && trimText.endsWith('"'))
-            ) {
-              console.log("对齐整行注释");
-              addDocumentFormattingEdits(
-                line,
-                trimText,
-                scopeLevel + entryLevel
-              );
-              continue;
-            }
+              //过滤无关符号
+              const pureText = trimText
+                .replace(/\/\/.*/g, "")
+                .replace(/\".*\"/g, "");
 
-            if (pureText.endsWith("[") || pureText.endsWith("(")) {
-              addDocumentFormattingEdits(
-                line,
-                trimText,
-                scopeLevel + entryLevel
-              );
-              ignore++;
-            } else if (pureText.endsWith("{")) {
-              addDocumentFormattingEdits(line, trimText, scopeLevel);
-              scopeLevel++;
-            } else if (
-              pureText.startsWith("If") ||
-              pureText.startsWith("While") ||
-              pureText.startsWith("For 全局变量") ||
-              pureText.startsWith("For 玩家变量")
-            ) {
-              addDocumentFormattingEdits(
-                line,
-                trimText,
-                scopeLevel + entryLevel
-              );
-              entryLevel++;
-            } else if (
-              pureText.startsWith("Else") ||
-              pureText.startsWith("Else If")
-            ) {
-              entryLevel--;
-              entryLevel = Math.max(entryLevel, 0);
-              addDocumentFormattingEdits(
-                line,
-                trimText,
-                scopeLevel + entryLevel
-              );
-              entryLevel++;
-            } else if (pureText.endsWith("}")) {
-              scopeLevel--;
-              scopeLevel = Math.max(scopeLevel, 0);
-              if (scopeLevel == 0) {
-                entryLevel = 0;
+              //绕过`[]`和`()`内容
+              if (ignore) {
+                for (let j = 0; j < pureText.length; j++) {
+                  const symbol = pureText[j];
+                  if (symbol == "[" || symbol == "(") {
+                    ignore++;
+                  } else if (symbol == "]" || symbol == ")") {
+                    ignore--;
+                    if (ignore == 0) {
+                      break;
+                    }
+                  }
+                }
+                if (ignore > 0) {
+                  continue;
+                }
               }
-              addDocumentFormattingEdits(line, trimText, scopeLevel);
-            } else if (pureText.startsWith("End")) {
-              entryLevel--;
-              entryLevel = Math.max(entryLevel, 0);
-              addDocumentFormattingEdits(
-                line,
-                trimText,
-                scopeLevel + entryLevel
-              );
-            } else {
-              addDocumentFormattingEdits(
-                line,
-                trimText,
-                scopeLevel + entryLevel
-              );
+
+              //对齐整行注释
+              if (
+                trimText.startsWith("//") ||
+                (trimText.startsWith('"') && trimText.endsWith('"'))
+              ) {
+                console.log("对齐整行注释");
+                addDocumentFormattingEdits(
+                  line,
+                  trimText,
+                  scopeLevel + entryLevel
+                );
+                continue;
+              }
+
+              if (pureText.endsWith("[") || pureText.endsWith("(")) {
+                addDocumentFormattingEdits(
+                  line,
+                  trimText,
+                  scopeLevel + entryLevel
+                );
+                ignore++;
+              } else if (pureText.endsWith("{")) {
+                addDocumentFormattingEdits(line, trimText, scopeLevel);
+                scopeLevel++;
+              } else if (
+                pureText.startsWith("If") ||
+                pureText.startsWith("While") ||
+                pureText.startsWith("For 全局变量") ||
+                pureText.startsWith("For 玩家变量")
+              ) {
+                addDocumentFormattingEdits(
+                  line,
+                  trimText,
+                  scopeLevel + entryLevel
+                );
+                entryLevel++;
+              } else if (
+                pureText.startsWith("Else") ||
+                pureText.startsWith("Else If")
+              ) {
+                entryLevel--;
+                entryLevel = Math.max(entryLevel, 0);
+                addDocumentFormattingEdits(
+                  line,
+                  trimText,
+                  scopeLevel + entryLevel
+                );
+                entryLevel++;
+              } else if (pureText.endsWith("}")) {
+                scopeLevel--;
+                scopeLevel = Math.max(scopeLevel, 0);
+                if (scopeLevel == 0) {
+                  entryLevel = 0;
+                }
+                addDocumentFormattingEdits(line, trimText, scopeLevel);
+              } else if (pureText.startsWith("End")) {
+                entryLevel--;
+                entryLevel = Math.max(entryLevel, 0);
+                addDocumentFormattingEdits(
+                  line,
+                  trimText,
+                  scopeLevel + entryLevel
+                );
+              } else {
+                addDocumentFormattingEdits(
+                  line,
+                  trimText,
+                  scopeLevel + entryLevel
+                );
+              }
             }
-          }
-          return documentFormattingEdits;
-          function addDocumentFormattingEdits(line, trimText, level) {
-            documentFormattingEdits.push(
-              new vscode.TextEdit(
+
+            //还原光标
+            vscode.window.activeTextEditor.selection = new vscode.Selection(
+              cursor,
+              cursor
+            );
+
+            //添加新修改
+            function addDocumentFormattingEdits(line, trimText, level) {
+              editBuilder.replace(
                 line.range,
                 " ".repeat(level * options.tabSize) + trimText
-              )
-            );
-          }
+              );
+            }
+          });
         } catch (error) {
           console.log(error);
         }
