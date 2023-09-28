@@ -1,6 +1,7 @@
 {
   "name": "Overwatch Workshop 明亮",
   "colors": {
+    "textPreformat.foreground": "#d19a66",
     "textCodeBlock.background": "#e1e4e8",
     "focusBorder": "#2188ff",
     "foreground": "#444d56",

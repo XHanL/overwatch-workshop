@@ -957,11 +957,7 @@ function activate(context) {
         const extensionUri = vscode.Uri.file(path.join(PATH, "", path.sep));
         const themeUri = theme ? "" : "gray/";
         const styleUri = webviewView.webview.asWebviewUri(
-          vscode.Uri.joinPath(
-            extensionUri,
-            "views",
-            theme ? `dark.css` : `light.css`
-          )
+          vscode.Uri.joinPath(extensionUri, "views", "view.css")
         );
         const scriptUri = webviewView.webview.asWebviewUri(
           vscode.Uri.joinPath(extensionUri, "views", "script.js")
