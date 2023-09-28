@@ -1,1 +1,0 @@
-vsce package --baseImagesUrl "https://gitee.com/xhanl/overwatch-workshop/raw/main"

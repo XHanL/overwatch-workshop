@@ -1,0 +1,2 @@
+vsce package --baseImagesUrl "https://gitee.com/xhanl/overwatch-workshop/raw/main"
+vsce package --baseContentUrl "https://gitee.com/xhanl/overwatch-workshop/raw/main"
