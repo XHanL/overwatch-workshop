@@ -897,37 +897,42 @@ function activate(context) {
       provideDocumentFormattingEdits(document, options) {
         try {
           let documentFormattingEdits = [];
-          let isString = false;
           let scopeLevel = 0;
           let entryLevel = 0;
           let ignore = 0;
           for (let i = 0; i < document.lineCount; i++) {
             const line = document.lineAt(i);
             const trimText = line.text.trim();
-            const pureText = trimText.replace(/\/\/.*/, "");
+            const pureText = trimText
+              .replace(/\/\/.*/g, "")
+              .replace(/\".*\"/g, "");
             if (pureText === "") {
               continue;
             }
 
-            if (ignore > 0) {
+            if (ignore) {
               for (let j = 0; j < pureText.length; j++) {
                 const symbol = pureText[j];
-                if (symbol == '"') {
-                  isString = !isString;
-                }
-                if (isString) {
-                  continue;
-                }
                 if (symbol == "[" || symbol == "(") {
                   ignore++;
                 } else if (symbol == "]" || symbol == ")") {
                   ignore--;
-                  ignore = Math.max(ignore, 0);
+                  if (ignore == 0) {
+                    break;
+                  }
                 }
+              }
+              if (ignore > 0) {
+                continue;
               }
             }
 
             if (pureText.endsWith("[") || pureText.endsWith("(")) {
+              addDocumentFormattingEdits(
+                line,
+                trimText,
+                scopeLevel + entryLevel
+              );
               ignore++;
             } else if (pureText.endsWith("{")) {
               addDocumentFormattingEdits(line, trimText, scopeLevel);
