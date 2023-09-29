@@ -4742,12 +4742,6 @@ function activate(context) {
   );
 }
 
-function deactivate(context) {
-  console.log(deactivate);
-  vscode.window.setStatusBarMessage(``);
-}
-
 module.exports = {
   activate,
-  deactivate,
 };
