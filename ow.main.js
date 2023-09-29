@@ -1457,7 +1457,7 @@ function activate(context) {
                         "images",
                         "ow",
                         "icon",
-                        `${themeUri}${imageNumber}.png`
+                        `${imageNumber}.png`
                       )
                     );
                     const icons = MODEL.常量.图标.map(
@@ -4742,6 +4742,12 @@ function activate(context) {
   );
 }
 
+function deactivate(context) {
+  console.log(deactivate);
+  vscode.window.setStatusBarMessage(``);
+}
+
 module.exports = {
   activate,
+  deactivate,
 };
