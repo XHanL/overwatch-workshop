@@ -267,13 +267,16 @@ function getEntry(document, position, scope) {
       const line = document.lineAt(i);
       const lineRange = line.range;
       const lineText = document.getText(lineRange).trim();
+
       //跳过当前行
       if (lineText == "" || lineText.startsWith("//")) {
         continue;
       }
+
       //扫描当前行
       const lastCharacter =
         i == position.line ? position.character : line.range.end.character;
+
       for (let j = lastCharacter; j >= 0; j--) {
         const charStart = new vscode.Position(i, j);
         const charEnd = charStart.translate(0, 1);
@@ -282,9 +285,10 @@ function getEntry(document, position, scope) {
 
         if (charText == '"') {
           if (j > 0) {
-            const prevStart = charEnd;
-            const prevEnd = charEnd.translate(0, 1);
-            const prevRange = new vscode.Range(prevStart, prevEnd);
+            const prevRange = new vscode.Range(
+              charEnd.translate(0, -2),
+              charEnd.translate(0, -1)
+            );
             const prevText = document.getText(prevRange);
             if (prevText == "\\") {
               continue;
@@ -347,13 +351,15 @@ function getEntry(document, position, scope) {
           (match = charText.match(/[\[\+\-\*\/\^\%\<\>\=\!\?\|\&\:]/)) &&
           commasCount == 0
         ) {
+          const prevCharText = document.getText(
+            new vscode.Range(
+              charStart.translate(0, -1),
+              charEnd.translate(0, -1)
+            )
+          );
+
           if (charText === "/" && j > 0) {
-            const prevCharText = document.getText(
-              new vscode.Range(
-                charStart.translate(0, -1),
-                charEnd.translate(0, -1)
-              )
-            );
+            //跳过注释
             if (prevCharText === "/") {
               j -= 1;
               continue;
@@ -369,6 +375,9 @@ function getEntry(document, position, scope) {
             } else {
               return "条件";
             }
+          } else if (prevCharText == ".") {
+            //跳过变量
+            continue;
           } else {
             return "条件";
           }

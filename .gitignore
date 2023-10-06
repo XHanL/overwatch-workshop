@@ -1,3 +1,2 @@
-
-*.vsix
-*/.DS_Store
+**/*.vsix
+**/.DS_Store

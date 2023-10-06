@@ -926,61 +926,61 @@ let 常量 = {
       名称: "技能1",
       标签: ["按钮"],
       提示: "绑定技能1的按钮。",
-      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
+      图标: "images/ow/input/button.png",
     },
     {
       名称: "技能2",
       标签: ["按钮"],
       提示: "绑定技能2的按钮。",
-      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
+      图标: "images/ow/input/button.png",
     },
     {
       名称: "蹲下",
       标签: ["按钮"],
       提示: "绑定蹲下的按钮。",
-      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
+      图标: "images/ow/input/button.png",
     },
     {
       名称: "互动",
       标签: ["按钮"],
       提示: "绑定互动的按钮。",
-      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
+      图标: "images/ow/input/button.png",
     },
     {
       名称: "跳跃",
       标签: ["按钮"],
       提示: "绑定跳跃的按钮。",
-      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
+      图标: "images/ow/input/button.png",
     },
     {
       名称: "近身攻击",
       标签: ["按钮"],
       提示: "绑定近身攻击的按钮。",
-      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
+      图标: "images/ow/input/button.png",
     },
     {
       名称: "主要攻击模式",
       标签: ["按钮"],
       提示: "绑定主要攻击模式的按钮。",
-      图标: ["images/ow/input/left.png", "images/ow/input/gray/left.png"],
+      图标: "images/ow/input/left.png",
     },
     {
       名称: "装填",
       标签: ["按钮"],
       提示: "绑定装填的按钮。",
-      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
+      图标: "images/ow/input/button.png",
     },
     {
       名称: "辅助攻击模式",
       标签: ["按钮"],
       提示: "绑定辅助攻击模式的按钮。",
-      图标: ["images/ow/input/right.png", "images/ow/input/gray/right.png"],
+      图标: "images/ow/input/right.png",
     },
     {
       名称: "终极技能",
       标签: ["按钮"],
       提示: "绑定终极技能的按钮。",
-      图标: ["images/ow/input/button.png", "images/ow/input/gray/button.png"],
+      图标: "images/ow/input/button.png",
     },
   ],
   截取: [
@@ -2751,40 +2751,31 @@ let 常量 = {
   英雄: [
     {
       名称: "安娜",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "作为守望先锋的副指挥官，安娜·艾玛莉利用她的技巧和专长保护家园和最亲密的人。",
-      图标: "images/ow/hero/support/ana/icon.png",
+      图标: "images/ow/hero/avatar/support_ana_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         生化步枪: {
-          图标: "images/ow/hero/support/ana/weapon.png",
+          图标: "images/ow/hero/ability/support_ana_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "安娜的步枪能够射出治疗队友和对敌人造成持续伤害的子弹。而她步枪上的瞄准镜能够让她进行更加精确的射击。",
         },
         纳米激素: {
-          图标: [
-            "images/ow/hero/support/ana/ultimate.png",
-            "images/ow/hero/support/ana/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_ana_ultimate.png",
           绑定: ["终极技能"],
           提示: "安娜在给一名队友注射战斗激素后，造成的伤害更高，而受到敌人的伤害更少。",
         },
         麻醉镖: {
-          图标: [
-            "images/ow/hero/support/ana/ability1.png",
-            "images/ow/hero/support/ana/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_ana_ability1.png",
           绑定: ["技能1"],
           提示: "安娜用她的手枪发射飞镖，而飞镖能够让敌人失去意识(但任何的伤害都能唤醒敌人)。",
         },
         生物手雷: {
-          图标: [
-            "images/ow/hero/support/ana/ability2.png",
-            "images/ow/hero/support/ana/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_ana_ability2.png",
           绑定: ["技能2"],
           提示: "受到手雷影响的队友在一段时间内所受到的治疗量增加，而受到手雷影响的敌人在一段时间内无法接受治疗。",
         },
@@ -2792,87 +2783,66 @@ let 常量 = {
     },
     {
       名称: "艾什",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "艾什是死局帮的领袖，这个帮派在美国西南部非常有影响。",
-      图标: "images/ow/hero/damage/ashe/icon.png",
+      图标: "images/ow/hero/avatar/damage_ashe_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         "“毒蛇”": {
-          图标: "images/ow/hero/damage/ashe/weapon.png",
+          图标: "images/ow/hero/ability/damage_ashe_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         召唤鲍勃: {
-          图标: [
-            "images/ow/hero/damage/ashe/ultimate.png",
-            "images/ow/hero/damage/ashe/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_ashe_ultimate.png",
           绑定: ["终极技能"],
         },
         短筒猎枪: {
-          图标: [
-            "images/ow/hero/damage/ashe/ability1.png",
-            "images/ow/hero/damage/ashe/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_ashe_ability1.png",
           绑定: ["技能1"],
         },
         延时雷管: {
-          图标: [
-            "images/ow/hero/damage/ashe/ability2.png",
-            "images/ow/hero/damage/ashe/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_ashe_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "巴蒂斯特",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "巴蒂斯特是一位精英战地医疗兵，曾担任黑爪特工，但现在的他致力于使用自己的能力去帮助那些饱受战火袭扰的人们。",
-      图标: "images/ow/hero/support/baptiste/icon.png",
+      图标: "images/ow/hero/avatar/support_baptiste_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         生化榴弹枪: {
-          图标: "images/ow/hero/support/baptiste/weapon1.png",
+          图标: "images/ow/hero/ability/support_baptiste_weapon1.png",
           绑定: ["主要攻击模式"],
           提示: "弹药索引为 0。",
         },
         生化榴弹: {
-          图标: "images/ow/hero/support/baptiste/weapon2.png",
+          图标: "images/ow/hero/ability/support_baptiste_weapon2.png",
           绑定: ["辅助攻击模式"],
           提示: "弹药索引为 1。",
         },
         增幅矩阵: {
-          图标: [
-            "images/ow/hero/support/baptiste/ultimate.png",
-            "images/ow/hero/support/baptiste/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_baptiste_ultimate.png",
           绑定: ["终极技能"],
         },
         愈合冲击: {
-          图标: [
-            "images/ow/hero/support/baptiste/ability1.png",
-            "images/ow/hero/support/baptiste/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_baptiste_ability1.png",
           绑定: ["技能1"],
         },
         维生力场: {
-          图标: [
-            "images/ow/hero/support/baptiste/ability2.png",
-            "images/ow/hero/support/baptiste/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_baptiste_ability2.png",
           绑定: ["技能2"],
         },
         动力战靴: {
-          图标: [
-            "images/ow/hero/support/baptiste/passive.png",
-            "images/ow/hero/support/baptiste/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/support_baptiste_passive.png",
           绑定: ["跳跃", "被动"],
           提示: "在蓄力后可以跳得更高。",
         },
@@ -2880,9 +2850,9 @@ let 常量 = {
     },
     {
       名称: "堡垒",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "曾在智械危机中身为前线战斗单位，充满好奇心的“堡垒”现在成为了一名探险者，被自然之美深深吸引的同时也警惕着人性之恶。",
-      图标: "images/ow/hero/damage/bastion/icon.png",
+      图标: "images/ow/hero/avatar/damage_bastion_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
@@ -2890,40 +2860,28 @@ let 常量 = {
       },
       技能: {
         侦察模式: {
-          图标: "images/ow/hero/damage/bastion/weapon1.png",
+          图标: "images/ow/hero/ability/damage_bastion_weapon1.png",
           绑定: ["主要攻击模式"],
         },
         强攻模式: {
-          图标: "images/ow/hero/damage/bastion/weapon2.png",
+          图标: "images/ow/hero/ability/damage_bastion_weapon2.png",
           绑定: ["主要攻击模式"],
           提示: "切换模式状态下的武器。无需装弹，故无法设置弹药。",
         },
         "A-36战术榴弹": {
-          图标: [
-            "images/ow/hero/damage/bastion/secondaryfire.png",
-            "images/ow/hero/damage/bastion/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/damage_bastion_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         火炮模式: {
-          图标: [
-            "images/ow/hero/damage/bastion/ultimate.png",
-            "images/ow/hero/damage/bastion/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_bastion_ultimate.png",
           绑定: ["终极技能"],
         },
         切换模式: {
-          图标: [
-            "images/ow/hero/damage/bastion/ability1.png",
-            "images/ow/hero/damage/bastion/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_bastion_ability1.png",
           绑定: ["技能1"],
         },
         抗击装甲: {
-          图标: [
-            "images/ow/hero/damage/bastion/passive.png",
-            "images/ow/hero/damage/bastion/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/damage_bastion_passive.png",
           绑定: ["被动"],
           提示: "降低切换模式后所受的伤害。",
         },
@@ -2931,9 +2889,9 @@ let 常量 = {
     },
     {
       名称: "布丽吉塔",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "布丽吉塔·林德霍姆是莱因哈特·威尔海姆的追随者，她曾经是一名机械工程师，现在则穿上盔甲踏上战场，保卫这个世界。",
-      图标: "images/ow/hero/support/brigitte/icon.png",
+      图标: "images/ow/hero/avatar/support_brigitte_avatar.png",
       生命: {
         自由: "150",
         职责: "150",
@@ -2942,103 +2900,70 @@ let 常量 = {
       },
       技能: {
         火箭连枷: {
-          图标: "images/ow/hero/support/brigitte/weapon.png",
+          图标: "images/ow/hero/ability/support_brigitte_weapon.png",
           绑定: ["主要攻击模式"],
           提示: "举盾时不可用。",
         },
         屏障护盾: {
-          图标: [
-            "images/ow/hero/support/brigitte/secondaryfire1.png",
-            "images/ow/hero/support/brigitte/gray/secondaryfire1.png",
-          ],
+          图标: "images/ow/hero/ability/support_brigitte_secondaryfire1.png",
           绑定: ["辅助攻击模式"],
         },
         能量盾击: {
-          图标: [
-            "images/ow/hero/support/brigitte/secondaryfire2.png",
-            "images/ow/hero/support/brigitte/gray/secondaryfire2.png",
-          ],
+          图标: "images/ow/hero/ability/support_brigitte_secondaryfire2.png",
           绑定: ["辅助攻击模式 + 主要攻击模式"],
           提示: "仅在举盾时可用。作为事件技能时为“主要攻击模式”。",
         },
         集结号令: {
-          图标: [
-            "images/ow/hero/support/brigitte/ultimate.png",
-            "images/ow/hero/support/brigitte/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_brigitte_ultimate.png",
           绑定: ["终极技能"],
         },
         流星飞锤: {
-          图标: [
-            "images/ow/hero/support/brigitte/ability1.png",
-            "images/ow/hero/support/brigitte/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_brigitte_ability1.png",
           绑定: ["技能1"],
         },
         恢复包: {
-          图标: [
-            "images/ow/hero/support/brigitte/ability2.png",
-            "images/ow/hero/support/brigitte/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_brigitte_ability2.png",
           绑定: ["技能2"],
         },
         鼓舞士气: {
-          图标: [
-            "images/ow/hero/support/brigitte/passive.png",
-            "images/ow/hero/support/brigitte/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/support_brigitte_passive.png",
           绑定: ["被动"],
         },
       },
     },
     {
       名称: "末日铁拳",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "“末日铁拳”是“黑爪”的领导者之一，他坚信只有将世界带向一场新的战争才能让人类变得更加强大。",
-      图标: "images/ow/hero/tank/doomfist/icon.png",
+      图标: "images/ow/hero/avatar/tank_doomfist_avatar.png",
       生命: {
         自由: "300",
         职责: "450",
       },
       技能: {
         手炮: {
-          图标: "images/ow/hero/tank/doomfist/weapon.png",
+          图标: "images/ow/hero/ability/tank_doomfist_weapon.png",
           绑定: ["主要攻击模式"],
           提示: "无法手动装填，但可以设置弹药。",
         },
         火箭重拳: {
-          图标: [
-            "images/ow/hero/tank/doomfist/secondaryfire.png",
-            "images/ow/hero/tank/doomfist/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/tank_doomfist_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         毁天灭地: {
-          图标: [
-            "images/ow/hero/tank/doomfist/ultimate.png",
-            "images/ow/hero/tank/doomfist/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_doomfist_ultimate.png",
           绑定: ["终极技能"],
         },
         裂地重拳: {
-          图标: [
-            "images/ow/hero/tank/doomfist/ability1.png",
-            "images/ow/hero/tank/doomfist/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_doomfist_ability1.png",
           绑定: ["技能1"],
         },
         悍猛格挡: {
-          图标: [
-            "images/ow/hero/tank/doomfist/ability2.png",
-            "images/ow/hero/tank/doomfist/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_doomfist_ability2.png",
           绑定: ["技能2"],
         },
         最佳防守: {
-          图标: [
-            "images/ow/hero/tank/doomfist/passive.png",
-            "images/ow/hero/tank/doomfist/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/tank_doomfist_passive.png",
           绑定: ["被动"],
           提示: "用技能命中敌人后，自身可生成临时生命值。",
         },
@@ -3046,9 +2971,9 @@ let 常量 = {
     },
     {
       名称: "D.Va",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "D.Va曾经是一名职业玩家，而现在则利用自己的技巧驾驶一台尖端机甲保卫国家。",
-      图标: "images/ow/hero/tank/dva/icon.png",
+      图标: "images/ow/hero/avatar/tank_dva_avatar.png",
       生命: {
         自由: "200",
         职责: "350",
@@ -3056,152 +2981,107 @@ let 常量 = {
       },
       技能: {
         聚变机炮: {
-          图标: "images/ow/hero/tank/dva/weapon1.png",
+          图标: "images/ow/hero/ability/tank_dva_weapon1.png",
           绑定: ["主要攻击模式"],
           提示: "使用时会降低D.Va的移动速度。",
         },
         光枪: {
-          图标: "images/ow/hero/tank/dva/weapon2.png",
+          图标: "images/ow/hero/ability/tank_dva_weapon2.png",
           绑定: ["主要攻击模式"],
           提示: "不在机甲内时为光枪。",
         },
         防御矩阵: {
-          图标: [
-            "images/ow/hero/tank/dva/secondaryfire.png",
-            "images/ow/hero/tank/dva/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/tank_dva_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         自毁: {
-          图标: [
-            "images/ow/hero/tank/dva/ultimate1.png",
-            "images/ow/hero/tank/dva/gray/ultimate1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_dva_ultimate1.png",
           绑定: ["终极技能"],
           提示: "将机甲设定为自爆模式，爆炸会对附近大范围的敌人造成巨额伤害。。",
         },
         呼叫机甲: {
-          图标: [
-            "images/ow/hero/tank/dva/ultimate2.png",
-            "images/ow/hero/tank/dva/gray/ultimate2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_dva_ultimate2.png",
           绑定: ["终极技能"],
           提示: "不在机甲内时为召唤机甲。",
         },
         推进器: {
-          图标: [
-            "images/ow/hero/tank/dva/ability1.png",
-            "images/ow/hero/tank/dva/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_dva_ability1.png",
           绑定: ["技能1"],
         },
         微型飞弹: {
-          图标: [
-            "images/ow/hero/tank/dva/ability2.png",
-            "images/ow/hero/tank/dva/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_dva_ability2.png",
           绑定: ["技能2"],
         },
         弹射: {
-          图标: [
-            "images/ow/hero/tank/dva/passive.png",
-            "images/ow/hero/tank/dva/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/tank_dva_passive.png",
           绑定: ["被动"],
         },
       },
     },
     {
       名称: "回声",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "“回声”是守望先锋成员米娜·廖博士设计制造的机器人，搭载了可以高速学习适应的先进人工智能程序。",
-      图标: "images/ow/hero/damage/echo/icon.png",
+      图标: "images/ow/hero/avatar/damage_echo_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         三角射击: {
-          图标: "images/ow/hero/damage/echo/weapon.png",
+          图标: "images/ow/hero/ability/damage_echo_weapon.png",
           绑定: ["主要攻击模式"],
         },
         黏性炸弹: {
-          图标: [
-            "images/ow/hero/damage/echo/secondaryfire.png",
-            "images/ow/hero/damage/echo/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/damage_echo_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         人格复制: {
-          图标: [
-            "images/ow/hero/damage/echo/ultimate.png",
-            "images/ow/hero/damage/echo/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_echo_ultimate.png",
           绑定: ["终极技能"],
         },
         飞行: {
-          图标: [
-            "images/ow/hero/damage/echo/ability1.png",
-            "images/ow/hero/damage/echo/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_echo_ability1.png",
           绑定: ["技能1"],
         },
         聚焦光线: {
-          图标: [
-            "images/ow/hero/damage/echo/ability2.png",
-            "images/ow/hero/damage/echo/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_echo_ability2.png",
           绑定: ["技能2"],
         },
         滑翔: {
-          图标: [
-            "images/ow/hero/damage/echo/passive.png",
-            "images/ow/hero/damage/echo/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/damage_echo_passive.png",
           绑定: ["跳跃", "被动"],
         },
       },
     },
     {
       名称: "源氏",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "半机械忍者岛田源氏已经接受了他曾经排斥的强化躯体，并因此发现了更高境界的人性。",
-      图标: "images/ow/hero/damage/genji/icon.png",
+      图标: "images/ow/hero/avatar/damage_genji_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         镖: {
-          图标: "images/ow/hero/damage/genji/weapon.png",
+          图标: "images/ow/hero/ability/damage_genji_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         斩: {
-          图标: [
-            "images/ow/hero/damage/genji/ultimate.png",
-            "images/ow/hero/damage/genji/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_genji_ultimate.png",
           绑定: ["终极技能"],
         },
         影: {
-          图标: [
-            "images/ow/hero/damage/genji/ability1.png",
-            "images/ow/hero/damage/genji/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_genji_ability1.png",
           绑定: ["技能1"],
         },
         闪: {
-          图标: [
-            "images/ow/hero/damage/genji/ability2.png",
-            "images/ow/hero/damage/genji/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_genji_ability2.png",
           绑定: ["技能2"],
         },
         灵: {
-          图标: [
-            "images/ow/hero/damage/genji/passive.png",
-            "images/ow/hero/damage/genji/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/damage_genji_passive.png",
           绑定: ["跳跃", "被动"],
           提示: "可以攀爬墙壁并且在空中二段跳。正在攀爬时视为“在墙上”。",
         },
@@ -3209,9 +3089,9 @@ let 常量 = {
     },
     {
       名称: "破坏球",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "“破坏球”的驾驶员哈蒙德是一只仓鼠，经过基因改造，他的智力发生了突变式进化。哈蒙德在世界各地探索，不断寻求着新的冒险。",
-      图标: "images/ow/hero/tank/wrecking-ball/icon.png",
+      图标: "images/ow/hero/avatar/tank_wrecking-ball_avatar.png",
       生命: {
         自由: "300",
         职责: "450",
@@ -3220,94 +3100,64 @@ let 常量 = {
       },
       技能: {
         四联火炮: {
-          图标: "images/ow/hero/tank/wrecking-ball/weapon.png",
+          图标: "images/ow/hero/ability/tank_wrecking-ball_weapon.png",
           绑定: ["主要攻击模式"],
         },
         工程抓钩: {
-          图标: [
-            "images/ow/hero/tank/wrecking-ball/secondaryfire.png",
-            "images/ow/hero/tank/wrecking-ball/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/tank_wrecking-ball_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         地雷禁区: {
-          图标: [
-            "images/ow/hero/tank/wrecking-ball/ultimate.png",
-            "images/ow/hero/tank/wrecking-ball/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_wrecking-ball_ultimate.png",
           绑定: ["终极技能"],
         },
         动力铁球: {
-          图标: [
-            "images/ow/hero/tank/wrecking-ball/ability1.png",
-            "images/ow/hero/tank/wrecking-ball/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_wrecking-ball_ability1.png",
           绑定: ["技能1"],
         },
         感应护盾: {
-          图标: [
-            "images/ow/hero/tank/wrecking-ball/ability2.png",
-            "images/ow/hero/tank/wrecking-ball/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_wrecking-ball_ability2.png",
           绑定: ["技能2"],
         },
         重力坠击: {
-          图标: [
-            "images/ow/hero/tank/wrecking-ball/crouch.png",
-            "images/ow/hero/tank/wrecking-ball/gray/crouch.png",
-          ],
+          图标: "images/ow/hero/ability/tank_wrecking-ball_crouch.png",
           绑定: ["蹲下"],
         },
       },
     },
     {
       名称: "半藏",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "作为箭术和忍术大师，岛田半藏一直都在追求极致完美的技艺以证明自己是最强大的武士。",
-      图标: "images/ow/hero/damage/hanzo/icon.png",
+      图标: "images/ow/hero/avatar/damage_hanzo_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         风: {
-          图标: "images/ow/hero/damage/hanzo/weapon.png",
+          图标: "images/ow/hero/ability/damage_hanzo_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "用辅助攻击模式取消拉弓。",
         },
         竜: {
-          图标: [
-            "images/ow/hero/damage/hanzo/ultimate.png",
-            "images/ow/hero/damage/hanzo/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_hanzo_ultimate.png",
           绑定: ["终极技能"],
         },
         音: {
-          图标: [
-            "images/ow/hero/damage/hanzo/ability1.png",
-            "images/ow/hero/damage/hanzo/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_hanzo_ability1.png",
           绑定: ["技能1"],
         },
         岚: {
-          图标: [
-            "images/ow/hero/damage/hanzo/ability2.png",
-            "images/ow/hero/damage/hanzo/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_hanzo_ability2.png",
           绑定: ["技能2"],
         },
         跃: {
-          图标: [
-            "images/ow/hero/damage/hanzo/jump.png",
-            "images/ow/hero/damage/hanzo/gray/jump.png",
-          ],
+          图标: "images/ow/hero/ability/damage_hanzo_jump.png",
           绑定: ["跳跃"],
         },
         攀: {
-          图标: [
-            "images/ow/hero/damage/hanzo/passive.png",
-            "images/ow/hero/damage/hanzo/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/damage_hanzo_passive.png",
           绑定: ["跳跃", "被动"],
           提示: "可以攀爬墙壁。正在攀爬时视为“在墙上”。",
         },
@@ -3315,97 +3165,70 @@ let 常量 = {
     },
     {
       名称: "渣客女王",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "曾经的废民奥代萨·“代斯”·斯通用她辛辣的笑容和无情的铁腕统治着渣客镇。",
-      图标: "images/ow/hero/tank/junker-queen/icon.png",
+      图标: "images/ow/hero/avatar/tank_junker-queen_avatar.png",
       生命: {
         自由: "300",
         职责: "450",
       },
       技能: {
         散弹枪: {
-          图标: "images/ow/hero/tank/junker-queen/weapon.png",
+          图标: "images/ow/hero/ability/tank_junker-queen_weapon.png",
           绑定: ["主要攻击模式"],
         },
         锯齿利刃: {
-          图标: [
-            "images/ow/hero/tank/junker-queen/secondaryfire.png",
-            "images/ow/hero/tank/junker-queen/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/tank_junker-queen_secondaryfire.png",
           绑定: ["辅助攻击模式", "近身攻击"],
           提示: "仅在被丢出时可进行正常近战。",
         },
         轰翻天: {
-          图标: [
-            "images/ow/hero/tank/junker-queen/ultimate.png",
-            "images/ow/hero/tank/junker-queen/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_junker-queen_ultimate.png",
           绑定: ["终极技能"],
         },
         命令怒吼: {
-          图标: [
-            "images/ow/hero/tank/junker-queen/ability1.png",
-            "images/ow/hero/tank/junker-queen/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_junker-queen_ability1.png",
           绑定: ["技能1"],
         },
         血斩: {
-          图标: [
-            "images/ow/hero/tank/junker-queen/ability2.png",
-            "images/ow/hero/tank/junker-queen/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_junker-queen_ability2.png",
           绑定: ["技能2"],
         },
         狂血奔涌: {
-          图标: [
-            "images/ow/hero/tank/junker-queen/passive.png",
-            "images/ow/hero/tank/junker-queen/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/tank_junker-queen_passive.png",
           绑定: ["被动"],
         },
       },
     },
     {
       名称: "狂鼠",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "“狂鼠”是一个满脑子都是爆炸的渣客，只为了混乱和破坏而活。",
-      图标: "images/ow/hero/damage/junkrat/icon.png",
+      图标: "images/ow/hero/avatar/damage_junkrat_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         榴弹发射器: {
-          图标: "images/ow/hero/damage/junkrat/weapon.png",
+          图标: "images/ow/hero/ability/damage_junkrat_weapon.png",
           绑定: ["主要攻击模式"],
         },
         炸弹轮胎: {
-          图标: [
-            "images/ow/hero/damage/junkrat/ultimate.png",
-            "images/ow/hero/damage/junkrat/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_junkrat_ultimate.png",
           绑定: ["终极技能"],
         },
         震荡地雷: {
-          图标: [
-            "images/ow/hero/damage/junkrat/ability1.png",
-            "images/ow/hero/damage/junkrat/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_junkrat_ability1.png",
           绑定: ["技能1", "辅助攻击模式"],
           提示: "用 技能1 部署，按 辅助攻击模式 引爆。",
         },
         捕兽夹: {
-          图标: [
-            "images/ow/hero/damage/junkrat/ability2.png",
-            "images/ow/hero/damage/junkrat/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_junkrat_ability2.png",
           绑定: ["技能2"],
         },
         临别礼物: {
-          图标: [
-            "images/ow/hero/damage/junkrat/passive.png",
-            "images/ow/hero/damage/junkrat/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/damage_junkrat_passive.png",
           绑定: ["被动"],
           提示: "被击杀后，在原地丢下若干快速引爆的榴弹。",
         },
@@ -3413,50 +3236,38 @@ let 常量 = {
     },
     {
       名称: "雾子",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "岛田家族衰亡后，雾子便开始为恢复铁坂的和平而战。",
-      图标: "images/ow/hero/support/kiriko/icon.png",
+      图标: "images/ow/hero/avatar/support_kiriko_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         锥: {
-          图标: "images/ow/hero/support/kiriko/weapon2.png",
+          图标: "images/ow/hero/ability/support_kiriko_weapon2.png",
           绑定: ["辅助攻击模式"],
           提示: "由于一个问题，无法通过地图工坊动作更改弹药。",
         },
         符: {
-          图标: "images/ow/hero/support/kiriko/weapon1.png",
+          图标: "images/ow/hero/ability/support_kiriko_weapon1.png",
           绑定: ["主要攻击模式"],
           提示: "无法更改弹药。",
         },
         狐: {
-          图标: [
-            "images/ow/hero/support/kiriko/ultimate.png",
-            "images/ow/hero/support/kiriko/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_kiriko_ultimate.png",
           绑定: ["终极技能"],
         },
         瞬: {
-          图标: [
-            "images/ow/hero/support/kiriko/ability1.png",
-            "images/ow/hero/support/kiriko/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_kiriko_ability1.png",
           绑定: ["技能1"],
         },
         铃: {
-          图标: [
-            "images/ow/hero/support/kiriko/ability2.png",
-            "images/ow/hero/support/kiriko/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_kiriko_ability2.png",
           绑定: ["技能2"],
         },
         攀: {
-          图标: [
-            "images/ow/hero/support/kiriko/passive.png",
-            "images/ow/hero/support/kiriko/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/support_kiriko_passive.png",
           绑定: ["跳跃", "被动"],
           提示: "可以攀爬墙壁。正在攀爬时视为“在墙上”。",
         },
@@ -3464,51 +3275,36 @@ let 常量 = {
     },
     {
       名称: "卢西奥",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "卢西奥是一位国际名人，通过音乐和巡演激发社会正能量。",
-      图标: "images/ow/hero/support/lucio/icon.png",
+      图标: "images/ow/hero/avatar/support_lucio_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         音速扩音器: {
-          图标: "images/ow/hero/support/lucio/weapon.png",
+          图标: "images/ow/hero/ability/support_lucio_weapon.png",
           绑定: ["主要攻击模式"],
         },
         音波: {
-          图标: [
-            "images/ow/hero/support/lucio/secondaryfire.png",
-            "images/ow/hero/support/lucio/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/support_lucio_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         音障: {
-          图标: [
-            "images/ow/hero/support/lucio/ultimate.png",
-            "images/ow/hero/support/lucio/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_lucio_ultimate.png",
           绑定: ["终极技能"],
         },
         切歌: {
-          图标: [
-            "images/ow/hero/support/lucio/ability1.png",
-            "images/ow/hero/support/lucio/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_lucio_ability1.png",
           绑定: ["技能1"],
         },
         强音: {
-          图标: [
-            "images/ow/hero/support/lucio/ability2.png",
-            "images/ow/hero/support/lucio/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_lucio_ability2.png",
           绑定: ["技能2"],
         },
         滑墙: {
-          图标: [
-            "images/ow/hero/support/lucio/passive.png",
-            "images/ow/hero/support/lucio/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/support_lucio_passive.png",
           绑定: ["跳跃", "技能2"],
           提示: "跃上墙面并在其上滑动。滑墙时视为“在墙上”。",
         },
@@ -3516,177 +3312,135 @@ let 常量 = {
     },
     {
       名称: "卡西迪",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "科尔·卡西迪依靠手中值得信赖的“维和者”四处亡命，以自己的方式伸张正义。",
-      图标: "images/ow/hero/damage/cassidy/icon.png",
+      图标: "images/ow/hero/avatar/damage_cassidy_avatar.png",
       生命: {
         自由: "225",
         职责: "225",
       },
       技能: {
         维和者: {
-          图标: "images/ow/hero/damage/cassidy/weapon.png",
+          图标: "images/ow/hero/ability/damage_cassidy_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         神射手: {
-          图标: [
-            "images/ow/hero/damage/cassidy/ultimate.png",
-            "images/ow/hero/damage/cassidy/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_cassidy_ultimate.png",
           绑定: ["终极技能"],
         },
         战术翻滚: {
-          图标: [
-            "images/ow/hero/damage/cassidy/ability1.png",
-            "images/ow/hero/damage/cassidy/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_cassidy_ability1.png",
           绑定: ["技能1"],
         },
         磁性手雷: {
-          图标: [
-            "images/ow/hero/damage/cassidy/ability2.png",
-            "images/ow/hero/damage/cassidy/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_cassidy_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "美",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "美是一名为了保护环境而选择战斗的科学家。",
-      图标: "images/ow/hero/damage/mei/icon.png",
+      图标: "images/ow/hero/avatar/damage_mei_avatar.png",
       生命: {
         自由: "250",
         职责: "250",
       },
       技能: {
         冰霜冲击枪: {
-          图标: "images/ow/hero/damage/mei/weapon.png",
+          图标: "images/ow/hero/ability/damage_mei_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         暴雪: {
-          图标: [
-            "images/ow/hero/damage/mei/ultimate.png",
-            "images/ow/hero/damage/mei/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_mei_ultimate.png",
           绑定: ["终极技能"],
         },
         急冻: {
-          图标: [
-            "images/ow/hero/damage/mei/ability1.png",
-            "images/ow/hero/damage/mei/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_mei_ability1.png",
           绑定: ["技能1"],
         },
         冰墙: {
-          图标: [
-            "images/ow/hero/damage/mei/ability2.png",
-            "images/ow/hero/damage/mei/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_mei_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "天使",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "对那些在她照料下的人来说，“天使”是名副其实的守护天使：她是一位顶尖的治疗者、天才科学家以及坚定的和平使者。",
-      图标: "images/ow/hero/support/mercy/icon.png",
+      图标: "images/ow/hero/avatar/support_mercy_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         天使之杖: {
-          图标: "images/ow/hero/support/mercy/weapon1.png",
+          图标: "images/ow/hero/ability/support_mercy_weapon1.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         天使冲击枪: {
-          图标: "images/ow/hero/support/mercy/weapon2.png",
+          图标: "images/ow/hero/ability/support_mercy_weapon2.png",
           绑定: ["主要攻击模式"],
         },
         女武神: {
-          图标: [
-            "images/ow/hero/support/mercy/ultimate.png",
-            "images/ow/hero/support/mercy/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_mercy_ultimate.png",
           绑定: ["终极技能"],
         },
         守护天使: {
-          图标: [
-            "images/ow/hero/support/mercy/ability1.png",
-            "images/ow/hero/support/mercy/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_mercy_ability1.png",
           绑定: ["技能1"],
         },
         重生: {
-          图标: [
-            "images/ow/hero/support/mercy/ability2.png",
-            "images/ow/hero/support/mercy/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_mercy_ability2.png",
           绑定: ["技能2"],
         },
         同情愈疗: {
-          图标: [
-            "images/ow/hero/support/mercy/passive.png",
-            "images/ow/hero/support/mercy/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/support_mercy_passive.png",
           绑定: ["被动"],
         },
       },
     },
     {
       名称: "莫伊拉",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "黑爪的科学家莫伊拉·奥德莱恩有着杰出的才华，但她的工作也引起了诸多争议。她是基因工程方面的顶尖专家，研究的方向是如何对生命最基本的单元加以改进。",
-      图标: "images/ow/hero/support/moira/icon.png",
+      图标: "images/ow/hero/avatar/support_moira_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         生化之触: {
-          图标: "images/ow/hero/support/moira/weapon.png",
+          图标: "images/ow/hero/ability/support_moira_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "治疗队友，吸取敌人。",
         },
         "生化之触-光束": {
-          图标: [
-            "images/ow/hero/support/moira/secondaryfire.png",
-            "images/ow/hero/support/moira/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/support_moira_secondaryfire.png",
           绑定: ["辅助攻击模式"],
           提示: "吸取敌人。",
         },
         聚合射线: {
-          图标: [
-            "images/ow/hero/support/moira/ultimate.png",
-            "images/ow/hero/support/moira/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_moira_ultimate.png",
           绑定: ["终极技能"],
         },
         消散: {
-          图标: [
-            "images/ow/hero/support/moira/ability1.png",
-            "images/ow/hero/support/moira/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_moira_ability1.png",
           绑定: ["技能1"],
         },
         生化之球: {
-          图标: [
-            "images/ow/hero/support/moira/ability2.png",
-            "images/ow/hero/support/moira/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_moira_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "奥丽莎",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "奥丽莎是用一台在努巴尼昙花一现的 OR15 系列防御机器人的零件组装而成的。尽管她还有很多要学，但现在的奥丽莎已经成为了这座城市的守护者。",
-      图标: "images/ow/hero/tank/orisa/icon.png",
+      图标: "images/ow/hero/avatar/tank_orisa_avatar.png",
       生命: {
         自由: "125",
         职责: "275",
@@ -3694,132 +3448,96 @@ let 常量 = {
       },
       技能: {
         强化聚变驱动器: {
-          图标: "images/ow/hero/tank/orisa/weapon.png",
+          图标: "images/ow/hero/ability/tank_orisa_weapon.png",
           绑定: ["主要攻击模式"],
         },
         能量标枪: {
-          图标: [
-            "images/ow/hero/tank/orisa/secondaryfire.png",
-            "images/ow/hero/tank/orisa/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/tank_orisa_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         撼地猛刺: {
-          图标: [
-            "images/ow/hero/tank/orisa/ultimate.png",
-            "images/ow/hero/tank/orisa/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_orisa_ultimate.png",
           绑定: ["终极技能"],
         },
         强固防御: {
-          图标: [
-            "images/ow/hero/tank/orisa/ability1.png",
-            "images/ow/hero/tank/orisa/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_orisa_ability1.png",
           绑定: ["技能1"],
         },
         标枪旋击: {
-          图标: [
-            "images/ow/hero/tank/orisa/ability2.png",
-            "images/ow/hero/tank/orisa/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_orisa_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "法老之鹰",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "法芮尔·艾玛莉骨子里就是一个恪守岗位的人。她来自一个军功卓越的军人世家，贡献与荣耀就是她最高的追求。",
-      图标: "images/ow/hero/damage/pharah/icon.png",
+      图标: "images/ow/hero/avatar/damage_pharah_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         火箭发射器: {
-          图标: "images/ow/hero/damage/pharah/weapon.png",
+          图标: "images/ow/hero/ability/damage_pharah_weapon.png",
           绑定: ["主要攻击模式"],
         },
         火箭弹幕: {
-          图标: [
-            "images/ow/hero/damage/pharah/ultimate.png",
-            "images/ow/hero/damage/pharah/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_pharah_ultimate.png",
           绑定: ["终极技能"],
         },
         推进背包: {
-          图标: [
-            "images/ow/hero/damage/pharah/ability1.png",
-            "images/ow/hero/damage/pharah/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_pharah_ability1.png",
           绑定: ["技能1"],
         },
         震荡冲击: {
-          图标: [
-            "images/ow/hero/damage/pharah/ability2.png",
-            "images/ow/hero/damage/pharah/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_pharah_ability2.png",
           绑定: ["技能2"],
         },
         悬浮背包: {
-          图标: [
-            "images/ow/hero/damage/pharah/passive.png",
-            "images/ow/hero/damage/pharah/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/damage_pharah_passive.png",
           绑定: ["辅助攻击模式", "跳跃", "被动"],
         },
       },
     },
     {
       名称: "死神",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "关于这个黑衣人的传闻并不多，只知道大家都称他为“死神”。虽然没人知道他的真实身份和动机，但有一点是可以肯定的，他的出现意味着死亡。",
-      图标: "images/ow/hero/damage/reaper/icon.png",
+      图标: "images/ow/hero/avatar/damage_reaper_avatar.png",
       生命: {
         自由: "250",
         职责: "250",
       },
       技能: {
         地狱火霰弹枪: {
-          图标: "images/ow/hero/damage/reaper/weapon.png",
+          图标: "images/ow/hero/ability/damage_reaper_weapon.png",
           绑定: ["主要攻击模式"],
         },
         死亡绽放: {
-          图标: [
-            "images/ow/hero/damage/reaper/ultimate.png",
-            "images/ow/hero/damage/reaper/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_reaper_ultimate.png",
           绑定: ["终极技能"],
         },
         暗影步: {
-          图标: [
-            "images/ow/hero/damage/reaper/ability1.png",
-            "images/ow/hero/damage/reaper/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_reaper_ability1.png",
           绑定: ["技能1"],
         },
         幽灵形态: {
-          图标: [
-            "images/ow/hero/damage/reaper/ability2.png",
-            "images/ow/hero/damage/reaper/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_reaper_ability2.png",
           绑定: ["技能2"],
         },
         收割: {
-          图标: [
-            "images/ow/hero/damage/reaper/passive.png",
-            "images/ow/hero/damage/reaper/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/damage_reaper_passive.png",
           绑定: ["被动"],
         },
       },
     },
     {
       名称: "莱因哈特",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "莱因哈特·威尔海姆的行事作风就像一个属于过去的勇士，时刻铭记着骑士的信条：无畏、公正、勇敢。",
-      图标: "images/ow/hero/tank/reinhardt/icon.png",
+      图标: "images/ow/hero/avatar/tank_reinhardt_avatar.png",
       生命: {
         自由: "175",
         职责: "325",
@@ -3828,81 +3546,60 @@ let 常量 = {
       },
       技能: {
         火箭重锤: {
-          图标: "images/ow/hero/tank/reinhardt/weapon.png",
+          图标: "images/ow/hero/ability/tank_reinhardt_weapon.png",
           绑定: ["主要攻击模式"],
         },
         屏障力场: {
-          图标: [
-            "images/ow/hero/tank/reinhardt/secondaryfire.png",
-            "images/ow/hero/tank/reinhardt/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/tank_reinhardt_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         裂地猛击: {
-          图标: [
-            "images/ow/hero/tank/reinhardt/ultimate.png",
-            "images/ow/hero/tank/reinhardt/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_reinhardt_ultimate.png",
           绑定: ["终极技能"],
         },
         冲锋: {
-          图标: [
-            "images/ow/hero/tank/reinhardt/ability1.png",
-            "images/ow/hero/tank/reinhardt/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_reinhardt_ability1.png",
           绑定: ["技能1"],
         },
         烈焰打击: {
-          图标: [
-            "images/ow/hero/tank/reinhardt/ability2.png",
-            "images/ow/hero/tank/reinhardt/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_reinhardt_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "路霸",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "“路霸”是一个心狠手辣的暴徒，因残忍和肆意破坏而臭名昭著。",
-      图标: "images/ow/hero/tank/roadhog/icon.png",
+      图标: "images/ow/hero/avatar/tank_roadhog_avatar.png",
       生命: {
         自由: "550",
         职责: "700",
       },
       技能: {
         爆裂枪: {
-          图标: "images/ow/hero/tank/roadhog/weapon.png",
+          图标: "images/ow/hero/ability/tank_roadhog_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         鸡飞狗跳: {
-          图标: [
-            "images/ow/hero/tank/roadhog/ultimate.png",
-            "images/ow/hero/tank/roadhog/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_roadhog_ultimate.png",
           绑定: ["终极技能"],
         },
         链钩: {
-          图标: [
-            "images/ow/hero/tank/roadhog/ability1.png",
-            "images/ow/hero/tank/roadhog/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_roadhog_ability1.png",
           绑定: ["技能1"],
         },
         呼吸器: {
-          图标: [
-            "images/ow/hero/tank/roadhog/ability2.png",
-            "images/ow/hero/tank/roadhog/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_roadhog_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "西格玛",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "希尔伯伦·德·柯伊伯博士是一位成就不凡的天体物理学家，在一场实验事故后，他获得了操控引力的力量。目前他正在黑爪的操纵下为他们效力。",
-      图标: "images/ow/hero/tank/sigma/icon.png",
+      图标: "images/ow/hero/avatar/tank_sigma_avatar.png",
       生命: {
         自由: "200",
         职责: "350",
@@ -3911,168 +3608,120 @@ let 常量 = {
       },
       技能: {
         超能之球: {
-          图标: "images/ow/hero/tank/sigma/weapon.png",
+          图标: "images/ow/hero/ability/tank_sigma_weapon.png",
           绑定: ["主要攻击模式"],
         },
         实验屏障: {
-          图标: [
-            "images/ow/hero/tank/sigma/secondaryfire.png",
-            "images/ow/hero/tank/sigma/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/tank_sigma_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         引力乱流: {
-          图标: [
-            "images/ow/hero/tank/sigma/ultimate.png",
-            "images/ow/hero/tank/sigma/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_sigma_ultimate.png",
           绑定: ["终极技能"],
         },
         动能俘获: {
-          图标: [
-            "images/ow/hero/tank/sigma/ability1.png",
-            "images/ow/hero/tank/sigma/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_sigma_ability1.png",
           绑定: ["技能1"],
         },
         质量吸附: {
-          图标: [
-            "images/ow/hero/tank/sigma/ability2.png",
-            "images/ow/hero/tank/sigma/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_sigma_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "索杰恩",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "“索杰恩”的躯体几乎均由机械强化部件组成，她是一位杰出的战术家，疾恶好善不曾动摇。战场之上，她是不可或缺的盟友……亦或是令人胆寒的敌人。",
-      图标: "images/ow/hero/damage/sojourn/icon.png",
+      图标: "images/ow/hero/avatar/damage_sojourn_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         电磁炮: {
-          图标: "images/ow/hero/damage/sojourn/weapon.png",
+          图标: "images/ow/hero/ability/damage_sojourn_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "无法通过修改技能资源或“伤害”动作来调整电磁炮的能量值。",
         },
         机体超频: {
-          图标: [
-            "images/ow/hero/damage/sojourn/ultimate.png",
-            "images/ow/hero/damage/sojourn/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_sojourn_ultimate.png",
           绑定: ["终极技能"],
         },
         机动滑铲: {
-          图标: [
-            "images/ow/hero/damage/sojourn/ability1.png",
-            "images/ow/hero/damage/sojourn/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_sojourn_ability1.png",
           绑定: ["技能1"],
         },
         干扰弹: {
-          图标: [
-            "images/ow/hero/damage/sojourn/ability2.png",
-            "images/ow/hero/damage/sojourn/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_sojourn_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "士兵：76",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "被全球通缉的独行侠“士兵：76”独自一人发动了一场旨在查出守望先锋解散真相的战争。",
-      图标: "images/ow/hero/damage/soldier-76/icon.png",
+      图标: "images/ow/hero/avatar/damage_soldier-76_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         重型脉冲步枪: {
-          图标: "images/ow/hero/damage/soldier-76/weapon.png",
+          图标: "images/ow/hero/ability/damage_soldier-76_weapon.png",
           绑定: ["主要攻击模式"],
         },
         螺旋飞弹: {
-          图标: [
-            "images/ow/hero/damage/soldier-76/secondaryfire.png",
-            "images/ow/hero/damage/soldier-76/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/damage_soldier-76_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         战术目镜: {
-          图标: [
-            "images/ow/hero/damage/soldier-76/ultimate.png",
-            "images/ow/hero/damage/soldier-76/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_soldier-76_ultimate.png",
           绑定: ["终极技能"],
         },
         疾跑: {
-          图标: [
-            "images/ow/hero/damage/soldier-76/ability1.png",
-            "images/ow/hero/damage/soldier-76/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_soldier-76_ability1.png",
           绑定: ["技能1"],
         },
         生物力场: {
-          图标: [
-            "images/ow/hero/damage/soldier-76/ability2.png",
-            "images/ow/hero/damage/soldier-76/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_soldier-76_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "黑影",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "作为全球最臭名昭著的黑客，“黑影”利用信息与情报操控权贵。",
-      图标: "images/ow/hero/damage/sombra/icon.png",
+      图标: "images/ow/hero/avatar/damage_sombra_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         自动手枪: {
-          图标: "images/ow/hero/damage/sombra/weapon.png",
+          图标: "images/ow/hero/ability/damage_sombra_weapon.png",
           绑定: ["主要攻击模式"],
         },
         黑客入侵: {
-          图标: [
-            "images/ow/hero/damage/sombra/secondaryfire.png",
-            "images/ow/hero/damage/sombra/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/damage_sombra_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         电磁脉冲: {
-          图标: [
-            "images/ow/hero/damage/sombra/ultimate.png",
-            "images/ow/hero/damage/sombra/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_sombra_ultimate.png",
           绑定: ["终极技能"],
         },
         隐秘潜行: {
-          图标: [
-            "images/ow/hero/damage/sombra/ability1.png",
-            "images/ow/hero/damage/sombra/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_sombra_ability1.png",
           绑定: ["技能1"],
         },
         位移传动: {
-          图标: [
-            "images/ow/hero/damage/sombra/ability2.png",
-            "images/ow/hero/damage/sombra/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_sombra_ability2.png",
           绑定: ["技能2"],
         },
         相时而动: {
-          图标: [
-            "images/ow/hero/damage/sombra/passive.png",
-            "images/ow/hero/damage/sombra/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/damage_sombra_passive.png",
           绑定: ["被动"],
           提示: "可以透过墙体侦测到严重受伤的敌人。",
         },
@@ -4080,9 +3729,9 @@ let 常量 = {
     },
     {
       名称: "秩序之光",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "“秩序之光”可以在真正意义上扭曲现实。通过控制高强度光束，她可以将世界改造成自己想象中的模样，实现一个完美、有序的社会。",
-      图标: "images/ow/hero/damage/symmetra/icon.png",
+      图标: "images/ow/hero/avatar/damage_symmetra_avatar.png",
       生命: {
         自由: "100",
         职责: "100",
@@ -4090,37 +3739,28 @@ let 常量 = {
       },
       技能: {
         光子发射器: {
-          图标: "images/ow/hero/damage/symmetra/weapon.png",
+          图标: "images/ow/hero/ability/damage_symmetra_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         光子屏障: {
-          图标: [
-            "images/ow/hero/damage/symmetra/ultimate.png",
-            "images/ow/hero/damage/symmetra/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_symmetra_ultimate.png",
           绑定: ["终极技能"],
         },
         哨戒炮: {
-          图标: [
-            "images/ow/hero/damage/symmetra/ability1.png",
-            "images/ow/hero/damage/symmetra/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_symmetra_ability1.png",
           绑定: ["技能1"],
         },
         传送面板: {
-          图标: [
-            "images/ow/hero/damage/symmetra/ability2.png",
-            "images/ow/hero/damage/symmetra/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_symmetra_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "托比昂",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "托比昂可以使用铆钉枪远距离或近距离作战，也可以布置一个炮台自动攻击敌人。他的锻造锤既可以修理炮台，也可以近身作战。他还可以射出高额伤害的熔岩陷阱持续伤害敌人。",
-      图标: "images/ow/hero/damage/torbjorn/icon.png",
+      图标: "images/ow/hero/avatar/damage_torbjorn_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
@@ -4128,32 +3768,23 @@ let 常量 = {
       },
       技能: {
         铆钉枪: {
-          图标: "images/ow/hero/damage/torbjorn/weapon1.png",
+          图标: "images/ow/hero/ability/damage_torbjorn_weapon1.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         锻造锤: {
-          图标: "images/ow/hero/damage/torbjorn/weapon2.png",
+          图标: "images/ow/hero/ability/damage_torbjorn_weapon2.png",
           绑定: ["主要攻击模式"],
         },
         熔火核心: {
-          图标: [
-            "images/ow/hero/damage/torbjorn/ultimate.png",
-            "images/ow/hero/damage/torbjorn/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_torbjorn_ultimate.png",
           绑定: ["终极技能"],
         },
         热力过载: {
-          图标: [
-            "images/ow/hero/damage/torbjorn/ability1.png",
-            "images/ow/hero/damage/torbjorn/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_torbjorn_ability1.png",
           绑定: ["技能1"],
         },
         部署炮台: {
-          图标: [
-            "images/ow/hero/damage/torbjorn/ability2.png",
-            "images/ow/hero/damage/torbjorn/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_torbjorn_ability2.png",
           绑定: ["技能2"],
           提示: "按 互动 摧毁。部署到炮台可射击前无法主动摧毁。",
         },
@@ -4161,83 +3792,65 @@ let 常量 = {
     },
     {
       名称: "猎空",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "前守望先锋成员“猎空”是一位可以进行时间跳跃的冒险家，为了正义而不懈努力着。",
-      图标: "images/ow/hero/damage/tracer/icon.png",
+      图标: "images/ow/hero/avatar/damage_tracer_avatar.png",
       生命: {
         自由: "150",
         职责: "150",
       },
       技能: {
         脉冲双枪: {
-          图标: "images/ow/hero/damage/tracer/weapon.png",
+          图标: "images/ow/hero/ability/damage_tracer_weapon.png",
           绑定: ["主要攻击模式"],
         },
         脉冲炸弹: {
-          图标: [
-            "images/ow/hero/damage/tracer/ultimate.png",
-            "images/ow/hero/damage/tracer/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_tracer_ultimate.png",
           绑定: ["终极技能"],
         },
         闪现: {
-          图标: [
-            "images/ow/hero/damage/tracer/ability1.png",
-            "images/ow/hero/damage/tracer/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_tracer_ability1.png",
           绑定: ["辅助攻击模式", "技能1"],
         },
         闪回: {
-          图标: [
-            "images/ow/hero/damage/tracer/ability2.png",
-            "images/ow/hero/damage/tracer/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_tracer_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "黑百合",
-      标签: ["英雄", "输出"],
+      标签: ["事件", "英雄", "输出"],
       提示: "“黑百合”是一位完美的刺客：耐心、果断、无情。没有任何情感且事后毫无悔意。",
-      图标: "images/ow/hero/damage/widowmaker/icon.png",
+      图标: "images/ow/hero/avatar/damage_widowmaker_avatar.png",
       生命: {
         自由: "175",
         职责: "175",
       },
       技能: {
         黑百合之吻: {
-          图标: "images/ow/hero/damage/widowmaker/weapon.png",
+          图标: "images/ow/hero/ability/damage_widowmaker_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         红外侦测: {
-          图标: [
-            "images/ow/hero/damage/widowmaker/ultimate.png",
-            "images/ow/hero/damage/widowmaker/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/damage_widowmaker_ultimate.png",
           绑定: ["终极技能"],
         },
         抓钩: {
-          图标: [
-            "images/ow/hero/damage/widowmaker/ability1.png",
-            "images/ow/hero/damage/widowmaker/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/damage_widowmaker_ability1.png",
           绑定: ["技能1"],
         },
         剧毒诡雷: {
-          图标: [
-            "images/ow/hero/damage/widowmaker/ability2.png",
-            "images/ow/hero/damage/widowmaker/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/damage_widowmaker_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "温斯顿",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "作为一个拥有高等智慧并被基因改造的大猩猩，温斯顿无疑是一位出色的科学家和代表着人类潜力的勇士。",
-      图标: "images/ow/hero/tank/winston/icon.png",
+      图标: "images/ow/hero/avatar/tank_winston_avatar.png",
       生命: {
         自由: "200",
         职责: "350",
@@ -4246,37 +3859,28 @@ let 常量 = {
       },
       技能: {
         特斯拉炮: {
-          图标: "images/ow/hero/tank/winston/weapon.png",
+          图标: "images/ow/hero/ability/tank_winston_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         原始暴怒: {
-          图标: [
-            "images/ow/hero/tank/winston/ultimate.png",
-            "images/ow/hero/tank/winston/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_winston_ultimate.png",
           绑定: ["终极技能"],
         },
         喷射背包: {
-          图标: [
-            "images/ow/hero/tank/winston/ability1.png",
-            "images/ow/hero/tank/winston/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_winston_ability1.png",
           绑定: ["技能1"],
         },
         屏障发射器: {
-          图标: [
-            "images/ow/hero/tank/winston/ability2.png",
-            "images/ow/hero/tank/winston/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_winston_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "查莉娅",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "查莉娅是世界上最强壮的女运动员之一。在战争期间，为了家人、朋友和祖国，毅然放弃了个人荣誉。",
-      图标: "images/ow/hero/tank/zarya/icon.png",
+      图标: "images/ow/hero/avatar/tank_zarya_avatar.png",
       生命: {
         自由: "100",
         职责: "250",
@@ -4284,45 +3888,33 @@ let 常量 = {
       },
       技能: {
         粒子炮: {
-          图标: "images/ow/hero/tank/zarya/weapon.png",
+          图标: "images/ow/hero/ability/tank_zarya_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
           提示: "无法通过修改技能资源或“伤害”动作来调整粒子炮的能量值。",
         },
         重力喷涌: {
-          图标: [
-            "images/ow/hero/tank/zarya/ultimate.png",
-            "images/ow/hero/tank/zarya/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_zarya_ultimate.png",
           绑定: ["终极技能"],
         },
         粒子屏障: {
-          图标: [
-            "images/ow/hero/tank/zarya/ability1.png",
-            "images/ow/hero/tank/zarya/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_zarya_ability1.png",
           绑定: ["技能1"],
         },
         投射屏障: {
-          图标: [
-            "images/ow/hero/tank/zarya/ability2.png",
-            "images/ow/hero/tank/zarya/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_zarya_ability2.png",
           绑定: ["技能2"],
         },
         能量转换: {
-          图标: [
-            "images/ow/hero/tank/zarya/passive.png",
-            "images/ow/hero/tank/zarya/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/tank_zarya_passive.png",
           绑定: ["被动"],
         },
       },
     },
     {
       名称: "禅雅塔",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "禅雅塔是一位游走于世界寻找灵魂升华之道的机械僧侣。据说任何有幸遇到他的人，其生命轨迹也会发生改变。",
-      图标: "images/ow/hero/support/zenyatta/icon.png",
+      图标: "images/ow/hero/avatar/support_zenyatta_avatar.png",
       生命: {
         自由: "50",
         职责: "50",
@@ -4330,35 +3922,23 @@ let 常量 = {
       },
       技能: {
         灭: {
-          图标: "images/ow/hero/support/zenyatta/weapon.png",
+          图标: "images/ow/hero/ability/support_zenyatta_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         圣: {
-          图标: [
-            "images/ow/hero/support/zenyatta/ultimate.png",
-            "images/ow/hero/support/zenyatta/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_zenyatta_ultimate.png",
           绑定: ["终极技能"],
         },
         谐: {
-          图标: [
-            "images/ow/hero/support/zenyatta/ability1.png",
-            "images/ow/hero/support/zenyatta/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_zenyatta_ability1.png",
           绑定: ["技能1"],
         },
         乱: {
-          图标: [
-            "images/ow/hero/support/zenyatta/ability2.png",
-            "images/ow/hero/support/zenyatta/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_zenyatta_ability2.png",
           绑定: ["技能2"],
         },
         蹬: {
-          图标: [
-            "images/ow/hero/support/zenyatta/passive.png",
-            "images/ow/hero/support/zenyatta/gray/passive.png",
-          ],
+          图标: "images/ow/hero/ability/support_zenyatta_passive.png",
           绑定: ["近身攻击", "被动"],
           提示: "近身攻击伤害提高50%，击退效果大幅提高。",
         },
@@ -4366,9 +3946,9 @@ let 常量 = {
     },
     {
       名称: "拉玛刹",
-      标签: ["英雄", "重装"],
+      标签: ["事件", "英雄", "重装"],
       提示: "拉玛刹有过很多身份：士兵、僧侣、革命者。如今身为“归零者”领袖的他为智械而战，不惜一切代价。",
-      图标: "images/ow/hero/tank/ramattra/icon.png",
+      图标: "images/ow/hero/avatar/tank_ramattra_avatar.png",
       生命: {
         自由: "300",
         职责: "450",
@@ -4376,131 +3956,95 @@ let 常量 = {
       },
       技能: {
         虚空加速器: {
-          图标: "images/ow/hero/tank/ramattra/weapon1.png",
+          图标: "images/ow/hero/ability/tank_ramattra_weapon1.png",
           绑定: ["主要攻击模式"],
         },
         猛拳: {
-          图标: "images/ow/hero/tank/ramattra/weapon2.png",
+          图标: "images/ow/hero/ability/tank_ramattra_weapon2.png",
           绑定: ["主要攻击模式"],
         },
         虚空屏障: {
-          图标: [
-            "images/ow/hero/tank/ramattra/secondaryfire1.png",
-            "images/ow/hero/tank/ramattra/gray/secondaryfire1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_ramattra_secondaryfire1.png",
           绑定: ["辅助攻击模式"],
         },
         铁臂: {
-          图标: [
-            "images/ow/hero/tank/ramattra/secondaryfire2.png",
-            "images/ow/hero/tank/ramattra/gray/secondaryfire2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_ramattra_secondaryfire2.png",
           绑定: ["辅助攻击模式"],
         },
         诛: {
-          图标: [
-            "images/ow/hero/tank/ramattra/ultimate.png",
-            "images/ow/hero/tank/ramattra/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/tank_ramattra_ultimate.png",
           绑定: ["终极技能"],
         },
         天罚形态: {
-          图标: [
-            "images/ow/hero/tank/ramattra/ability1.png",
-            "images/ow/hero/tank/ramattra/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/tank_ramattra_ability1.png",
           绑定: ["技能1"],
         },
         吞噬漩涡: {
-          图标: [
-            "images/ow/hero/tank/ramattra/ability2.png",
-            "images/ow/hero/tank/ramattra/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/tank_ramattra_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "生命之梭",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "生物光技术的杰出创造者，将植物物质和光结合在一起，他梦想着治愈世界。",
-      图标: "images/ow/hero/support/lifeweaver/icon.png",
+      图标: "images/ow/hero/avatar/support_lifeweaver_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         愈疗灵花: {
-          图标: "images/ow/hero/support/lifeweaver/weapon1.png",
+          图标: "images/ow/hero/ability/support_lifeweaver_weapon1.png",
           绑定: ["主要攻击模式"],
         },
         棘刺箭雨: {
-          图标: "images/ow/hero/support/lifeweaver/weapon2.png",
+          图标: "images/ow/hero/ability/support_lifeweaver_weapon2.png",
           绑定: ["主要攻击模式"],
         },
         花瓣平台: {
-          图标: [
-            "images/ow/hero/support/lifeweaver/secondaryfire.png",
-            "images/ow/hero/support/lifeweaver/gray/secondaryfire.png",
-          ],
+          图标: "images/ow/hero/ability/support_lifeweaver_secondaryfire.png",
           绑定: ["辅助攻击模式"],
         },
         生命之树: {
-          图标: [
-            "images/ow/hero/support/lifeweaver/ultimate.png",
-            "images/ow/hero/support/lifeweaver/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_lifeweaver_ultimate.png",
           绑定: ["终极技能"],
         },
         回春疾行: {
-          图标: [
-            "images/ow/hero/support/lifeweaver/ability1.png",
-            "images/ow/hero/support/lifeweaver/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_lifeweaver_ability1.png",
           绑定: ["技能1"],
         },
         生命之握: {
-          图标: [
-            "images/ow/hero/support/lifeweaver/ability2.png",
-            "images/ow/hero/support/lifeweaver/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_lifeweaver_ability2.png",
           绑定: ["技能2"],
         },
       },
     },
     {
       名称: "伊拉锐",
-      标签: ["英雄", "支援"],
+      标签: ["事件", "英雄", "支援"],
       提示: "接受过太阳丝线强化改造过的伊拉锐会用太阳之力瓦解敌人。",
-      图标: "images/ow/hero/support/illari/icon.png",
+      图标: "images/ow/hero/avatar/support_illari_avatar.png",
       生命: {
         自由: "200",
         职责: "200",
       },
       技能: {
         阳焰步枪: {
-          图标: "images/ow/hero/support/illari/weapon.png",
+          图标: "images/ow/hero/ability/support_illari_weapon.png",
           绑定: ["主要攻击模式", "辅助攻击模式"],
         },
         桎梏灼日: {
-          图标: [
-            "images/ow/hero/support/illari/ultimate.png",
-            "images/ow/hero/support/illari/gray/ultimate.png",
-          ],
+          图标: "images/ow/hero/ability/support_illari_ultimate.png",
           绑定: ["终极技能"],
         },
         烈日冲击: {
-          图标: [
-            "images/ow/hero/support/illari/ability1.png",
-            "images/ow/hero/support/illari/gray/ability1.png",
-          ],
+          图标: "images/ow/hero/ability/support_illari_ability1.png",
           绑定: ["技能1"],
         },
         治疗光塔: {
-          图标: [
-            "images/ow/hero/support/illari/ability2.png",
-            "images/ow/hero/support/illari/gray/ability2.png",
-          ],
+          图标: "images/ow/hero/ability/support_illari_ability2.png",
           绑定: ["技能2"],
         },
       },
@@ -4528,217 +4072,217 @@ let 常量 = {
       名称: "箭头：向下",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/1.png", "images/ow/icon/gray/1.png"],
+      图标: "images/ow/icon/1.png",
     },
     {
       名称: "箭头：向左",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/2.png", "images/ow/icon/gray/2.png"],
+      图标: "images/ow/icon/2.png",
     },
     {
       名称: "箭头：向右",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/3.png", "images/ow/icon/gray/3.png"],
+      图标: "images/ow/icon/3.png",
     },
     {
       名称: "箭头：向上",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/4.png", "images/ow/icon/gray/4.png"],
+      图标: "images/ow/icon/4.png",
     },
     {
       名称: "星形",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/5.png", "images/ow/icon/gray/5.png"],
+      图标: "images/ow/icon/5.png",
     },
     {
       名称: "箭矢",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/6.png", "images/ow/icon/gray/6.png"],
+      图标: "images/ow/icon/6.png",
     },
     {
       名称: "对号",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/7.png", "images/ow/icon/gray/7.png"],
+      图标: "images/ow/icon/7.png",
     },
     {
       名称: "圆圈",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/8.png", "images/ow/icon/gray/8.png"],
+      图标: "images/ow/icon/8.png",
     },
     {
       名称: "梅花",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/9.png", "images/ow/icon/gray/9.png"],
+      图标: "images/ow/icon/9.png",
     },
     {
       名称: "方块",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/10.png", "images/ow/icon/gray/10.png"],
+      图标: "images/ow/icon/10.png",
     },
     {
       名称: "晕眩",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/11.png", "images/ow/icon/gray/11.png"],
+      图标: "images/ow/icon/11.png",
     },
     {
       名称: "感叹号",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/12.png", "images/ow/icon/gray/12.png"],
+      图标: "images/ow/icon/12.png",
     },
     {
       名称: "眼睛",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/13.png", "images/ow/icon/gray/13.png"],
+      图标: "images/ow/icon/13.png",
     },
     {
       名称: "火焰",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/14.png", "images/ow/icon/gray/14.png"],
+      图标: "images/ow/icon/14.png",
     },
     {
       名称: "旗帜",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/15.png", "images/ow/icon/gray/15.png"],
+      图标: "images/ow/icon/15.png",
     },
     {
       名称: "光晕",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/16.png", "images/ow/icon/gray/16.png"],
+      图标: "images/ow/icon/16.png",
     },
     {
       名称: "高兴",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/17.png", "images/ow/icon/gray/17.png"],
+      图标: "images/ow/icon/17.png",
     },
     {
       名称: "红桃",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/18.png", "images/ow/icon/gray/18.png"],
+      图标: "images/ow/icon/18.png",
     },
     {
       名称: "满月",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/19.png", "images/ow/icon/gray/19.png"],
+      图标: "images/ow/icon/19.png",
     },
     {
       名称: "拒绝",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/20.png", "images/ow/icon/gray/20.png"],
+      图标: "images/ow/icon/20.png",
     },
     {
       名称: "加号",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/21.png", "images/ow/icon/gray/21.png"],
+      图标: "images/ow/icon/21.png",
     },
     {
       名称: "剧毒",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/22.png", "images/ow/icon/gray/22.png"],
+      图标: "images/ow/icon/22.png",
     },
     {
       名称: "剧毒2",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/23.png", "images/ow/icon/gray/23.png"],
+      图标: "images/ow/icon/23.png",
     },
     {
       名称: "问号",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/24.png", "images/ow/icon/gray/24.png"],
+      图标: "images/ow/icon/24.png",
     },
     {
       名称: "辐射",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/25.png", "images/ow/icon/gray/25.png"],
+      图标: "images/ow/icon/25.png",
     },
     {
       名称: "回收",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/26.png", "images/ow/icon/gray/26.png"],
+      图标: "images/ow/icon/26.png",
     },
     {
       名称: "宽环",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/27.png", "images/ow/icon/gray/27.png"],
+      图标: "images/ow/icon/27.png",
     },
     {
       名称: "细环",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/28.png", "images/ow/icon/gray/28.png"],
+      图标: "images/ow/icon/28.png",
     },
     {
       名称: "难过",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/29.png", "images/ow/icon/gray/29.png"],
+      图标: "images/ow/icon/29.png",
     },
     {
       名称: "骷髅",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/30.png", "images/ow/icon/gray/30.png"],
+      图标: "images/ow/icon/30.png",
     },
     {
       名称: "黑桃",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/31.png", "images/ow/icon/gray/31.png"],
+      图标: "images/ow/icon/31.png",
     },
     {
       名称: "螺旋",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/32.png", "images/ow/icon/gray/32.png"],
+      图标: "images/ow/icon/32.png",
     },
     {
       名称: "停止",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/33.png", "images/ow/icon/gray/33.png"],
+      图标: "images/ow/icon/33.png",
     },
     {
       名称: "垃圾箱",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/34.png", "images/ow/icon/gray/34.png"],
+      图标: "images/ow/icon/34.png",
     },
     {
       名称: "警告",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/35.png", "images/ow/icon/gray/35.png"],
+      图标: "images/ow/icon/35.png",
     },
     {
       名称: "X",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: ["images/ow/icon/36.png", "images/ow/icon/gray/36.png"],
+      图标: "images/ow/icon/36.png",
     },
   ],
   屏障视线检测: [
@@ -17710,132 +17254,111 @@ function buildStaticModels(PATH) {
     }
   }
   for (i in 常量.英雄) {
-    let details = [``, ``].map(
-      (element) =>
-        (element += `
+    let details = `
 |||
 |:--|:--|
-<img src="${常量.英雄[i].图标}" width=50 height=50/>&nbsp;&nbsp;|${常量.英雄[i].提示}\n\n`)
-    );
+<img src="${常量.英雄[i].图标}" width=50 height=50/>&nbsp;&nbsp;|${常量.英雄[i].提示}\n\n`;
+
     if (常量.英雄[i].生命.hasOwnProperty("自由")) {
-      details = details.map(
-        (element) =>
-          (element += `***自由***&nbsp;&nbsp;\`${常量.英雄[i].生命.自由}\`&nbsp;&nbsp;`)
-      );
+      details += `***自由***&nbsp;&nbsp;\`${常量.英雄[i].生命.自由}\`&nbsp;&nbsp;`;
     }
+
     if (常量.英雄[i].生命.hasOwnProperty("职责")) {
-      details = details.map(
-        (element) =>
-          (element += `***职责***&nbsp;&nbsp;\`${常量.英雄[i].生命.职责}\`&nbsp;&nbsp;`)
-      );
+      details += `***职责***&nbsp;&nbsp;\`${常量.英雄[i].生命.职责}\`&nbsp;&nbsp;`;
     }
+
     if (常量.英雄[i].生命.hasOwnProperty("护甲")) {
-      details = details.map(
-        (element) =>
-          (element += `***护甲***&nbsp;&nbsp;<span style="color:#C50;">\`${常量.英雄[i].生命.护甲}\`</span>&nbsp;&nbsp;`)
-      );
+      details += `***护甲***&nbsp;&nbsp;<span style="color:#C50;">\`${常量.英雄[i].生命.护甲}\`</span>&nbsp;&nbsp;`;
     }
+
     if (常量.英雄[i].生命.hasOwnProperty("护盾")) {
-      details = details.map(
-        (element) =>
-          (element += `***护盾***&nbsp;&nbsp;<span style="color:#0AC;">\`${常量.英雄[i].生命.护盾}\`</span>`)
-      );
+      details += `***护盾***&nbsp;&nbsp;<span style="color:#0AC;">\`${常量.英雄[i].生命.护盾}\`</span>`;
     }
-    details = details.map((element) => (element += `\n\n`));
+
+    details += `\n\n`;
+
     for (j in 常量.英雄[i].技能) {
-      details = details.map(
-        (element, index) =>
-          (element += `
+      details += `
 ||||
 |:-:|-:|:-|
-|<img src="${
-            Array.isArray(常量.英雄[i].技能[j].图标)
-              ? 常量.英雄[i].技能[j].图标[index]
-              : 常量.英雄[i].技能[j].图标
-          }" width=auto height=25/>&nbsp;&nbsp;|***${j}***&nbsp;&nbsp;|`)
-      );
-
+|<img src="${常量.英雄[i].技能[j].图标}" width=auto height=25/>&nbsp;&nbsp;|***${j}***&nbsp;&nbsp;|`;
       for (k in 常量.英雄[i].技能[j].绑定) {
-        details = details.map(
-          (element) => (element += `\`${常量.英雄[i].技能[j].绑定[k]}\`&nbsp;`)
-        );
+        details += `\`${常量.英雄[i].技能[j].绑定[k]}\`&nbsp;`;
       }
-      details = details.map((element) => (element += `\n\n`));
+      details += `\n\n`;
     }
-    常量.英雄[i].悬停 = details.map((element) =>
-      buildHover(PATH, 常量.英雄[i].名称, 常量.英雄[i].标签, element)
+
+    常量.英雄[i].悬停 = buildHover(
+      PATH,
+      常量.英雄[i].名称,
+      常量.英雄[i].标签,
+      details
     );
-    常量.英雄[i].补全 = details.map((element) =>
-      buildCompletion(
-        PATH,
-        常量.英雄[i].名称,
-        vscode.CompletionItemKind.Constant,
-        常量.英雄[i].标签,
-        element
-      )
+
+    常量.英雄[i].补全 = buildCompletion(
+      PATH,
+      常量.英雄[i].名称,
+      vscode.CompletionItemKind.Constant,
+      常量.英雄[i].标签,
+      details
     );
   }
   for (i in 常量.图标) {
-    let details = [``, ``].map(
-      (element, index) =>
-        (element += `
-|||
-|:-|:-|
-<img src="${常量.图标[i].图标[index]}" width=30 height=30/>&nbsp;&nbsp;|${常量.图标[i].提示}`)
+    const details = `<img src="${常量.图标[i].图标}" width=36 height=36/><br>${常量.图标[i].提示}`;
+
+    常量.图标[i].悬停 = buildHover(
+      PATH,
+      常量.图标[i].名称,
+      常量.图标[i].标签,
+      details
     );
-    常量.图标[i].悬停 = details.map((element) =>
-      buildHover(PATH, 常量.图标[i].名称, 常量.图标[i].标签, element)
-    );
-    常量.图标[i].补全 = details.map((element) =>
-      buildCompletion(
-        PATH,
-        常量.图标[i].名称,
-        vscode.CompletionItemKind.Constant,
-        常量.图标[i].标签,
-        element
-      )
+
+    常量.图标[i].补全 = buildCompletion(
+      PATH,
+      常量.图标[i].名称,
+      vscode.CompletionItemKind.Constant,
+      常量.图标[i].标签,
+      details
     );
   }
   for (i in 常量.按钮) {
-    let details = [``, ``].map(
-      (element, index) =>
-        (element += `
+    let details = `
 |||
 |:-|:-|
-<img src="${常量.按钮[i].图标[index]}" width=25 height=25/>&nbsp;&nbsp;|${常量.按钮[i].提示}`)
+<img src="${常量.按钮[i].图标}" width=32 height=32/>&nbsp;&nbsp;|${常量.按钮[i].提示}`;
+
+    常量.按钮[i].悬停 = buildHover(
+      PATH,
+      常量.按钮[i].名称,
+      常量.按钮[i].标签,
+      details
     );
-    常量.按钮[i].悬停 = details.map((element) =>
-      buildHover(PATH, 常量.按钮[i].名称, 常量.按钮[i].标签, element)
-    );
-    常量.按钮[i].补全 = details.map((element) =>
-      buildCompletion(
-        PATH,
-        常量.按钮[i].名称,
-        vscode.CompletionItemKind.Constant,
-        常量.按钮[i].标签,
-        element
-      )
+
+    常量.按钮[i].补全 = buildCompletion(
+      PATH,
+      常量.按钮[i].名称,
+      vscode.CompletionItemKind.Constant,
+      常量.按钮[i].标签,
+      details
     );
   }
   for (i in 常量.颜色) {
+    const details = `
+|||
+|:-|:-|
+<img src="${常量.颜色[i].图标}" width=32 height=32/>&nbsp;&nbsp;|${常量.颜色[i].提示}`;
     常量.颜色[i].悬停 = buildHover(
       PATH,
       常量.颜色[i].名称,
       常量.颜色[i].标签,
-      `
-|||
-|:-|:-|
-<img src="${常量.颜色[i].图标}" width=25 height=25/>&nbsp;&nbsp;|${常量.颜色[i].提示}`
+      details
     );
     常量.颜色[i].补全 = buildCompletion(
       PATH,
       常量.颜色[i].名称,
       vscode.CompletionItemKind.Constant,
       常量.颜色[i].标签,
-      `
-|||
-|:-|:-|
-<img src="${常量.颜色[i].图标}" width=25 height=25/>&nbsp;&nbsp;|${常量.颜色[i].提示}`
+      details
     );
   }
   for (i in 常量.字符串) {

@@ -291,10 +291,6 @@ function activate(context) {
             return;
           }
           const hoverText = document.getText(hoverRange);
-          const theme =
-            vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark
-              ? 0
-              : 1;
           const scope = UTIL.getScope(document, position);
           if (scope.name === "扩展") {
             if (MODEL.扩展.hasOwnProperty(hoverText)) {
@@ -318,7 +314,7 @@ function activate(context) {
             }
             for (i of MODEL.常量.英雄) {
               if (i.名称 == hoverText) {
-                return i.悬停[theme];
+                return i.悬停;
               }
             }
             return matchDynamicHover();
@@ -330,7 +326,7 @@ function activate(context) {
               for (j in MODEL.常量[i]) {
                 if (MODEL.常量[i][j].名称 == hoverText) {
                   if (Array.isArray(MODEL.常量[i][j].悬停)) {
-                    return MODEL.常量[i][j].悬停[theme];
+                    return MODEL.常量[i][j].悬停;
                   }
                   return MODEL.常量[i][j].悬停;
                 }
@@ -348,7 +344,7 @@ function activate(context) {
               for (j in MODEL.常量[i]) {
                 if (MODEL.常量[i][j].名称 == hoverText) {
                   if (Array.isArray(MODEL.常量[i][j].悬停)) {
-                    return MODEL.常量[i][j].悬停[theme];
+                    return MODEL.常量[i][j].悬停;
                   }
                   return MODEL.常量[i][j].悬停;
                 }
@@ -619,12 +615,7 @@ function activate(context) {
               let completions = [];
               for (const p in object) {
                 if (Array.isArray(object[p].补全)) {
-                  const theme =
-                    vscode.window.activeColorTheme.kind ===
-                    vscode.ColorThemeKind.Dark
-                      ? 0
-                      : 1;
-                  completions.push(object[p].补全[theme]);
+                  completions.push(object[p].补全);
                 } else {
                   completions.push(object[p].补全);
                 }
@@ -1119,10 +1110,7 @@ function activate(context) {
     vscode.window.registerWebviewViewProvider("ow.view.manual", {
       resolveWebviewView(webviewView) {
         try {
-          const theme =
-            vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark;
           const extensionUri = vscode.Uri.file(path.join(PATH, "", path.sep));
-          const themeUri = theme ? "" : "gray/";
           const styleUri = webviewView.webview.asWebviewUri(
             vscode.Uri.joinPath(extensionUri, "views", "view.css")
           );
@@ -1463,9 +1451,10 @@ function activate(context) {
                     const icons = MODEL.常量.图标.map(
                       (element) => element.名称
                     );
-                    return `<td style="text-align: center; font-weight: 500;"><img src="${imageSrc}" width="30" height="30"><br>${
-                      icons[imageNumber - 1]
-                    }</td>`;
+                    return `<td style="text-align:center; font-weight: 500;">
+                    <img src="${imageSrc}" class="icon">
+
+                    <br>${icons[imageNumber - 1]}</td>`;
                   })
                   .join("");
                 return `<tr>${imageCells}</tr>`;
@@ -1490,16 +1479,19 @@ function activate(context) {
                     ${tableHtml}
 
                     <i><h3>英雄/技能图标</h3></i>
-                    <h4 style="display: flex; align-items: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "tank",
-                        `${themeUri}tank.png`
-                      )
-                    )}" width="auto" height="30" style="vertical-align: middle;">&nbsp;重装</h4>
+                    <h4 style="display: flex; align-items: center;">
+                    <div class="iconBox">
+                      <img src="${webviewView.webview.asWebviewUri(
+                        vscode.Uri.joinPath(
+                          extensionUri,
+                          "images",
+                          "ow",
+                          "hero",
+                          `tank.png`
+                        )
+                      )}" class="icon">
+                    </div>
+                    &nbsp;重装</h4>
                     <table style="min-width: 700px; max-width: 800px;">
                     <thead>
                     <td style="text-align: center; font-weight: 600;">英雄</td>
@@ -1520,75 +1512,71 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "doomfist",
-                        "icon.png"
+                        "avatar",
+                        "tank_doomfist_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>末日铁拳<br></td>
+                    )}" height="48"><br>末日铁拳<br></td>
+                    <td style="text-align: center;">
+                      <img src="${webviewView.webview.asWebviewUri(
+                        vscode.Uri.joinPath(
+                          extensionUri,
+                          "images",
+                          "ow",
+                          "hero",
+                          "ability",
+                          "tank_doomfist_weapon.png"
+                        )
+                      )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "doomfist",
-                        "weapon.png"
+                        "ability",
+                        "tank_doomfist_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "doomfist",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "tank_doomfist_ultimate.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "doomfist",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_doomfist_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "doomfist",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_doomfist_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "doomfist",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -1600,75 +1588,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "dva",
-                        "icon.png"
+                        "avatar",
+                        "tank_dva_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>D.Va<br></td>
+                    )}" height="48"><br>D.Va<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "dva",
-                        "weapon1.png"
+                        "ability",
+                        "tank_dva_weapon1.png"
                       )
-                    )}" width="60" height="auto"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "dva",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "tank_dva_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "dva",
-                        `${themeUri}ultimate1.png`
+                        "ability",
+                        "tank_dva_ultimate1.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "dva",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_dva_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "dva",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_dva_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -1680,75 +1663,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "wrecking-ball",
-                        "icon.png"
+                        "avatar",
+                        "tank_wrecking-ball_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>破坏球<br></td>
+                    )}" height="48"><br>破坏球<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "wrecking-ball",
-                        "weapon.png"
+                        "ability",
+                        "tank_wrecking-ball_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "wrecking-ball",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "tank_wrecking-ball_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "wrecking-ball",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_wrecking-ball_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "wrecking-ball",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_wrecking-ball_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "wrecking-ball",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_wrecking-ball_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
@@ -1756,11 +1734,10 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "wrecking-ball",
-                        `${themeUri}crouch.png`
+                        "ability",
+                        "tank_wrecking-ball_crouch.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     </tr>
 
                     <tr>
@@ -1770,75 +1747,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "junker-queen",
-                        "icon.png"
+                        "avatar",
+                        "tank_junker-queen_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>渣客女王<br></td>
+                    )}" height="48"><br>渣客女王<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "junker-queen",
-                        "weapon.png"
+                        "ability",
+                        "tank_junker-queen_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "junker-queen",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "tank_junker-queen_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "junker-queen",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_junker-queen_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "junker-queen",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_junker-queen_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "junker-queen",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_junker-queen_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -1850,75 +1822,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "orisa",
-                        "icon.png"
+                        "avatar",
+                        "tank_orisa_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>奥丽莎<br></td>
+                    )}" height="48"><br>奥丽莎<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "orisa",
-                        "weapon.png"
+                        "ability",
+                        "tank_orisa_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "orisa",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "tank_orisa_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "orisa",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_orisa_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "orisa",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_orisa_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "orisa",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_orisa_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -1930,75 +1897,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "reinhardt",
-                        "icon.png"
+                        "avatar",
+                        "tank_reinhardt_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>莱因哈特<br></td>
+                    )}" height="48"><br>莱因哈特<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "reinhardt",
-                        "weapon.png"
+                        "ability",
+                        "tank_reinhardt_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "reinhardt",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "tank_reinhardt_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "reinhardt",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_reinhardt_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "reinhardt",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_reinhardt_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "reinhardt",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_reinhardt_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -2010,75 +1972,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "roadhog",
-                        "icon.png"
+                        "avatar",
+                        "tank_roadhog_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>路霸<br></td>
+                    )}" height="48"><br>路霸<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "roadhog",
-                        "weapon.png"
+                        "ability",
+                        "tank_roadhog_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "roadhog",
-                        `weapon.png`
+                        "ability",
+                        "tank_roadhog_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "roadhog",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_roadhog_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "roadhog",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_roadhog_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "roadhog",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_roadhog_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -2090,75 +2047,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "sigma",
-                        "icon.png"
+                        "avatar",
+                        "tank_sigma_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>西格玛<br></td>
+                    )}" height="48"><br>西格玛<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "sigma",
-                        "weapon.png"
+                        "ability",
+                        "tank_sigma_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "sigma",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "tank_sigma_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "sigma",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_sigma_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "sigma",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_sigma_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "sigma",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_sigma_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -2170,75 +2122,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "winston",
-                        "icon.png"
+                        "avatar",
+                        "tank_winston_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>温斯顿<br></td>
+                    )}" height="48"><br>温斯顿<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "winston",
-                        "weapon.png"
+                        "ability",
+                        "tank_winston_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "winston",
-                        `weapon.png`
+                        "ability",
+                        "tank_winston_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "winston",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_winston_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "winston",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_winston_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "winston",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_winston_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -2250,75 +2197,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "zarya",
-                        "icon.png"
+                        "avatar",
+                        "tank_zarya_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>查莉娅<br></td>
+                    )}" height="48"><br>查莉娅<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "zarya",
-                        "weapon.png"
+                        "ability",
+                        "tank_zarya_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "zarya",
-                        `weapon.png`
+                        "ability",
+                        "tank_zarya_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "zarya",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_zarya_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "zarya",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_zarya_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "zarya",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_zarya_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -2330,91 +2272,88 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "ramattra",
-                        "icon.png"
+                        "avatar",
+                        "tank_ramattra_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>拉玛刹<br></td>
+                    )}" height="48"><br>拉玛刹<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "ramattra",
-                        "weapon1.png"
+                        "ability",
+                        "tank_ramattra_weapon1.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "ramattra",
-                        `${themeUri}secondaryfire1.png`
+                        "ability",
+                        "tank_ramattra_secondaryfire1.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "ramattra",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "tank_ramattra_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "ramattra",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "tank_ramattra_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "tank",
-                        "ramattra",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "tank_ramattra_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
                     </tbody>
                     </table>
 
-                    <h4 style="display: flex; align-items: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        `${themeUri}damage.png`
-                      )
-                    )}" width="auto" height="30" style="vertical-align: middle;">&nbsp;输出</h4>
+                    <h4 style="display: flex; align-items: center;"><div class="iconBox">
+                      <img src="${webviewView.webview.asWebviewUri(
+                        vscode.Uri.joinPath(
+                          extensionUri,
+                          "images",
+                          "ow",
+                          "hero",
+                          `damage.png`
+                        )
+                      )}" class="icon">
+                    </div>
+                    &nbsp;输出</h4>
                     <table style="min-width: 700px; max-width: 800px;">
                     <thead>
                     <td style="text-align: center; font-weight: 600;">英雄</td>
@@ -2435,135 +2374,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "ashe",
-                        "icon.png"
+                        "avatar",
+                        "damage_ashe_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>艾什<br></td>
+                    )}" height="48"><br>艾什<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "ashe",
-                        "weapon.png"
+                        "ability",
+                        "damage_ashe_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"></td>
+                    )}" class="icon"></td>
+                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                       vscode.Uri.joinPath(
+                         extensionUri,
+                         "images",
+                         "ow",
+                         "hero",
+                         "ability",
+                         "damage_ashe_weapon.png"
+                       )
+                     )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "ashe",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_ashe_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "ashe",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_ashe_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "ashe",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_ashe_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    <td style="text-align: center;"></td>
-                    </tr>
-
-                    <tr>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "bastion",
-                        "icon.png"
-                      )
-                    )}" width="auto" height="50"><br>堡垒<br></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "bastion",
-                        "weapon1.png"
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "bastion",
-                        `${themeUri}secondaryfire.png`
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "bastion",
-                        `${themeUri}ultimate.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "bastion",
-                        `${themeUri}ability1.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -2575,202 +2449,50 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "echo",
-                        "icon.png"
+                        "avatar",
+                        "damage_bastion_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>回声<br></td>
+                    )}" height="48"><br>堡垒<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "echo",
-                        "weapon.png"
+                        "ability",
+                        "damage_bastion_weapon1.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "echo",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "damage_bastion_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "echo",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_bastion_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "echo",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_bastion_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "echo",
-                        `${themeUri}ability2.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "echo",
-                        `${themeUri}passive.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    </tr>
-
-                    <tr>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "genji",
-                        "icon.png"
-                      )
-                    )}" width="auto" height="50"><br>源氏<br></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "genji",
-                        "weapon.png"
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "genji",
-                        `weapon.png`
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "genji",
-                        `${themeUri}ultimate.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "genji",
-                        `${themeUri}ability1.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "genji",
-                        `${themeUri}ability2.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "genji",
-                        `${themeUri}passive.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    </tr>
-
-                    <tr>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "hanzo",
-                        "icon.png"
-                      )
-                    )}" width="auto" height="50"><br>半藏<br></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "hanzo",
-                        "weapon.png"
-                      )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
@@ -2778,121 +2500,10 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "hanzo",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "hanzo",
-                        `${themeUri}ability1.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "hanzo",
-                        `${themeUri}ability2.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "hanzo",
-                        `${themeUri}passive.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    </tr>
-                    <tr>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "junkrat",
-                        "icon.png"
-                      )
-                    )}" width="auto" height="50"><br>狂鼠<br></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "junkrat",
-                        "weapon.png"
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "junkrat",
-                        `${themeUri}ultimate.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "junkrat",
-                        `${themeUri}ability1.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "junkrat",
-                        `${themeUri}ability2.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -2904,75 +2515,303 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "cassidy",
-                        "icon.png"
+                        "avatar",
+                        "damage_echo_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>卡西迪<br></td>
+                    )}" height="48"><br>回声<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "cassidy",
-                        "weapon.png"
+                        "ability",
+                        "damage_echo_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "cassidy",
-                        `weapon.png`
+                        "ability",
+                        "damage_echo_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "cassidy",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_echo_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "cassidy",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_echo_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "cassidy",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_echo_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_echo_passive.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
+
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "damage_genji_avatar.png"
+                      )
+                    )}" height="48"><br>源氏<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_genji_weapon.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_genji_weapon.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_genji_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_genji_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_genji_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_genji_passive.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
+
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "damage_hanzo_avatar.png"
+                      )
+                    )}" height="48"><br>半藏<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_hanzo_weapon.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_hanzo_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_hanzo_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_hanzo_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_hanzo_passive.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "damage_junkrat_avatar.png"
+                      )
+                    )}" height="48"><br>狂鼠<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_junkrat_weapon.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_junkrat_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_junkrat_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_junkrat_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -2984,75 +2823,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "mei",
-                        "icon.png"
+                        "avatar",
+                        "damage_cassidy_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>美<br></td>
+                    )}" height="48"><br>卡西迪<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "mei",
-                        "weapon.png"
+                        "ability",
+                        "damage_cassidy_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "mei",
-                        `weapon.png`
+                        "ability",
+                        "damage_cassidy_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "mei",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_cassidy_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "mei",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_cassidy_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "mei",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_cassidy_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -3064,145 +2898,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "pharah",
-                        "icon.png"
+                        "avatar",
+                        "damage_mei_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>法老之鹰<br></td>
+                    )}" height="48"><br>美<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "pharah",
-                        "weapon.png"
+                        "ability",
+                        "damage_mei_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "pharah",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_mei_weapon.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "pharah",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_mei_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "pharah",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_mei_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        "damage_mei_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "pharah",
-                        `${themeUri}passive.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    </tr>
-
-                    <tr>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "reaper",
-                        "icon.png"
-                      )
-                    )}" width="auto" height="50"><br>死神<br></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "reaper",
-                        "weapon.png"
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "reaper",
-                        `${themeUri}ultimate.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "reaper",
-                        `${themeUri}ability1.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "damage",
-                        "reaper",
-                        `${themeUri}ability2.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -3214,75 +2973,136 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sojourn",
-                        "icon.png"
+                        "avatar",
+                        "damage_pharah_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>索杰恩<br></td>
+                    )}" height="48"><br>法老之鹰<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sojourn",
-                        "weapon.png"
+                        "ability",
+                        "damage_pharah_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sojourn",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "damage_pharah_ultimate.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sojourn",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_pharah_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sojourn",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_pharah_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sojourn",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        "passive.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
+
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "damage_reaper_avatar.png"
+                      )
+                    )}" height="48"><br>死神<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_reaper_weapon.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_reaper_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_reaper_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_reaper_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -3294,75 +3114,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "soldier-76",
-                        "icon.png"
+                        "avatar",
+                        "damage_sojourn_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>士兵：76<br></td>
+                    )}" height="48"><br>索杰恩<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "soldier-76",
-                        "weapon.png"
+                        "ability",
+                        "damage_sojourn_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "soldier-76",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "damage_sojourn_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "soldier-76",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_sojourn_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "soldier-76",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_sojourn_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "soldier-76",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_sojourn_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -3374,75 +3189,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sombra",
-                        "icon.png"
+                        "avatar",
+                        "damage_soldier-76_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>黑影<br></td>
+                    )}" height="48"><br>士兵：76<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sombra",
-                        "weapon.png"
+                        "ability",
+                        "damage_soldier-76_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sombra",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "damage_soldier-76_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sombra",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_soldier-76_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sombra",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_soldier-76_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "sombra",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_soldier-76_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -3454,75 +3264,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "symmetra",
-                        "icon.png"
+                        "avatar",
+                        "damage_sombra_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>秩序之光<br></td>
+                    )}" height="48"><br>黑影<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "symmetra",
-                        "weapon.png"
+                        "ability",
+                        "damage_sombra_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "symmetra",
-                        `weapon.png`
+                        "ability",
+                        "damage_sombra_secondaryfire.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "symmetra",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_sombra_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "symmetra",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_sombra_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "symmetra",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_sombra_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -3534,75 +3339,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "torbjorn",
-                        "icon.png"
+                        "avatar",
+                        "damage_symmetra_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>托比昂<br></td>
+                    )}" height="48"><br>秩序之光<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "torbjorn",
-                        "weapon1.png"
+                        "ability",
+                        "damage_symmetra_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "torbjorn",
-                        `weapon1.png`
+                        "ability",
+                        "damage_symmetra_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "torbjorn",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_symmetra_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "torbjorn",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_symmetra_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "torbjorn",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_symmetra_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -3614,65 +3414,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "tracer",
-                        "icon.png"
+                        "avatar",
+                        "damage_torbjorn_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>猎空<br></td>
+                    )}" height="48"><br>托比昂<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "tracer",
-                        "weapon.png"
+                        "ability",
+                        "damage_torbjorn_weapon1.png"
                       )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "tracer",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_torbjorn_weapon1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "tracer",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_torbjorn_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "tracer",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_torbjorn_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        "damage_torbjorn_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -3684,22 +3489,20 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "widowmaker",
-                        "icon.png"
+                        "avatar",
+                        "damage_tracer_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>黑百合<br></td>
+                    )}" height="48"><br>猎空<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "widowmaker",
-                        "weapon.png"
+                        "ability",
+                        "damage_tracer_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
@@ -3707,58 +3510,133 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "widowmaker",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "damage_tracer_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "widowmaker",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "damage_tracer_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "damage",
-                        "widowmaker",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "damage_tracer_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
+
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "damage_widowmaker_avatar.png"
+                      )
+                    )}" height="48"><br>黑百合<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_widowmaker_weapon.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_widowmaker_weapon.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_widowmaker_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_widowmaker_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "damage_widowmaker_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
                     </tbody>
                     </table>
 
-                    <h4 style="display: flex; align-items: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        `${themeUri}support.png`
-                      )
-                    )}" width="auto" height="30" style="vertical-align: middle;">&nbsp;支援</h4>
+                    <h4 style="display: flex; align-items: center;"><div class="iconBox">
+                      <img src="${webviewView.webview.asWebviewUri(
+                        vscode.Uri.joinPath(
+                          extensionUri,
+                          "images",
+                          "ow",
+                          "hero",
+                          `support.png`
+                        )
+                      )}" class="icon">
+                    </div>
+                    &nbsp;支援</h4>
                     <table style="min-width: 700px; max-width: 800px;">
                     <thead>
                     <td style="text-align: center; font-weight: 600;">英雄</td>
@@ -3779,235 +3657,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "ana",
-                        "icon.png"
+                        "avatar",
+                        "support_ana_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>安娜<br></td>
+                    )}" height="48"><br>安娜<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "ana",
-                        "weapon.png"
+                        "ability",
+                        "support_ana_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "ana",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "support_ana_weapon.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "ana",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "support_ana_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "ana",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "support_ana_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        "support_ana_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    <td style="text-align: center;"></td>
-                    </tr>
-
-                    <tr>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "baptiste",
-                        "icon.png"
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="auto" height="50"><br>巴蒂斯特<br></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "baptiste",
-                        "weapon1.png"
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "baptiste",
-                        `weapon2.png`
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "baptiste",
-                        `${themeUri}ultimate.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "baptiste",
-                        `${themeUri}ability1.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "baptiste",
-                        `${themeUri}ability2.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "baptiste",
-                        `${themeUri}passive.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    </tr>
-
-                    <tr>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "brigitte",
-                        "icon.png"
-                      )
-                    )}" width="auto" height="50"><br>布丽吉塔<br></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "brigitte",
-                        "weapon.png"
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "brigitte",
-                        `${themeUri}secondaryfire1.png`
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "brigitte",
-                        `${themeUri}ultimate.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "brigitte",
-                        `${themeUri}ability1.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "brigitte",
-                        `${themeUri}ability2.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -4019,87 +3732,81 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "kiriko",
-                        "icon.png"
+                        "avatar",
+                        "support_baptiste_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>雾子<br></td>
+                    )}" height="48"><br>巴蒂斯特<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "kiriko",
-                        "weapon1.png"
+                        "ability",
+                        "support_baptiste_weapon1.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "kiriko",
-                        `weapon2.png`
+                        "ability",
+                        "support_baptiste_weapon2.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "kiriko",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "support_baptiste_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "kiriko",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "support_baptiste_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "kiriko",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "support_baptiste_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "kiriko",
-                        `${themeUri}passive.png`
-                      )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_baptiste_passive.png"
+                      )
+                    )}" class="icon"></td>
                     </tr>
 
                     <tr>
@@ -4109,255 +3816,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lucio",
-                        "icon.png"
+                        "avatar",
+                        "support_brigitte_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>卢西奥<br></td>
+                    )}" height="48"><br>布丽吉塔<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lucio",
-                        "weapon.png"
+                        "ability",
+                        "support_brigitte_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lucio",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "support_brigitte_secondaryfire1.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lucio",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "support_brigitte_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lucio",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "support_brigitte_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lucio",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "support_brigitte_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "lucio",
-                        `${themeUri}passive.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    </tr>
-
-                    <tr>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "mercy",
-                        "icon.png"
-                      )
-                    )}" width="auto" height="50"><br>天使<br></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "mercy",
-                        "weapon1.png"
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "mercy",
-                        `weapon1.png`
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "mercy",
-                        `${themeUri}ultimate.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "mercy",
-                        `${themeUri}ability1.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "mercy",
-                        `${themeUri}ability2.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "mercy",
-                        `${themeUri}passive.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"></td>
-                    </tr>
-
-                    <tr>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "moira",
-                        "icon.png"
-                      )
-                    )}" width="auto" height="50"><br>莫伊拉<br></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "moira",
-                        "weapon.png"
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "moira",
-                        `${themeUri}secondaryfire.png`
-                      )
-                    )}" width="auto" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "moira",
-                        `${themeUri}ultimate.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "moira",
-                        `${themeUri}ability1.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        "support",
-                        "moira",
-                        `${themeUri}ability2.png`
-                      )
-                    )}" width="30" height="30"></td>
-                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
-                      vscode.Uri.joinPath(
-                        extensionUri,
-                        "images",
-                        "ow",
-                        "hero",
-                        `${themeUri}melee.png`
-                      )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -4369,75 +3891,322 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "zenyatta",
-                        "icon.png"
+                        "avatar",
+                        "support_kiriko_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>禅雅塔<br></td>
+                    )}" height="48"><br>雾子<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "zenyatta",
-                        "weapon.png"
+                        "ability",
+                        "support_kiriko_weapon1.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "zenyatta",
-                        `weapon.png`
+                        "ability",
+                        "support_kiriko_weapon2.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "zenyatta",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "support_kiriko_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "zenyatta",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "support_kiriko_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "zenyatta",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "support_kiriko_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_kiriko_passive.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
+
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "support_lucio_avatar.png"
+                      )
+                    )}" height="48"><br>卢西奥<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lucio_weapon.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lucio_secondaryfire.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lucio_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lucio_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lucio_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "passive.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
+
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "support_mercy_avatar.png"
+                      )
+                    )}" height="48"><br>天使<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_mercy_weapon1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_mercy_weapon1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_mercy_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_mercy_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_mercy_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_mercy_passive.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
+
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "support_moira_avatar.png"
+                      )
+                    )}" height="48"><br>莫伊拉<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_moira_weapon.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_moira_secondaryfire.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_moira_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_moira_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_moira_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -4449,75 +4218,145 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lifeweaver",
-                        "icon.png"
+                        "avatar",
+                        "support_zenyatta_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>生命之梭<br></td>
+                    )}" height="48"><br>禅雅塔<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lifeweaver",
-                        "weapon1.png"
+                        "ability",
+                        "support_zenyatta_weapon.png"
                       )
-                    )}" width="60" height="auto"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lifeweaver",
-                        `${themeUri}secondaryfire.png`
+                        "ability",
+                        "support_zenyatta_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lifeweaver",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "support_zenyatta_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lifeweaver",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "support_zenyatta_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "lifeweaver",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "support_zenyatta_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
+
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "support_lifeweaver_avatar.png"
+                      )
+                    )}" height="48"><br>生命之梭<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lifeweaver_weapon1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lifeweaver_secondaryfire.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lifeweaver_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lifeweaver_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "support_lifeweaver_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        `melee.png`
+                      )
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
@@ -4528,75 +4367,70 @@ function activate(context) {
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "illari",
-                        "icon.png"
+                        "avatar",
+                        "support_illari_avatar.png"
                       )
-                    )}" width="auto" height="50"><br>伊拉锐<br></td>
+                    )}" height="48"><br>伊拉锐<br></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "illari",
-                        "weapon.png"
+                        "ability",
+                        "support_illari_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "illari",
-                        `weapon.png`
+                        "ability",
+                        "support_illari_weapon.png"
                       )
-                    )}" width="auto" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "illari",
-                        `${themeUri}ultimate.png`
+                        "ability",
+                        "support_illari_ultimate.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "illari",
-                        `${themeUri}ability1.png`
+                        "ability",
+                        "support_illari_ability1.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        "support",
-                        "illari",
-                        `${themeUri}ability2.png`
+                        "ability",
+                        "support_illari_ability2.png"
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,
                         "images",
                         "ow",
                         "hero",
-                        `${themeUri}melee.png`
+                        "ability",
+                        `melee.png`
                       )
-                    )}" width="30" height="30"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
