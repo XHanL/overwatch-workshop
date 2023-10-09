@@ -60,33 +60,13 @@
 
 ## **_主要特性_**
 
-- ### 代码大纲
+- ### 参考手册
 
-  在资源管理器 `大纲视图` 中，具备跟踪光标和跳转能力
-
-  <details>
-   <summary>预览图片</summary>
-   <img src="docs/images/readme/outline.png" align=center width=250 />
-  </details>
-  <br>
-
-- ### 代码折叠
-
-  基于关键词与缩进的精准折叠能力
+  侧边栏可激活手册视图，具有实用的 `图标表格` 等
 
   <details>
    <summary>预览图片</summary>
-   <img src="docs/images/readme/fold.png" align=center width=400 />
-  </details>
-  <br>
-
-- ### 代码整理
-
-  使用右键菜单的 `格式化文档` 修正代码缩进
-
-  <details>
-   <summary>预览图片</summary>
-   <img src="docs/images/readme/format.png" align=center width=200 />
+   <img src="docs/images/readme/manual.png" align=center width=600 />
   </details>
   <br>
 
@@ -100,19 +80,9 @@
   </details>
   <br>
 
-- ### 调色盘
+- ### 补全提示
 
-  针对自定义颜色的预览和调制能力
-
-  <details>
-   <summary>预览图片</summary>
-   <img src="docs/images/readme/color.png" align=center width=400 />
-  </details>
-  <br>
-
-- ### 补全建议
-
-  汉字或拼音输入展开建议列表，可使用 `展开` 按钮主动展开
+  `汉字/拼音/首字母` 激活补全提示，还可使用 `展开` 按钮显示全部选项
 
   <details>
    <summary>预览图片</summary>
@@ -130,17 +100,47 @@
   </details>
   <br>
 
-- ### 参考手册
+- ### 代码混淆
 
-  侧边栏增加可收纳的参考手册视图
+  使用 `混淆` 选项导出混淆代码到剪切板
 
   <details>
    <summary>预览图片</summary>
-   <img src="docs/images/readme/manual.png" align=center width=700 />
+   <img src="docs/images/readme/obfuscate.png" align=center width=500 />
   </details>
   <br>
 
-- ### 语法高亮
+- ### 代码整理
+
+  使用右键菜单的 `格式化文档` 修正代码缩进
+
+  <details>
+   <summary>预览图片</summary>
+   <img src="docs/images/readme/format.png" align=center width=200 />
+  </details>
+  <br>
+
+- ### 代码折叠
+
+  基于关键词与缩进的精准折叠能力
+
+  <details>
+   <summary>预览图片</summary>
+   <img src="docs/images/readme/fold.png" align=center width=400 />
+  </details>
+  <br>
+
+- ### 代码大纲
+
+  在资源管理器 `大纲视图` 中，具备跟踪光标和跳转能力
+
+  <details>
+   <summary>预览图片</summary>
+   <img src="docs/images/readme/outline.png" align=center width=250 />
+  </details>
+  <br>
+
+- ### 代码高亮
 
   代码的精准上色能力
 
@@ -158,6 +158,16 @@
    <summary>预览图片</summary>
    <img src="docs/images/readme/switch.png" align=center width=400 />
   </details>
+  <br>
+
+- ### 调色盘
+
+  针对自定义颜色的预览和调制能力
+
+  <details>
+   <summary>预览图片</summary>
+   <img src="docs/images/readme/color.png" align=center width=400 />
+  </details>
 
 <br>
 
@@ -167,7 +177,7 @@
 
   | 功能     | 描述                                    |
   | :------- | :-------------------------------------- |
-  | **展开** | 展开光标处的补全建议列表。              |
+  | **展开** | 展开光标处的补全提示列表。              |
   | **换行** | 切换自动换行行为。                      |
   | **导出** | 导入到剪切板，同时修复已知的工坊错误。❶ |
   | **修复** | 导入到编辑器，同时修复已知的工坊错误。❶ |

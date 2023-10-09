@@ -14,7 +14,7 @@
     "守望先锋",
     "工坊"
   ],
-  "version": "2.10.1",
+  "version": "3.0.0",
   "engines": {
     "vscode": "^1.39.0"
   },
@@ -58,6 +58,10 @@
       {
         "command": "ow.command.line",
         "title": "换行"
+      },
+      {
+        "command": "ow.command.obfuscate",
+        "title": "混淆"
       },
       {
         "command": "ow.command.copy",
@@ -104,14 +108,19 @@
           "group": "navigation@101"
         },
         {
-          "command": "ow.command.copy",
+          "command": "ow.command.obfuscate",
           "when": "editorLangId == ow",
           "group": "navigation@102"
         },
         {
-          "command": "ow.command.paste",
+          "command": "ow.command.copy",
           "when": "editorLangId == ow",
           "group": "navigation@103"
+        },
+        {
+          "command": "ow.command.paste",
+          "when": "editorLangId == ow",
+          "group": "navigation@104"
         }
       ],
       "editor/context": [
@@ -126,23 +135,23 @@
           "group": "0@1"
         },
         {
-          "command": "ow.command.copy",
+          "command": "ow.command.obfuscate",
           "when": "editorLangId == ow",
           "group": "0@2"
         },
         {
-          "command": "ow.command.paste",
+          "command": "ow.command.copy",
           "when": "editorLangId == ow",
           "group": "0@3"
+        },
+        {
+          "command": "ow.command.paste",
+          "when": "editorLangId == ow",
+          "group": "0@4"
         }
       ]
     },
     "themes": [
-      {
-        "label": "Overwatch Workshop 明亮",
-        "uiTheme": "vs",
-        "path": "themes/ow.light.json"
-      },
       {
         "label": "Overwatch Workshop 深邃",
         "uiTheme": "vs-dark",
@@ -157,6 +166,11 @@
         "label": "Overwatch Workshop 深井 (by 踏足)",
         "uiTheme": "vs-dark",
         "path": "themes/ow.deep.TaZu.json"
+      },
+      {
+        "label": "Overwatch Workshop 明亮",
+        "uiTheme": "vs",
+        "path": "themes/ow.light.json"
       }
     ]
   }

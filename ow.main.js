@@ -16,72 +16,53 @@ function activate(context) {
   context.subscriptions.push(
     //新建文件能力
     vscode.commands.registerCommand("ow.command.newFile", () => {
-      vscode.window
-        .showSaveDialog({
-          filters: {
-            "ow Files": ["ow"],
-          },
-        })
-        .then((fileUri) => {
-          if (fileUri) {
-            const filePath = fileUri.fsPath;
-            fs.writeFile(filePath, MODEL.示例, "utf-8", () => {
-              const document = vscode.workspace.openTextDocument(filePath);
-              vscode.window.showTextDocument(document);
-            });
-          }
-        });
+      try {
+        vscode.window
+          .showSaveDialog({
+            filters: {
+              "ow Files": ["ow"],
+            },
+          })
+          .then((fileUri) => {
+            if (fileUri) {
+              const filePath = fileUri.fsPath;
+              fs.writeFile(filePath, MODEL.示例, "utf-8", () => {
+                const document = vscode.workspace.openTextDocument(filePath);
+                vscode.window.showTextDocument(document);
+              });
+            }
+          });
+      } catch (error) {
+        console.log("错误：ow.command.newFile 新建文件能力" + error);
+      }
     }),
 
     //主动建议能力
     vscode.commands.registerCommand("ow.command.suggest", () => {
-      vscode.commands.executeCommand("editor.action.triggerSuggest");
-      vscode.commands.executeCommand("editor.action.triggerParameterHints");
+      try {
+        vscode.commands.executeCommand("editor.action.triggerSuggest");
+        vscode.commands.executeCommand("editor.action.triggerParameterHints");
+      } catch (error) {
+        console.log("错误：ow.command.suggest 主动建议能力" + error);
+      }
     }),
 
     //自动换行能力
     vscode.commands.registerCommand("ow.command.line", () => {
-      vscode.commands.executeCommand("editor.action.toggleWordWrap");
+      try {
+        vscode.commands.executeCommand("editor.action.toggleWordWrap");
+      } catch (error) {
+        console.log("错误：ow.command.line 自动换行能力" + error);
+      }
     }),
 
     //导出修复能力
     vscode.commands.registerCommand("ow.command.copy", () => {
-      let activeEditor = vscode.window.activeTextEditor;
-      if (activeEditor) {
-        let document = activeEditor.document;
-        let text = document.getText();
-        text = text.replace(
-          /设置不可见\((.*), 无\);/g,
-          "设置不可见($1, 全部禁用);"
-        );
-        text = text.replace(
-          /追踪全局变量频率\((.*), (.*), (.*), 无\);/g,
-          "追踪全局变量频率($1, $2, $3, 全部禁用);"
-        );
-        text = text.replace(
-          /追踪玩家变量频率\((.*), (.*), (.*), (.*), 无\);/g,
-          "追踪玩家变量频率($1, $2, $3, $4, 全部禁用);"
-        );
-        text = text.replace(
-          /持续追踪全局变量\((.*), (.*), (.*), 无\);/g,
-          "持续追踪全局变量($1, $2, $3, 全部禁用);"
-        );
-        text = text.replace(
-          /持续追踪玩家变量\((.*), (.*), (.*), (.*), 无\);/g,
-          "持续追踪玩家变量($1, $2, $3, $4, 全部禁用);"
-        );
-        vscode.env.clipboard.writeText(text);
-        vscode.window.showInformationMessage(
-          `${path.basename(document.fileName)} 已导出到剪切板`
-        );
-      }
-    }),
-
-    //修复导入能力
-    vscode.commands.registerCommand("ow.command.paste", () => {
-      let activeEditor = vscode.window.activeTextEditor;
-      if (activeEditor) {
-        vscode.env.clipboard.readText().then((text) => {
+      try {
+        const activeEditor = vscode.window.activeTextEditor;
+        if (activeEditor) {
+          const document = activeEditor.document;
+          let text = document.getText();
           text = text.replace(
             /设置不可见\((.*), 无\);/g,
             "设置不可见($1, 全部禁用);"
@@ -102,16 +83,303 @@ function activate(context) {
             /持续追踪玩家变量\((.*), (.*), (.*), (.*), 无\);/g,
             "持续追踪玩家变量($1, $2, $3, $4, 全部禁用);"
           );
-          let edit = new vscode.WorkspaceEdit();
-          let wholeDocumentRange = activeEditor.document.validateRange(
-            new vscode.Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE)
-          );
-          edit.replace(activeEditor.document.uri, wholeDocumentRange, text);
-          vscode.workspace.applyEdit(edit);
+          vscode.env.clipboard.writeText(text);
           vscode.window.showInformationMessage(
-            `${path.basename(activeEditor.document.fileName)} 已导入并修复`
+            `${path.basename(document.fileName)} 已导出到剪切板`
           );
-        });
+        }
+      } catch (error) {
+        console.log("错误：ow.command.copy 导出修复能力" + error);
+      }
+    }),
+
+    //修复导入能力
+    vscode.commands.registerCommand("ow.command.paste", () => {
+      try {
+        const activeEditor = vscode.window.activeTextEditor;
+        if (activeEditor) {
+          vscode.env.clipboard.readText().then((text) => {
+            text = text.replace(
+              /设置不可见\((.*), 无\);/g,
+              "设置不可见($1, 全部禁用);"
+            );
+            text = text.replace(
+              /追踪全局变量频率\((.*), (.*), (.*), 无\);/g,
+              "追踪全局变量频率($1, $2, $3, 全部禁用);"
+            );
+            text = text.replace(
+              /追踪玩家变量频率\((.*), (.*), (.*), (.*), 无\);/g,
+              "追踪玩家变量频率($1, $2, $3, $4, 全部禁用);"
+            );
+            text = text.replace(
+              /持续追踪全局变量\((.*), (.*), (.*), 无\);/g,
+              "持续追踪全局变量($1, $2, $3, 全部禁用);"
+            );
+            text = text.replace(
+              /持续追踪玩家变量\((.*), (.*), (.*), (.*), 无\);/g,
+              "持续追踪玩家变量($1, $2, $3, $4, 全部禁用);"
+            );
+            const edit = new vscode.WorkspaceEdit();
+            const wholeDocumentRange = activeEditor.document.validateRange(
+              new vscode.Range(0, 0, Number.MAX_VALUE, Number.MAX_VALUE)
+            );
+            edit.replace(activeEditor.document.uri, wholeDocumentRange, text);
+            vscode.workspace.applyEdit(edit);
+            vscode.window.showInformationMessage(
+              `${path.basename(activeEditor.document.fileName)} 已导入并修复`
+            );
+          });
+        }
+      } catch (error) {
+        console.log("错误：ow.command.paste 修复导入能力" + error);
+      }
+    }),
+
+    //代码混淆能力
+    vscode.commands.registerCommand("ow.command.obfuscate", () => {
+      try {
+        const activeEditor = vscode.window.activeTextEditor;
+        if (activeEditor) {
+          const document = activeEditor.document;
+          const dynamicList = UTIL.getDynamicList(document);
+          const obfuscatedNames = UTIL.getObfuscatedNames(128);
+          let text = document.getText();
+
+          //修复工坊问题
+          text = text.replace(
+            /设置不可见\((.*), 无\);/g,
+            "设置不可见($1, 全部禁用);"
+          );
+          text = text.replace(
+            /追踪全局变量频率\((.*), (.*), (.*), 无\);/g,
+            "追踪全局变量频率($1, $2, $3, 全部禁用);"
+          );
+          text = text.replace(
+            /追踪玩家变量频率\((.*), (.*), (.*), (.*), 无\);/g,
+            "追踪玩家变量频率($1, $2, $3, $4, 全部禁用);"
+          );
+          text = text.replace(
+            /持续追踪全局变量\((.*), (.*), (.*), 无\);/g,
+            "持续追踪全局变量($1, $2, $3, 全部禁用);"
+          );
+          text = text.replace(
+            /持续追踪玩家变量\((.*), (.*), (.*), (.*), 无\);/g,
+            "持续追踪玩家变量($1, $2, $3, $4, 全部禁用);"
+          );
+
+          //移除全部注释
+          text = text.replace(
+            /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|^\s*"[^"]*"\s*)/gm,
+            ""
+          );
+
+          //移除重复规则
+          text = text.replace(/禁用查看器录制\s*;/g, "");
+
+          //移除空白行
+          text = text.replace(/^\s*[\r\n]/gm, "");
+
+          //移除缩进
+          text = text.replace(/^\s+|\s+$/gm, "");
+
+          //获取混淆名称
+          let obfuscatedList = { 子程序: [], 全局变量: [], 玩家变量: [] };
+          for (const i in dynamicList.子程序) {
+            obfuscatedList.子程序[i] = obfuscatedNames[i];
+          }
+          for (const i in dynamicList.全局变量) {
+            obfuscatedList.全局变量[i] = obfuscatedNames[i];
+          }
+          for (const i in dynamicList.玩家变量) {
+            obfuscatedList.玩家变量[i] = obfuscatedNames[i];
+          }
+
+          //混淆子程序名称
+          for (const i in dynamicList.子程序) {
+            //事件
+            text = text.replace(
+              RegExp(`\\b${dynamicList.子程序[i]}\\b\\s*;`, "g"),
+              `${obfuscatedList.子程序[i]};`
+            );
+            //开始规则
+            text = text.replace(
+              RegExp(
+                `开始规则\\s*\\(\\s*\\b${dynamicList.子程序[i]}\\b\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `开始规则(${obfuscatedList.子程序[i]}, $1);`
+            );
+            //调用子程序
+            text = text.replace(
+              RegExp(
+                `调用子程序\\s*\\(\\s*\\b${dynamicList.子程序[i]}\\b\\s*\\)\\s*;`,
+                "g"
+              ),
+              `调用子程序(${obfuscatedList.子程序[i]});`
+            );
+          }
+
+          //混淆子程序列表
+          if (obfuscatedList.子程序.length > 0) {
+            let replaceText = `子程序\n{\n`;
+            for (const i in obfuscatedList.子程序) {
+              replaceText += `${i}: ${obfuscatedList.子程序[i]}\n`;
+            }
+            replaceText += `}`;
+            text = text.replace(/子程序\s*{\s*(.*?)\s*}/s, replaceText);
+          }
+
+          //混淆全局变量名称
+          for (const i in dynamicList.全局变量) {
+            //前缀为 "全局."
+            text = text.replace(
+              RegExp(`全局\\s*.\\s*\\b${dynamicList.全局变量[i]}\\b`, "g"),
+              `全局.${obfuscatedList.全局变量[i]}`
+            );
+            //For 全局变量
+            text = text.replace(
+              RegExp(
+                `For 全局变量\\s*\\(\\s*\\b${dynamicList.全局变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `For 全局变量(${obfuscatedList.全局变量[i]}, $1, $2, $3);`
+            );
+            //设置全局变量
+            text = text.replace(
+              RegExp(
+                `设置全局变量\\s*\\(\\s*\\b${dynamicList.全局变量[i]}\\b\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `设置全局变量(${obfuscatedList.全局变量[i]}, $1);`
+            );
+            //修改全局变量
+            text = text.replace(
+              RegExp(
+                `修改全局变量\\s*\\(\\s*\\b${dynamicList.全局变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `修改全局变量(${obfuscatedList.全局变量[i]}, $1, $2);`
+            );
+            //在索引处设置全局变量
+            text = text.replace(
+              RegExp(
+                `在索引处设置全局变量\\s*\\(\\s*\\b${dynamicList.全局变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `在索引处设置全局变量(${obfuscatedList.全局变量[i]}, $1, $2);`
+            );
+            //在索引处修改全局变量
+            text = text.replace(
+              RegExp(
+                `在索引处修改全局变量\\s*\\(\\s*\\b${dynamicList.全局变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `在索引处修改全局变量(${obfuscatedList.全局变量[i]}, $1, $2, $3);`
+            );
+            //持续追踪全局变量
+            text = text.replace(
+              RegExp(
+                `持续追踪全局变量\\s*\\(\\s*\\b${dynamicList.全局变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `持续追踪全局变量(${obfuscatedList.全局变量[i]}, $1, $2, $3);`
+            );
+            //追踪全局变量频率
+            text = text.replace(
+              RegExp(
+                `追踪全局变量频率\\s*\\(\\s*\\b${dynamicList.全局变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `追踪全局变量频率(${obfuscatedList.全局变量[i]}, $1, $2, $3);`
+            );
+            //停止追踪全局变量
+            text = text.replace(
+              RegExp(
+                `停止追踪全局变量\\s*\\(\\s*\\b${dynamicList.全局变量[i]}\\b\\s*\\)\\s*;`,
+                "g"
+              ),
+              `停止追踪全局变量(${obfuscatedList.全局变量[i]});`
+            );
+          }
+
+          //混淆全局变量列表
+          if (obfuscatedList.全局变量.length > 0) {
+            replaceText = `全局:\n`;
+            for (const i in obfuscatedList.全局变量) {
+              replaceText += `${i}: ${obfuscatedList.全局变量[i]}\n`;
+            }
+            let s2 = text.match(/全局\s*:\s*(.*?)\s*(玩家\s*:|})/s)[2];
+            text = text.replace(
+              /全局\s*:\s*(.*?)\s*(玩家\s*:|})/s,
+              `${replaceText}${s2}`
+            );
+          }
+
+          //混淆玩家变量名称和列表
+          for (const i in dynamicList.玩家变量) {
+            //剩下的都是玩家变量
+            text = text.replace(
+              RegExp(`\\b${dynamicList.玩家变量[i]}\\b`, "g"),
+              `${obfuscatedList.玩家变量[i]}`
+            );
+          }
+
+          //混淆规则名称
+          text = text.replace(
+            /规则\s*\(\s*".*"\s*\)/g,
+            () =>
+              `规则("${
+                obfuscatedNames[
+                  Math.floor(Math.random() * obfuscatedNames.length)
+                ]
+              }")`
+          );
+
+          //填充空白规则
+          const rules = text
+            .replace(/(禁用\s*)?规则\s*\(\s*"/g, `✂\n规则("`)
+            .split("✂");
+          let newRules = [
+            rules[0],
+            `
+规则("${obfuscatedNames[Math.floor(Math.random() * obfuscatedNames.length)]}")
+{
+事件
+{
+持续 - 全局;
+}
+动作
+{
+禁用查看器录制;
+}
+}`,
+          ];
+          for (let i = 1; i < rules.length; i++) {
+            newRules.push(rules[i]);
+            for (
+              let j = 0;
+              j < UTIL.getRandomInt(2000 / rules.length, 2500 / rules.length);
+              j++
+            ) {
+              newRules.push(`
+规则("${obfuscatedNames[Math.floor(Math.random() * obfuscatedNames.length)]}")
+{
+事件
+{
+持续 - 全局;
+}
+}`);
+            }
+          }
+          text = newRules.join("");
+
+          vscode.env.clipboard.writeText(text);
+          vscode.window.showInformationMessage(
+            `${path.basename(document.fileName)}（混淆）已导出到剪切板`
+          );
+        }
+      } catch (error) {
+        console.log("错误：ow.command.obfuscate 代码混淆能力" + error);
       }
     }),
 
@@ -181,7 +449,7 @@ function activate(context) {
                     ];
                   } else if (
                     (match = prevLineText.match(
-                      /^(禁用\s*)?规则\s*\("(.*)"\)$/
+                      /^(禁用\s*)?规则\s*\(\s*"(.*)"\s*\)$/
                     ))
                   ) {
                     if (match[1] === undefined) {
@@ -943,7 +1211,18 @@ function activate(context) {
 
     //代码整理能力
     vscode.languages.registerDocumentFormattingEditProvider("ow", {
-      provideDocumentFormattingEdits(document, options) {
+      async provideDocumentFormattingEdits(document, options) {
+        if (document.lineCount > 10000) {
+          const response = await vscode.window.showInformationMessage(
+            "文件过大，整理需要一点时间。要继续吗？",
+            "继续",
+            "取消"
+          );
+          if (response === "取消") {
+            return;
+          }
+        }
+
         return vscode.window.activeTextEditor.edit((editBuilder) => {
           try {
             //保留光标
@@ -1075,16 +1354,12 @@ function activate(context) {
 
             //添加新修改
             function addDocumentFormattingEdits(line, trimText, level) {
-              try {
-                editBuilder.replace(
-                  line.range,
-                  (options.insertSpaces
-                    ? " ".repeat(level * options.tabSize)
-                    : "\t".repeat(level)) + trimText
-                );
-              } catch (error) {
-                console.log(error);
-              }
+              editBuilder.replace(
+                line.range,
+                (options.insertSpaces
+                  ? " ".repeat(level * options.tabSize)
+                  : "\t".repeat(level)) + trimText
+              );
             }
           } catch (error) {
             console.log(
@@ -1101,7 +1376,7 @@ function activate(context) {
         try {
           const codeLens = [];
           const text = document.getText();
-          const pattern = /(禁用\s*)?规则\s*\("(.*)"\)/g;
+          const pattern = /(禁用\s*)?规则\s*\(\s*"(.*)"\s*\)/g;
           while ((match = pattern.exec(text))) {
             const matchText = match[0];
             const startPos = document.positionAt(match.index);
