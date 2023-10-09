@@ -315,12 +315,25 @@ function activate(context) {
             );
           }
 
-          //混淆玩家变量名称和列表
+          //混淆玩家变量名称
           for (const i in dynamicList.玩家变量) {
             //剩下的都是玩家变量
             text = text.replace(
-              RegExp(`\\b${dynamicList.玩家变量[i]}\\b`, "g"),
+              RegExp(`.\\s*\\b${dynamicList.玩家变量[i]}\\b`, "g"),
               `${obfuscatedList.玩家变量[i]}`
+            );
+          }
+
+          //混淆玩家变量列表
+          if (obfuscatedList.玩家变量.length > 0) {
+            replaceText = `玩家:\n`;
+            for (const i in obfuscatedList.玩家变量) {
+              replaceText += `${i}: ${obfuscatedList.玩家变量[i]}\n`;
+            }
+            let s2 = text.match(/玩家\s*:\s*(.*?)\s*(全局\s*:|})/s)[2];
+            text = text.replace(
+              /玩家\s*:\s*(.*?)\s*(全局\s*:|})/s,
+              `${replaceText}${s2}`
             );
           }
 
