@@ -320,7 +320,7 @@ function activate(context) {
             //剩下的都是玩家变量
             text = text.replace(
               RegExp(`.\\s*\\b${dynamicList.玩家变量[i]}\\b`, "g"),
-              `${obfuscatedList.玩家变量[i]}`
+              `.${obfuscatedList.玩家变量[i]}`
             );
           }
 
