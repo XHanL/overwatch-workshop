@@ -233,7 +233,7 @@ function activate(context) {
           for (const i in dynamicList.全局变量) {
             //前缀为 "全局."
             text = text.replace(
-              RegExp(`全局\\s*.\\s*\\b${dynamicList.全局变量[i]}\\b`, "g"),
+              RegExp(`全局\\s*\\.\\s*\\b${dynamicList.全局变量[i]}\\b`, "g"),
               `全局.${obfuscatedList.全局变量[i]}`
             );
             //For 全局变量
@@ -319,7 +319,7 @@ function activate(context) {
           for (const i in dynamicList.玩家变量) {
             //剩下的都是玩家变量
             text = text.replace(
-              RegExp(`.\\s*\\b${dynamicList.玩家变量[i]}\\b`, "g"),
+              RegExp(`\\.\\s*\\b${dynamicList.玩家变量[i]}\\b`, "g"),
               `.${obfuscatedList.玩家变量[i]}`
             );
           }
