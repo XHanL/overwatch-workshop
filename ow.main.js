@@ -317,10 +317,74 @@ function activate(context) {
 
           //混淆玩家变量名称
           for (const i in dynamicList.玩家变量) {
-            //剩下的都是玩家变量
+            //前缀为 "."
             text = text.replace(
               RegExp(`\\.\\s*\\b${dynamicList.玩家变量[i]}\\b`, "g"),
               `.${obfuscatedList.玩家变量[i]}`
+            );
+            //For 玩家变量
+            text = text.replace(
+              RegExp(
+                `For 玩家变量\\s*\\(\\s*(.*)\\s*,\\s*\\b${dynamicList.玩家变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `For 玩家变量($1, ${obfuscatedList.玩家变量[i]}, $2, $3, $4);`
+            );
+            //设置玩家变量
+            text = text.replace(
+              RegExp(
+                `设置玩家变量\\s*\\(\\s*(.*)\\s*,\\s*\\b${dynamicList.玩家变量[i]}\\b\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `设置玩家变量($1, ${obfuscatedList.玩家变量[i]}, $2);`
+            );
+            //修改玩家变量
+            text = text.replace(
+              RegExp(
+                `修改玩家变量\\s*\\(\\s*(.*)\\s*,\\s*\\b${dynamicList.玩家变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `修改玩家变量($1, ${obfuscatedList.玩家变量[i]}, $2, $3);`
+            );
+            //在索引处设置玩家变量
+            text = text.replace(
+              RegExp(
+                `在索引处设置玩家变量\\s*\\(\\s*(.*)\\s*,\\s*\\b${dynamicList.玩家变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `在索引处设置玩家变量($1, ${obfuscatedList.玩家变量[i]}, $2, $3);`
+            );
+            //在索引处修改玩家变量
+            text = text.replace(
+              RegExp(
+                `在索引处修改玩家变量\\s*\\(\\s*(.*)\\s*,\\s*\\b${dynamicList.玩家变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `在索引处修改玩家变量($1, ${obfuscatedList.玩家变量[i]}, $2, $3, $4);`
+            );
+            //持续追踪玩家变量
+            text = text.replace(
+              RegExp(
+                `持续追踪玩家变量\\s*\\(\\s*(.*)\\s*,\\s*\\b${dynamicList.玩家变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `持续追踪玩家变量($1, ${obfuscatedList.玩家变量[i]}, $2, $3, $4);`
+            );
+            //追踪玩家变量频率
+            text = text.replace(
+              RegExp(
+                `追踪玩家变量频率\\s*\\(\\s*(.*)\\s*,\\s*\\b${dynamicList.玩家变量[i]}\\b\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)\\s*;`,
+                "g"
+              ),
+              `追踪玩家变量频率($1, ${obfuscatedList.玩家变量[i]}, $2, $3, $4);`
+            );
+            //停止追踪玩家变量
+            text = text.replace(
+              RegExp(
+                `停止追踪玩家变量\\s*\\(\\s*(.*)\\s*,\\s*\\b${dynamicList.玩家变量[i]}\\b\\s*\\)\\s*;`,
+                "g"
+              ),
+              `停止追踪玩家变量($1, ${obfuscatedList.玩家变量[i]});`
             );
           }
 
