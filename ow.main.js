@@ -145,6 +145,28 @@ function activate(context) {
           const obfuscatedNames = UTIL.getObfuscatedNames(128);
           let text = document.getText();
 
+          //混淆字符串
+          const pattern = /自定义字符串\s*\(\s*"((?:[^"\\]|\\.)+)"/g;
+          let match;
+          while ((match = pattern.exec(text))) {
+            const fullMatch = match[0];
+            const quotedContent = match[1];
+            const obfuscatedContent = quotedContent.replace(
+              /\{[0-2]\}|\\[ntr]|./g,
+              (char) => {
+                if (char.length > 1) {
+                  return char;
+                }
+                return String.fromCodePoint(char.charCodeAt(0) + 0xe0000);
+              }
+            );
+
+            text = text.replace(
+              fullMatch,
+              `自定义字符串("${obfuscatedContent}"`
+            );
+          }
+
           //修复工坊问题
           text = text.replace(
             /设置不可见\((.*), 无\);/g,
@@ -167,14 +189,14 @@ function activate(context) {
             "持续追踪玩家变量($1, $2, $3, $4, 全部禁用);"
           );
 
-          //移除全部注释
+          //移除注释
           text = text.replace(
             /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|^\s*"[^"]*"\s*)/gm,
             ""
           );
 
-          //移除重复规则
-          text = text.replace(/禁用查看器录制\s*;/g, "");
+          //移除查看器
+          text = text.replace(/(禁用查看器录制|启用查看器录制)\s*;/g, "");
 
           //移除空白行
           text = text.replace(/^\s*[\r\n]/gm, "");
@@ -419,7 +441,7 @@ function activate(context) {
           let newRules = [
             rules[0],
             `
-规则("${obfuscatedNames[Math.floor(Math.random() * obfuscatedNames.length)]}")
+规则("代码受到保护，请尊重作者的劳动成果｜守望先锋® 工坊语言支持")
 {
 事件
 {
@@ -439,7 +461,11 @@ function activate(context) {
               j++
             ) {
               newRules.push(`
-规则("${obfuscatedNames[Math.floor(Math.random() * obfuscatedNames.length)]}")
+规则("${`\n${
+                obfuscatedNames[
+                  Math.floor(Math.random() * obfuscatedNames.length)
+                ]
+              }`.repeat(UTIL.getRandomInt(5, 8))}")
 {
 事件
 {
@@ -448,9 +474,8 @@ function activate(context) {
 }`);
             }
           }
-          text = newRules.join("");
 
-          vscode.env.clipboard.writeText(text);
+          vscode.env.clipboard.writeText(newRules.join(""));
           vscode.window.showInformationMessage(
             `${path.basename(document.fileName)}（混淆）已导出到剪切板`
           );
@@ -1293,7 +1318,7 @@ function activate(context) {
           const text = document.getText();
           const indentations = {};
           const pattern =
-            /"([^"\\]|\\.)*"|\{|\}|\[|\]|\(|\)|全局:|玩家:|For 全局变量|For 玩家变量|While|If|Else If|Else|End/g;
+            /"(?:[^"\\]|\\.)*"|\{|\}|\[|\]|\(|\)|全局:|玩家:|For 全局变量|For 玩家变量|While|If|Else If|Else|End/g;
           let isVariable = false;
           let level = 0;
           let ignore = 0;
