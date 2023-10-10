@@ -1288,185 +1288,128 @@ function activate(context) {
 
     //代码整理能力
     vscode.languages.registerDocumentFormattingEditProvider("ow", {
-      async provideDocumentFormattingEdits(document, options) {
-        if (document.lineCount > 10000) {
-          const response = await vscode.window.showInformationMessage(
-            "文件过大，整理需要一点时间。要继续吗？",
-            "继续",
-            "取消"
-          );
-          if (response === "取消") {
-            return;
+      provideDocumentFormattingEdits(document, options) {
+        try {
+          const text = document.getText();
+          const indentations = {};
+          const pattern =
+            /"([^"\\]|\\.)*"|\{|\}|\[|\]|\(|\)|全局:|玩家:|For 全局变量|For 玩家变量|While|If|Else If|Else|End/g;
+          let isVariable = false;
+          let level = 0;
+          let ignore = 0;
+          let match;
+          while ((match = pattern.exec(text))) {
+            switch (match[0]) {
+              case "[":
+              case "(":
+                indentations[document.positionAt(match.index).line + 1] =
+                  --ignore;
+                break;
+
+              case "]":
+              case ")":
+                indentations[document.positionAt(match.index).line + 1] =
+                  ++ignore == 0 ? level : ignore;
+                break;
+
+              case "{":
+              case "For 全局变量":
+              case "For 玩家变量":
+              case "While":
+              case "If":
+                indentations[document.positionAt(match.index).line + 1] =
+                  ++level;
+                break;
+
+              case "}":
+              case "End":
+                if (isVariable) {
+                  --level;
+                  isVariable = false;
+                }
+                indentations[document.positionAt(match.index).line] = --level;
+                break;
+
+              case "Else If":
+              case "Else":
+                indentations[document.positionAt(match.index).line] = --level;
+                indentations[document.positionAt(match.index).line + 1] =
+                  ++level;
+                break;
+
+              case "全局:":
+              case "玩家:":
+                if (isVariable) {
+                  indentations[document.positionAt(match.index).line] = --level;
+                }
+                indentations[document.positionAt(match.index).line + 1] =
+                  ++level;
+                isVariable = true;
+                break;
+            }
           }
-        }
 
-        return vscode.window.activeTextEditor.edit((editBuilder) => {
-          try {
-            //保留光标
-            let selection = vscode.window.activeTextEditor.selection;
-            let variable = false;
-            let scopeLevel = 0;
-            let entryLevel = 0;
-            let ignore = 0;
-            for (let i = 0; i < document.lineCount; i++) {
-              const line = document.lineAt(i);
-              const trimText = line.text.trim();
-
-              //绕过空行
-              if (trimText === "") {
-                continue;
-              }
-
-              //过滤无关符号
-              const pureText = trimText
-                .replace(/\/\/.*/g, "")
-                .replace(/\".*\"/g, "");
-
-              //绕过`[]`和`()`内容
-              if (ignore) {
-                for (let j = 0; j < pureText.length; j++) {
-                  const symbol = pureText[j];
-                  if (symbol == "[" || symbol == "(") {
-                    ignore++;
-                  } else if (symbol == "]" || symbol == ")") {
-                    ignore--;
-                    if (ignore == 0) {
-                      break;
-                    }
-                  }
-                }
-                if (ignore > 0) {
-                  continue;
-                }
-              }
-
-              //对齐整行注释
-              if (
-                trimText.startsWith("//") ||
-                (trimText.startsWith('"') && trimText.endsWith('"'))
-              ) {
-                addDocumentFormattingEdits(
-                  line,
-                  trimText,
-                  scopeLevel + entryLevel
-                );
-                continue;
-              }
-
-              if (pureText.endsWith("[") || pureText.endsWith("(")) {
-                addDocumentFormattingEdits(
-                  line,
-                  trimText,
-                  scopeLevel + entryLevel
-                );
-                ignore++;
-              } else if (pureText.endsWith("{")) {
-                addDocumentFormattingEdits(line, trimText, scopeLevel);
-                scopeLevel++;
-              } else if (
-                pureText.startsWith("全局:") ||
-                pureText.startsWith("玩家:")
-              ) {
-                if (variable) {
-                  entryLevel--;
-                }
-                addDocumentFormattingEdits(
-                  line,
-                  trimText,
-                  scopeLevel + entryLevel
-                );
-                variable = true;
-                entryLevel++;
-              } else if (
-                pureText.startsWith("If") ||
-                pureText.startsWith("While") ||
-                pureText.startsWith("For 全局变量") ||
-                pureText.startsWith("For 全局变量") ||
-                pureText.startsWith("For 玩家变量")
-              ) {
-                addDocumentFormattingEdits(
-                  line,
-                  trimText,
-                  scopeLevel + entryLevel
-                );
-                entryLevel++;
-              } else if (
-                pureText.startsWith("Else") ||
-                pureText.startsWith("Else If")
-              ) {
-                entryLevel--;
-                entryLevel = Math.max(entryLevel, 0);
-                addDocumentFormattingEdits(
-                  line,
-                  trimText,
-                  scopeLevel + entryLevel
-                );
-                entryLevel++;
-              } else if (pureText.endsWith("}")) {
-                scopeLevel--;
-                scopeLevel = Math.max(scopeLevel, 0);
-                if (scopeLevel == 0) {
-                  entryLevel = 0;
-                }
-                addDocumentFormattingEdits(line, trimText, scopeLevel);
-              } else if (pureText.startsWith("End")) {
-                entryLevel--;
-                entryLevel = Math.max(entryLevel, 0);
-                addDocumentFormattingEdits(
-                  line,
-                  trimText,
-                  scopeLevel + entryLevel
-                );
-              } else {
-                addDocumentFormattingEdits(
-                  line,
-                  trimText,
-                  scopeLevel + entryLevel
-                );
-              }
+          let formatLines = [];
+          let indentation = 0;
+          for (let i = 0; i < document.lineCount; i++) {
+            if (indentations.hasOwnProperty(i)) {
+              indentation = indentations[i];
+            }
+            if (indentation < 0) {
+              continue;
             }
 
-            //还原光标
-            vscode.window.activeTextEditor.selection = selection;
+            const line = document.lineAt(i);
+            const trimText = line.text.trim();
+            if (trimText === "") {
+              continue;
+            }
 
-            //添加新修改
-            function addDocumentFormattingEdits(line, trimText, level) {
-              editBuilder.replace(
+            formatLines.push(
+              new vscode.TextEdit(
                 line.range,
                 (options.insertSpaces
-                  ? " ".repeat(level * options.tabSize)
-                  : "\t".repeat(level)) + trimText
-              );
-            }
-          } catch (error) {
-            console.log(
-              "错误：provideDocumentFormattingEdits 代码整理能力" + error
+                  ? " ".repeat(indentation * options.tabSize)
+                  : "\t".repeat(indentation)) + trimText
+              )
             );
           }
-        });
+
+          return formatLines;
+        } catch (error) {
+          console.log(error);
+        }
       },
     }),
 
     //切换开关能力
     vscode.languages.registerCodeLensProvider("ow", {
-      provideCodeLenses(document) {
+      async provideCodeLenses(document) {
         try {
           const codeLens = [];
           const text = document.getText();
-          const pattern = /(禁用\s*)?规则\s*\(\s*"(.*)"\s*\)/g;
-          while ((match = pattern.exec(text))) {
-            const matchText = match[0];
-            const startPos = document.positionAt(match.index);
-            const endPos = document.positionAt(match.index + matchText.length);
-            const range = new vscode.Range(startPos, endPos);
-            const toggleCommand = {
-              title: `切换开关`,
-              command: "ow.toggle.disableRule",
-              arguments: [{ document, range }],
-            };
-            const newCodeLens = new vscode.CodeLens(range, toggleCommand);
-            codeLens.push(newCodeLens);
-          }
+          const pattern = /(禁用\s*)?规则\s*\(\s*"/g;
+          let match;
+          const processMatchesAsync = async () => {
+            while ((match = pattern.exec(text))) {
+              const matchText = match[0];
+              const startPos = document.positionAt(match.index);
+              const endPos = document.positionAt(
+                match.index + matchText.length
+              );
+              const range = new vscode.Range(startPos, endPos);
+              const toggleCommand = {
+                title: `切换开关`,
+                command: "ow.toggle.disableRule",
+                arguments: [{ document, range }],
+              };
+              const newCodeLens = new vscode.CodeLens(range, toggleCommand);
+              codeLens.push(newCodeLens);
+              //引入一个小延迟，将控制权交还给事件循环
+              await new Promise((resolve) => setTimeout(resolve, 0.016));
+            }
+          };
+          await processMatchesAsync();
           return codeLens;
         } catch (error) {
           console.log("错误：provideCodeLenses 切换开关能力" + error);

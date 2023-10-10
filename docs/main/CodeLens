@@ -1,0 +1,68 @@
+    //切换开关能力
+    vscode.languages.registerCodeLensProvider("ow", {
+      provideCodeLenses(document) {
+        try {
+          const codeLens = [];
+          const pattern = /(禁用\s*)?规则\s*\(\s*"/g;
+          const editor = vscode.window.activeTextEditor;
+          const visibleRange = editor.visibleRanges[0];
+          const visibleText = document.getText(visibleRange);
+          let match;
+          while ((match = pattern.exec(visibleText))) {
+            const matchText = match[0];
+            const startPos = document.positionAt(
+              document.offsetAt(visibleRange.start) + match.index
+            );
+            const endPos = document.positionAt(
+              document.offsetAt(visibleRange.start) +
+                match.index +
+                matchText.length
+            );
+            const range = new vscode.Range(startPos, endPos);
+            const toggleCommand = {
+              title: `切换开关`,
+              command: "ow.toggle.disableRule",
+              arguments: [{ document, range }],
+            };
+            const newCodeLens = new vscode.CodeLens(range, toggleCommand);
+            codeLens.push(newCodeLens);
+          }
+          return codeLens;
+        } catch (error) {
+          console.log("错误：provideCodeLenses 切换开关能力" + error);
+        }
+      },
+    }),
+
+    //切换开关行为
+    vscode.commands.registerCommand("ow.toggle.disableRule", (args) => {
+      try {
+        const { document, range } = args;
+        let text = document.getText(range);
+        if (text.startsWith("禁用")) {
+          text = text.replace(/禁用\s*/, "");
+        } else {
+          text = `禁用 ${text}`;
+        }
+        const edit = new vscode.WorkspaceEdit();
+        edit.replace(document.uri, range, text);
+        vscode.workspace.applyEdit(edit);
+      } catch (error) {
+        console.log("错误：ow.toggle.disableRule 切换开关行为" + error);
+      }
+    }),
+
+    //切换开关滚动监视
+    vscode.window.onDidChangeTextEditorVisibleRanges((event) => {
+      try {
+
+        vscode.commands.executeCommand(
+          "vscode.executeCodeLensProvider",
+          event.textEditor.document.uri
+        );
+      } catch (error) {
+        console.log(
+          "错误：onDidChangeTextEditorVisibleRanges 切换开关滚动监视" + error
+        );
+      }
+    }),
