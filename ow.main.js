@@ -453,19 +453,18 @@ function activate(context) {
 }
 }`,
           ];
+          const min = Math.min(60, (2000 - rules.length) / rules.length);
+          const max = Math.min(80, (2500 - rules.length) / rules.length);
+
           for (let i = 1; i < rules.length; i++) {
             newRules.push(rules[i]);
-            for (
-              let j = 0;
-              j < UTIL.getRandomInt(2000 / rules.length, 2500 / rules.length);
-              j++
-            ) {
+            for (let j = 0; j < UTIL.getRandomInt(min, max); j++) {
               newRules.push(`
 规则("${`\n${
                 obfuscatedNames[
                   Math.floor(Math.random() * obfuscatedNames.length)
                 ]
-              }`.repeat(UTIL.getRandomInt(5, 8))}")
+              }`.repeat(UTIL.getRandomInt(5, 10))}")
 {
 事件
 {
