@@ -194,6 +194,18 @@ function activate(context) {
           //替换禁用
           rules = rules.replace(/禁用\s+/g, "⟁");
 
+          //移除规则名
+          rules = rules.replace(/规则\("((?:\\"|[^"])+?)"\)/gs, `规则(\"\")`);
+
+          //移除字符串注释
+          rules = rules.replace(/^\s*"((?:\\"|[^"])*)"/gs, "");
+
+          //移除单行注释
+          rules = rules.replace(/\/\/.*/g, "");
+
+          //移除段落注释
+          rules = rules.replace(/\/\*(.*?)\*\//gs, "");
+
           //移除换行
           rules = rules.replace(/[\r\n]+/g, "");
 
@@ -204,6 +216,7 @@ function activate(context) {
               rules
             ))
           ) {
+            console.log(match[0]);
             strings.push(
               match[2].replace(/\{[0-2]\}|\\[ntr]|./g, (char) => {
                 if (char.length == 1) {
@@ -236,11 +249,8 @@ function activate(context) {
           //移除查看器
           rules = rules.replace(/(禁用查看器录制|启用查看器录制);/g, "");
 
-          //清空注释与规则字符串
-          rules = rules.replace(/"(.*?)"/g, `""`);
-
-          //移除字符串注释
-          rules = rules.replace(/^""$\n/gm, "");
+          //移除空行
+          rules = rules.replace(/^\s*[\r\n]/gm, "");
 
           //修复工坊问题
           rules = rules.replace(
@@ -442,7 +452,9 @@ function activate(context) {
           }
 
           //混淆数字
-          //TODO
+          rules.replace(/\[(\d+)\]/g, (match) => {
+            return `[${match}]`;
+          });
 
           //填充空白规则
           const ruleList = rules
@@ -479,6 +491,30 @@ function activate(context) {
 `);
             }
           }
+
+          for (let t = 0; t < 5; t++) {
+            newRules.splice(
+              Math.floor(Math.random() * (newRules.length + 1)),
+              0,
+              `规则("") {
+事件
+{
+持续 - 全局;
+}
+条件
+{
+0.000${UTIL.getRandomInt(1, 4)} == 假;
+}
+动作
+{
+While(真);
+End;
+}
+}
+`
+            );
+          }
+
           rules = newRules.join("");
 
           //混淆规则名称
@@ -499,15 +535,6 @@ function activate(context) {
           rules = rules.replace(/❖/g, () => {
             return `"${strings.shift()}"`;
           });
-
-          //移除单行注释
-          rules = rules.replace(/\/\/.*/g, "");
-
-          //移除段落注释
-          rules = rules.replace(/\/\*(.*?)\*\//gs, "");
-
-          //移除空行
-          rules = rules.replace(/^\s*[\r\n]/gm, "");
 
           //混淆子程序列表
           if (obfuscatedList.子程序.length > 0) {
