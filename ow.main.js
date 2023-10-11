@@ -200,6 +200,18 @@ function activate(context) {
             `规则(\"\")`
           );
 
+          //移除字符串注释
+          rules = rules.replace(/^\s*"((?:\\"|[^"])*)"$/gm, "");
+
+          //移除单行注释
+          rules = rules.replace(/\/\/.*/g, "");
+
+          //移除段落注释
+          rules = rules.replace(/\/\*(.*?)\*\//gs, "");
+
+          //移除换行
+          rules = rules.replace(/[\r\n]+/g, "");
+
           //混淆玩家字符串
           const strings = [];
           while (
@@ -217,18 +229,6 @@ function activate(context) {
             );
             rules = rules.replace(match[0], `自定义字符串(❖`);
           }
-
-          //移除字符串注释
-          rules = rules.replace(/^\s*"((?:\\"|[^"])*)"$/gm, "");
-
-          //移除单行注释
-          rules = rules.replace(/\/\/.*/g, "");
-
-          //移除段落注释
-          rules = rules.replace(/\/\*(.*?)\*\//gs, "");
-
-          //移除换行
-          rules = rules.replace(/[\r\n]+/g, "");
 
           //移除空白
           rules = rules.replace(/\s+/g, "");
@@ -275,6 +275,8 @@ function activate(context) {
             /持续追踪玩家变量\((.*),(.*),(.*),(.*),无\);/g,
             "持续追踪玩家变量($1,$2,$3,$4,全部禁用);"
           );
+
+          //文本那些刷新选项没做 无 -> 全部禁用
 
           //获取混淆名称
           let obfuscatedList = { 子程序: [], 全局变量: [], 玩家变量: [] };
@@ -454,6 +456,7 @@ function activate(context) {
           }
 
           //混淆数字
+
           rules = rules.replace(/\[(\d+)\]/g, (match) => {
             const value = parseInt(match[1]);
             const offset = parseFloat(
