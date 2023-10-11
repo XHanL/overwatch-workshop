@@ -195,7 +195,10 @@ function activate(context) {
           rules = rules.replace(/禁用\s+/g, "⟁");
 
           //移除规则名
-          rules = rules.replace(/规则\("((?:\\"|[^"])+?)"\)/gs, `规则(\"\")`);
+          rules = rules.replace(
+            /规则\s*\(\s*"((?:\\"|[^"])+?)"\)/gs,
+            `规则(\"\")`
+          );
 
           //移除字符串注释
           rules = rules.replace(/^\s*"((?:\\"|[^"])*)"$/gm, "");
