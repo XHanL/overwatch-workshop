@@ -456,15 +456,16 @@ function activate(context) {
           }
 
           //混淆数字
-
+          /*
           rules = rules.replace(/\[(\d+)\]/g, (match) => {
             const value = parseInt(match[1]);
             const offset = parseFloat(
-              UTIL.getRandomNumber(value > 1 ? -0.4 : 0.1, 0.4, 1)
+              UTIL.getRandomNumber(value > 1 ? -0.4 : 0, 0, 1)
             );
-            const result = value + offset;
-            return `[乘(1,${result})]`;
+            const result = value - offset;
+            return `[乘(10000000,${match[1]} / 10000000)]`;
           });
+          */
 
           //填充空白规则
           const ruleList = rules
