@@ -200,18 +200,6 @@ function activate(context) {
             `规则(\"\")`
           );
 
-          //移除字符串注释
-          rules = rules.replace(/^\s*"((?:\\"|[^"])*)"$/gm, "");
-
-          //移除单行注释
-          rules = rules.replace(/\/\/.*/g, "");
-
-          //移除段落注释
-          rules = rules.replace(/\/\*(.*?)\*\//gs, "");
-
-          //移除换行
-          rules = rules.replace(/[\r\n]+/g, "");
-
           //混淆玩家字符串
           const strings = [];
           while (
@@ -229,6 +217,18 @@ function activate(context) {
             );
             rules = rules.replace(match[0], `自定义字符串(❖`);
           }
+
+          //移除字符串注释
+          rules = rules.replace(/^\s*"((?:\\"|[^"])*)"$/gm, "");
+
+          //移除单行注释
+          rules = rules.replace(/\/\/.*/g, "");
+
+          //移除段落注释
+          rules = rules.replace(/\/\*(.*?)\*\//gs, "");
+
+          //移除换行
+          rules = rules.replace(/[\r\n]+/g, "");
 
           //移除空白
           rules = rules.replace(/\s+/g, "");
