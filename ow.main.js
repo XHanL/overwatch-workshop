@@ -198,7 +198,7 @@ function activate(context) {
           rules = rules.replace(/规则\("((?:\\"|[^"])+?)"\)/gs, `规则(\"\")`);
 
           //移除字符串注释
-          rules = rules.replace(/^\s*"((?:\\"|[^"])*)"/gm, "");
+          rules = rules.replace(/^\s*"((?:\\"|[^"])*)"$/gm, "");
 
           //移除单行注释
           rules = rules.replace(/\/\/.*/g, "");
@@ -451,12 +451,13 @@ function activate(context) {
           }
 
           //混淆数字
-          rules.replace(/\[(\d+)\]/g, (match) => {
-            //parseFloat(UTIL.getRandomNumber(0.1, 0.4, 1)) +
-            let num = (parseInt(match[1]) / 10000000).toString();
-            console.log(num);
-
-            return `[乘(10000000,${num})]`;
+          rules = rules.replace(/\[(\d+)\]/g, (match) => {
+            const value = parseInt(match[1]);
+            const offset = parseFloat(
+              UTIL.getRandomNumber(value > 1 ? -0.4 : 0.1, 0.4, 1)
+            );
+            const result = value + offset;
+            return `[乘(1,${result})]`;
           });
 
           //填充空白规则
