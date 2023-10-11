@@ -198,7 +198,7 @@ function activate(context) {
           rules = rules.replace(/规则\("((?:\\"|[^"])+?)"\)/gs, `规则(\"\")`);
 
           //移除字符串注释
-          rules = rules.replace(/^\s*"((?:\\"|[^"])*)"/gs, "");
+          rules = rules.replace(/^\s*"((?:\\"|[^"])*)"/gm, "");
 
           //移除单行注释
           rules = rules.replace(/\/\/.*/g, "");
@@ -212,20 +212,19 @@ function activate(context) {
           //混淆玩家字符串
           const strings = [];
           while (
-            (match = /(字符串|自定义字符串)\s*\(\s*"((?:\\"|[^"])+?)"/.exec(
+            (match = /(?:字符串|自定义字符串)\s*\(\s*"((?:\\"|[^"])+?)"/.exec(
               rules
             ))
           ) {
-            console.log(match[0]);
             strings.push(
-              match[2].replace(/\{[0-2]\}|\\[ntr]|./g, (char) => {
+              match[1].replace(/\{[0-2]\}|\\[ntr]|./g, (char) => {
                 if (char.length == 1) {
                   return String.fromCodePoint(char.charCodeAt(0) + 0xe0000);
                 }
                 return char;
               })
             );
-            rules = rules.replace(match[0], `${match[1]}(❖`);
+            rules = rules.replace(match[0], `自定义字符串(❖`);
           }
 
           //移除空白
@@ -453,7 +452,11 @@ function activate(context) {
 
           //混淆数字
           rules.replace(/\[(\d+)\]/g, (match) => {
-            return `[${match}]`;
+            //parseFloat(UTIL.getRandomNumber(0.1, 0.4, 1)) +
+            let num = (parseInt(match[1]) / 10000000).toString();
+            console.log(num);
+
+            return `[乘(10000000,${num})]`;
           });
 
           //填充空白规则
@@ -461,7 +464,7 @@ function activate(context) {
             .replace(/\n(⟁规则|规则)\(""\)/g, '\n✂$1("")')
             .split("✂");
 
-          ruleList.unshift(`规则("代码受到保护，请尊重作者劳动成果 - 守望先锋® 工坊语言支持")
+          ruleList.unshift(`规则("代码受到保护，请尊重作者劳动成果。守望先锋® 工坊语言支持")
 {
 事件
 {
