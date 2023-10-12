@@ -453,7 +453,10 @@ function activate(context) {
               }
 
               //移除查看器录制
-              rules = rules.replace(/(禁用查看器录制|启用查看器录制);/g, "");
+              rules = rules.replace(
+                /⟁?(?:禁用查看器录制|启用查看器录制);/g,
+                ""
+              );
 
               //最大元素数量
               const input = parseInt(value);
