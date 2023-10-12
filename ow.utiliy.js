@@ -9,8 +9,8 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getRandomNumber(min, max, fix) {
-  return (Math.random() * (max - min) + min).toFixed(fix);
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
 //获取动态类型

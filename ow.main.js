@@ -64,24 +64,32 @@ function activate(context) {
           const document = activeEditor.document;
           let text = document.getText();
           text = text.replace(
+            /创建HUD文本\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*,\s*(.*)\s*\)\s*;/g,
+            "创建HUD文本($1, $2, $3, $4, $5, $6, $7, $8, $9, 全部禁用, $10);"
+          );
+          text = text.replace(
+            /创建进度条地图文本\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*,\s*(.*)\s*\)\s*;/g,
+            "创建进度条地图文本($1, $2, $3, $4, $5, $6, $7, $8, 全部禁用, $9);"
+          );
+          text = text.replace(
+            /创建进度条HUD文本\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*,\s*(.*)\s*\)\s*;/g,
+            "创建进度条HUD文本($1, $2, $3, $4, $5, $6, $7, 全部禁用, $8);"
+          );
+          text = text.replace(
+            /创建地图文本\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*,\s*(.*)\s*,\s*(.*)\s*\)\s*;/g,
+            "创建地图文本($1, $2, $3, $4, $5, 全部禁用, $6, $7);"
+          );
+          text = text.replace(
+            /(追踪全局变量频率|持续追踪全局变量|开始治疗调整)\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
+            "$1($2, $3, $4, 全部禁用);"
+          );
+          text = text.replace(
+            /(追踪玩家变量频率|持续追踪玩家变量)\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
+            "$1($2, $3, $4, $5, 全部禁用);"
+          );
+          text = text.replace(
             /设置不可见\s*\(\s*(.*)\s*,\s*无\s*\)\s*;/g,
             "设置不可见($1, 全部禁用);"
-          );
-          text = text.replace(
-            /追踪全局变量频率\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
-            "追踪全局变量频率($1, $2, $3, 全部禁用);"
-          );
-          text = text.replace(
-            /追踪玩家变量频率\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
-            "追踪玩家变量频率($1, $2, $3, $4, 全部禁用);"
-          );
-          text = text.replace(
-            /持续追踪全局变量\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
-            "持续追踪全局变量($1, $2, $3, 全部禁用);"
-          );
-          text = text.replace(
-            /持续追踪玩家变量\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
-            "持续追踪玩家变量($1, $2, $3, $4, 全部禁用);"
           );
           vscode.env.clipboard.writeText(text);
           vscode.window.showInformationMessage(
@@ -100,24 +108,32 @@ function activate(context) {
         if (activeEditor) {
           vscode.env.clipboard.readText().then((text) => {
             text = text.replace(
+              /创建HUD文本\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*,\s*(.*)\s*\)\s*;/g,
+              "创建HUD文本($1, $2, $3, $4, $5, $6, $7, $8, $9, 全部禁用, $10);"
+            );
+            text = text.replace(
+              /创建进度条地图文本\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*,\s*(.*)\s*\)\s*;/g,
+              "创建进度条地图文本($1, $2, $3, $4, $5, $6, $7, $8, 全部禁用, $9);"
+            );
+            text = text.replace(
+              /创建进度条HUD文本\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*,\s*(.*)\s*\)\s*;/g,
+              "创建进度条HUD文本($1, $2, $3, $4, $5, $6, $7, 全部禁用, $8);"
+            );
+            text = text.replace(
+              /创建地图文本\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*,\s*(.*)\s*,\s*(.*)\s*\)\s*;/g,
+              "创建地图文本($1, $2, $3, $4, $5, 全部禁用, $6, $7);"
+            );
+            text = text.replace(
+              /(追踪全局变量频率|持续追踪全局变量|开始治疗调整)\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
+              "$1($2, $3, $4, 全部禁用);"
+            );
+            text = text.replace(
+              /(追踪玩家变量频率|持续追踪玩家变量)\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
+              "$1($2, $3, $4, $5, 全部禁用);"
+            );
+            text = text.replace(
               /设置不可见\s*\(\s*(.*)\s*,\s*无\s*\)\s*;/g,
               "设置不可见($1, 全部禁用);"
-            );
-            text = text.replace(
-              /追踪全局变量频率\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
-              "追踪全局变量频率($1, $2, $3, 全部禁用);"
-            );
-            text = text.replace(
-              /追踪玩家变量频率\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
-              "追踪玩家变量频率($1, $2, $3, $4, 全部禁用);"
-            );
-            text = text.replace(
-              /持续追踪全局变量\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
-              "持续追踪全局变量($1, $2, $3, 全部禁用);"
-            );
-            text = text.replace(
-              /持续追踪玩家变量\s*\(\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*(.*)\s*,\s*无\s*\)\s*;/g,
-              "持续追踪玩家变量($1, $2, $3, $4, 全部禁用);"
             );
             const edit = new vscode.WorkspaceEdit();
             const wholeDocumentRange = activeEditor.document.validateRange(
@@ -229,10 +245,11 @@ function activate(context) {
                     //console.log(`替换字符：${string} → ❖`);
                     strings.push(
                       string.replace(
-                        /\{[0-2]\}|(?:\\[abfnrtv'"\\\\])+|./g,
+                        /\{[0-2]\}|(\\[abfnrtv'"\\\\])+|./g,
                         (char) => {
                           if (char.length == 1) {
                             if (char.match(/[\x00-\x1F\x7F-\x9F\xAD]/g)) {
+                              //忽略已隐形字符
                               return char;
                             }
                             return String.fromCodePoint(
@@ -280,27 +297,33 @@ function activate(context) {
 
               //修复工坊问题
               rules = rules.replace(
+                /创建HUD文本\((.*),(.*),(.*),(.*),(.*),(.*),(.*),(.*),(.*),无,(.*)\);/g,
+                "创建HUD文本($1,$2,$3,$4,$5,$6,$7,$8,$9,全部禁用,$10);"
+              );
+              rules = rules.replace(
+                /创建进度条地图文本\((.*),(.*),(.*),(.*),(.*),(.*),(.*),(.*),无,(.*)\);/g,
+                "创建进度条地图文本($1,$2,$3,$4,$5,$6,$7,$8,全部禁用,$9);"
+              );
+              rules = rules.replace(
+                /创建进度条HUD文本\((.*),(.*),(.*),(.*),(.*),(.*),(.*),无,(.*)\);/g,
+                "创建进度条HUD文本($1,$2,$3,$4,$5,$6,$7,全部禁用,$8);"
+              );
+              rules = rules.replace(
+                /创建地图文本\((.*),(.*),(.*),(.*),(.*),无,(.*),(.*)\);/g,
+                "创建地图文本($1,$2,$3,$4,$5,全部禁用,$6,$7);"
+              );
+              rules = rules.replace(
+                /(追踪全局变量频率|持续追踪全局变量|开始治疗调整)\((.*),(.*),(.*),无\);/g,
+                "$1($2,$3,$4,全部禁用);"
+              );
+              rules = rules.replace(
+                /(追踪玩家变量频率|持续追踪玩家变量)\((.*),(.*),(.*),(.*),无\);/g,
+                "$1($2,$3,$4,$5,全部禁用);"
+              );
+              rules = rules.replace(
                 /设置不可见\((.*),无\);/g,
                 "设置不可见($1,全部禁用);"
               );
-              rules = rules.replace(
-                /追踪全局变量频率\((.*),(.*),(.*),无\);/g,
-                "追踪全局变量频率($1,$2,$3,全部禁用);"
-              );
-              rules = rules.replace(
-                /追踪玩家变量频率\((.*),(.*),(.*),(.*),无\);/g,
-                "追踪玩家变量频率($1,$2,$3,$4,全部禁用);"
-              );
-              rules = rules.replace(
-                /持续追踪全局变量\((.*),(.*),(.*),无\);/g,
-                "持续追踪全局变量($1,$2,$3,全部禁用);"
-              );
-              rules = rules.replace(
-                /持续追踪玩家变量\((.*),(.*),(.*),(.*),无\);/g,
-                "持续追踪玩家变量($1,$2,$3,$4,全部禁用);"
-              );
-
-              //文本那些刷新选项没做 无 -> 全部禁用
 
               //获取混淆名称
               let obfuscatedList = {
@@ -489,66 +512,71 @@ function activate(context) {
                 );
               }
 
-              //混淆数字
-              /*
-          rules = rules.replace(/\[(\d+)\]/g, (match) => {
-            const value = parseInt(match[1]);
-            const offset = parseFloat(
-              UTIL.getRandomNumber(value > 1 ? -0.4 : 0, 0, 1)
-            );
-            const result = value - offset;
-            return `[乘(10000000,${match[1]} / 10000000)]`;
-          });
-          */
-
-              //切割规则
-              const ruleList = rules
-                .replace(/(⟁规则|规则)\(""\)/g, '✂$1("")')
-                .split("✂");
+              //移除查看器录制
+              rules = rules.replace(/(禁用查看器录制|启用查看器录制);/g, "");
 
               //最大元素数量
               const input = parseInt(value);
               let elementCount = 32768;
               elementCount -= isNaN(input) ? 30000 : input;
 
-              //移除查看器录制
-              rules = rules.replace(/(禁用查看器录制|启用查看器录制);/g, "");
+              //混淆数字(由于hud无法准确还原数字遭到禁用)
+              /*
+              rules = rules.replace(/\[(\d+)\]/g, (match) => {
+                const value = parseInt(match[1]);
+                if (value == 0) {
+                  return `[${UTIL.getRandomNumber(0.01, 0.43).toFixed(3)}]`;
+                }
+                return `[${(value + UTIL.getRandomNumber(-0.43, 0.43)).toFixed(
+                  3
+                )}]`;
+              });
+              */
+
+              //切割规则
+              const ruleList = rules
+                .replace(/(⟁规则|规则)\(""\)/g, '✂$1("")')
+                .split("✂");
 
               //填充查看器警告 (2元素)
               if (elementCount >= 2) {
+                elementCount -= 2;
                 ruleList.unshift(
                   `规则("代码受到保护，请尊重作者劳动成果。守望先锋® 工坊语言支持")\n{\n事件\n{\n持续 - 全局;\n}\n动作\n{\n禁用查看器录制;\n}\n}`
                 );
-                elementCount -= 2;
               }
 
-              //填充篡改保护
+              //填充篡改保护 (25元素，5元素/个)
               for (let t = 0; t < 5; t++) {
                 if (elementCount >= 5) {
-                  obfuscatedRules.splice(
-                    Math.floor(Math.random() * (obfuscatedRules.length + 1)),
+                  elementCount -= 5;
+                  ruleList.splice(
+                    Math.floor(Math.random() * (ruleList.length + 1)),
                     0,
                     `规则("")\n{\n事件\n{\n持续 - 全局;\n}\n条件\n{\n0.000${UTIL.getRandomInt(
                       1,
                       4
                     )} == 假;\n}\n动作\n{\nWhile(真);\nEnd;\n}\n}`
                   );
-                  elementCount -= 5;
                 } else {
                   break;
                 }
               }
 
-              //映射规则列表
+              //映射规则列表 (消耗剩余元素，1元素/个)
               const length = Math.floor(elementCount / (ruleList.length - 1));
-              console.log(length);
+              //console.log(length);
               for (let i = 0; i < ruleList.length; i++) {
                 obfuscatedRules.push(ruleList[i]);
                 //填充空白规则
-                for (let j = 0; j < length; j++) {
-                  obfuscatedRules.push(
-                    `规则("")\n{\n事件\n{\n持续 - 全局;\n}\n}`
-                  );
+                const length = UTIL.getRandomInt(5, 8);
+                if (elementCount >= length) {
+                  elementCount -= length;
+                  for (let j = 0; j < length; j++) {
+                    obfuscatedRules.push(
+                      `规则("")\n{\n事件\n{\n持续 - 全局;\n}\n}`
+                    );
+                  }
                 }
               }
 
