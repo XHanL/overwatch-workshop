@@ -115,6 +115,7 @@ function activate(context) {
     vscode.commands.registerCommand("ow.command.obfuscate", () => {
       vscode.window
         .showInputBox({
+          placeHolder: "留空使用默认值 30000",
           prompt: "请提供原生代码的总元素数量",
           validateInput: (value) => {
             if (value === "") {
@@ -125,18 +126,27 @@ function activate(context) {
             if (isNaN(intValue)) {
               return "无效输入";
             } else if (intValue > 32768) {
-              return `元素超出游戏限制 (最多32768个)`;
+              return `超出游戏限制 (最多32768个)`;
             }
           },
-          placeHolder: "留空使用 30000 默认值",
         })
         .then((value) => {
+          if (value === undefined) {
+            //用户取消
+            return;
+          }
           try {
+            //最大元素数量
+            const input = parseInt(value);
+            let elementCount = 32768;
+            elementCount -= isNaN(input) ? 30000 : input;
+
+            //修改当前文件
             const activeEditor = vscode.window.activeTextEditor;
             if (activeEditor) {
+              //文档数据
               const document = activeEditor.document;
               const dynamicList = UTIL.getDynamicList(document);
-              const obfuscatedNames = UTIL.getObfuscatedNames(128);
 
               //混淆内容
               let settings = "";
@@ -209,7 +219,7 @@ function activate(context) {
                         (char) => {
                           if (char.length == 1) {
                             if (char.match(/[\x00-\x1F\x7F-\x9F\xAD]/g)) {
-                              //忽略已隐形字符
+                              //忽略隐形字符
                               return char;
                             }
                             return String.fromCodePoint(
@@ -247,15 +257,15 @@ function activate(context) {
               rules = rules.replace(/For玩家变量/g, "For 玩家变量");
               rules = rules.replace(/ElseIf/g, "Else If");
 
-              //添加块换行
+              //添加 "{}" 换行
               rules = rules.replace(/{|}/g, (match) => {
                 return `\n${match[0]}\n`;
               });
 
-              //添加分隔换行
+              //添加 ";" 换行
               rules = rules.replace(/;/g, ";\n");
 
-              //修复工坊问题
+              //修复工坊错误
               rules = rules.replace(
                 /(创建地图文本|创建HUD文本|创建进度条地图文本|创建进度条HUD文本)\((.*),无,(.*)\);/g,
                 "$1($2,全部禁用,$3);"
@@ -266,6 +276,7 @@ function activate(context) {
               );
 
               //获取混淆名称
+              const obfuscatedNames = UTIL.getObfuscatedNames(128);
               let obfuscatedList = {
                 子程序: [],
                 全局变量: [],
@@ -285,7 +296,7 @@ function activate(context) {
               for (const i in dynamicList.子程序) {
                 //事件
                 rules = rules.replace(
-                  RegExp(`\\b${dynamicList.子程序[i]}\\b;`, "g"),
+                  RegExp(`^\\b${dynamicList.子程序[i]}\\b;$`, "gm"),
                   `${obfuscatedList.子程序[i]};`
                 );
                 //开始规则
@@ -313,6 +324,7 @@ function activate(context) {
                   RegExp(`全局\\.\\b${dynamicList.全局变量[i]}\\b`, "g"),
                   `全局.${obfuscatedList.全局变量[i]}`
                 );
+
                 //For 全局变量
                 rules = rules.replace(
                   RegExp(
@@ -452,40 +464,122 @@ function activate(context) {
                 );
               }
 
-              //移除查看器录制
-              rules = rules.replace(
-                /⟁?(?:禁用查看器录制|启用查看器录制);/g,
-                ""
-              );
+              //清洗空行
+              rules = rules.replace(/[\r\n]+/g, "");
 
-              //最大元素数量
-              const input = parseInt(value);
-              let elementCount = 32768;
-              elementCount -= isNaN(input) ? 30000 : input;
-
-              //混淆数字(由于hud无法准确还原数字遭到禁用)
-              /*
-              rules = rules.replace(/\[(\d+)\]/g, (match) => {
-                const value = parseInt(match[1]);
-                if (value == 0) {
-                  return `[${UTIL.getRandomNumber(0.01, 0.43).toFixed(3)}]`;
-                }
-                return `[${(value + UTIL.getRandomNumber(-0.43, 0.43)).toFixed(
-                  3
-                )}]`;
-              });
-              */
-
-              //切割规则
+              //规则处理
               const ruleList = rules
-                .replace(/(⟁规则|规则)\(""\)/g, '✂$1("")')
-                .split("✂");
+                .replace(/((?:⟁规则|规则)\(""\))/g, "✂$1")
+                .split("✂")
+                .filter((rule) => {
+                  //忽略空白
+                  return rule.trim() !== "";
+                })
+                .map((rule) => {
+                  //分解规则
+                  return rule
+                    .replace(/((?:条件|动作)\{)/g, "✂$1")
+                    .split("✂")
+                    .map((block) => {
+                      if (block.startsWith("条件{")) {
+                        return block
+                          .replace(/({|;)/g, "$1✂")
+                          .split("✂")
+                          .map((entry) => {
+                            //混淆索引
+                            return entry.replace(
+                              /\[(\d+)\]/g,
+                              (match, number) => {
+                                // 预留330 = 查看器警告2 + 篡改保护25 + 填充规则300 + 允许继续的自身3
+                                if (elementCount >= 330) {
+                                  //加密服务端计算条目其它索引
+                                  elementCount -= 3;
+                                  return `[乘(10000000, ${(
+                                    parseInt(number) * 0.0000001
+                                  ).toFixed(7)})]`;
+                                }
+                                return match;
+                              }
+                            );
+                          })
+                          .join("\n");
+                      } else if (block.startsWith("动作{")) {
+                        return block
+                          .replace(/({|;)/g, "$1✂")
+                          .split("✂")
+                          .filter((entry) => {
+                            //忽略动作中的查看器条目或禁用条目
+                            return ![
+                              "禁用查看器录制",
+                              "启用查看器录制",
+                              "记入查看器",
+                            ].some((name) => entry.startsWith(name));
+                          })
+                          .map((entry) => {
+                            //混淆索引
+                            if (
+                              [
+                                "小字体信息",
+                                "大字体信息",
+                                "创建光束效果",
+                                "创建效果",
+                                "播放效果",
+                                "创建图标",
+                                "创建地图文本",
+                                "创建进度条地图文本",
+                                "创建HUD文本",
+                                "创建进度条HUD文本",
+                                "创建弹道",
+                                "创建弹道效果",
+                                "创建追踪弹道",
+                                "设置目标点描述",
+                              ].some((name) => entry.startsWith(name))
+                            ) {
+                              //加密客户端计算条目索引
+                              entry = entry.replace(
+                                /\[(\d+)\]/g,
+                                (_, number) => {
+                                  return `[${(
+                                    parseInt(number) +
+                                    Math.random() * 0.8 -
+                                    0.4
+                                  ).toFixed(3)}]`;
+                                }
+                              );
+                            } else {
+                              entry = entry.replace(
+                                /\[(\d+)\]/g,
+                                (match, number) => {
+                                  // 预留330 = 查看器警告2 + 篡改保护25 + 填充规则300 + 允许继续的自身3
+                                  if (elementCount >= 330) {
+                                    //加密服务端计算条目其它索引
+                                    elementCount -= 3;
+                                    const value = parseInt(number);
+                                    return `[乘(10000000, ${
+                                      value == 0
+                                        ? 0
+                                        : (value * 0.0000001).toFixed(7)
+                                    })]`;
+                                  }
+                                  return match;
+                                }
+                              );
+                            }
+                            return entry;
+                          })
+                          .join("\n");
+                      } else {
+                        return block;
+                      }
+                    })
+                    .join("");
+                });
 
               //填充查看器警告 (2元素)
               if (elementCount >= 2) {
                 elementCount -= 2;
                 ruleList.unshift(
-                  `规则("代码受到保护，请尊重作者劳动成果。守望先锋® 工坊语言支持")\n{\n事件\n{\n持续 - 全局;\n}\n动作\n{\n禁用查看器录制;\n}\n}`
+                  `规则("代码受到保护，请尊重作者劳动成果。守望先锋® 工坊语言支持"){事件{持续 - 全局;}动作{禁用查看器录制;}}`
                 );
               }
 
@@ -496,36 +590,47 @@ function activate(context) {
                   ruleList.splice(
                     Math.floor(Math.random() * (ruleList.length + 1)),
                     0,
-                    `规则("")\n{\n事件\n{\n持续 - 全局;\n}\n条件\n{\n0.000${UTIL.getRandomInt(
+                    `规则(""){事件{持续 - 全局;}条件{0.000${UTIL.getRandomInt(
                       1,
                       4
-                    )} == 假;\n}\n动作\n{\nWhile(真);\nEnd;\n}\n}`
+                    )} == 假;}动作{While(真);End;}}`
                   );
                 } else {
                   break;
                 }
               }
 
-              //映射规则列表 (消耗剩余元素，1元素/个)
-              const length = Math.floor(elementCount / (ruleList.length - 1));
-              //console.log(length);
+              //映射规则
+              let maxLength = Math.min(elementCount, 2500);
+              let length = Math.floor(maxLength / (ruleList.length - 1));
+              if (length === 0) {
+                length = 5;
+              }
               for (let i = 0; i < ruleList.length; i++) {
                 obfuscatedRules.push(ruleList[i]);
-                //填充空白规则
-                const length = UTIL.getRandomInt(5, 8);
-                if (elementCount >= length) {
-                  elementCount -= length;
-                  for (let j = 0; j < length; j++) {
-                    obfuscatedRules.push(
-                      `规则("")\n{\n事件\n{\n持续 - 全局;\n}\n}`
-                    );
+                //填充空白规则 (随机插入，1元素/个)
+                for (let j = 0; j < length; j++) {
+                  if (elementCount > 0) {
+                    obfuscatedRules.push(`规则(""){事件{持续 - 全局;}}`);
                   }
                 }
               }
 
-              //合并规则列表
+              //合并规则
               rules = obfuscatedRules.join("");
 
+              //还原禁用
+              rules = rules.replace(/⟁/g, "禁用 ");
+
+              //还原字符串
+              rules = rules.replace(/❖/g, () => {
+                return `"${strings.shift()}"`;
+              });
+
+              let nameLength = Math.floor(maxLength * 0.0028);
+              if (nameLength == 0) {
+                nameLength = 1;
+              }
               //混淆规则名称
               rules = rules.replace(
                 /规则\(""\)/g,
@@ -534,20 +639,12 @@ function activate(context) {
                     obfuscatedNames[
                       Math.floor(Math.random() * obfuscatedNames.length)
                     ]
-                  }`.repeat(UTIL.getRandomInt(5, 10))}")`
+                  }`.repeat(UTIL.getRandomInt(nameLength, nameLength + 2))}")` //加大强度
               );
-
-              //还原禁用标签
-              rules = rules.replace(/⟁/g, "禁用 ");
-
-              //还原字符串
-              rules = rules.replace(/❖/g, () => {
-                return `"${strings.shift()}"`;
-              });
 
               //混淆子程序列表
               if (obfuscatedList.子程序.length > 0) {
-                subroutines += `子程序\n{\n`;
+                subroutines += `子程序{\n`;
                 for (const i in obfuscatedList.子程序) {
                   subroutines += `${i}: ${obfuscatedList.子程序[i]}\n`;
                 }
@@ -555,7 +652,7 @@ function activate(context) {
               }
 
               //混淆变量列表
-              variables += `变量\n{\n`;
+              variables += `变量{\n`;
               if (obfuscatedList.全局变量.length > 0) {
                 variables += `全局:\n`;
                 for (const i in obfuscatedList.全局变量) {
@@ -569,9 +666,6 @@ function activate(context) {
                 }
               }
               variables += `}`;
-
-              //清洗空行
-              rules = rules.replace(/[\r\n]+/g, "\n");
 
               vscode.env.clipboard.writeText(
                 `${settings}\n${variables}\n${subroutines}\n${rules}`
