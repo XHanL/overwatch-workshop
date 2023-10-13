@@ -143,8 +143,8 @@ function activate(context) {
               let variables = "";
               let subroutines = "";
               let rules = "";
-              let obfuscatedRules = [];
               let strings = [];
+              let obfuscatedRules = [];
 
               //分离 设置，变量，子程序，规则
               let block;
