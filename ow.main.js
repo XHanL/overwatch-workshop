@@ -627,11 +627,10 @@ function activate(context) {
                 return `"${strings.shift()}"`;
               });
 
-              let nameLength = Math.floor(maxLength * 0.0028);
-              if (nameLength == 0) {
-                nameLength = 1;
-              }
               //混淆规则名称
+              //拟合 (17388 - 总规则数量) / 总规则数量 = 单规则名称倍率
+              const nameLength =
+                (17388 - obfuscatedRules.length) / obfuscatedRules.length;
               rules = rules.replace(
                 /规则\(""\)/g,
                 () =>
@@ -639,7 +638,7 @@ function activate(context) {
                     obfuscatedNames[
                       Math.floor(Math.random() * obfuscatedNames.length)
                     ]
-                  }`.repeat(UTIL.getRandomInt(nameLength, nameLength + 2))}")` //加大强度
+                  }`.repeat(UTIL.getRandomInt(nameLength, nameLength + 2))}")`
               );
 
               //混淆子程序列表
