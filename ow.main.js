@@ -115,7 +115,7 @@ function activate(context) {
     vscode.commands.registerCommand("ow.command.obfuscate", () => {
       vscode.window
         .showInputBox({
-          placeHolder: "留空使用默认值 (30000)",
+          placeHolder: "留空使用默认值 | 30000",
           prompt: "请提供原生代码的总元素数量",
           validateInput: (value) => {
             if (value === "") {
