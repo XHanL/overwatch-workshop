@@ -64,99 +64,110 @@
 
   侧边栏可激活手册视图，具有实用的 `图标表格` 等
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/manual.png" align=center width=600 />
-
+  </details>
   <br>
 
 - ### 悬停提示
 
   将光标放置在关键词上弹出详细提示
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/hover.png" align=center width=800 />
-
+  </details>
   <br>
 
 - ### 补全提示
 
   `汉字/拼音/首字母` 激活补全提示，还可使用 `展开` 按钮显示全部选项
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/suggest.png" align=center width=850 />
-
+  </details>
   <br>
 
 - ### 参数提示
 
   填充参数时会指示参数位和参数详情
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/param.png" align=center width=700 />
-
+  </details>
   <br>
 
 - ### 代码混淆
 
   使用 `混淆` 选项导出混淆代码到剪切板
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/obfuscate.png" align=center width=500 />
-
+  </details>
   <br>
 
 - ### 代码整理
 
   使用右键菜单的 `格式化文档` 修正代码缩进
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/format.png" align=center width=200 />
-
+  </details>
   <br>
 
 - ### 代码折叠
 
   基于缩进的折叠能力
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/fold.png" align=center width=400 />
-
+  </details>
   <br>
 
 - ### 代码大纲
 
   在资源管理器 `大纲视图` 中，具备跟踪光标和跳转能力
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/outline.png" align=center width=250 />
-
+  </details>
   <br>
 
 - ### 代码高亮
 
   代码精准上色能力
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/highlight.png" align=center width=800 />
-
+  </details>
   <br>
 
 - ### 规则开关
 
   为每条规则生成 `禁用` 切换开关
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/switch.png" align=center width=400 />
-
+  </details>
   <br>
 
 - ### 调色盘
 
   针对自定义颜色的预览和调制能力
 
-
+  <details>
+   <summary>预览图片</summary>
    <img src="docs/images/readme/color.png" align=center width=400 />
-
+  </details>
 
 <br>
 
