@@ -4078,7 +4078,7 @@ let 常量 = {
           },
           绑定: ["终极技能"],
         },
-        隐秘潜行: {
+        病毒侵染: {
           图标: {
             深色: "images/ow/hero/ability/damage_sombra_ability1.png",
             浅色: "images/ow/hero/ability_gray/damage_sombra_ability1.png",
@@ -4092,10 +4092,17 @@ let 常量 = {
           },
           绑定: ["技能2"],
         },
+        隐秘潜行: {
+          图标: {
+            深色: "images/ow/hero/ability/damage_sombra_passive1.png",
+            浅色: "images/ow/hero/ability_gray/damage_sombra_passive1.png",
+          },
+          绑定: ["被动"],
+        },
         相时而动: {
           图标: {
-            深色: "images/ow/hero/ability/damage_sombra_passive.png",
-            浅色: "images/ow/hero/ability_gray/damage_sombra_passive.png",
+            深色: "images/ow/hero/ability/damage_sombra_passive2.png",
+            浅色: "images/ow/hero/ability_gray/damage_sombra_passive2.png",
           },
           绑定: ["被动"],
           提示: "可以透过墙体侦测到严重受伤的敌人。",
