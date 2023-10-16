@@ -1079,10 +1079,10 @@ function activate(context) {
                   MODEL.buildCompletion(
                     PATH,
                     i,
+                    MODEL.模版.全局[i].拼音,
                     vscode.CompletionItemKind.Module,
                     MODEL.模版.全局[i].标签,
                     MODEL.模版.全局[i].提示,
-                    undefined,
                     undefined,
                     new vscode.SnippetString(`${MODEL.模版.全局[i].格式}`)
                   )
@@ -1099,6 +1099,7 @@ function activate(context) {
                   MODEL.buildCompletion(
                     PATH,
                     i,
+                    MODEL.扩展[i].拼音,
                     vscode.CompletionItemKind.Property,
                     MODEL.扩展[i].标签,
                     MODEL.扩展[i].提示
@@ -1116,10 +1117,10 @@ function activate(context) {
                   MODEL.buildCompletion(
                     PATH,
                     i,
+                    MODEL.模版.规则[i].拼音,
                     vscode.CompletionItemKind.Module,
                     MODEL.模版.规则[i].标签,
                     MODEL.模版.规则[i].提示,
-                    undefined,
                     undefined,
                     new vscode.SnippetString(`${MODEL.模版.规则[i].格式}`)
                   )
@@ -1285,6 +1286,7 @@ function activate(context) {
                   let item = MODEL.buildCompletion(
                     PATH,
                     i.padStart(3, "0") + ": " + dynamicList.全局变量[i],
+                    undefined,
                     vscode.CompletionItemKind.Function,
                     ["全局变量", i],
                     `一个已定义的全局变量。`,
@@ -1301,6 +1303,7 @@ function activate(context) {
                   let item = MODEL.buildCompletion(
                     PATH,
                     i.padStart(3, "0") + ": " + dynamicList.玩家变量[i],
+                    undefined,
                     vscode.CompletionItemKind.Function,
                     ["玩家变量", i],
                     `一个已定义的玩家变量。`,
@@ -1317,6 +1320,7 @@ function activate(context) {
                   let item = MODEL.buildCompletion(
                     PATH,
                     i.padStart(3, "0") + ": " + dynamicList.子程序[i],
+                    undefined,
                     vscode.CompletionItemKind.Function,
                     ["子程序", i],
                     `一个已定义的子程序。`,
