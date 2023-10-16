@@ -35,891 +35,6 @@ const 示例 = `设置
 }
 `;
 
-let 拼音 = {
-  阿: "A E",
-  啊: "E A",
-  埃: "Zhi Ai",
-  艾: "Yi Ai",
-  碍: "Ai",
-  安: "An",
-  按: "An",
-  昂: "Yang Ang",
-  奥: "You Ao Yu",
-  巴: "Ba",
-  靶: "Ba",
-  霸: "Po Ba",
-  吧: "Pa Ba",
-  白: "Bo Bai",
-  百: "Mo Bai Bo",
-  败: "Bai",
-  坂: "Ban",
-  板: "Ban",
-  半: "Pan Ban",
-  帮: "Bang",
-  绑: "Bang",
-  棒: "Bang",
-  包: "Pao Bao Fu",
-  保: "Bao",
-  堡: "Pu Bu Bao",
-  报: "Bao",
-  抱: "Pou Pao Bao",
-  暴: "Bo Pu Bao",
-  爆: "Bo Bao",
-  北: "Bei",
-  备: "Bei",
-  背: "Bei",
-  被: "Bei Pi Bi",
-  本: "Ben",
-  比: "Bi Pi",
-  币: "Yin Bi",
-  闭: "Bi",
-  蔽: "Bie Pie Bi",
-  壁: "Bi",
-  避: "Bi",
-  边: "Bian",
-  变: "Bian",
-  标: "Biao",
-  镖: "Biao",
-  表: "Biao",
-  别: "Bie",
-  冰: "Bing Ning",
-  兵: "Bing",
-  并: "Bing",
-  播: "Bo",
-  不: "Bu Fu Fou",
-  布: "Bu",
-  部: "Bu Pou",
-  材: "Cai",
-  参: "Cen Shen Can",
-  藏: "Zang Cang",
-  操: "Cao",
-  测: "Ce",
-  查: "Zha Cha Chai",
-  差: "Chai Jie Cha Ci Cuo",
-  禅: "Chan Shan",
-  尝: "Chang",
-  场: "Chang",
-  超: "Chao Tiao",
-  朝: "Zhu Chao Zhao",
-  撤: "Che",
-  沉: "Chen",
-  称: "Cheng Chen",
-  成: "Cheng",
-  承: "Cheng Zheng",
-  城: "Cheng",
-  乘: "Cheng Sheng",
-  程: "Cheng",
-  橙: "Chen Cheng Deng",
-  池: "Che Chi Tuo",
-  持: "Chi",
-  充: "Chong",
-  冲: "Chong",
-  宠: "Chong",
-  抽: "Chou",
-  仇: "Ju Qiu Chou",
-  出: "Chu",
-  初: "Chu",
-  除: "Shu Zhu Chu",
-  处: "Chu",
-  触: "Chu",
-  传: "Zhuan Chuan",
-  串: "Chuan Guan Quan",
-  创: "Chuang",
-  垂: "Zhui Chui",
-  锤: "Chui",
-  春: "Chun",
-  磁: "Ci",
-  此: "Ci",
-  次: "Ci Zi",
-  从: "Cong",
-  摧: "Cui Cuo Zui",
-  村: "Cun",
-  存: "Cun",
-  错: "Cuo",
-  达: "Ti Ta Da",
-  打: "Da",
-  大: "Tai Da Dai",
-  带: "Dai",
-  待: "Dai",
-  单: "Shan Chan Dan",
-  诞: "Dan",
-  弹: "Tan Dan",
-  当: "Dang",
-  挡: "Dang",
-  荡: "Dang",
-  岛: "Dao",
-  到: "Dao",
-  倒: "Dao",
-  道: "Dao",
-  得: "Dei De",
-  德: "De",
-  地: "De Di",
-  的: "Di De",
-  灯: "Deng Ding",
-  等: "Deng",
-  迪: "Di",
-  敌: "Di Hua",
-  抵: "Qi Zhi Di",
-  蒂: "Di",
-  典: "Dian Tian",
-  点: "Dian",
-  电: "Dian",
-  店: "Dian",
-  殿: "Dian",
-  调: "Diao Tiao",
-  掉: "Nuo Diao",
-  跌: "Die Tu",
-  顶: "Ding",
-  定: "Ding",
-  东: "Dong",
-  动: "Dong",
-  冻: "Dong",
-  斗: "Zhu Dou",
-  毒: "Du Dai",
-  独: "Du",
-  读: "Du Dou",
-  度: "Zhai Du Duo",
-  端: "Duan",
-  段: "Duan",
-  断: "Duan",
-  堆: "Zui Dui",
-  队: "Dui",
-  对: "Dui",
-  蹲: "Zun Cuan Dun Qun Cun",
-  盾: "Shun Dun Yun",
-  顿: "Du Dun",
-  多: "Duo",
-  夺: "Duo",
-  朵: "Duo",
-  躲: "Duo",
-  呃: "Ai E",
-  恩: "En",
-  儿: "Ren Er",
-  尔: "Er",
-  饵: "Er",
-  发: "Fa",
-  法: "Fa",
-  反: "Fan",
-  返: "Fan",
-  范: "Fan",
-  方: "Fang Wang Feng Pang",
-  坊: "Fang",
-  防: "Fang",
-  放: "Fang",
-  飞: "Fei",
-  非: "Fei",
-  废: "Fei",
-  分: "Fen Ban",
-  峰: "Feng",
-  锋: "Feng",
-  否: "Pi Fou",
-  孵: "Fu",
-  弗: "Fu",
-  服: "Fu Bi Bo",
-  符: "Fu",
-  幅: "Bi Fu",
-  辐: "Fu",
-  釜: "Fu",
-  辅: "Fu",
-  腐: "Fu",
-  负: "Fu",
-  附: "Bu Fu",
-  复: "Fu",
-  赋: "Fu",
-  改: "Gai",
-  赶: "Qian Gan",
-  感: "Gan Han",
-  干: "Gan An",
-  港: "Hong Gang",
-  高: "Gao",
-  告: "Gao Ju Gu",
-  割: "Ge",
-  格: "Luo He Ge",
-  个: "Ge Gan",
-  根: "Gen",
-  跟: "Gen",
-  更: "Geng",
-  工: "Gong",
-  公: "Gong",
-  功: "Gong",
-  攻: "Gong",
-  恭: "Gong",
-  勾: "Gou",
-  钩: "Gou",
-  购: "Gou",
-  怪: "Guai",
-  关: "Guan",
-  观: "Guan",
-  管: "Guan",
-  光: "Guang",
-  归: "Gui",
-  规: "Gui",
-  诡: "Gui",
-  国: "Guo",
-  果: "Luo Guan Guo",
-  过: "Guo",
-  哈: "Ta Ha Sha He",
-  海: "Hai",
-  害: "He Hai",
-  含: "Han",
-  好: "Hao",
-  号: "Xiao Hao",
-  耗: "Hao Mao",
-  合: "He Ge",
-  和: "Huo Hu He",
-  河: "He",
-  黑: "Hei",
-  红: "Gong Hong",
-  后: "Hou",
-  候: "Hou",
-  弧: "Hu",
-  互: "Hu",
-  护: "Hu",
-  花: "Hua",
-  化: "Hua Huo",
-  坏: "Pei Pi Huai",
-  欢: "Huan",
-  环: "Huan",
-  换: "Huan",
-  皇: "Huang Wang",
-  黄: "Huang",
-  灰: "Hui",
-  恢: "Hui",
-  回: "Hui",
-  毁: "Hui",
-  会: "Hui Kuai",
-  活: "Huo Guo",
-  火: "Huo",
-  或: "Yu Huo",
-  货: "Huo",
-  获: "Huo",
-  击: "Ji",
-  圾: "Jie Ji",
-  机: "Ji Wei",
-  积: "Ji Zhi",
-  基: "Ji",
-  激: "Ji Jiao",
-  及: "Ji",
-  吉: "Ji",
-  级: "Ji",
-  即: "Ji",
-  极: "Ji",
-  急: "Ji",
-  疾: "Ji",
-  集: "Ji",
-  计: "Ji",
-  记: "Ji",
-  技: "Ji Qi",
-  际: "Ji",
-  继: "Ji",
-  加: "Jia",
-  夹: "Ga Jia",
-  佳: "Jia",
-  枷: "Jia",
-  家: "Jia Gu Jie",
-  甲: "Jia",
-  假: "Jia Jie Ge Xia",
-  价: "Jie Jia",
-  间: "Jian",
-  监: "Jian",
-  减: "Jian",
-  检: "Jian",
-  见: "Xian Jian",
-  件: "Jian Mou",
-  建: "Jian",
-  键: "Jian",
-  箭: "Jian",
-  江: "Jiang",
-  将: "Qiang Jiang",
-  奖: "Jiang",
-  降: "Jiang Xiang",
-  交: "Jiao",
-  焦: "Qiao Jiao",
-  角: "Jiao Gu Lu Jue",
-  较: "Jiao",
-  阶: "Jie",
-  接: "Xie Sha Jie Cha",
-  揭: "Jie He Qi",
-  街: "Jie",
-  节: "Jie",
-  杰: "Jie",
-  结: "Jie",
-  截: "Jie",
-  解: "Jie Xie",
-  戒: "Jie",
-  界: "Jie",
-  金: "Jin",
-  尽: "Jin",
-  锦: "Jin",
-  近: "Jin",
-  进: "Jin",
-  禁: "Jin",
-  经: "Jing",
-  睛: "Jing",
-  井: "Jing",
-  阱: "Jing",
-  警: "Jing",
-  净: "Jing Cheng",
-  径: "Jing",
-  竞: "Jing",
-  境: "Jing",
-  镜: "Jing",
-  救: "Jiu",
-  就: "Jiu",
-  局: "Ju",
-  拒: "Ju",
-  具: "Ju",
-  剧: "Ju",
-  据: "Ju",
-  距: "Ju",
-  聚: "Ju",
-  决: "Jue",
-  绝: "Jue",
-  均: "Yun Jun",
-  卡: "Qia Ka",
-  开: "Kai",
-  看: "Kan",
-  可: "Ke Ge",
-  克: "Ke",
-  客: "Qia Ke",
-  空: "Kong",
-  控: "Qiang Kong",
-  骷: "Ku",
-  块: "Kuai Yue",
-  快: "Kuai",
-  宽: "Kuan",
-  狂: "Jue Kuang",
-  扩: "Kuo",
-  廓: "Kuo",
-  垃: "La",
-  拉: "La",
-  来: "Lai",
-  莱: "Lai",
-  兰: "Lan",
-  栏: "Lan",
-  蓝: "La Lan",
-  老: "Lao",
-  乐: "Le Yue",
-  了: "Liao Le",
-  雷: "Lei",
-  垒: "Lei",
-  类: "Lei",
-  冷: "Ling Leng",
-  离: "Li Chi",
-  漓: "Li",
-  黎: "Li",
-  里: "Li",
-  力: "Li",
-  立: "Wei Li",
-  丽: "Li",
-  利: "Li",
-  励: "Li",
-  莉: "Chi Li",
-  粒: "Li",
-  连: "Lian",
-  练: "Lian",
-  链: "Lian",
-  亮: "Liang",
-  量: "Liang",
-  疗: "Liao",
-  聊: "Liao Liu",
-  料: "Liao",
-  烈: "Lie",
-  猎: "Que Xi Lie",
-  裂: "Lie",
-  林: "Lin",
-  灵: "Ling",
-  领: "Ling",
-  流: "Liu",
-  榴: "Liu",
-  髅: "Lou",
-  卢: "Lu",
-  陆: "Lu Liu",
-  录: "Lu",
-  路: "Luo Lu",
-  率: "Lv Shuai Lve",
-  绿: "Lu Lv",
-  滤: "Lv",
-  乱: "Luan",
-  轮: "Lun",
-  罗: "Luo",
-  螺: "Luo",
-  落: "La Lao Luo",
-  麻: "Ma",
-  马: "Ma",
-  玛: "Ma",
-  买: "Mai",
-  脉: "Mai Mo",
-  满: "Man",
-  慢: "Man",
-  玫: "Mei",
-  梅: "Mei",
-  每: "Mei",
-  美: "Mei",
-  魅: "Mei",
-  盟: "Meng Ming",
-  米: "Mi",
-  面: "Mian",
-  描: "Mao Miao",
-  瞄: "Miao",
-  秒: "Miao",
-  灭: "Mie",
-  名: "Ming",
-  命: "Ming",
-  模: "Mu Mo",
-  末: "Me Mo",
-  莫: "Mu Mo",
-  默: "Mo",
-  目: "Mu",
-  墓: "Mu",
-  幕: "Man Mu",
-  嗯: "Ng N",
-  那: "Na Nai Nuo Nei Ne",
-  纳: "Na",
-  娜: "Na Nuo",
-  南: "Nan Na",
-  难: "Nan",
-  内: "Nei Rui Na",
-  能: "Tai Xiong Neng Nai",
-  尼: "Ni",
-  你: "Ni",
-  黏: "Nian",
-  钮: "Niu",
-  努: "Nu",
-  怒: "Nu",
-  女: "Ru Nv",
-  噢: "O Yu Ao",
-  哦: "E O",
-  帕: "Mo Pa",
-  排: "Bai Pai",
-  牌: "Pai",
-  叛: "Pan",
-  跑: "Bo Pao",
-  炮: "Bao Pao",
-  佩: "Pei",
-  喷: "Pen",
-  碰: "Peng",
-  批: "Pi",
-  频: "Pin",
-  品: "Pin",
-  平: "Ping Beng Bing Pian",
-  屏: "Ping Bing",
-  泊: "Bo Po",
-  破: "Po",
-  普: "Pu",
-  漆: "Qie Qi",
-  旗: "Qi",
-  启: "Qi",
-  起: "Qi",
-  弃: "Qi",
-  器: "Qi",
-  前: "Qian Jian",
-  钱: "Qian",
-  歉: "Qian",
-  枪: "Qiang",
-  强: "Jiang Qiang",
-  墙: "Qiang",
-  巧: "Qiao",
-  切: "Qi Qie",
-  侵: "Qin",
-  青: "Jing Qing",
-  轻: "Qing",
-  清: "Qing",
-  情: "Qing",
-  求: "Qiu",
-  球: "Qiu",
-  区: "Qu Ou",
-  驱: "Qu",
-  取: "Qu",
-  去: "Qu",
-  圈: "Juan Quan",
-  全: "Quan",
-  拳: "Quan",
-  却: "Que",
-  群: "Qun",
-  燃: "Ran",
-  扰: "You Rao",
-  热: "Re",
-  人: "Ren",
-  认: "Ren",
-  任: "Lin Ren",
-  日: "Ri",
-  融: "Rong",
-  如: "Ru",
-  入: "Ru",
-  锐: "Rui",
-  萨: "Sa",
-  赛: "Sai",
-  散: "San",
-  色: "Se Shai",
-  森: "Sen",
-  杀: "Sha",
-  刹: "Cha Sha",
-  莎: "Sha Suo Sui",
-  山: "Shan",
-  闪: "Shan",
-  善: "Shan",
-  伤: "Shang",
-  商: "Shang",
-  赏: "Shang",
-  上: "Shang",
-  烧: "Shao",
-  少: "Shao",
-  哨: "Shao Sao Xiao",
-  设: "She",
-  射: "She Yi Ye",
-  身: "Shen Juan",
-  深: "Shen",
-  什: "Shen Shi",
-  神: "Shen",
-  升: "Sheng",
-  生: "Sheng",
-  声: "Sheng Qing",
-  圣: "Sheng Ku",
-  胜: "Sheng Qing Xing",
-  剩: "Sheng",
-  失: "Yi Shi",
-  施: "Shi Yi",
-  时: "Shi",
-  实: "Shi",
-  拾: "She Jie Shi",
-  矢: "Shi",
-  使: "Shi",
-  始: "Shi",
-  士: "Shi",
-  氏: "Shi Zhi Jing",
-  世: "Shi",
-  市: "Shi Fu",
-  示: "Zhi Qi Shi",
-  式: "Shi Te",
-  事: "Zi Shi",
-  势: "Shi",
-  视: "Shi",
-  试: "Shi",
-  室: "Shi",
-  是: "Shi Ti",
-  适: "Shi Kuo",
-  噬: "Shi",
-  收: "Shou",
-  手: "Shou",
-  守: "Shou",
-  首: "Shou",
-  受: "Shou Dao",
-  狩: "Shou",
-  兽: "Shou",
-  售: "Shu Shou",
-  输: "Shu",
-  鼠: "Shu",
-  术: "Shu Zhu",
-  束: "Shu",
-  述: "Shu",
-  数: "Shu Shuo",
-  刷: "Shua",
-  双: "Shuang",
-  水: "Shui",
-  睡: "Shui",
-  瞬: "Shun",
-  斯: "Shi Si",
-  撕: "Xi Si",
-  死: "Si",
-  寺: "Shi Si",
-  送: "Song",
-  苏: "Su",
-  素: "Su",
-  速: "Su",
-  算: "Suan",
-  随: "Sui",
-  梭: "Suo Xun",
-  所: "Suo",
-  索: "Suo",
-  锁: "Suo",
-  塔: "Ta Da",
-  胎: "Tai",
-  台: "Si Tai Yi",
-  太: "Ta Tai",
-  态: "Tai",
-  坛: "Tan",
-  坦: "Tan",
-  叹: "You Yi Tan",
-  探: "Xian Tan",
-  桃: "Zhao Tiao Tao",
-  特: "Te",
-  提: "Shi Chi Di Ti",
-  体: "Ben Cui Ti",
-  替: "Ti",
-  天: "Tian",
-  添: "Tian",
-  填: "Chen Zhen Tian",
-  挑: "Tao Diao Tiao",
-  条: "Tiao",
-  跳: "Tiao Diao Tao",
-  铁: "Tie",
-  厅: "Ting",
-  庭: "Ting",
-  停: "Ting",
-  通: "Tong",
-  头: "Tou",
-  突: "Tu",
-  图: "Tu",
-  徒: "Tu",
-  团: "Qiu Tuan",
-  推: "Tui",
-  退: "Tui",
-  吞: "Tian Tun",
-  托: "Tuo",
-  陀: "Tuo Duo",
-  瓦: "Wa",
-  哇: "Hua Gui Wa",
-  外: "Wai",
-  完: "Wan Kuan",
-  玩: "Wan",
-  万: "Mo Wan",
-  亡: "Wang Wu",
-  王: "Yu Wang",
-  往: "Wang",
-  望: "Wang",
-  危: "Wei",
-  威: "Wei",
-  微: "Wei",
-  围: "Wei",
-  维: "Wei",
-  为: "Wei",
-  未: "Wei",
-  位: "Wei Li",
-  温: "Wen Yun",
-  文: "Wen",
-  稳: "Wen",
-  问: "Wen",
-  涡: "Guo Wo",
-  我: "Wo",
-  沃: "Wo",
-  无: "Mo Wu",
-  伍: "Wu",
-  武: "Wu",
-  务: "Wu",
-  坞: "Wu",
-  物: "Wu",
-  误: "Wu",
-  雾: "Wu",
-  吸: "Xi",
-  西: "Xi",
-  息: "Xi",
-  悉: "Xi",
-  袭: "Xi",
-  洗: "Xi Xian",
-  喜: "Chi Xi",
-  戏: "Hu Xi",
-  细: "Xi",
-  下: "Xia",
-  先: "Xian",
-  弦: "Xian",
-  显: "Xian",
-  险: "Xian",
-  现: "Xian",
-  线: "Xian",
-  限: "Wen Xian",
-  陷: "Xian",
-  相: "Xiang",
-  香: "Xiang",
-  箱: "Xiang",
-  向: "Xiang",
-  象: "Xiang",
-  像: "Xiang",
-  消: "Xiao",
-  销: "Xiao",
-  小: "Xiao",
-  效: "Xiao",
-  协: "Xie",
-  胁: "Xie",
-  携: "Xie",
-  械: "Xie",
-  谢: "Xie",
-  心: "Xin",
-  新: "Xin",
-  信: "Xin Shen",
-  星: "Xing",
-  行: "Xing Hang Heng",
-  形: "Xing",
-  型: "Xing",
-  兴: "Xing",
-  姓: "Xing Sheng",
-  性: "Xing",
-  雄: "Xiong",
-  修: "Xiu",
-  秀: "Xiu",
-  墟: "Xu",
-  需: "Ru Nuo Ruan Xu",
-  序: "Xu",
-  绪: "Xu",
-  续: "Xu",
-  宣: "Xuan",
-  旋: "Xuan",
-  漩: "Xuan",
-  选: "Xuan",
-  眩: "Huan Juan Xuan",
-  学: "Xue",
-  雪: "Xue",
-  寻: "Xun Xin",
-  循: "Xun",
-  训: "Xun",
-  雅: "Ya",
-  娅: "Ya",
-  呀: "Xia Ya",
-  烟: "Yin Yan",
-  延: "Yan",
-  严: "Yan",
-  颜: "Yan",
-  眼: "Wen Yan",
-  验: "Yan",
-  焰: "Yan",
-  药: "Yao",
-  要: "Yao",
-  耶: "Ye Xie",
-  野: "Shu Ye",
-  业: "Ye",
-  夜: "Ye",
-  一: "Yi",
-  伊: "Yi",
-  移: "Yi Chi",
-  已: "Si Yi",
-  以: "Si Yi",
-  义: "Yi",
-  易: "Yi",
-  益: "Yi",
-  意: "Yi",
-  因: "Yin",
-  音: "Yin",
-  银: "Yin",
-  引: "Yin",
-  隐: "Yin",
-  应: "Ying",
-  英: "Ying Yang",
-  鹰: "Ying",
-  迎: "Ying",
-  营: "Ying",
-  影: "Ying",
-  映: "Yang Ying",
-  勇: "Yong",
-  涌: "Yong Chong",
-  用: "Yong",
-  优: "You",
-  幽: "You",
-  游: "Liu You",
-  鱿: "You",
-  友: "You",
-  有: "You Wei",
-  右: "You",
-  诱: "You",
-  于: "Xu Wei Yu",
-  余: "Tu Xu Yu",
-  与: "Yu",
-  屿: "Yu",
-  语: "Yu",
-  育: "Yu Zhou Yo",
-  预: "Yu",
-  域: "Yu",
-  阈: "Yu",
-  御: "Ya Yu",
-  元: "Yuan",
-  园: "Wan Yuan",
-  原: "Yuan",
-  圆: "Yuan",
-  援: "Yuan Huan",
-  源: "Yuan",
-  远: "Yuan",
-  院: "Yuan",
-  月: "Ru Yue",
-  跃: "Yue",
-  晕: "Yun",
-  云: "Yun",
-  运: "Yun",
-  再: "Zai",
-  在: "Zai",
-  载: "Zai",
-  暂: "Zan",
-  赞: "Zan",
-  造: "Cao Zao",
-  则: "Ze",
-  择: "Zhai Ze",
-  增: "Ceng Zeng",
-  渣: "Zha",
-  炸: "Zha",
-  占: "Tie Zhan",
-  战: "Zhan",
-  站: "Zhan",
-  长: "Zhang Chang",
-  障: "Zhang",
-  爪: "Zhua Zhao",
-  找: "Zhao Hua",
-  罩: "Zhao",
-  遮: "Zhe",
-  者: "Zhe",
-  这: "Zhe Zhei",
-  着: "Zhuo Zhao Zhe",
-  真: "Zhen",
-  阵: "Zhen",
-  镇: "Zhen",
-  震: "Shen Zhen",
-  整: "Zheng",
-  正: "Zheng",
-  帧: "Zheng",
-  之: "Zhu Zhi",
-  支: "Zhi Qi",
-  知: "Zhi",
-  直: "Zhi",
-  值: "Zhi",
-  止: "Zhi",
-  指: "Zhi",
-  至: "Zhi Die",
-  志: "Zhi",
-  制: "Zhi",
-  帜: "Zhi",
-  治: "Zhi Chi",
-  质: "Zhi",
-  秩: "Zhi",
-  智: "Zhi",
-  置: "Zhi",
-  中: "Zhong",
-  终: "Zhong",
-  衷: "Zhong",
-  重: "Tong Zhong Chong",
-  洲: "Zhou",
-  逐: "Zhou Zhu Di Tun",
-  主: "Zhu",
-  住: "Zhu",
-  助: "Chu Zhu",
-  注: "Zhu Zhou",
-  柱: "Zhu",
-  筑: "Zhu",
-  抓: "Zhua",
-  转: "Zhuan Zhuai",
-  庄: "Peng Zhuang",
-  装: "Zhuang",
-  状: "Zhuang",
-  撞: "Zhuang",
-  追: "Tui Dui Zhui",
-  锥: "Zhui",
-  坠: "Zhui",
-  准: "Zhun",
-  资: "Zi",
-  紫: "Zi",
-  字: "Zi",
-  自: "Zi",
-  子: "Zi",
-  踪: "Zong",
-  总: "Zong",
-  走: "Zou",
-  阻: "Zu Zhu",
-  组: "Zu",
-  最: "Cuo Zui",
-  罪: "Zui",
-  醉: "Zui",
-  左: "Zuo",
-  作: "Zuo",
-  坐: "Zuo",
-  做: "Zuo",
-};
-
 let 常量 = {
   按钮: [
     {
@@ -930,6 +45,7 @@ let 常量 = {
         深色: "images/ow/input/button.png",
         浅色: "images/ow/input/button_gray.png",
       },
+      拼音: "Ji Neng 1",
     },
     {
       名称: "技能2",
@@ -939,6 +55,7 @@ let 常量 = {
         深色: "images/ow/input/button.png",
         浅色: "images/ow/input/button_gray.png",
       },
+      拼音: "Ji Neng 2",
     },
     {
       名称: "蹲下",
@@ -948,6 +65,7 @@ let 常量 = {
         深色: "images/ow/input/button.png",
         浅色: "images/ow/input/button_gray.png",
       },
+      拼音: "Dun Xia",
     },
     {
       名称: "互动",
@@ -957,6 +75,7 @@ let 常量 = {
         深色: "images/ow/input/button.png",
         浅色: "images/ow/input/button_gray.png",
       },
+      拼音: "Hu Dong",
     },
     {
       名称: "跳跃",
@@ -966,6 +85,7 @@ let 常量 = {
         深色: "images/ow/input/button.png",
         浅色: "images/ow/input/button_gray.png",
       },
+      拼音: "Tiao Yue",
     },
     {
       名称: "近身攻击",
@@ -975,12 +95,14 @@ let 常量 = {
         深色: "images/ow/input/button.png",
         浅色: "images/ow/input/button_gray.png",
       },
+      拼音: "Jin Shen Gong Ji",
     },
     {
       名称: "主要攻击模式",
       标签: ["按钮"],
       提示: "绑定主要攻击模式的按钮。",
       图标: "images/ow/input/left.png",
+      拼音: "Zhu Yao Gong Ji Mo Shi",
     },
     {
       名称: "装填",
@@ -990,12 +112,14 @@ let 常量 = {
         深色: "images/ow/input/button.png",
         浅色: "images/ow/input/button_gray.png",
       },
+      拼音: "Zhuang Tian",
     },
     {
       名称: "辅助攻击模式",
       标签: ["按钮"],
       提示: "绑定辅助攻击模式的按钮。",
       图标: "images/ow/input/right.png",
+      拼音: "Fu Zhu Gong Ji Mo Shi",
     },
     {
       名称: "终极技能",
@@ -1005,6 +129,7 @@ let 常量 = {
         深色: "images/ow/input/button.png",
         浅色: "images/ow/input/button_gray.png",
       },
+      拼音: "Zhong Ji Ji Neng",
     },
   ],
   截取: [
@@ -1012,11 +137,13 @@ let 常量 = {
       名称: "根据表面截取",
       标签: ["截取", "地图"],
       提示: "一个仅用于“创建地图文本”或“创建地图进度条文本”的截取选项。",
+      拼音: "Gen Ju Biao Mian Jie Qu",
     },
     {
       名称: "不要截取",
       标签: ["截取", "地图"],
       提示: "一个仅用于“创建地图文本”或“创建地图进度条文本”的截取选项。",
+      拼音: "Bu Yao Jie Qu",
     },
   ],
   颜色: [
@@ -1026,6 +153,7 @@ let 常量 = {
       数值: [255, 255, 255, 255],
       图标: "images/ow/color/white.png",
       提示: "一个默认颜色选项。等效自定义颜色(255, 255, 255, 255)。",
+      拼音: "Bai Se",
     },
     {
       名称: "黄色",
@@ -1033,6 +161,7 @@ let 常量 = {
       数值: [255, 255, 0, 255],
       图标: "images/ow/color/yellow.png",
       提示: "一个默认颜色选项。等效自定义颜色(255, 255, 0, 255)。",
+      拼音: "Huang Se",
     },
     {
       名称: "绿色",
@@ -1040,6 +169,7 @@ let 常量 = {
       数值: [69, 255, 87, 255],
       图标: "images/ow/color/green.png",
       提示: "一个默认颜色选项。等效自定义颜色(69, 255, 87, 255)。",
+      拼音: "Lv Se",
     },
     {
       名称: "紫色",
@@ -1047,6 +177,7 @@ let 常量 = {
       数值: [100, 50, 255, 255],
       图标: "images/ow/color/violet.png",
       提示: "一个默认颜色选项。等效自定义颜色(100, 50, 255, 255)。",
+      拼音: "Zi Se",
     },
     {
       名称: "红色",
@@ -1054,6 +185,7 @@ let 常量 = {
       数值: [200, 0, 19, 255],
       图标: "images/ow/color/red.png",
       提示: "一个默认颜色选项。等效自定义颜色(200, 0, 19, 255)。",
+      拼音: "Hong Se",
     },
     {
       名称: "蓝色",
@@ -1061,6 +193,7 @@ let 常量 = {
       数值: [39, 170, 255, 255],
       图标: "images/ow/color/blue.png",
       提示: "一个默认颜色选项。等效自定义颜色(39, 170, 255, 255)。",
+      拼音: "Lan Se",
     },
     {
       名称: "队伍1",
@@ -1068,6 +201,7 @@ let 常量 = {
       数值: [39, 170, 255, 255],
       图标: "images/ow/color/team1.png",
       提示: "一个队伍颜色选项, 默认为蓝色。等效自定义颜色(39, 170, 255, 255)。",
+      拼音: "Dui Wu 1",
     },
     {
       名称: "队伍2",
@@ -1075,6 +209,7 @@ let 常量 = {
       数值: [200, 0, 19, 255],
       图标: "images/ow/color/team2.png",
       提示: "一个队伍颜色选项, 默认为红色。等效自定义颜色(200, 0, 19, 255)。",
+      拼音: "Dui Wu 2",
     },
     {
       名称: "水绿色",
@@ -1082,6 +217,7 @@ let 常量 = {
       数值: [0, 234, 234, 255],
       图标: "images/ow/color/aqua.png",
       提示: "一个默认颜色选项。等效自定义颜色(0, 234, 234, 255)。",
+      拼音: "Shui Lv Se",
     },
     {
       名称: "橙色",
@@ -1089,6 +225,7 @@ let 常量 = {
       数值: [236, 153, 0, 255],
       图标: "images/ow/color/orange.png",
       提示: "一个默认颜色选项。等效自定义颜色(236, 153, 0, 255)。",
+      拼音: "Cheng Se",
     },
     {
       名称: "天蓝色",
@@ -1096,6 +233,7 @@ let 常量 = {
       数值: [108, 190, 244, 255],
       图标: "images/ow/color/sky_blue.png",
       提示: "一个默认颜色选项。等效自定义颜色(108, 190, 244, 255)。",
+      拼音: "Tian Lan Se",
     },
     {
       名称: "青绿色",
@@ -1103,6 +241,7 @@ let 常量 = {
       数值: [0, 230, 151, 255],
       图标: "images/ow/color/turquoise.png",
       提示: "一个默认颜色选项。等效自定义颜色(0, 230, 151, 255)。",
+      拼音: "Qing Lv Se",
     },
     {
       名称: "灰绿色",
@@ -1110,6 +249,7 @@ let 常量 = {
       数值: [160, 232, 27, 255],
       图标: "images/ow/color/lime_green.png",
       提示: "一个默认颜色选项。等效自定义颜色(160, 232, 27, 255)。",
+      拼音: "Hui Lv Se",
     },
     {
       名称: "亮紫色",
@@ -1117,6 +257,7 @@ let 常量 = {
       数值: [161, 73, 197, 255],
       图标: "images/ow/color/purple.png",
       提示: "一个默认颜色选项。等效自定义颜色(161, 73, 197, 255)。",
+      拼音: "Liang Zi Se",
     },
     {
       名称: "黑色",
@@ -1124,6 +265,7 @@ let 常量 = {
       数值: [0, 0, 0, 255],
       图标: "images/ow/color/black.png",
       提示: "一个默认颜色选项。等效自定义颜色(0, 0, 0, 255)。",
+      拼音: "Hei Se",
     },
     {
       名称: "玫红",
@@ -1131,6 +273,7 @@ let 常量 = {
       数值: [255, 50, 145, 255],
       图标: "images/ow/color/rose.png",
       提示: "一个默认颜色选项。等效自定义颜色(255, 50, 145, 255)。",
+      拼音: "Mei Hong",
     },
     {
       名称: "灰色",
@@ -1138,6 +281,7 @@ let 常量 = {
       数值: [127, 127, 127, 255],
       图标: "images/ow/color/gray.png",
       提示: "一个默认颜色选项。等效自定义颜色(127, 127, 127, 255)。",
+      拼音: "Hui Se",
     },
   ],
   交流: [
@@ -1145,181 +289,217 @@ let 常量 = {
       名称: "收到",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Shou Dao",
     },
     {
       名称: "不行",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Bu Xing",
     },
     {
       名称: "抱歉",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Bao Qian",
     },
     {
       名称: "好的",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Hao De",
     },
     {
       名称: "感谢",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Gan Xie",
     },
     {
       名称: "撤退",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Che Tui",
     },
     {
       名称: "推进",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Tui Jin",
     },
     {
       名称: "前进",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Qian Jin",
     },
     {
       名称: "集合",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Ji He",
     },
     {
       名称: "再见",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Zai Jian",
     },
     {
       名称: "问候",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Wen Hou",
     },
     {
       名称: "不用谢",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Bu Yong Xie",
     },
     {
       名称: "我上了",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Wo Shang Le",
     },
     {
       名称: "倒计时",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Dao Ji Shi",
     },
     {
       名称: "敌人来袭",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Di Ren Lai Xi",
     },
     {
       名称: "需要治疗",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Xu Yao Zhi Liao",
     },
     {
       名称: "需要帮助",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Xu Yao Bang Zhu",
     },
     {
       名称: "做好准备",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Zuo Hao Zhun Bei",
     },
     {
       名称: "正在进攻",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Zheng Zai Jin Gong",
     },
     {
       名称: "正在防守",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Zheng Zai Fang Shou",
     },
     {
       名称: "正在赶来",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Zheng Zai Gan Lai",
     },
     {
       名称: "继续攻击",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Ji Xu Gong Ji",
     },
     {
       名称: "我跟着你",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Wo Gen Zhe Ni",
     },
     {
       名称: "喷漆上",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Pen Qi Shang",
     },
     {
       名称: "喷漆左",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Pen Qi Zuo",
     },
     {
       名称: "喷漆右",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Pen Qi You",
     },
     {
       名称: "喷漆下",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Pen Qi Xia",
     },
     {
       名称: "语音（上）",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Yu Yin （ Shang ）",
     },
     {
       名称: "语音（左）",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Yu Yin （ Zuo ）",
     },
     {
       名称: "语音（右）",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Yu Yin （ You ）",
     },
     {
       名称: "语音（下）",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Yu Yin （ Xia ）",
     },
     {
       名称: "表情（上）",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Biao Qing （ Shang ）",
     },
     {
       名称: "表情（左）",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Biao Qing （ Zuo ）",
     },
     {
       名称: "表情（右）",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Biao Qing （ You ）",
     },
     {
       名称: "表情（下）",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Biao Qing （ Xia ）",
     },
     {
       名称: "终极技能状态",
       标签: ["交流"],
       提示: "一个交流选项。",
+      拼音: "Zhong Ji Ji Neng Zhuang Tai",
     },
   ],
   英雄数据: [
@@ -1327,166 +507,199 @@ let 常量 = {
       名称: "所有造成伤害量",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Suo You Zao Cheng Shang Hai Liang",
     },
     {
       名称: "对屏障造成伤害量",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Dui Ping Zhang Zao Cheng Shang Hai Liang",
     },
     {
       名称: "阻挡伤害量",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Zu Dang Shang Hai Liang",
     },
     {
       名称: "承受伤害量",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Cheng Shou Shang Hai Liang",
     },
     {
       名称: "阵亡",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Zhen Wang",
     },
     {
       名称: "消灭",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Xiao Mie",
     },
     {
       名称: "地形阵亡",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Di Xing Zhen Wang",
     },
     {
       名称: "地形消灭",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Di Xing Xiao Mie",
     },
     {
       名称: "协助防守",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Xie Zhu Fang Shou",
     },
     {
       名称: "协助进攻",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Xie Zhu Jin Gong",
     },
     {
       名称: "最后一击",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Zui Hou Yi Ji",
     },
     {
       名称: "对英雄造成伤害量",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Dui Ying Xiong Zao Cheng Shang Hai Liang",
     },
     {
       名称: "治疗量",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Zhi Liao Liang",
     },
     {
       名称: "最佳瞬间消灭",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Zui Jia Shun Jian Xiao Mie",
     },
     {
       名称: "瞬间消灭",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Shun Jian Xiao Mie",
     },
     {
       名称: "目标攻防消灭",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Mu Biao Gong Fang Xiao Mie",
     },
     {
       名称: "单独消灭",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Dan Du Xiao Mie",
     },
     {
       名称: "获得终极技能",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Huo De Zhong Ji Ji Neng",
     },
     {
       名称: "使用终极技能",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Shi Yong Zhong Ji Ji Neng",
     },
     {
       名称: "武器命中率",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Wu Qi Ming Zhong Lv",
     },
     {
       名称: "暴击命中率",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Bao Ji Ming Zhong Lv",
     },
     {
       名称: "暴击",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Bao Ji",
     },
     {
       名称: "受到治疗量",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Shou Dao Zhi Liao Liang",
     },
     {
       名称: "开镜命中率",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Kai Jing Ming Zhong Lv",
     },
     {
       名称: "开镜暴击率",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Kai Jing Bao Ji Lv",
     },
     {
       名称: "开镜暴击消灭",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Kai Jing Bao Ji Xiao Mie",
     },
     {
       名称: "开镜暴击",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Kai Jing Bao Ji",
     },
     {
       名称: "开镜命中",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Kai Jing Ming Zhong",
     },
     {
       名称: "开镜射击",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Kai Jing She Ji",
     },
     {
       名称: "自我治疗量",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "Zi Wo Zhi Liao Liang",
     },
     {
       名称: "射击次数",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "She Ji Ci Shu",
     },
     {
       名称: "射击命中",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "She Ji Ming Zhong",
     },
     {
       名称: "射击未命中",
       标签: ["数据", "英雄"],
       提示: "一个英雄数据选项。",
+      拼音: "She Ji Wei Ming Zhong",
     },
   ],
   玩家数据: [
@@ -1494,101 +707,121 @@ let 常量 = {
       名称: "所有造成伤害量",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Suo You Zao Cheng Shang Hai Liang",
     },
     {
       名称: "对屏障造成伤害量",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Dui Ping Zhang Zao Cheng Shang Hai Liang",
     },
     {
       名称: "阻挡伤害量",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Zu Dang Shang Hai Liang",
     },
     {
       名称: "承受伤害量",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Cheng Shou Shang Hai Liang",
     },
     {
       名称: "阵亡",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Zhen Wang",
     },
     {
       名称: "消灭",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Xiao Mie",
     },
     {
       名称: "地形阵亡",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Di Xing Zhen Wang",
     },
     {
       名称: "地形消灭",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Di Xing Xiao Mie",
     },
     {
       名称: "协助防守",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Xie Zhu Fang Shou",
     },
     {
       名称: "协助进攻",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Xie Zhu Jin Gong",
     },
     {
       名称: "最后一击",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Zui Hou Yi Ji",
     },
     {
       名称: "对英雄造成伤害量",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Dui Ying Xiong Zao Cheng Shang Hai Liang",
     },
     {
       名称: "治疗量",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Zhi Liao Liang",
     },
     {
       名称: "最佳瞬间消灭",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Zui Jia Shun Jian Xiao Mie",
     },
     {
       名称: "瞬间消灭",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Shun Jian Xiao Mie",
     },
     {
       名称: "目标攻防消灭",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Mu Biao Gong Fang Xiao Mie",
     },
     {
       名称: "单独消灭",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Dan Du Xiao Mie",
     },
     {
       名称: "获得终极技能",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Huo De Zhong Ji Ji Neng",
     },
     {
       名称: "使用终极技能",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Shi Yong Zhong Ji Ji Neng",
     },
     {
       名称: "武器命中率",
       标签: ["数据", "玩家"],
       提示: "一个玩家数据选项。",
+      拼音: "Wu Qi Ming Zhong Lv",
     },
   ],
   光束效果: [
@@ -1597,120 +830,140 @@ let 常量 = {
       标签: ["光束", "基础效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "You Yi Guang Shu",
     },
     {
       名称: "有害光束",
       标签: ["光束", "基础效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "You Hai Guang Shu",
     },
     {
       名称: "抓钩光束",
       标签: ["光束", "基础效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Zhua Gou Guang Shu",
     },
     {
       名称: "布丽吉塔连枷链光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Lian Jia Lian Guang Shu",
     },
     {
       名称: "“回声”聚焦光线光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Hui Sheng ” Ju Jiao Guang Xian Guang Shu",
     },
     {
       名称: "“狂鼠”陷阱链光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Xian Jing Lian Guang Shu",
     },
     {
       名称: "“天使”治疗光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Tian Shi ” Zhi Liao Guang Shu",
     },
     {
       名称: "“天使”强化光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Tian Shi ” Qiang Hua Guang Shu",
     },
     {
       名称: "莫伊拉生化之球治疗光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Mo Yi La Sheng Hua Zhi Qiu Zhi Liao Guang Shu",
     },
     {
       名称: "莫伊拉生化之球伤害光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Mo Yi La Sheng Hua Zhi Qiu Shang Hai Guang Shu",
     },
     {
       名称: "莫伊拉生化之触连接光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Mo Yi La Sheng Hua Zhi Chu Lian Jie Guang Shu",
     },
     {
       名称: "莫伊拉聚合射线光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Mo Yi La Ju He She Xian Guang Shu",
     },
     {
       名称: "奥丽莎站住别动连线光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Ao Li Sha Zhan Zhu Bie Dong Lian Xian Guang Shu",
     },
     {
       名称: "奥丽莎强化光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Ao Li Sha Qiang Hua Guang Shu",
     },
     {
       名称: "“秩序之光”光子发射器光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Zhi Xu Zhi Guang ” Guang Zi Fa She Qi Guang Shu",
     },
     {
       名称: "“秩序之光”哨戒炮光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Zhi Xu Zhi Guang ” Shao Jie Pao Guang Shu",
     },
     {
       名称: "托比昂炮台视线光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Tuo Bi Ang Pao Tai Shi Xian Guang Shu",
     },
     {
       名称: "温斯顿特斯拉炮光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Wen Si Dun Te Si La Pao Guang Shu",
     },
     {
       名称: "查莉娅粒子光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Zha Li Ya Li Zi Guang Shu",
     },
     {
       名称: "智械切割者光束",
       标签: ["光束", "光束效果"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Zhi Xie Qie Ge Zhe Guang Shu",
     },
   ],
   播放效果: [
@@ -1719,600 +972,700 @@ let 常量 = {
       标签: ["播放", "基础效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "You Yi Bao Zha",
     },
     {
       名称: "有害爆炸",
       标签: ["播放", "基础效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "You Hai Bao Zha",
     },
     {
       名称: "环状爆炸",
       标签: ["播放", "基础效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Huan Zhuang Bao Zha",
     },
     {
       名称: "有益选择效果",
       标签: ["播放", "基础效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "You Yi Xuan Ze Xiao Guo",
     },
     {
       名称: "有害选择效果",
       标签: ["播放", "基础效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "You Hai Xuan Ze Xiao Guo",
     },
     {
       名称: "正面状态施加声音",
       标签: ["播放", "基础声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Zheng Mian Zhuang Tai Shi Jia Sheng Yin",
     },
     {
       名称: "负面状态施加声音",
       标签: ["播放", "基础声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Fu Mian Zhuang Tai Shi Jia Sheng Yin",
     },
     {
       名称: "状态爆炸声音",
       标签: ["播放", "基础声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Zhuang Tai Bao Zha Sheng Yin",
     },
     {
       名称: "环状爆炸声音",
       标签: ["播放", "基础声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Huan Zhuang Bao Zha Sheng Yin",
     },
     {
       名称: "爆炸声音",
       标签: ["播放", "基础声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Bao Zha Sheng Yin",
     },
     {
       名称: "卡西迪闪光弹击晕效果",
       标签: ["播放", "减益状态效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ka Xi Di Shan Guang Tan Ji Yun Xiao Guo",
     },
     {
       名称: "“黑影”黑客入侵完成开始效果",
       标签: ["播放", "减益状态效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Hei Ke Ru Qin Wan Cheng Kai Shi Xiao Guo",
     },
     {
       名称: "治疗目标激活效果",
       标签: ["播放", "增益状态效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Zhi Liao Mu Biao Ji Huo Xiao Guo",
     },
     {
       名称: "“黑影”位移传动材料效果",
       标签: ["播放", "增益状态效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Cai Liao Xiao Guo",
     },
     {
       名称: "安娜生物手雷增疗声音",
       标签: ["播放", "增益效果和减益效果声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "An Na Sheng Wu Shou Lei Zeng Liao Sheng Yin",
     },
     {
       名称: "安娜生物手雷禁疗声音",
       标签: ["播放", "增益效果和减益效果声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "An Na Sheng Wu Shou Lei Jin Liao Sheng Yin",
     },
     {
       名称: "安娜麻醉镖声音",
       标签: ["播放", "增益效果和减益效果声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "An Na Ma Zui Biao Sheng Yin",
     },
     {
       名称: "“死神”幽灵形态声音",
       标签: ["播放", "增益效果和减益效果声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Si Shen ” You Ling Xing Tai Shig Yin",
     },
     {
       名称: "“黑影”位移传动声音",
       标签: ["播放", "增益效果和减益效果声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Sheng Yin",
     },
     {
       名称: "“士兵：76”疾跑开始声音",
       标签: ["播放", "增益效果和减益效果声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Shi Bing ： 7 6 ” Ji Pao Kai Shi Sheng Yin",
     },
     {
       名称: "安娜生物手雷爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "An Na Sheng Wu Shou Lei Bao Zha Sheng Yin",
     },
     {
       名称: "艾什延时雷管爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ai Shi Yan Shi Lei Guan Bao Zha Sheng Yin",
     },
     {
       名称: "巴蒂斯特生化榴弹枪爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ba Di Si Te Sheng Hua Liu Dan Qiang Bao Zha Sheng Yin",
     },
     {
       名称: "“堡垒”坦克炮爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Bao Lei ” Tan Ke Pao Bao Zha Sheng Yin",
     },
     {
       名称: "布丽吉塔流星飞锤范围治疗声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Liu Xing Fei Chui Fan Wei Zhi Liao Sheng Yin",
     },
     {
       名称: "布丽吉塔恢复包击中声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Hui Fu Bao Ji Zhong Sheng Yin",
     },
     {
       名称: "布丽吉塔恢复包护甲声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Hui Fu Bao Hu Jia Sheng Yin",
     },
     {
       名称: "D.Va微型飞弹爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "D . V A Wei Xing Fei Dan Bao Zha Sheng Yin",
     },
     {
       名称: "D.Va自毁爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "D . V A Zi Hui Bao Zha Sheng Yin",
     },
     {
       名称: "“末日铁拳”上勾重拳跳跃声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Shang Gou Zhong Quan Tiao Yue Sheng Yin",
     },
     {
       名称: "“末日铁拳”上勾重拳击中声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Shang Gou Zhong Quan Ji Zhong Sheng Yin",
     },
     {
       名称: "“末日铁拳”毁天灭地击中声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Hui Tian Mie Di Ji Zhong Sheng Yin",
     },
     {
       名称: "“回声”黏性炸弹爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hui Sheng ” Nian Xing Zha Dan Bao Zha Sheng Yin",
     },
     {
       名称: "“狂鼠”榴弹发射器爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Liu Dan Fa She Qi Bao Zha Sheng Yin",
     },
     {
       名称: "“狂鼠”震荡地雷爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Zhen Dang Di Lei Bao Zha Sheng Yin",
     },
     {
       名称: "“狂鼠”炸弹轮胎爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Zha Dan Lun Tai Bao Zha Sheng Yin",
     },
     {
       名称: "半藏音初始脉冲声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ban Zang Yin Chu Shi Mai Chong Sheng Yin",
     },
     {
       名称: "卢西奥音障施放声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Lu Xi Ao Yin Zhang Shi Fang Sheng Yin",
     },
     {
       名称: "卡西迪闪光弹爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ka Xi Di Shan Guang Tan Bao Zha Sheng Yin",
     },
     {
       名称: "莫伊拉消散消失声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Mo Yi La Xiao San Xiao Shi Sheng Yin",
     },
     {
       名称: "莫伊拉消散重现声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Mo Yi La Xiao San Chong Xian Sheng Yin",
     },
     {
       名称: "奥丽莎站住别动内爆声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ao Li Sha Zhan Zhu Bie Dong Nei Bao Sheng Yin",
     },
     {
       名称: "“法老之鹰”火箭发射器爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Huo Jian Fa She Qi Bao Zha Sheng Yin",
     },
     {
       名称: "“法老之鹰”震荡冲击声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Zhen Dang Chong Ji Sheng Yin",
     },
     {
       名称: "“法老之鹰”火箭弹幕爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Huo Jian Tan Mu Bao Zha Sheng Yin",
     },
     {
       名称: "莱因哈特烈焰打击目标击中声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Lai Yin Ha Te Lie Yan Da Ji Mu Biao Ji Zhong Sheng Yin",
     },
     {
       名称: "“西格玛”超能之球内爆声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Chao Neng Zhi Qiu Nei Bao Sheng Yin",
     },
     {
       名称: "“西格玛”质量吸附击中声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Zhi Liang Xi Fu Ji Zhong Sheng Yin",
     },
     {
       名称: "“黑影”标志声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Biao Zhi Sheng Yin",
     },
     {
       名称: "“黑影”位移传动消失声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Xiao Shi Sheng Yin",
     },
     {
       名称: "“黑影”位移传动重现声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Chong Xian Sheng Yin",
     },
     {
       名称: "“黑影”电磁脉冲爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Dian Ci Mai Chong Bao Zha Sheng Yin",
     },
     {
       名称: "“秩序之光”传送面板重现声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Zhi Xu Zhi Guang ” Chuan Song Mian Ban Chong Xian Sheng Yin",
     },
     {
       名称: "“猎空”闪回消失声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Lie Kong ” Shan Hui Xiao Shi Sheng Yin",
     },
     {
       名称: "“猎空”闪回重现声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Lie Kong ” Shan Hui Chong Xian Sheng Yin",
     },
     {
       名称: "“黑百合”剧毒诡雷爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Bai He ” Ju Du Gui Lei Bao Zha Sheng Yin",
     },
     {
       名称: "温斯顿喷射背包着陆声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Wen Si Dun Pen She Bei Bao Zhuo Lu Sheng Yin",
     },
     {
       名称: "“破坏球”重力坠击击中声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Zhong Li Zhui Ji Ji Zhong Sheng Yin",
     },
     {
       名称: "“破坏球”地雷禁区爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Di Lei Jin Qu Bao Zha Sheng Yin",
     },
     {
       名称: "查莉娅粒子炮爆炸声音",
       标签: ["播放", "爆炸声音"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Zha Li Ya Li Zi Pao Bao Zha Sheng Yin",
     },
     {
       名称: "布丽吉塔恢复包击中效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Hui Fu Bao Ji Zhong Xiao Guo",
     },
     {
       名称: "布丽吉塔恢复包护甲效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Hui Fu Bao Hu Jia Xiao Guo",
     },
     {
       名称: "布丽吉塔流星飞锤范围治疗效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Liu Xing Fei Chui Fan Wei Zhi Liao Xiao Guo",
     },
     {
       名称: "D.Va微型飞弹爆炸效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "D . V A Wei Xing Fei Dan Bao Zha Xiao Guo",
     },
     {
       名称: "D.Va自毁爆炸效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "D . V A Zi Hui Bao Zha Xiao Guo",
     },
     {
       名称: "“回声”黏性炸弹爆炸效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hui Sheng ” Nian Xing Zha Dan Bao Zha Xiao Guo",
     },
     {
       名称: "半藏音初始脉冲效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ban Zang Yin Chu Shi Mai Chong Xiao Guo",
     },
     {
       名称: "卢西奥音障施放效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Lu Xi Ao Yin Zhang Shi Fang Xiao Guo",
     },
     {
       名称: "莫伊拉消散消失效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Mo Yi La Xiao San Xiao Shi Xiao Guo",
     },
     {
       名称: "莫伊拉消散重现效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Mo Yi La Xiao San Chong Xian Xiao Guo",
     },
     {
       名称: "奥丽莎站住别动内爆效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ao Li Sha Zhan Zhu Bie Dong Nei Bao Xiao Guo",
     },
     {
       名称: "“西格玛”超能之球内爆效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Chao Neng Zhi Qiu Nei Bao Xiao Guo",
     },
     {
       名称: "“黑影”标志效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Biao Zhi Xiao Guo",
     },
     {
       名称: "“黑影”位移传动消失效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Xiao Shi Xiao Guo",
     },
     {
       名称: "“黑影”位移传动重现效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Chong Xian Xiao Guo",
     },
     {
       名称: "“黑影”电磁脉冲爆炸效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Dian Ci Mai Chong Bao Zha Xiao Guo",
     },
     {
       名称: "“秩序之光”传送面板重现效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Zhi Xu Zhi Guang ” Chuan Song Mian Ban Chong Xian Xiao Guo",
     },
     {
       名称: "“猎空”闪回消失效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Lie Kong ” Shan Hui Xiao Shi Xiao Guo",
     },
     {
       名称: "“猎空“闪回重现效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Lie Kong “ Shan Hui Chong Xian Xiao Guo",
     },
     {
       名称: "查莉娅粒子炮爆炸效果",
       标签: ["播放", "能量爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Zha Li Ya Li Zi Pao Bao Zha Xiao Guo",
     },
     {
       名称: "安娜生物手雷爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "An Na Sheng Wu Shou Lei Bao Zha Xiao Guo",
     },
     {
       名称: "艾什延时雷管爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ai Shi Yan Shi Lei Guan Bao Zha Xiao Guo",
     },
     {
       名称: "巴蒂斯特生化榴弹枪爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ba Di Si Te Sheng Hua Liu Dan Qiang Bao Zha Xiao Guo",
     },
     {
       名称: "“堡垒”坦克炮爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Bao Lei ” Tan Ke Pao Bao Zha Xiao Guo",
     },
     {
       名称: "“末日铁拳”上勾重拳跳跃效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Shang Gou Zhong Quan Tiao Yue Xiao Guo",
     },
     {
       名称: "“末日铁拳”上勾重拳击中效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Shang Gou Zhong Quan Ji Zhong Xiao Guo",
     },
     {
       名称: "“末日铁拳”毁天灭地击中效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Hui Tian Mie Di Ji Zhong Xiao Guo",
     },
     {
       名称: "“狂鼠”榴弹发射器爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Liu Dan Fa She Qi Bao Zha Xiao Guo",
     },
     {
       名称: "“狂鼠”震荡地雷爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Zhen Dang Di Lei Bao Zha Xiao Guo",
     },
     {
       名称: "“狂鼠”炸弹轮胎爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Zha Dan Lun Tai Bao Zha Xiao Guo",
     },
     {
       名称: "卡西迪闪光弹爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Ka Xi Di Shan Guang Tan Bao Zha Xiao Guo",
     },
     {
       名称: "“法老之鹰”火箭发射器爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Huo Jian Fa She Qi Bao Zha Xiao Guo",
     },
     {
       名称: "“法老之鹰”震荡冲击效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Zhen Dang Chong Ji Xiao Guo",
     },
     {
       名称: "“法老之鹰”火箭弹幕爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Huo Jian Tan Mu Bao Zha Xiao Guo",
     },
     {
       名称: "莱因哈特烈焰打击目标击中效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Lai Yin Ha Te Lie Yan Da Ji Mu Biao Ji Zhong Xiao Guo",
     },
     {
       名称: "“西格玛”质量吸附击中效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Zhi Liang Xi Fu Ji Zhong Xiao Guo",
     },
     {
       名称: "“黑百合“剧毒诡雷爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Hei Bai He “ Ju Du Gui Lei Bao Zha Xiao Guo",
     },
     {
       名称: "温斯顿喷射背包着陆效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "Wen Si Dun Pen She Bei Bao Zhuo Lu Xiao Guo",
     },
     {
       名称: "“破坏球”重力坠击击中效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Zhong Li Zhui Ji Ji Zhong Xiao Guo",
     },
     {
       名称: "“破坏球”地雷禁区爆炸效果",
       标签: ["播放", "运动爆炸效果"],
       提示: "一个播放效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Di Lei Jin Qu Bao Zha Xiao Guo",
     },
   ],
   效果: [
@@ -2321,426 +1674,497 @@ let 常量 = {
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Qiu Ti",
     },
     {
       名称: "光柱",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Guang Zhu",
     },
     {
       名称: "球",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Qiu",
     },
     {
       名称: "环",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Huan",
     },
     {
       名称: "云",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Yun",
     },
     {
       名称: "火花",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Huo Hua",
     },
     {
       名称: "有益光环",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "You Yi Guang Huan",
     },
     {
       名称: "有害光环",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "You Hai Guang Huan",
     },
     {
       名称: "能量声音",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Neng Liang Sheng Yin",
     },
     {
       名称: "拾取音效",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Shi Qu Yin Xiao",
     },
     {
       名称: "有益光环声音",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "You Yi Guang Huan Sheng Yin",
     },
     {
       名称: "负面光环音效",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Fu Mian Guang Huan Yin Xiao",
     },
     {
       名称: "火花声音",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Huo Hua Sheng Yin",
     },
     {
       名称: "烟雾声音",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Yan Wu Sheng Yin",
     },
     {
       名称: "诱饵声音",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "You Er Sheng Yin",
     },
     {
       名称: "信标声音",
       标签: ["效果", "基础效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Xin Biao Sheng Yin",
     },
     {
       名称: "安娜生物手雷禁疗效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "An Na Sheng Wu Shou Lei Jin Liao Xiao Guo",
     },
     {
       名称: "安娜麻醉镖效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "An Na Ma Zui Biao Xiao Guo",
     },
     {
       名称: "艾什延时雷管燃烧粒子效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Ai Shi Yan Shi Lei Guan Ran Shao Li Zi Xiao Guo",
     },
     {
       名称: "艾什延时雷管燃烧材料效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Ai Shi Yan Shi Lei Guan Ran Shao Cai Liao Xiao Guo",
     },
     {
       名称: "卡西迪闪光弹击晕效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Ka Xi Di Shan Guang Tan Ji Yun Xiao Guo",
     },
     {
       名称: "美冰冻效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Mei Bing Dong Xiao Guo",
     },
     {
       名称: "“西格玛”引力乱流目标效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Yin Li Luan Liu Mu Biao Xiao Guo",
     },
     {
       名称: "“黑影”黑客入侵完成循环效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Hei Ke Ru Qin Wan Cheng Xun Huan Xiao Guo",
     },
     {
       名称: "“黑百合”剧毒诡雷目标效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Hei Bai He ” Ju Du Gui Lei Mu Biao Xiao Guo",
     },
     {
       名称: "温斯顿特斯拉炮目标效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Wen Si Dun Te Si La Pao Mu Biao Xiao Guo",
     },
     {
       名称: "禅雅塔乱目标效果",
       标签: ["效果", "减益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Chan Ya Ta Luan Mu Biao Xiao Guo",
     },
     {
       名称: "治疗目标效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Zhi Liao Mu Biao Xiao Guo",
     },
     {
       名称: "治疗目标激活效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Zhi Liao Mu Biao Ji Huo Xiao Guo",
     },
     {
       名称: "安娜生物手雷增疗效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "An Na Sheng Wu Shou Lei Zeng Liao Xiao Guo",
     },
     {
       名称: "安娜纳米激素强化效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "An Na Na Mi Ji Su Qiang Hua Xiao Guo",
     },
     {
       名称: "巴蒂斯特维生力场保护效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Ba Di Si Te Wei Sheng Li Chang Bao Hu Xiao Guo",
     },
     {
       名称: "“回声”复制效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Hui Sheng ” Fu Zhi Xiao Guo",
     },
     {
       名称: "卢西奥音障保护效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Lu Xi Ao Yin Zhang Bao Hu Xiao Guo",
     },
     {
       名称: "“天使”伤害强化效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Tian Shi ” Shang Hai Qiang Hua Xiao Guo",
     },
     {
       名称: "“死神”幽灵形态效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Si Shen ” You Ling Xing Tai Xiao Guo",
     },
     {
       名称: "“士兵：76”疾跑效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Shi Bing ： 7 6 ” Ji Pao Xiao Guo",
     },
     {
       名称: "托比昂热力过载效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Tuo Bi Ang Re Li Guo Zai Xiao Guo",
     },
     {
       名称: "温斯顿原始暴怒效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Wen Si Dun Yuan Shi Bao Nu Xiao Guo",
     },
     {
       名称: "“破坏球”感应护盾目标效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Gan Ying Hu Dun Mu Biao Xiao Guo",
     },
     {
       名称: "“破坏球”重力坠击火焰效果",
       标签: ["效果", "增益状态效果"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Zhong Li Zhui Ji Huo Yan Xiao Guo",
     },
     {
       名称: "安娜纳米激素强化声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "An Na Na Mi Ji Su Qiang Hua Sheng Yin",
     },
     {
       名称: "巴蒂斯特维生力场保护声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Ba Di Si Te Wei Sheng Li Chang Bao Hu Sheng Yin",
     },
     {
       名称: "“回声”复制声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Hui Sheng ” Fu Zhi Sheng Yin",
     },
     {
       名称: "卢西奥音障保护声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Lu Xi Ao Yin Zhang Bao Hu Sheng Yin",
     },
     {
       名称: "美冰冻声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Mei Bing Dong Sheng Yin",
     },
     {
       名称: "“天使”伤害强化声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Tian Shi ” Shang Hai Qiang Hua Sheng Yin",
     },
     {
       名称: "“西格玛”引力乱流目标声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Yin Li Luan Liu Mu Biao Sheng Yin",
     },
     {
       名称: "“黑影”黑客入侵进行声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Hei Ke Ru Qin Jin Xing Sheng Yin",
     },
     {
       名称: "“黑影”黑客入侵完成声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Hei Ke Ru Qin Wan Cheng Sheng Yin",
     },
     {
       名称: "托比昂热力过载声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Tuo Bi Ang Re Li Guo Zai Shig Yin",
     },
     {
       名称: "“黑百合“剧毒诡雷目标声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Hei Bai He “ Ju Du Gui Lei Mu Biao Sheng Yin",
     },
     {
       名称: "温斯顿特斯拉炮目标声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Wen Si Dun Te Si La Pao Mu Biao Sheng Yin",
     },
     {
       名称: "温斯顿原始暴怒声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Wen Si Dun Yuan Shi Bao Nu Sheng Yin",
     },
     {
       名称: "“破坏球”感应护盾目标声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Gan Ying Hu Dun Mu Biao Sheng Yin",
     },
     {
       名称: "“破坏球”重力坠击火焰声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Zhong Li Zhui Ji Huo Yan Sheng Yin",
     },
     {
       名称: "禅雅塔乱目标声音",
       标签: ["效果", "增益效果和减益效果声音"],
       提示: "一个效果选项。",
       图标: "",
+      拼音: "Chan Ya Ta Luan Mu Biao Sheng Yin",
     },
     {
       名称: "“回声”聚焦光线光束声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Hui Sheng ” Ju Jiao Guang Xian Guang Shu Sheng Yin",
     },
     {
       名称: "“狂鼠”陷阱链声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Xian Jing Lian Sheng Yin",
     },
     {
       名称: "“天使”治疗光束声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Tian Shi ” Zhi Liao Guang Shu Sheng Yin",
     },
     {
       名称: "“天使”强化光束声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Tian Shi ” Qiang Hua Guang Shu Sheng Yin",
     },
     {
       名称: "莫伊拉生化之触连接声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Mo Yi La Sheng Hua Zhi Chu Lian Jie Sheng Yin",
     },
     {
       名称: "莫伊拉生化之球伤害声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Mo Yi La Sheng Hua Zhi Qiu Shang Hai Shig Yin",
     },
     {
       名称: "莫伊拉生化之球治疗声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Mo Yi La Sheng Hua Zhi Qiu Zhi Liao Sheng Yin",
     },
     {
       名称: "莫伊拉聚合射线声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Mo Yi La Ju He She Xian Sheng Yin",
     },
     {
       名称: "奥丽莎强化声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Ao Li Sha Qiang Hua Sheng Yin",
     },
     {
       名称: "奥丽莎站住别动连线声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Ao Li Sha Zhan Zhu Bie Dong Lian Xian Sheng Yin",
     },
     {
       名称: "“秩序之光”光子发射器声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "“ Zhi Xu Zhi Guang ” Guang Zi Fa She Qi Sheng Yin",
     },
     {
       名称: "温斯顿特斯拉炮声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Wen Si Dun Te Si La Pao Sheng Yin",
     },
     {
       名称: "查莉娅粒子炮爆炸声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Zha Li Ya Li Zi Pao Bao Zha Sheng Yin",
     },
     {
       名称: "智械切割者光束声音",
       标签: ["效果", "光束声音"],
       提示: "一个光束效果选项。",
       图标: "",
+      拼音: "Zhi Xie Qie Ge Zhe Guang Shu Sheng Yin",
     },
   ],
   子程序行为: [
@@ -2748,11 +2172,13 @@ let 常量 = {
       名称: "重新开始规则",
       标签: ["子程序", "行为"],
       提示: "一个仅用于“开始规则”的子程序行为选项。",
+      拼音: "Chong Xin Kai Shi Gui Ze",
     },
     {
       名称: "无动作",
       标签: ["子程序", "行为"],
       提示: "一个仅用于“开始规则”的子程序行为选项。",
+      拼音: "Wu Dong Zuo",
     },
   ],
   生命类型: [
@@ -2760,16 +2186,19 @@ let 常量 = {
       名称: "生命值",
       标签: ["生命类型"],
       提示: "一个生命类型选项。",
+      拼音: "Sheng Ming Zhi",
     },
     {
       名称: "护甲",
       标签: ["生命类型"],
       提示: "一个生命类型选项。",
+      拼音: "Hu Jia",
     },
     {
       名称: "护盾",
       标签: ["生命类型"],
       提示: "一个生命类型选项。",
+      拼音: "Hu Dun",
     },
   ],
   英雄: [
@@ -2813,6 +2242,7 @@ let 常量 = {
           提示: "受到手雷影响的队友在一段时间内所受到的治疗量增加，而受到手雷影响的敌人在一段时间内无法接受治疗。",
         },
       },
+      拼音: "An Na",
     },
     {
       名称: "艾什",
@@ -2850,6 +2280,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Ai Shi",
     },
     {
       名称: "巴蒂斯特",
@@ -2901,6 +2332,7 @@ let 常量 = {
           提示: "在蓄力后可以跳得更高。",
         },
       },
+      拼音: "Ba Di Si Te",
     },
     {
       名称: "堡垒",
@@ -2952,6 +2384,7 @@ let 常量 = {
           提示: "降低切换模式后所受的伤害。",
         },
       },
+      拼音: "Bao Lei",
     },
     {
       名称: "布丽吉塔",
@@ -3014,6 +2447,7 @@ let 常量 = {
           绑定: ["被动"],
         },
       },
+      拼音: "Bu Li Ji Ta",
     },
     {
       名称: "末日铁拳",
@@ -3067,6 +2501,7 @@ let 常量 = {
           提示: "用技能命中敌人后，自身可生成临时生命值。",
         },
       },
+      拼音: "Mo Ri Tie Quan",
     },
     {
       名称: "D.Va",
@@ -3185,6 +2620,7 @@ let 常量 = {
           绑定: ["跳跃", "被动"],
         },
       },
+      拼音: "Hui Sheng",
     },
     {
       名称: "源氏",
@@ -3230,6 +2666,7 @@ let 常量 = {
           提示: "可以攀爬墙壁并且在空中二段跳。正在攀爬时视为“在墙上”。",
         },
       },
+      拼音: "Yuan Shi",
     },
     {
       名称: "破坏球",
@@ -3283,6 +2720,7 @@ let 常量 = {
           绑定: ["蹲下"],
         },
       },
+      拼音: "Po Huai Qiu",
     },
     {
       名称: "半藏",
@@ -3336,6 +2774,7 @@ let 常量 = {
           提示: "可以攀爬墙壁。正在攀爬时视为“在墙上”。",
         },
       },
+      拼音: "Ban Zang",
     },
     {
       名称: "渣客女王",
@@ -3388,6 +2827,7 @@ let 常量 = {
           绑定: ["被动"],
         },
       },
+      拼音: "Zha Ke Nv Wang",
     },
     {
       名称: "狂鼠",
@@ -3434,6 +2874,7 @@ let 常量 = {
           提示: "被击杀后，在原地丢下若干快速引爆的榴弹。",
         },
       },
+      拼音: "Kuang Shu",
     },
     {
       名称: "雾子",
@@ -3485,6 +2926,7 @@ let 常量 = {
           提示: "可以攀爬墙壁。正在攀爬时视为“在墙上”。",
         },
       },
+      拼音: "Wu Zi",
     },
     {
       名称: "卢西奥",
@@ -3537,6 +2979,7 @@ let 常量 = {
           提示: "跃上墙面并在其上滑动。滑墙时视为“在墙上”。",
         },
       },
+      拼音: "Lu Xi Ao",
     },
     {
       名称: "卡西迪",
@@ -3574,6 +3017,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Ka Xi Di",
     },
     {
       名称: "美",
@@ -3611,6 +3055,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Mei",
     },
     {
       名称: "天使",
@@ -3659,6 +3104,7 @@ let 常量 = {
           绑定: ["被动"],
         },
       },
+      拼音: "Tian Shi",
     },
     {
       名称: "莫伊拉",
@@ -3705,6 +3151,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Mo Yi La",
     },
     {
       名称: "奥丽莎",
@@ -3750,6 +3197,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Ao Li Sha",
     },
     {
       名称: "法老之鹰",
@@ -3794,6 +3242,7 @@ let 常量 = {
           绑定: ["辅助攻击模式", "跳跃", "被动"],
         },
       },
+      拼音: "Fa Lao Zhi Ying",
     },
     {
       名称: "死神",
@@ -3838,6 +3287,7 @@ let 常量 = {
           绑定: ["被动"],
         },
       },
+      拼音: "Si Shen",
     },
     {
       名称: "莱因哈特",
@@ -3884,6 +3334,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Lai Yin Ha Te",
     },
     {
       名称: "路霸",
@@ -3921,6 +3372,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Lu Ba",
     },
     {
       名称: "西格玛",
@@ -3967,6 +3419,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Xi Ge Ma",
     },
     {
       名称: "索杰恩",
@@ -4005,6 +3458,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Suo Jie En",
     },
     {
       名称: "士兵：76",
@@ -4049,6 +3503,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Shi Bing ： 7 6",
     },
     {
       名称: "黑影",
@@ -4108,6 +3563,7 @@ let 常量 = {
           提示: "可以透过墙体侦测到严重受伤的敌人。",
         },
       },
+      拼音: "Hei Ying",
     },
     {
       名称: "秩序之光",
@@ -4146,6 +3602,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Zhi Xu Zhi Guang",
     },
     {
       名称: "托比昂",
@@ -4189,6 +3646,7 @@ let 常量 = {
           提示: "按 互动 摧毁。部署到炮台可射击前无法主动摧毁。",
         },
       },
+      拼音: "Tuo Bi Ang",
     },
     {
       名称: "猎空",
@@ -4226,6 +3684,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Lie Kong",
     },
     {
       名称: "黑百合",
@@ -4263,6 +3722,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Hei Bai He",
     },
     {
       名称: "温斯顿",
@@ -4302,6 +3762,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Wen Si Dun",
     },
     {
       名称: "查莉娅",
@@ -4348,6 +3809,7 @@ let 常量 = {
           绑定: ["被动"],
         },
       },
+      拼音: "Zha Li Ya",
     },
     {
       名称: "禅雅塔",
@@ -4394,6 +3856,7 @@ let 常量 = {
           提示: "近身攻击伤害提高50%，击退效果大幅提高。",
         },
       },
+      拼音: "Chan Ya Ta",
     },
     {
       名称: "拉玛刹",
@@ -4450,6 +3913,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "La Ma Cha",
     },
     {
       名称: "生命之梭",
@@ -4498,6 +3962,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Sheng Ming Zhi Suo",
     },
     {
       名称: "伊拉锐",
@@ -4535,6 +4000,7 @@ let 常量 = {
           绑定: ["技能2"],
         },
       },
+      拼音: "Yi La Rui",
     },
   ],
   HUD位置: [
@@ -4542,16 +4008,19 @@ let 常量 = {
       名称: "左边",
       标签: ["HUD", "位置"],
       提示: "一个HUD位置选项。",
+      拼音: "Zuo Bian",
     },
     {
       名称: "顶部",
       标签: ["HUD", "位置"],
       提示: "一个HUD位置选项。",
+      拼音: "Ding Bu",
     },
     {
       名称: "右边",
       标签: ["HUD", "位置"],
       提示: "一个HUD位置选项。",
+      拼音: "You Bian",
     },
   ],
   图标: [
@@ -4559,55 +4028,91 @@ let 常量 = {
       名称: "箭头：向下",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: { 深色: "images/ow/icon/1.png", 浅色: "images/ow/icon_gray/1.png" },
+      图标: {
+        深色: "images/ow/icon/1.png",
+        浅色: "images/ow/icon_gray/1.png",
+      },
+      拼音: "Jian Tou ： Xiang Xia",
     },
     {
       名称: "箭头：向左",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: { 深色: "images/ow/icon/2.png", 浅色: "images/ow/icon_gray/2.png" },
+      图标: {
+        深色: "images/ow/icon/2.png",
+        浅色: "images/ow/icon_gray/2.png",
+      },
+      拼音: "Jian Tou ： Xiang Zuo",
     },
     {
       名称: "箭头：向右",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: { 深色: "images/ow/icon/3.png", 浅色: "images/ow/icon_gray/3.png" },
+      图标: {
+        深色: "images/ow/icon/3.png",
+        浅色: "images/ow/icon_gray/3.png",
+      },
+      拼音: "Jian Tou ： Xiang You",
     },
     {
       名称: "箭头：向上",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: { 深色: "images/ow/icon/4.png", 浅色: "images/ow/icon_gray/4.png" },
+      图标: {
+        深色: "images/ow/icon/4.png",
+        浅色: "images/ow/icon_gray/4.png",
+      },
+      拼音: "Jian Tou ： Xiang Shang",
     },
     {
       名称: "星形",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: { 深色: "images/ow/icon/5.png", 浅色: "images/ow/icon_gray/5.png" },
+      图标: {
+        深色: "images/ow/icon/5.png",
+        浅色: "images/ow/icon_gray/5.png",
+      },
+      拼音: "Xing Xing",
     },
     {
       名称: "箭矢",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: { 深色: "images/ow/icon/6.png", 浅色: "images/ow/icon_gray/6.png" },
+      图标: {
+        深色: "images/ow/icon/6.png",
+        浅色: "images/ow/icon_gray/6.png",
+      },
+      拼音: "Jian Shi",
     },
     {
       名称: "对号",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: { 深色: "images/ow/icon/7.png", 浅色: "images/ow/icon_gray/7.png" },
+      图标: {
+        深色: "images/ow/icon/7.png",
+        浅色: "images/ow/icon_gray/7.png",
+      },
+      拼音: "Dui Hao",
     },
     {
       名称: "圆圈",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: { 深色: "images/ow/icon/8.png", 浅色: "images/ow/icon_gray/8.png" },
+      图标: {
+        深色: "images/ow/icon/8.png",
+        浅色: "images/ow/icon_gray/8.png",
+      },
+      拼音: "Yuan Quan",
     },
     {
       名称: "梅花",
       标签: ["图标"],
       提示: "一个用于“创建图标”或“图标字符串”的图标选项。",
-      图标: { 深色: "images/ow/icon/9.png", 浅色: "images/ow/icon_gray/9.png" },
+      图标: {
+        深色: "images/ow/icon/9.png",
+        浅色: "images/ow/icon_gray/9.png",
+      },
+      拼音: "Mei Hua",
     },
     {
       名称: "方块",
@@ -4617,6 +4122,7 @@ let 常量 = {
         深色: "images/ow/icon/10.png",
         浅色: "images/ow/icon_gray/10.png",
       },
+      拼音: "Fang Kuai",
     },
     {
       名称: "晕眩",
@@ -4626,6 +4132,7 @@ let 常量 = {
         深色: "images/ow/icon/11.png",
         浅色: "images/ow/icon_gray/11.png",
       },
+      拼音: "Yun Xuan",
     },
     {
       名称: "感叹号",
@@ -4635,6 +4142,7 @@ let 常量 = {
         深色: "images/ow/icon/12.png",
         浅色: "images/ow/icon_gray/12.png",
       },
+      拼音: "Gan Tan Hao",
     },
     {
       名称: "眼睛",
@@ -4644,6 +4152,7 @@ let 常量 = {
         深色: "images/ow/icon/13.png",
         浅色: "images/ow/icon_gray/13.png",
       },
+      拼音: "Yan Jing",
     },
     {
       名称: "火焰",
@@ -4653,6 +4162,7 @@ let 常量 = {
         深色: "images/ow/icon/14.png",
         浅色: "images/ow/icon_gray/14.png",
       },
+      拼音: "Huo Yan",
     },
     {
       名称: "旗帜",
@@ -4662,6 +4172,7 @@ let 常量 = {
         深色: "images/ow/icon/15.png",
         浅色: "images/ow/icon_gray/15.png",
       },
+      拼音: "Qi Zhi",
     },
     {
       名称: "光晕",
@@ -4671,6 +4182,7 @@ let 常量 = {
         深色: "images/ow/icon/16.png",
         浅色: "images/ow/icon_gray/16.png",
       },
+      拼音: "Guang Yun",
     },
     {
       名称: "高兴",
@@ -4680,6 +4192,7 @@ let 常量 = {
         深色: "images/ow/icon/17.png",
         浅色: "images/ow/icon_gray/17.png",
       },
+      拼音: "Gao Xing",
     },
     {
       名称: "红桃",
@@ -4689,6 +4202,7 @@ let 常量 = {
         深色: "images/ow/icon/18.png",
         浅色: "images/ow/icon_gray/18.png",
       },
+      拼音: "Hong Tao",
     },
     {
       名称: "满月",
@@ -4698,6 +4212,7 @@ let 常量 = {
         深色: "images/ow/icon/19.png",
         浅色: "images/ow/icon_gray/19.png",
       },
+      拼音: "Man Yue",
     },
     {
       名称: "拒绝",
@@ -4707,6 +4222,7 @@ let 常量 = {
         深色: "images/ow/icon/20.png",
         浅色: "images/ow/icon_gray/20.png",
       },
+      拼音: "Ju Jue",
     },
     {
       名称: "加号",
@@ -4716,6 +4232,7 @@ let 常量 = {
         深色: "images/ow/icon/21.png",
         浅色: "images/ow/icon_gray/21.png",
       },
+      拼音: "Jia Hao",
     },
     {
       名称: "剧毒",
@@ -4725,6 +4242,7 @@ let 常量 = {
         深色: "images/ow/icon/22.png",
         浅色: "images/ow/icon_gray/22.png",
       },
+      拼音: "Ju Du",
     },
     {
       名称: "剧毒2",
@@ -4734,6 +4252,7 @@ let 常量 = {
         深色: "images/ow/icon/23.png",
         浅色: "images/ow/icon_gray/23.png",
       },
+      拼音: "Ju Du 2",
     },
     {
       名称: "问号",
@@ -4743,6 +4262,7 @@ let 常量 = {
         深色: "images/ow/icon/24.png",
         浅色: "images/ow/icon_gray/24.png",
       },
+      拼音: "Wen Hao",
     },
     {
       名称: "辐射",
@@ -4752,6 +4272,7 @@ let 常量 = {
         深色: "images/ow/icon/25.png",
         浅色: "images/ow/icon_gray/25.png",
       },
+      拼音: "Fu She",
     },
     {
       名称: "回收",
@@ -4761,6 +4282,7 @@ let 常量 = {
         深色: "images/ow/icon/26.png",
         浅色: "images/ow/icon_gray/26.png",
       },
+      拼音: "Hui Shou",
     },
     {
       名称: "宽环",
@@ -4770,6 +4292,7 @@ let 常量 = {
         深色: "images/ow/icon/27.png",
         浅色: "images/ow/icon_gray/27.png",
       },
+      拼音: "Kuan Huan",
     },
     {
       名称: "细环",
@@ -4779,6 +4302,7 @@ let 常量 = {
         深色: "images/ow/icon/28.png",
         浅色: "images/ow/icon_gray/28.png",
       },
+      拼音: "Xi Huan",
     },
     {
       名称: "难过",
@@ -4788,6 +4312,7 @@ let 常量 = {
         深色: "images/ow/icon/29.png",
         浅色: "images/ow/icon_gray/29.png",
       },
+      拼音: "Nan Guo",
     },
     {
       名称: "骷髅",
@@ -4797,6 +4322,7 @@ let 常量 = {
         深色: "images/ow/icon/30.png",
         浅色: "images/ow/icon_gray/30.png",
       },
+      拼音: "Ku Lou",
     },
     {
       名称: "黑桃",
@@ -4806,6 +4332,7 @@ let 常量 = {
         深色: "images/ow/icon/31.png",
         浅色: "images/ow/icon_gray/31.png",
       },
+      拼音: "Hei Tao",
     },
     {
       名称: "螺旋",
@@ -4815,6 +4342,7 @@ let 常量 = {
         深色: "images/ow/icon/32.png",
         浅色: "images/ow/icon_gray/32.png",
       },
+      拼音: "Luo Xuan",
     },
     {
       名称: "停止",
@@ -4824,6 +4352,7 @@ let 常量 = {
         深色: "images/ow/icon/33.png",
         浅色: "images/ow/icon_gray/33.png",
       },
+      拼音: "Ting Zhi",
     },
     {
       名称: "垃圾箱",
@@ -4833,6 +4362,7 @@ let 常量 = {
         深色: "images/ow/icon/34.png",
         浅色: "images/ow/icon_gray/34.png",
       },
+      拼音: "La Ji Xiang",
     },
     {
       名称: "警告",
@@ -4842,6 +4372,7 @@ let 常量 = {
         深色: "images/ow/icon/35.png",
         浅色: "images/ow/icon_gray/35.png",
       },
+      拼音: "Jing Gao",
     },
     {
       名称: "X",
@@ -4851,6 +4382,7 @@ let 常量 = {
         深色: "images/ow/icon/36.png",
         浅色: "images/ow/icon_gray/36.png",
       },
+      拼音: "X",
     },
   ],
   屏障视线检测: [
@@ -4858,16 +4390,19 @@ let 常量 = {
       名称: "屏障不会阻挡视线",
       标签: ["视线检测", "屏障"],
       提示: "一个屏障视线检测选项。",
+      拼音: "Ping Zhang Bu Hui Zu Dang Shi Xian",
     },
     {
       名称: "敌方屏障阻挡视线",
       标签: ["视线检测", "屏障"],
       提示: "一个屏障视线检测选项。",
+      拼音: "Di Fang Ping Zhang Zu Dang Shi Xian",
     },
     {
       名称: "所有屏障阻挡视线",
       标签: ["视线检测", "屏障"],
       提示: "一个屏障视线检测选项。",
+      拼音: "Suo You Ping Zhang Zu Dang Shi Xian",
     },
   ],
   视线检测: [
@@ -4875,21 +4410,25 @@ let 常量 = {
       名称: "关闭",
       标签: ["视线检测"],
       提示: "一个视线检测选项。",
+      拼音: "Guan Bi",
     },
     {
       名称: "表面",
       标签: ["视线检测"],
       提示: "一个视线检测选项。",
+      拼音: "Biao Mian",
     },
     {
       名称: "表面及全部屏障",
       标签: ["视线检测"],
       提示: "一个视线检测选项。",
+      拼音: "Biao Mian Ji Quan Bu Ping Zhang",
     },
     {
       名称: "表面及敌方屏障",
       标签: ["视线检测"],
       提示: "一个视线检测选项。",
+      拼音: "Biao Mian Ji Di Fang Ping Zhang",
     },
   ],
   地图: [
@@ -4897,381 +4436,457 @@ let 常量 = {
       名称: "阿育陀耶",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "A Yu Tuo Ye",
     },
     {
       名称: "黑森林",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Hei Sen Lin",
     },
     {
       名称: "圣诞节黑森林",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Sheng Dan Jie Hei Sen Lin",
     },
     {
       名称: "暴雪世界",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Bao Xue Shi Jie",
     },
     {
       名称: "圣诞节暴雪世界",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Sheng Dan Jie Bao Xue Shi Jie",
     },
     {
       名称: "釜山",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Fu Shan",
     },
     {
       名称: "春节釜山城区",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Chun Jie Fu Shan Cheng Qu",
     },
     {
       名称: "春节釜山寺院",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Chun Jie Fu Shan Si Yuan",
     },
     {
       名称: "城堡",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Cheng Bao",
     },
     {
       名称: "吉拉德堡",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ji La De Bao",
     },
     {
       名称: "万圣节吉拉德堡",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Wan Sheng Jie Ji La De Bao",
     },
     {
       名称: "皇家赛道",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Huang Jia Sai Dao",
     },
     {
       名称: "斗兽场",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Dou Shou Chang",
     },
     {
       名称: "多拉多",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Duo La Duo",
     },
     {
       名称: "生态监测站：南极洲",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Sheng Tai Jian Ce Zhan ： Nan Ji Zhou",
     },
     {
       名称: "圣诞节生态监测站：南极洲",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Sheng Dan Jie Sheng Tai Jian Ce Zhan ： Nan Ji Zhou",
     },
     {
       名称: "艾兴瓦尔德",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ai Xing Wa Er De",
     },
     {
       名称: "万圣节艾兴瓦尔德",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Wan Sheng Jie Ai Xing Wa Er De",
     },
     {
       名称: "埃斯佩兰萨",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ai Si Pei Lan Sa",
     },
     {
       名称: "花村",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Hua Cun",
     },
     {
       名称: "圣诞节花村",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Sheng Dan Jie Hua Cun",
     },
     {
       名称: "哈瓦那",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ha Wa Na",
     },
     {
       名称: "好莱坞",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Hao Lai Wu",
     },
     {
       名称: "万圣节好莱坞",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Wan Sheng Jie Hao Lai Wu",
     },
     {
       名称: "“地平线”月球基地",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "“ Di Ping Xian ” Yue Qiu Ji Di",
     },
     {
       名称: "伊利奥斯",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Yi Li Ao Si",
     },
     {
       名称: "伊利奥斯灯塔",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Yi Li Ao Si Deng Ta",
     },
     {
       名称: "伊利奥斯废墟",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Yi Li Ao Si Fei Xu",
     },
     {
       名称: "伊利奥斯深井",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Yi Li Ao Si Shen Jing",
     },
     {
       名称: "怪鼠复仇",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Guai Shu Fu Chou",
     },
     {
       名称: "渣客镇",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Zha Ke Zhen",
     },
     {
       名称: "铁坂",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Tie Ban",
     },
     {
       名称: "国王大道",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Guo Wang Da Dao",
     },
     {
       名称: "圣诞节国王大道",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Sheng Dan Jie Guo Wang Da Dao",
     },
     {
       名称: "漓江塔控制中心",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Li Jiang Ta Kong Zhi Zhong Xin",
     },
     {
       名称: "春节漓江塔控制中心",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Chun Jie Li Jiang Ta Kong Zhi Zhong Xin",
     },
     {
       名称: "漓江塔庭院",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Li Jiang Ta Ting Yuan",
     },
     {
       名称: "春节漓江塔庭院",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Chun Jie Li Jiang Ta Ting Yuan",
     },
     {
       名称: "漓江塔夜市",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Li Jiang Ta Ye Shi",
     },
     {
       名称: "春节漓江塔夜市",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Chun Jie Li Jiang Ta Ye Shi",
     },
     {
       名称: "漓江塔",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Li Jiang Ta",
     },
     {
       名称: "春节漓江塔",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Chun Jie Li Jiang Ta",
     },
     {
       名称: "马莱温多",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ma Lai Wen Duo",
     },
     {
       名称: "中城",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Zhong Cheng",
     },
     {
       名称: "墓园",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Mu Yuan",
     },
     {
       名称: "尼泊尔",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ni Bo Er",
     },
     {
       名称: "尼泊尔圣所",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ni Bo Er Sheng Suo",
     },
     {
       名称: "尼泊尔圣坛",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ni Bo Er Sheng Tan",
     },
     {
       名称: "尼泊尔村庄",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ni Bo Er Cun Zhuang",
     },
     {
       名称: "圣诞节尼泊尔村庄",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Sheng Dan Jie Ni Bo Er Cun Zhuang",
     },
     {
       名称: "新皇后街",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Xin Huang Hou Jie",
     },
     {
       名称: "努巴尼",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Nu Ba Ni",
     },
     {
       名称: "绿洲城",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Lv Zhou Cheng",
     },
     {
       名称: "绿洲城中心",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Lv Zhou Cheng Zhong Xin",
     },
     {
       名称: "绿洲城花园",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Lv Zhou Cheng Hua Yuan",
     },
     {
       名称: "绿洲城大学",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Lv Zhou Cheng Da Xue",
     },
     {
       名称: "帕拉伊苏",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Pa La Yi Su",
     },
     {
       名称: "巴黎",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Ba Li",
     },
     {
       名称: "佩特拉",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Pei Te La",
     },
     {
       名称: "训练靶场",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Xun Lian Ba Chang",
     },
     {
       名称: "里阿尔托",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Li A Er Tuo",
     },
     {
       名称: "66号公路",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "6 6 Hao Gong Lu",
     },
     {
       名称: "阿努比斯神殿",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "A Nu Bi Si Shen Dian",
     },
     {
       名称: "沃斯卡娅工业区",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Wo Si Ka Ya Gong Ye Qu",
     },
     {
       名称: "监测站：直布罗陀",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Jian Ce Zhan ： Zhi Bu Luo Tuo",
     },
     {
       名称: "地图工坊室内",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Di Tu Gong Fang Shi Nei",
     },
     {
       名称: "地图工坊空地",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Di Tu Gong Fang Kong Di",
     },
     {
       名称: "地图工坊空地（夜间）",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Di Tu Gong Fang Kong Di （ Ye Jian ）",
     },
     {
       名称: "地图工坊绿幕",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Di Tu Gong Fang Lv Mu",
     },
     {
       名称: "地图工坊岛屿",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Di Tu Gong Fang Dao Yu",
     },
     {
       名称: "地图工坊岛屿（夜间）",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Di Tu Gong Fang Dao Yu （ Ye Jian ）",
     },
     {
       名称: "香巴里寺院",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Xiang Ba Li Si Yuan",
     },
     {
       名称: "爪兰蒂斯",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Zhao Lan Di Si",
     },
     {
       名称: "南极半岛",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Nan Ji Ban Dao",
     },
     {
       名称: "新渣客城",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Xin Zha Ke Cheng",
     },
     {
       名称: "苏拉瓦萨",
       标签: ["地图"],
       提示: "一张地图。",
+      拼音: "Su La Wa Sa",
     },
   ],
   模式: [
@@ -5279,101 +4894,121 @@ let 常量 = {
       名称: "攻防作战",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Gong Fang Zuo Zhan",
     },
     {
       名称: "赏金猎手",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Shang Jin Lie Shou",
     },
     {
       名称: "占领要点",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Zhan Ling Yao Dian",
     },
     {
       名称: "勇夺锦旗",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Yong Duo Jin Qi",
     },
     {
       名称: "决斗先锋",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Jue Dou Xian Feng",
     },
     {
       名称: "运载目标",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Yun Zai Mu Biao",
     },
     {
       名称: "死斗",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Si Dou",
     },
     {
       名称: "融冰决斗",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Rong Bing Jue Dou",
     },
     {
       名称: "攻击护送",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Gong Ji Hu Song",
     },
     {
       名称: "怪鼠复仇",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Guai Shu Fu Chou",
     },
     {
       名称: "雪球攻势",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Xue Qiu Gong Shi",
     },
     {
       名称: "训练靶场",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Xun Lian Ba Chang",
     },
     {
       名称: "机动推进",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Ji Dong Tui Jin",
     },
     {
       名称: "突击模式",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Tu Ji Mo Shi",
     },
     {
       名称: "雪球死斗",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Xue Qiu Si Dou",
     },
     {
       名称: "团队死斗",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Tuan Dui Si Dou",
     },
     {
       名称: "雪域狩猎",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Xue Yu Shou Lie",
     },
     {
       名称: "路霸的小鱿抓抓乐",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Lu Ba De Xiao You Zhua Zhua Le",
     },
     {
       名称: "星际守望：银河救兵",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Xing Ji Shou Wang ： Yin He Jiu Bing",
     },
     {
       名称: "闪点作战",
       标签: ["模式"],
       提示: "一个模式选项。",
+      拼音: "Shan Dian Zuo Zhan",
     },
   ],
   相反运动: [
@@ -5381,16 +5016,19 @@ let 常量 = {
       名称: "取消相反运动",
       标签: ["运动", "行为"],
       提示: "一个用于“施加推力”的相反运动行为选项。",
+      拼音: "Qu Xiao Xiang Fan Yun Dong",
     },
     {
       名称: "取消相反运动XYZ",
       标签: ["运动", "行为"],
       提示: "一个用于“施加推力”的相反运动行为选项。",
+      拼音: "Qu Xiao Xiang Fan Yun Dong X Y Z",
     },
     {
       名称: "合并相反运动",
       标签: ["运动", "行为"],
       提示: "一个用于“施加推力”的相反运动行为选项。",
+      拼音: "He Bing Xiang Fan Yun Dong",
     },
   ],
   操作: [
@@ -5398,56 +5036,67 @@ let 常量 = {
       名称: "加",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Jia",
     },
     {
       名称: "减",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Jian",
     },
     {
       名称: "乘",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Cheng",
     },
     {
       名称: "除",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Chu",
     },
     {
       名称: "最小",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Zui Xiao",
     },
     {
       名称: "最大",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Zui Da",
     },
     {
       名称: "根据值从数组中移除",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Gen Ju Zhi Cong Shu Zu Zhong Yi Chu",
     },
     {
       名称: "根据索引从数组中移除",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Gen Ju Suo Yin Cong Shu Zu Zhong Yi Chu",
     },
     {
       名称: "添加至数组",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Tian Jia Zhi Shu Zu",
     },
     {
       名称: "余数",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Yu Shu",
     },
     {
       名称: "乘方",
       标签: ["操作"],
       提示: "一个变量操作选项。",
+      拼音: "Cheng Fang",
     },
   ],
   轮廓: [
@@ -5455,16 +5104,19 @@ let 常量 = {
       名称: "默认",
       标签: ["轮廓"],
       提示: "一个用于“开始强制设置轮廓”的轮廓类型选项。",
+      拼音: "Mo Ren",
     },
     {
       名称: "遮蔽",
       标签: ["轮廓"],
       提示: "一个用于“开始强制设置轮廓”的类型选项。",
+      拼音: "Zhe Bi",
     },
     {
       名称: "总是",
       标签: ["轮廓"],
       提示: "一个用于“开始强制设置轮廓”的类型选项。",
+      拼音: "Zong Shi",
     },
   ],
   弹道爆炸声音: [
@@ -5473,258 +5125,301 @@ let 常量 = {
       标签: ["弹道爆炸声音", "基础声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Bao Zha Sheng Yin",
     },
     {
       名称: "状态爆炸声音",
       标签: ["弹道爆炸声音", "基础声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Zhuang Tai Bao Zha Sheng Yin",
     },
     {
       名称: "环状爆炸声音",
       标签: ["弹道爆炸声音", "基础声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Huan Zhuang Bao Zha Sheng Yin",
     },
     {
       名称: "安娜生物手雷爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "An Na Sheng Wu Shou Lei Bao Zha Sheng Yin",
     },
     {
       名称: "艾什延时雷管爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Ai Shi Yan Shi Lei Guan Bao Zha Sheng Yin",
     },
     {
       名称: "巴蒂斯特生化榴弹枪爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Ba Di Si Te Sheng Hua Liu Dan Qiang Bao Zha Sheng Yin",
     },
     {
       名称: "“堡垒”坦克炮爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Bao Lei ” Tan Ke Pao Bao Zha Sheng Yin",
     },
     {
       名称: "布丽吉塔流星飞锤范围治疗声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Liu Xing Fei Chui Fan Wei Zhi Liao Sheng Yin",
     },
     {
       名称: "布丽吉塔恢复包击中声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Hui Fu Bao Ji Zhong Sheng Yin",
     },
     {
       名称: "布丽吉塔恢复包护甲声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Hui Fu Bao Hu Jia Sheng Yin",
     },
     {
       名称: "D.Va微型飞弹爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "D . V A Wei Xing Fei Dan Bao Zha Sheng Yin",
     },
     {
       名称: "D.Va自毁爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "D . V A Zi Hui Bao Zha Sheng Yin",
     },
     {
       名称: "“末日铁拳”上勾重拳跳跃声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Shang Gou Zhong Quan Tiao Yue Sheng Yin",
     },
     {
       名称: "“末日铁拳”上勾重拳击中声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Shang Gou Zhong Quan Ji Zhong Sheng Yin",
     },
     {
       名称: "“末日铁拳”毁天灭地击中声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Hui Tian Mie Di Ji Zhong Sheng Yin",
     },
     {
       名称: "“回声”黏性炸弹爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Hui Sheng ” Nian Xing Zha Dan Bao Zha Sheng Yin",
     },
     {
       名称: "“狂鼠”榴弹发射器爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Liu Dan Fa She Qi Bao Zha Sheng Yin",
     },
     {
       名称: "“狂鼠”震荡地雷爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Zhen Dang Di Lei Bao Zha Sheng Yin",
     },
     {
       名称: "“狂鼠”炸弹轮胎爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Zha Dan Lun Tai Bao Zha Sheng Yin",
     },
     {
       名称: "半藏音初始脉冲声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Ban Zang Yin Chu Shi Mai Chong Sheng Yin",
     },
     {
       名称: "卢西奥音障施放声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Lu Xi Ao Yin Zhang Shi Fang Sheng Yin",
     },
     {
       名称: "卡西迪闪光弹爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Ka Xi Di Shan Guang Tan Bao Zha Sheng Yin",
     },
     {
       名称: "莫伊拉消散消失声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Mo Yi La Xiao San Xiao Shi Sheng Yin",
     },
     {
       名称: "莫伊拉消散重现声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Mo Yi La Xiao San Chong Xian Sheng Yin",
     },
     {
       名称: "奥丽莎站住别动内爆声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Ao Li Sha Zhan Zhu Bie Dong Nei Bao Sheng Yin",
     },
     {
       名称: "“法老之鹰”火箭发射器爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Huo Jian Fa She Qi Bao Zha Sheng Yin",
     },
     {
       名称: "“法老之鹰”震荡冲击声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Zhen Dang Chong Ji Sheng Yin",
     },
     {
       名称: "“法老之鹰”火箭弹幕爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Huo Jian Tan Mu Bao Zha Sheng Yin",
     },
     {
       名称: "莱因哈特烈焰打击目标击中声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Lai Yin Ha Te Lie Yan Da Ji Mu Biao Ji Zhong Sheng Yin",
     },
     {
       名称: "“西格玛”超能之球内爆声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Chao Neng Zhi Qiu Nei Bao Sheng Yin",
     },
     {
       名称: "“西格玛”质量吸附击中声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Zhi Liang Xi Fu Ji Zhong Sheng Yin",
     },
     {
       名称: "“黑影”标志声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Biao Zhi Sheng Yin",
     },
     {
       名称: "“黑影”位移传动消失声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Xiao Shi Sheng Yin",
     },
     {
       名称: "“黑影”位移传动重现声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Chong Xian Sheng Yin",
     },
     {
       名称: "“黑影”电磁脉冲爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Dian Ci Mai Chong Bao Zha Sheng Yin",
     },
     {
       名称: "“秩序之光”传送面板重现声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Zhi Xu Zhi Guang ” Chuan Song Mian Ban Chong Xian Sheng Yin",
     },
     {
       名称: "“猎空”闪回消失声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Lie Kong ” Shan Hui Xiao Shi Sheng Yin",
     },
     {
       名称: "“猎空”闪回重现声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Lie Kong ” Shan Hui Chong Xian Sheng Yin",
     },
     {
       名称: "“黑百合”剧毒诡雷爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Hei Bai He ” Ju Du Gui Lei Bao Zha Sheng Yin",
     },
     {
       名称: "温斯顿喷射背包着陆声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Wen Si Dun Pen She Bei Bao Zhuo Lu Sheng Yin",
     },
     {
       名称: "“破坏球”重力坠击击中声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Zhong Li Zhui Ji Ji Zhong Sheng Yin",
     },
     {
       名称: "“破坏球”地雷禁区爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Di Lei Jin Qu Bao Zha Sheng Yin",
     },
     {
       名称: "查莉娅粒子炮爆炸声音",
       标签: ["弹道爆炸声音", "爆炸声音"],
       提示: "一个弹道爆炸声音选项。",
       图标: "",
+      拼音: "Zha Li Ya Li Zi Pao Bao Zha Sheng Yin",
     },
   ],
   弹道爆炸效果: [
@@ -5733,258 +5428,301 @@ let 常量 = {
       标签: ["弹道爆炸", "基础效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "You Yi Bao Zha",
     },
     {
       名称: "有害爆炸",
       标签: ["弹道爆炸", "基础效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "You Hai Bao Zha",
     },
     {
       名称: "环状爆炸",
       标签: ["弹道爆炸", "基础效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Huan Zhuang Bao Zha",
     },
     {
       名称: "布丽吉塔恢复包击中效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Hui Fu Bao Ji Zhong Xiao Guo",
     },
     {
       名称: "布丽吉塔恢复包护甲效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Hui Fu Bao Hu Jia Xiao Guo",
     },
     {
       名称: "布丽吉塔流星飞锤范围治疗效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Bu Li Ji Ta Liu Xing Fei Chui Fan Wei Zhi Liao Xiao Guo",
     },
     {
       名称: "D.Va微型飞弹爆炸效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "D . V A Wei Xing Fei Dan Bao Zha Xiao Guo",
     },
     {
       名称: "D.Va自毁爆炸效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "D . V A Zi Hui Bao Zha Xiao Guo",
     },
     {
       名称: "“回声”黏性炸弹爆炸效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Hui Sheng ” Nian Xing Zha Dan Bao Zha Xiao Guo",
     },
     {
       名称: "半藏音初始脉冲效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Ban Zang Yin Chu Shi Mai Chong Xiao Guo",
     },
     {
       名称: "卢西奥音障施放效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Lu Xi Ao Yin Zhang Shi Fang Xiao Guo",
     },
     {
       名称: "莫伊拉消散消失效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Mo Yi La Xiao San Xiao Shi Xiao Guo",
     },
     {
       名称: "莫伊拉消散重现效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Mo Yi La Xiao San Chong Xian Xiao Guo",
     },
     {
       名称: "奥丽莎站住别动内爆效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Ao Li Sha Zhan Zhu Bie Dong Nei Bao Xiao Guo",
     },
     {
       名称: "“西格玛”超能之球内爆效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Chao Neng Zhi Qiu Nei Bao Xiao Guo",
     },
     {
       名称: "“黑影”标志效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Biao Zhi Xiao Guo",
     },
     {
       名称: "“黑影”位移传动消失效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Xiao Shi Xiao Guo",
     },
     {
       名称: "“黑影”位移传动重现效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Wei Yi Chuan Dong Chong Xian Xiao Guo",
     },
     {
       名称: "“黑影”电磁脉冲爆炸效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Hei Ying ” Dian Ci Mai Chong Bao Zha Xiao Guo",
     },
     {
       名称: "“秩序之光”传送面板重现效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Zhi Xu Zhi Guang ” Chuan Song Mian Ban Chong Xian Xiao Guo",
     },
     {
       名称: "“猎空”闪回消失效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Lie Kong ” Shan Hui Xiao Shi Xiao Guo",
     },
     {
       名称: "“猎空“闪回重现效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Lie Kong “ Shan Hui Chong Xian Xiao Guo",
     },
     {
       名称: "查莉娅粒子炮爆炸效果",
       标签: ["弹道爆炸", "能量爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Zha Li Ya Li Zi Pao Bao Zha Xiao Guo",
     },
     {
       名称: "安娜生物手雷爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "An Na Sheng Wu Shou Lei Bao Zha Xiao Guo",
     },
     {
       名称: "艾什延时雷管爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Ai Shi Yan Shi Lei Guan Bao Zha Xiao Guo",
     },
     {
       名称: "巴蒂斯特生化榴弹枪爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Ba Di Si Te Sheng Hua Liu Dan Qiang Bao Zha Xiao Guo",
     },
     {
       名称: "“堡垒”坦克炮爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Bao Lei ” Tan Ke Pao Bao Zha Xiao Guo",
     },
     {
       名称: "“末日铁拳”上勾重拳跳跃效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Shang Gou Zhong Quan Tiao Yue Xiao Guo",
     },
     {
       名称: "“末日铁拳”上勾重拳击中效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Shang Gou Zhong Quan Ji Zhong Xiao Guo",
     },
     {
       名称: "“末日铁拳”毁天灭地击中效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Mo Ri Tie Quan ” Hui Tian Mie Di Ji Zhong Xiao Guo",
     },
     {
       名称: "“狂鼠”榴弹发射器爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Liu Dan Fa She Qi Bao Zha Xiao Guo",
     },
     {
       名称: "“狂鼠”震荡地雷爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Zhen Dang Di Lei Bao Zha Xiao Guo",
     },
     {
       名称: "“狂鼠”炸弹轮胎爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Kuang Shu ” Zha Dan Lun Tai Bao Zha Xiao Guo",
     },
     {
       名称: "卡西迪闪光弹爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Ka Xi Di Shan Guang Tan Bao Zha Xiao Guo",
     },
     {
       名称: "“法老之鹰”火箭发射器爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Huo Jian Fa She Qi Bao Zha Xiao Guo",
     },
     {
       名称: "“法老之鹰”震荡冲击效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Zhen Dang Chong Ji Xiao Guo",
     },
     {
       名称: "“法老之鹰”火箭弹幕爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Huo Jian Tan Mu Bao Zha Xiao Guo",
     },
     {
       名称: "莱因哈特烈焰打击目标击中效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Lai Yin Ha Te Lie Yan Da Ji Mu Biao Ji Zhong Xiao Guo",
     },
     {
       名称: "“西格玛”质量吸附击中效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Xi Ge Ma ” Zhi Liang Xi Fu Ji Zhong Xiao Guo",
     },
     {
       名称: "“黑百合“剧毒诡雷爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Hei Bai He “ Ju Du Gui Lei Bao Zha Xiao Guo",
     },
     {
       名称: "温斯顿喷射背包着陆效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "Wen Si Dun Pen She Bei Bao Zhuo Lu Xiao Guo",
     },
     {
       名称: "“破坏球”重力坠击击中效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Zhong Li Zhui Ji Ji Zhong Xiao Guo",
     },
     {
       名称: "“破坏球”地雷禁区爆炸效果",
       标签: ["弹道爆炸", "运动爆炸效果"],
       提示: "一个弹道爆炸效果选项。",
       图标: "",
+      拼音: "“ Po Huai Qiu ” Di Lei Jin Qu Bao Zha Xiao Guo",
     },
   ],
   弹道生命行为: [
@@ -5993,12 +5731,14 @@ let 常量 = {
       标签: ["弹道", "生命", "行为"],
       提示: "一个弹道生命行为选项。",
       图标: "",
+      拼音: "Shang Hai",
     },
     {
       名称: "治疗",
       标签: ["弹道", "生命", "行为"],
       提示: "一个弹道生命行为选项。",
       图标: "",
+      拼音: "Zhi Liao",
     },
   ],
   弹道: [
@@ -6007,120 +5747,140 @@ let 常量 = {
       标签: ["弹道", "基础弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Qiu Dan Dao",
     },
     {
       名称: "巴蒂斯特生化榴弹枪",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Ba Di Si Te Sheng Hua Liu Dan Qiang",
     },
     {
       名称: "“堡垒”A-36战术榴弹",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "“ Bao Lei ” A - 3 6 Zhan Shu Liu Dan",
     },
     {
       名称: "“回声”黏性炸弹",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "“ Hui Sheng ” Nian Xing Zha Dan",
     },
     {
       名称: "源氏“镖”",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Yuan Shi “ Biao ”",
     },
     {
       名称: "卢西奥音速扩音器",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Lu Xi Ao Yin Su Kuo Yin Qi",
     },
     {
       名称: "美冰锥",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Mei Bing Zhui",
     },
     {
       名称: "“天使”天使冲击枪",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "“ Tian Shi ” Tian Shi Chong Ji Qiang",
     },
     {
       名称: "莫伊拉伤害生化之球",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Mo Yi La Shang Hai Shig Hua Zhi Qiu",
     },
     {
       名称: "莫伊拉治疗生化之球",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Mo Yi La Zhi Liao Sheng Hua Zhi Qiu",
     },
     {
       名称: "奥丽莎聚变驱动器",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Ao Li Sha Ju Bian Qu Dong Qi",
     },
     {
       名称: "“法老之鹰”火箭",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "“ Fa Lao Zhi Ying ” Huo Jian",
     },
     {
       名称: "莱因哈特烈焰打击",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Lai Yin Ha Te Lie Yan Da Ji",
     },
     {
       名称: "“路霸”爆裂枪",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "“ Lu Ba ” Bao Lie Qiang",
     },
     {
       名称: "“路霸”爆裂枪废铁球",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "“ Lu Ba ” Bao Lie Qiang Fei Tie Qiu",
     },
     {
       名称: "西格玛超能之球",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Xi Ge Ma Chao Neng Zhi Qiu",
     },
     {
       名称: "“秩序之光”光子发射器",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "“ Zhi Xu Zhi Guang ” Guang Zi Fa She Qi",
     },
     {
       名称: "拉玛刹吞噬漩涡能量球",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "La Ma Cha Tun Shi Xuan Wo Neng Liang Qiu",
     },
     {
       名称: "查莉娅重力喷涌",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Zha Li Ya Zhong Li Pen Yong",
     },
     {
       名称: "查莉娅粒子炮",
       标签: ["弹道", "扩展弹道"],
       提示: "一个弹道选项。",
       图标: "",
+      拼音: "Zha Li Ya Li Zi Pao",
     },
   ],
   加速刷新: [
@@ -6128,11 +5888,13 @@ let 常量 = {
       名称: "无",
       标签: ["加速", "刷新"],
       提示: "一个仅用于“开始加速”的刷新选项。",
+      拼音: "Wu",
     },
     {
       名称: "方向，速率，及最大速度",
       标签: ["加速", "刷新"],
       提示: "一个仅用于“开始加速”的刷新选项。",
+      拼音: "Fang Xiang ， Su Lv ， Ji Zui Da Su Du",
     },
   ],
   助攻刷新: [
@@ -6140,11 +5902,13 @@ let 常量 = {
       名称: "无",
       标签: ["刷新", "助攻"],
       提示: "一个仅用于“开始助攻”的刷新选项。",
+      拼音: "Wu",
     },
     {
       名称: "助攻者和目标",
       标签: ["刷新", "助攻"],
       提示: "一个仅用于“开始助攻”的刷新选项。",
+      拼音: "Zhu Gong Zhe He Mu Biao",
     },
   ],
   追踪频率刷新: [
@@ -6152,11 +5916,13 @@ let 常量 = {
       名称: "全部禁用",
       标签: ["刷新", "追踪", "速率"],
       提示: "一个仅用于“追踪全局变量频率”或“追踪玩家变量频率”的刷新选项。",
+      拼音: "Quan Bu Jin Yong",
     },
     {
       名称: "速率及最终值",
       标签: ["刷新", "追踪", "速率"],
       提示: "一个仅用于“追踪全局变量频率”或“追踪玩家变量频率”的刷新选项。",
+      拼音: "Su Lv Ji Zui Zhong Zhi",
     },
   ],
   持续追踪刷新: [
@@ -6164,11 +5930,13 @@ let 常量 = {
       名称: "全部禁用",
       标签: ["刷新", "追踪", "持续时间"],
       提示: "一个仅用于“持续追踪全局变量”或“持续追踪玩家变量”的刷新选项。",
+      拼音: "Quan Bu Jin Yong",
     },
     {
       名称: "终点及持续时间",
       标签: ["刷新", "追踪", "持续时间"],
       提示: "一个仅用于“持续追踪全局变量”或“持续追踪玩家变量”的刷新选项。",
+      拼音: "Zhong Dian Ji Chi Xu Shi Jian",
     },
   ],
   伤害调整刷新: [
@@ -6176,16 +5944,19 @@ let 常量 = {
       名称: "无",
       标签: ["刷新", "伤害调整"],
       提示: "一个仅用于“开始伤害调整”的刷新选项。",
+      拼音: "Wu",
     },
     {
       名称: "受伤害者和伤害者",
       标签: ["刷新", "伤害调整"],
       提示: "一个仅用于“开始伤害调整”的刷新选项。",
+      拼音: "Shou Shang Hai Zhe He Shang Hai Zhe",
     },
     {
       名称: "受伤害者，伤害者及伤害百分比",
       标签: ["刷新", "伤害调整"],
       提示: "一个仅用于“开始伤害调整”的刷新选项。",
+      拼音: "Shou Shang Hai Zhe ， Shang Hai Zhe Ji Shang Hai Bai Fen Bi",
     },
   ],
   效果刷新: [
@@ -6193,41 +5964,49 @@ let 常量 = {
       名称: "无",
       标签: ["刷新", "效果"],
       提示: "一个仅用于“创建效果”或“创建光束效果”的刷新选项。",
+      拼音: "Wu",
     },
     {
       名称: "可见",
       标签: ["刷新", "效果"],
       提示: "一个仅用于“创建效果”或“创建光束效果”的刷新选项。",
+      拼音: "Ke Jian",
     },
     {
       名称: "颜色",
       标签: ["刷新", "效果"],
       提示: "一个仅用于“创建效果”或“创建光束效果”的刷新选项。",
+      拼音: "Yan Se",
     },
     {
       名称: "可见和颜色",
       标签: ["刷新", "效果"],
       提示: "一个仅用于“创建效果”或“创建光束效果”的刷新选项。",
+      拼音: "Ke Jian He Yan Se",
     },
     {
       名称: "位置和半径",
       标签: ["刷新", "效果"],
       提示: "一个仅用于“创建效果”或“创建光束效果”的刷新选项。",
+      拼音: "Wei Zhi He Ban Jing",
     },
     {
       名称: "位置，半径和颜色",
       标签: ["刷新", "效果"],
       提示: "一个仅用于“创建效果”或“创建光束效果”的刷新选项。",
+      拼音: "Wei Zhi ， Ban Jing He Yan Se",
     },
     {
       名称: "可见，位置和半径",
       标签: ["刷新", "效果"],
       提示: "一个仅用于“创建效果”或“创建光束效果”的刷新选项。",
+      拼音: "Ke Jian ， Wei Zhi He Ban Jing",
     },
     {
       名称: "可见，位置，半径和颜色",
       标签: ["刷新", "效果"],
       提示: "一个仅用于“创建效果”或“创建光束效果”的刷新选项。",
+      拼音: "Ke Jian ， Wei Zhi ， Ban Jing He Yan Se",
     },
   ],
   朝向刷新: [
@@ -6235,11 +6014,13 @@ let 常量 = {
       名称: "无",
       标签: ["刷新", "朝向"],
       提示: "一个仅用于“开始朝向”的刷新选项。",
+      拼音: "Wu",
     },
     {
       名称: "方向及角速率",
       标签: ["刷新", "朝向"],
       提示: "一个仅用于“开始朝向”的刷新选项。",
+      拼音: "Fang Xiang Ji Jiao Su Lv",
     },
   ],
   友善刷新: [
@@ -6247,36 +6028,43 @@ let 常量 = {
       名称: "无",
       标签: ["刷新", "友善"],
       提示: "一个友善刷新选项。",
+      拼音: "Wu",
     },
     {
       名称: "可见",
       标签: ["刷新", "友善"],
       提示: "一个友善刷新选项。",
+      拼音: "Ke Jian",
     },
     {
       名称: "友善",
       标签: ["刷新", "友善"],
       提示: "一个友善刷新选项。",
+      拼音: "You Shan",
     },
     {
       名称: "可见，友善",
       标签: ["刷新", "友善"],
       提示: "一个友善刷新选项。",
+      拼音: "Ke Jian ， You Shan",
     },
     {
       名称: "位置，方向和大小",
       标签: ["刷新", "友善"],
       提示: "一个友善刷新选项。",
+      拼音: "Wei Zhi ， Fang Xiang He Da Xiao",
     },
     {
       名称: "友善，位置，方向和大小",
       标签: ["刷新", "友善"],
       提示: "一个友善刷新选项。",
+      拼音: "You Shan ， Wei Zhi ， Fang Xiang He Da Xiao",
     },
     {
       名称: "可见，友善，位置，方向和大小",
       标签: ["刷新", "友善"],
       提示: "一个友善刷新选项。",
+      拼音: "Ke Jian ， You Shan ， Wei Zhi ， Fang Xiang He Da Xiao",
     },
   ],
   治疗调整刷新: [
@@ -6284,16 +6072,19 @@ let 常量 = {
       名称: "全部禁用",
       标签: ["刷新", "治疗调整"],
       提示: "一个仅用于“开始治疗调整”的刷新选项。",
+      拼音: "Quan Bu Jin Yong",
     },
     {
       名称: "受治疗者和治疗者",
       标签: ["刷新", "治疗调整"],
       提示: "一个仅用于“开始治疗调整”的刷新选项。",
+      拼音: "Shou Zhi Liao Zhe He Zhi Liao Zhe",
     },
     {
       名称: "受治疗者，治疗者及治疗百分比",
       标签: ["刷新", "治疗调整"],
       提示: "一个仅用于“开始治疗调整”的刷新选项。",
+      拼音: "Shou Zhi Liao Zhe ， Zhi Liao Zhe Ji Zhi Liao Bai Fen Bi",
     },
   ],
   HUD进度条刷新: [
@@ -6301,41 +6092,49 @@ let 常量 = {
       名称: "全部禁用",
       标签: ["刷新", "HUD", "进度条"],
       提示: "一个仅用于“创建进度条HUD文本”的刷新选项。",
+      拼音: "Quan Bu Jin Yong",
     },
     {
       名称: "可见",
       标签: ["刷新", "HUD", "进度条"],
       提示: "一个仅用于“创建进度条HUD文本”的刷新选项。",
+      拼音: "Ke Jian",
     },
     {
       名称: "颜色",
       标签: ["刷新", "HUD", "进度条"],
       提示: "一个仅用于“创建进度条HUD文本”的刷新选项。",
+      拼音: "Yan Se",
     },
     {
       名称: "可见和颜色",
       标签: ["刷新", "HUD", "进度条"],
       提示: "一个仅用于“创建进度条HUD文本”的刷新选项。",
+      拼音: "Ke Jian He Yan Se",
     },
     {
       名称: "值",
       标签: ["刷新", "HUD", "进度条"],
       提示: "一个仅用于“创建进度条HUD文本”的刷新选项。",
+      拼音: "Zhi",
     },
     {
       名称: "值和颜色",
       标签: ["刷新", "HUD", "进度条"],
       提示: "一个仅用于“创建进度条HUD文本”的刷新选项。",
+      拼音: "Zhi He Yan Se",
     },
     {
       名称: "可见和值",
       标签: ["刷新", "HUD", "进度条"],
       提示: "一个仅用于“创建进度条HUD文本”的刷新选项。",
+      拼音: "Ke Jian He Zhi",
     },
     {
       名称: "可见，值和颜色",
       标签: ["刷新", "HUD", "进度条"],
       提示: "一个仅用于“创建进度条HUD文本”的刷新选项。",
+      拼音: "Ke Jian ， Zhi He Yan Se",
     },
   ],
   HUD文本刷新: [
@@ -6343,81 +6142,97 @@ let 常量 = {
       名称: "全部禁用",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Quan Bu Jin Yong",
     },
     {
       名称: "可见",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Ke Jian",
     },
     {
       名称: "颜色",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Yan Se",
     },
     {
       名称: "可见和颜色",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Ke Jian He Yan Se",
     },
     {
       名称: "字符串",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Zi Fu Chuan",
     },
     {
       名称: "字符串和颜色",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Zi Fu Chuan He Yan Se",
     },
     {
       名称: "可见和字符串",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Ke Jian He Zi Fu Chuan",
     },
     {
       名称: "可见，字符串和颜色",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Ke Jian ， Zi Fu Chuan He Yan Se",
     },
     {
       名称: "可见性和排序",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Ke Jian Xing He Pai Xu",
     },
     {
       名称: "可见，排序规则和颜色",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Ke Jian ， Pai Xu Gui Ze He Yan Se",
     },
     {
       名称: "可见性，排序规则和字符串",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Ke Jian Xing ， Pai Xu Gui Ze He Zi Fu Chuan",
     },
     {
       名称: "可见，排序规则，字符串和颜色",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Ke Jian ， Pai Xu Gui Ze ， Zi Fu Chuan He Yan Se",
     },
     {
       名称: "排序",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Pai Xu",
     },
     {
       名称: "排序规则和颜色",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Pai Xu Gui Ze He Yan Se",
     },
     {
       名称: "排序规则和字符串",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Pai Xu Gui Ze He Zi Fu Chuan",
     },
     {
       名称: "排序规则，字符串和颜色",
       标签: ["刷新", "HUD", "文本"],
       提示: "一个仅用于“创建HUD文本”的刷新选项。",
+      拼音: "Pai Xu Gui Ze ， Zi Fu Chuan He Yan Se",
     },
   ],
   图标刷新: [
@@ -6425,41 +6240,49 @@ let 常量 = {
       名称: "无",
       标签: ["刷新", "图标"],
       提示: "一个图标刷新选项。",
+      拼音: "Wu",
     },
     {
       名称: "可见",
       标签: ["刷新", "图标"],
       提示: "一个图标刷新选项。",
+      拼音: "Ke Jian",
     },
     {
       名称: "颜色",
       标签: ["刷新", "图标"],
       提示: "一个图标刷新选项。",
+      拼音: "Yan Se",
     },
     {
       名称: "可见和颜色",
       标签: ["刷新", "图标"],
       提示: "一个图标刷新选项。",
+      拼音: "Ke Jian He Yan Se",
     },
     {
       名称: "可见和位置",
       标签: ["刷新", "图标"],
       提示: "一个图标刷新选项。",
+      拼音: "Ke Jian He Wei Zhi",
     },
     {
       名称: "可见，位置和颜色",
       标签: ["刷新", "图标"],
       提示: "一个图标刷新选项。",
+      拼音: "Ke Jian ， Wei Zhi He Yan Se",
     },
     {
       名称: "位置",
       标签: ["刷新", "图标"],
       提示: "一个图标刷新选项。",
+      拼音: "Wei Zhi",
     },
     {
       名称: "位置和颜色",
       标签: ["刷新", "图标"],
       提示: "一个图标刷新选项。",
+      拼音: "Wei Zhi He Yan Se",
     },
   ],
   地图进度条刷新: [
@@ -6467,81 +6290,97 @@ let 常量 = {
       名称: "全部禁用",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Quan Bu Jin Yong",
     },
     {
       名称: "可见",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Ke Jian",
     },
     {
       名称: "颜色",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Yan Se",
     },
     {
       名称: "可见和颜色",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Ke Jian He Yan Se",
     },
     {
       名称: "值",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Zhi",
     },
     {
       名称: "值和颜色",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Zhi He Yan Se",
     },
     {
       名称: "可见和值",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Ke Jian He Zhi",
     },
     {
       名称: "可见，值和颜色",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Ke Jian ， Zhi He Yan Se",
     },
     {
       名称: "可见和位置",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Ke Jian He Wei Zhi",
     },
     {
       名称: "可见，位置和颜色",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Ke Jian ， Wei Zhi He Yan Se",
     },
     {
       名称: "位置",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Wei Zhi",
     },
     {
       名称: "位置和颜色",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Wei Zhi He Yan Se",
     },
     {
       名称: "位置和值",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Wei Zhi He Zhi",
     },
     {
       名称: "位置，值和颜色",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Wei Zhi ， Zhi He Yan Se",
     },
     {
       名称: "可见，位置和值",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Ke Jian ， Wei Zhi He Zhi",
     },
     {
       名称: "可见，位置，值和颜色",
       标签: ["刷新", "地图", "进度条"],
       提示: "一个仅用于“创建进度条地图文本”的刷新选项。",
+      拼音: "Ke Jian ， Wei Zhi ， Zhi He Yan Se",
     },
   ],
   地图文本刷新: [
@@ -6549,61 +6388,73 @@ let 常量 = {
       名称: "全部禁用",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Quan Bu Jin Yong",
     },
     {
       名称: "可见",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Ke Jian",
     },
     {
       名称: "颜色",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Yan Se",
     },
     {
       名称: "可见和颜色",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Ke Jian He Yan Se",
     },
     {
       名称: "字符串",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Zi Fu Chuan",
     },
     {
       名称: "字符串和颜色",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Zi Fu Chuan He Yan Se",
     },
     {
       名称: "可见和字符串",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Ke Jian He Zi Fu Chuan",
     },
     {
       名称: "可见，字符串和颜色",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Ke Jian ， Zi Fu Chuan He Yan Se",
     },
     {
       名称: "可见和位置",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Ke Jian He Wei Zhi",
     },
     {
       名称: "可见，位置和颜色",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Ke Jian ， Wei Zhi He Yan Se",
     },
     {
       名称: "可见，位置和字符串",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Ke Jian ， Wei Zhi He Zi Fu Chuan",
     },
     {
       名称: "可见，位置，字符串和颜色",
       标签: ["刷新", "地图", "文本"],
       提示: "一个仅用于“创建地图文本”的刷新选项。",
+      拼音: "Ke Jian ， Wei Zhi ， Zi Fu Chuan He Yan Se",
     },
   ],
   阈值刷新: [
@@ -6611,11 +6462,13 @@ let 常量 = {
       名称: "无",
       标签: ["刷新", "阈值"],
       提示: "一个仅用于“开始定向阈值”的刷新选项。",
+      拼音: "Wu",
     },
     {
       名称: "方向和幅度",
       标签: ["刷新", "阈值"],
       提示: "一个仅用于“开始定向阈值”的刷新选项。",
+      拼音: "Fang Xiang He Fu Du",
     },
   ],
   相对: [
@@ -6623,11 +6476,13 @@ let 常量 = {
       名称: "至地图",
       标签: ["坐标", "参照"],
       提示: "一个坐标相对选项。",
+      拼音: "Zhi Di Tu",
     },
     {
       名称: "至玩家",
       标签: ["坐标", "参照"],
       提示: "一个坐标相对选项。",
+      拼音: "Zhi Wan Jia",
     },
   ],
   取整: [
@@ -6635,16 +6490,19 @@ let 常量 = {
       名称: "上",
       标签: ["取整"],
       提示: "一个取整方式选项。",
+      拼音: "Shang",
     },
     {
       名称: "下",
       标签: ["取整"],
       提示: "一个取整方式选项。",
+      拼音: "Xia",
     },
     {
       名称: "至最近",
       标签: ["取整"],
       提示: "一个取整方式选项。",
+      拼音: "Zhi Zui Jin",
     },
   ],
   状态: [
@@ -6652,51 +6510,61 @@ let 常量 = {
       名称: "沉睡",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Chen Shui",
     },
     {
       名称: "点燃",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Dian Ran",
     },
     {
       名称: "冰冻",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Bing Dong",
     },
     {
       名称: "被入侵",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Bei Ru Qin",
     },
     {
       名称: "无敌",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Wu Di",
     },
     {
       名称: "击倒",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Ji Dao",
     },
     {
       名称: "相移",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Xiang Yi",
     },
     {
       名称: "定身",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Ding Shen",
     },
     {
       名称: "击晕",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Ji Yun",
     },
     {
       名称: "无法杀死",
       标签: ["状态"],
       提示: "一种玩家状态选项。",
+      拼音: "Wu Fa Sha Si",
     },
   ],
   字符串: [
@@ -6704,3056 +6572,3667 @@ let 常量 = {
       名称: '""',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" "',
     },
     {
       名称: '"*"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" * "',
     },
     {
       名称: '"----------"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" - - - - - - - - - - "',
     },
     {
       名称: '"#{0}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" # { 0 } "',
     },
     {
       名称: '"-> {0}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" - >   { 0 } "',
     },
     {
       名称: '"<-> {0}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" < - >   { 0 } "',
     },
     {
       名称: '"<- {0}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" < -   { 0 } "',
     },
     {
       名称: '"{0} ->"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   - > "',
     },
     {
       名称: '"{0} <->"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   < - > "',
     },
     {
       名称: '"{0} <-"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   < - "',
     },
     {
       名称: '"{0} -> {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   - >   { 1 } "',
     },
     {
       名称: '"{0} - {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   -   { 1 } "',
     },
     {
       名称: '"{0} != {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   ! =   { 1 } "',
     },
     {
       名称: '"{0} * {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   *   { 1 } "',
     },
     {
       名称: '"{0} / {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   /   { 1 } "',
     },
     {
       名称: '"{0} + {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   +   { 1 } "',
     },
     {
       名称: '"{0} <-> {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   < - >   { 1 } "',
     },
     {
       名称: '"{0} <- {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   < -   { 1 } "',
     },
     {
       名称: '"{0} <= {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   < =   { 1 } "',
     },
     {
       名称: '"{0} < {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   <   { 1 } "',
     },
     {
       名称: '"{0} == {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   = =   { 1 } "',
     },
     {
       名称: '"{0} = {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   =   { 1 } "',
     },
     {
       名称: '"{0} >= {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   > =   { 1 } "',
     },
     {
       名称: '"{0} > {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   >   { 1 } "',
     },
     {
       名称: '"{0} {1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   { 1 } "',
     },
     {
       名称: '"{0} : {1} : {2}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   :   { 1 }   :   { 2 } "',
     },
     {
       名称: '"{0} {1} {2}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   { 1 }   { 2 } "',
     },
     {
       名称: '"({0})"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" ( { 0 } ) "',
     },
     {
       名称: '"¡{0}!"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" ¡ { 0 } ! "',
     },
     {
       名称: '"¿{0}?"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" ¿ { 0 } ? "',
     },
     {
       名称: '"{0} 米"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   Mi "',
     },
     {
       名称: '"{0} 米/秒"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 }   Mi / Miao "',
     },
     {
       名称: '"{0}%"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } % "',
     },
     {
       名称: '"{0}:"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } : "',
     },
     {
       名称: '"{0}:{1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } : { 1 } "',
     },
     {
       名称: '"{0}和{1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } He { 1 } "',
     },
     {
       名称: '"{0}对阵{1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } Dui Zhen { 1 } "',
     },
     {
       名称: '"{0}秒"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } Miao "',
     },
     {
       名称: '"{0}！"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ！ "',
     },
     {
       名称: '"{0}！！"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ！ ！ "',
     },
     {
       名称: '"{0}！！！"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ！ ！ ！ "',
     },
     {
       名称: '"{0}，{1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ， { 1 } "',
     },
     {
       名称: '"{0}，{1}和{2}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ， { 1 } He { 2 } "',
     },
     {
       名称: '"{0}：{1}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ： { 1 } "',
     },
     {
       名称: '"{0}：{1}和{2}"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ： { 1 } He { 2 } "',
     },
     {
       名称: '"{0}？"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ？ "',
     },
     {
       名称: '"{0}？？"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ？ ？ "',
     },
     {
       名称: '"{0}？？？"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" { 0 } ？ ？ ？ "',
     },
     {
       名称: '"！"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" ！ "',
     },
     {
       名称: '"！！"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" ！ ！ "',
     },
     {
       名称: '"！！！"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" ！ ！ ！ "',
     },
     {
       名称: '"……"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" … … "',
     },
     {
       名称: '"？"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" ？ "',
     },
     {
       名称: '"？？"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" ？ ？ "',
     },
     {
       名称: '"？？？"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" ？ ？ ？ "',
     },
     {
       名称: '"技能"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Neng "',
     },
     {
       名称: '"技能1"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Neng 1 "',
     },
     {
       名称: '"技能2"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Neng 2 "',
     },
     {
       名称: '"警报"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jing Bao "',
     },
     {
       名称: '"存活"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Cun Huo "',
     },
     {
       名称: '"盟友"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Meng You "',
     },
     {
       名称: '"弹药"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dan Yao "',
     },
     {
       名称: '"角度"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jiao Du "',
     },
     {
       名称: '"进攻"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jin Gong "',
     },
     {
       名称: '"已进攻"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Jin Gong "',
     },
     {
       名称: '"正在进攻"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Jin Gong "',
     },
     {
       名称: '"尝试"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chang Shi "',
     },
     {
       名称: '"平均"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ping Jun "',
     },
     {
       名称: '"躲避"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Duo Bi "',
     },
     {
       名称: '"已躲避"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Duo Bi "',
     },
     {
       名称: '"正在躲避"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Duo Bi "',
     },
     {
       名称: '"后"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hou "',
     },
     {
       名称: '"差"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Cha "',
     },
     {
       名称: '"屏蔽"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ping Bi "',
     },
     {
       名称: '"已屏蔽"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Ping Bi "',
     },
     {
       名称: '"正在屏蔽"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Ping Bi "',
     },
     {
       名称: '"最佳"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Jia "',
     },
     {
       名称: '"优秀"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" You Xiu "',
     },
     {
       名称: '"加注"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jia Zhu "',
     },
     {
       名称: '"阻挡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zu Dang "',
     },
     {
       名称: '"已阻挡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Zu Dang "',
     },
     {
       名称: '"正在阻挡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Zu Dang "',
     },
     {
       名称: '"蓝色"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Lan Se "',
     },
     {
       名称: '"奖励"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jiang Li "',
     },
     {
       名称: '"首领"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shou Ling "',
     },
     {
       名称: '"已购买"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Gou Mai "',
     },
     {
       名称: '"建造"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jian Zao "',
     },
     {
       名称: '"正在建造"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Jian Zao "',
     },
     {
       名称: '"已建造"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Jian Zao "',
     },
     {
       名称: '"点燃"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dian Ran "',
     },
     {
       名称: '"正在点燃"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Dian Ran "',
     },
     {
       名称: '"已点燃"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Dian Ran "',
     },
     {
       名称: '"购买"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Gou Mai "',
     },
     {
       名称: '"正在购买"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Gou Mai "',
     },
     {
       名称: '"夺取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Duo Qu "',
     },
     {
       名称: '"已夺取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Duo Qu "',
     },
     {
       名称: '"正在夺取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Duo Qu "',
     },
     {
       名称: '"危险"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wei Xian "',
     },
     {
       名称: '"中"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhong "',
     },
     {
       名称: '"接受挑战"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jie Shou Tiao Zhan "',
     },
     {
       名称: '"魅力"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Mei Li "',
     },
     {
       名称: '"追击"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhui Ji "',
     },
     {
       名称: '"已追击"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Zhui Ji "',
     },
     {
       名称: '"正在追击"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Zhui Ji "',
     },
     {
       名称: '"检查点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jian Cha Dian "',
     },
     {
       名称: '"云朵"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yun Duo "',
     },
     {
       名称: '"梅花"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Mei Hua "',
     },
     {
       名称: '"连击"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Lian Ji "',
     },
     {
       名称: '"到这儿来"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dao Zhe Er Lai "',
     },
     {
       名称: '"条件"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Tiao Jian "',
     },
     {
       名称: '"恭喜"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Gong Xi "',
     },
     {
       名称: '"连接"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Lian Jie "',
     },
     {
       名称: '"已连接"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Lian Jie "',
     },
     {
       名称: '"正在连接"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Lian Jie "',
     },
     {
       名称: '"建筑"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jian Zhu "',
     },
     {
       名称: '"控制点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Kong Zhi Dian "',
     },
     {
       名称: '"冷却时间"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Leng Que Shi Jian "',
     },
     {
       名称: '"腐化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fu Hua "',
     },
     {
       名称: '"已腐化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Fu Hua "',
     },
     {
       名称: '"正在腐化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Fu Hua "',
     },
     {
       名称: '"货币"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Huo Bi "',
     },
     {
       名称: '"严重"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yan Zhong "',
     },
     {
       名称: '"蹲下"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dun Xia "',
     },
     {
       名称: '"已蹲下"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Dun Xia "',
     },
     {
       名称: '"正在蹲下"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Dun Xia "',
     },
     {
       名称: '"当前"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian "',
     },
     {
       名称: '"当前盟友"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Meng You "',
     },
     {
       名称: '"当前尝试"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Chang Shi "',
     },
     {
       名称: '"当前检查点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Jian Cha Dian "',
     },
     {
       名称: '"当前敌人"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Di Ren "',
     },
     {
       名称: '"当前形态"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Xing Tai "',
     },
     {
       名称: '"当前游戏"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian You Xi "',
     },
     {
       名称: '"当前英雄"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Ying Xiong "',
     },
     {
       名称: '"当前人质"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Ren Zhi "',
     },
     {
       名称: '"当前等级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Deng Ji "',
     },
     {
       名称: '"当前任务"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Ren Wu "',
     },
     {
       名称: '"当前对象"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Dui Xiang "',
     },
     {
       名称: '"当前目标点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Mu Biao Dian "',
     },
     {
       名称: '"当前阶段"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Jie Duan "',
     },
     {
       名称: '"当前玩家"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Wan Jia "',
     },
     {
       名称: '"当前回合"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Hui He "',
     },
     {
       名称: '"当前目标"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Mu Biao "',
     },
     {
       名称: '"当前升级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dang Qian Sheng Ji "',
     },
     {
       名称: '"伤害"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shang Hai "',
     },
     {
       名称: '"已伤害"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Shang Hai "',
     },
     {
       名称: '"正在伤害"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Shang Hai "',
     },
     {
       名称: '"已死亡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Si Wang "',
     },
     {
       名称: '"发牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fa Pai "',
     },
     {
       名称: '"正在发牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Fa Pai "',
     },
     {
       名称: '"已发牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Fa Pai "',
     },
     {
       名称: '"牌堆"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Pai Dui "',
     },
     {
       名称: '"战败"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhan Bai "',
     },
     {
       名称: '"防守"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fang Shou "',
     },
     {
       名称: '"已防守"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Fang Shou "',
     },
     {
       名称: '"正在防守"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Fang Shou "',
     },
     {
       名称: '"防御"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fang Yu "',
     },
     {
       名称: '"送达"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Song Da "',
     },
     {
       名称: '"已送达"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Song Da "',
     },
     {
       名称: '"正在送达"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Song Da "',
     },
     {
       名称: '"深度"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shen Du "',
     },
     {
       名称: '"干扰"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Gan Rao "',
     },
     {
       名称: '"已干扰"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Gan Rao "',
     },
     {
       名称: '"正在干扰"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Gan Rao "',
     },
     {
       名称: '"摧毁"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Cui Hui "',
     },
     {
       名称: '"已摧毁"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Cui Hui "',
     },
     {
       名称: '"正在摧毁"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Cui Hui "',
     },
     {
       名称: '"探测"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Tan Ce "',
     },
     {
       名称: '"被探测"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bei Tan Ce "',
     },
     {
       名称: '"正在探测"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Tan Ce "',
     },
     {
       名称: '"灵巧"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ling Qiao "',
     },
     {
       名称: '"方块"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fang Kuai "',
     },
     {
       名称: '"死亡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Si Wang "',
     },
     {
       名称: '"弃牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qi Pai "',
     },
     {
       名称: '"已弃牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Qi Pai "',
     },
     {
       名称: '"正在弃牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Qi Pai "',
     },
     {
       名称: '"断开"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Duan Kai "',
     },
     {
       名称: '"已断开"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Duan Kai "',
     },
     {
       名称: '"正在断开"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Duan Kai "',
     },
     {
       名称: '"距离"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ju Li "',
     },
     {
       名称: '"躲闪"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Duo Shan "',
     },
     {
       名称: '"已躲闪"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Duo Shan "',
     },
     {
       名称: '"正在躲闪"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Duo Shan "',
     },
     {
       名称: '"罩子"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhao Zi "',
     },
     {
       名称: '"下"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia "',
     },
     {
       名称: '"下载"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Zai "',
     },
     {
       名称: '"已下载"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Xia Zai "',
     },
     {
       名称: '"正在下载"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Xia Zai "',
     },
     {
       名称: '"平局"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ping Ju "',
     },
     {
       名称: '"正在抽牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Chou Pai "',
     },
     {
       名称: '"已抽牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Chou Pai "',
     },
     {
       名称: '"掉落"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Diao Luo "',
     },
     {
       名称: '"已掉落"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Diao Luo "',
     },
     {
       名称: '"正在掉落"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Diao Luo "',
     },
     {
       名称: '"正在死亡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Si Wang "',
     },
     {
       名称: '"东"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dong "',
     },
     {
       名称: '"消灭"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xiao Mie "',
     },
     {
       名称: '"已消灭"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Xiao Mie "',
     },
     {
       名称: '"正在消灭"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Xiao Mie "',
     },
     {
       名称: '"敌人"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Di Ren "',
     },
     {
       名称: '"进入"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jin Ru "',
     },
     {
       名称: '"护送"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hu Song "',
     },
     {
       名称: '"已护送"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Hu Song "',
     },
     {
       名称: '"正在护送"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Hu Song "',
     },
     {
       名称: '"离开"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Li Kai "',
     },
     {
       名称: '"经验值"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jing Yan Zhi "',
     },
     {
       名称: '"极端"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Duan "',
     },
     {
       名称: '"面向"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Mian Xiang "',
     },
     {
       名称: '"正在面向"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Mian Xiang "',
     },
     {
       名称: '"已失败"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Shi Bai "',
     },
     {
       名称: '"即将失败"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Jiang Shi Bai "',
     },
     {
       名称: '"失败"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi Bai "',
     },
     {
       名称: '"跌落"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Die Luo "',
     },
     {
       名称: '"已跌落"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Die Luo "',
     },
     {
       名称: '"正在跌落"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Die Luo "',
     },
     {
       名称: '"远"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yuan "',
     },
     {
       名称: '"快"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Kuai "',
     },
     {
       名称: '"较快"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jiao Kuai "',
     },
     {
       名称: '"最快"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Kuai "',
     },
     {
       名称: '"失误"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi Wu "',
     },
     {
       名称: '"最终"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong "',
     },
     {
       名称: '"最终盟友"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Meng You "',
     },
     {
       名称: '"最终尝试"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Chang Shi "',
     },
     {
       名称: '"最终检查点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Jian Cha Dian "',
     },
     {
       名称: '"最终敌人"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Di Ren "',
     },
     {
       名称: '"最终形态"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Xing Tai "',
     },
     {
       名称: '"最终游戏"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong You Xi "',
     },
     {
       名称: '"最终英雄"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Ying Xiong "',
     },
     {
       名称: '"最终人质"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Ren Zhi "',
     },
     {
       名称: '"最终物品"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Wu Pin "',
     },
     {
       名称: '"最终等级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Deng Ji "',
     },
     {
       名称: '"最终任务"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Ren Wu "',
     },
     {
       名称: '"最终对象"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Dui Xiang "',
     },
     {
       名称: '"最终目标点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Mu Biao Dian "',
     },
     {
       名称: '"最终阶段"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Jie Duan "',
     },
     {
       名称: '"最终玩家"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Wan Jia "',
     },
     {
       名称: '"最终回合"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Hui He "',
     },
     {
       名称: '"最终目标"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Mu Biao "',
     },
     {
       名称: '"最终时间"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Shi Jian "',
     },
     {
       名称: '"最终升级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Zhong Sheng Ji "',
     },
     {
       名称: '"寻找"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xun Zhao "',
     },
     {
       名称: '"正在寻找"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Xun Zhao "',
     },
     {
       名称: '"结束"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jie Shu "',
     },
     {
       名称: '"已结束"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Jie Shu "',
     },
     {
       名称: '"正在结束"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Jie Shu "',
     },
     {
       名称: '"已飞行"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Fei Xing "',
     },
     {
       名称: '"飞行"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fei Xing "',
     },
     {
       名称: '"正在飞行"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Fei Xing "',
     },
     {
       名称: '"收起"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shou Qi "',
     },
     {
       名称: '"已收起"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Shou Qi "',
     },
     {
       名称: '"正在收起"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Shou Qi "',
     },
     {
       名称: '"表格"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Biao Ge "',
     },
     {
       名称: '"前"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qian "',
     },
     {
       名称: '"已找到"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Zhao Dao "',
     },
     {
       名称: '"冰冻"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bing Dong "',
     },
     {
       名称: '"正在冰冻"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Bing Dong "',
     },
     {
       名称: '"已冰冻"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Bing Dong "',
     },
     {
       名称: '"游戏"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" You Xi "',
     },
     {
       名称: '"战败场数"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhan Bai Chang Shu "',
     },
     {
       名称: '"胜利场数"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Sheng Li Chang Shu "',
     },
     {
       名称: '"前往"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qian Wang "',
     },
     {
       名称: '"终点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhong Dian "',
     },
     {
       名称: '"正在前往"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Qian Wang "',
     },
     {
       名称: '"好"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hao "',
     },
     {
       名称: '"好运"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hao Yun "',
     },
     {
       名称: '"再见"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zai Jian "',
     },
     {
       名称: '"绿色"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Lv Se "',
     },
     {
       名称: '"有罪"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" You Zui "',
     },
     {
       名称: '"入侵"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ru Qin "',
     },
     {
       名称: '"已入侵"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Ru Qin "',
     },
     {
       名称: '"正在入侵"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Ru Qin "',
     },
     {
       名称: '"手牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shou Pai "',
     },
     {
       名称: '"治疗"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhi Liao "',
     },
     {
       名称: '"已治疗"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Zhi Liao "',
     },
     {
       名称: '"治疗者"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhi Liao Zhe "',
     },
     {
       名称: '"正在治疗"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Zhi Liao "',
     },
     {
       名称: '"红桃"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hong Tao "',
     },
     {
       名称: '"心"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xin "',
     },
     {
       名称: '"高度"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Gao Du "',
     },
     {
       名称: '"问候"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wen Hou "',
     },
     {
       名称: '"求助"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qiu Zhu "',
     },
     {
       名称: '"此处"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ci Chu "',
     },
     {
       名称: '"英雄"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ying Xiong "',
     },
     {
       名称: '"已隐藏"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Yin Cang "',
     },
     {
       名称: '"隐藏"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yin Cang "',
     },
     {
       名称: '"正在隐藏"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Yin Cang "',
     },
     {
       名称: '"最高得分"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Gao De Fen "',
     },
     {
       名称: '"击中"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Zhong "',
     },
     {
       名称: '"正在击中"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Ji Zhong "',
     },
     {
       名称: '"嗯"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ng "',
     },
     {
       名称: '"人质"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ren Zhi "',
     },
     {
       名称: '"哈"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ha "',
     },
     {
       名称: '"狩猎"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shou Lie "',
     },
     {
       名称: '"已狩猎 "',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Shou Lie   "',
     },
     {
       名称: '"猎人"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Lie Ren "',
     },
     {
       名称: '"正在狩猎"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Shou Lie "',
     },
     {
       名称: '"我放弃了"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wo Fang Qi Le "',
     },
     {
       名称: '"我尽力了"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wo Jin Li Le "',
     },
     {
       名称: '"在视野中"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zai Shi Ye Zhong "',
     },
     {
       名称: '"收入"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shou Ru "',
     },
     {
       名称: '"正在前来"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Qian Lai "',
     },
     {
       名称: '"初始"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi "',
     },
     {
       名称: '"初始盟友"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Meng You "',
     },
     {
       名称: '"初始尝试"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Chang Shi "',
     },
     {
       名称: '"初始检查点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Jian Cha Dian "',
     },
     {
       名称: '"初始敌人"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Di Ren "',
     },
     {
       名称: '"初始形态"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Xing Tai "',
     },
     {
       名称: '"初始游戏"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi You Xi "',
     },
     {
       名称: '"初始英雄"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Ying Xiong "',
     },
     {
       名称: '"初始人质"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Ren Zhi "',
     },
     {
       名称: '"初始等级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Deng Ji "',
     },
     {
       名称: '"初始任务"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Ren Wu "',
     },
     {
       名称: '"初始对象"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Dui Xiang "',
     },
     {
       名称: '"初始目标点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Mu Biao Dian "',
     },
     {
       名称: '"初始阶段"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Jie Duan "',
     },
     {
       名称: '"初始玩家"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Wan Jia "',
     },
     {
       名称: '"初始回合"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Hui He "',
     },
     {
       名称: '"初始目标"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Mu Biao "',
     },
     {
       名称: '"初始升级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shi Sheng Ji "',
     },
     {
       名称: '"无罪"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wu Zui "',
     },
     {
       名称: '"内"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Nei "',
     },
     {
       名称: '"智力"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhi Li "',
     },
     {
       名称: '"互动"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hu Dong "',
     },
     {
       名称: '"不可见"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bu Ke Jian "',
     },
     {
       名称: '"物品"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wu Pin "',
     },
     {
       名称: '"加入"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jia Ru "',
     },
     {
       名称: '"已加入"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Jia Ru "',
     },
     {
       名称: '"正在加入"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Jia Ru "',
     },
     {
       名称: '"跳跃"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Tiao Yue "',
     },
     {
       名称: '"正在跳跃"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Tiao Yue "',
     },
     {
       名称: '"击杀"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Sha "',
     },
     {
       名称: '"连杀"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Lian Sha "',
     },
     {
       名称: '"队长"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dui Zhang "',
     },
     {
       名称: '"最少"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Shao "',
     },
     {
       名称: '"左"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zuo "',
     },
     {
       名称: '"更少"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Geng Shao "',
     },
     {
       名称: '"等级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji "',
     },
     {
       名称: '"等级下降"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji Xia Jiang "',
     },
     {
       名称: '"等级提升"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji Ti Sheng "',
     },
     {
       名称: '"生命"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Sheng Ming "',
     },
     {
       名称: '"受限"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shou Xian "',
     },
     {
       名称: '"读取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Du Qu "',
     },
     {
       名称: '"已读取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Du Qu "',
     },
     {
       名称: '"正在读取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Du Qu "',
     },
     {
       名称: '"坐标"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zuo Biao "',
     },
     {
       名称: '"锁定"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Suo Ding "',
     },
     {
       名称: '"已锁定"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Suo Ding "',
     },
     {
       名称: '"正在锁定"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Suo Ding "',
     },
     {
       名称: '"败者"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bai Zhe "',
     },
     {
       名称: '"较大"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jiao Da "',
     },
     {
       名称: '"轻微"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qing Wei "',
     },
     {
       名称: '"较小"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jiao Xiao "',
     },
     {
       名称: '"任务"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ren Wu "',
     },
     {
       名称: '"放弃的任务"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fang Qi De Ren Wu "',
     },
     {
       名称: '"任务完成"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ren Wu Wan Cheng "',
     },
     {
       名称: '"失败的任务"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi Bai De Ren Wu "',
     },
     {
       名称: '"适中"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi Zhong "',
     },
     {
       名称: '"金钱"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jin Qian "',
     },
     {
       名称: '"怪物"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Guai Wu "',
     },
     {
       名称: '"更多"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Geng Duo "',
     },
     {
       名称: '"最多"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Duo "',
     },
     {
       名称: '"我的错"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wo De Cuo "',
     },
     {
       名称: '"近"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jin "',
     },
     {
       名称: '"最新高分"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Xin Gao Fen "',
     },
     {
       名称: '"最新记录"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Xin Ji Lu "',
     },
     {
       名称: '"下一个"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge "',
     },
     {
       名称: '"下一批盟友"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Pi Meng You "',
     },
     {
       名称: '"下一个盟友"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Meng You "',
     },
     {
       名称: '"下一次尝试"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ci Chang Shi "',
     },
     {
       名称: '"下一个检查点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Jian Cha Dian "',
     },
     {
       名称: '"下一批敌人"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Pi Di Ren "',
     },
     {
       名称: '"下一个敌人"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Di Ren "',
     },
     {
       名称: '"下一个表格"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Biao Ge "',
     },
     {
       名称: '"下一个游戏"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge You Xi "',
     },
     {
       名称: '"下一个英雄"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Ying Xiong "',
     },
     {
       名称: '"下一批英雄"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Pi Ying Xiong "',
     },
     {
       名称: '"下一个人质"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Ren Zhi "',
     },
     {
       名称: '"下一批人质"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Pi Ren Zhi "',
     },
     {
       名称: '"下一个等级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Deng Ji "',
     },
     {
       名称: '"下一个任务"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Ren Wu "',
     },
     {
       名称: '"下一批对象"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Pi Dui Xiang "',
     },
     {
       名称: '"下一个目标点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Mu Biao Dian "',
     },
     {
       名称: '"下一个对象"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Dui Xiang "',
     },
     {
       名称: '"下一个阶段"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Jie Duan "',
     },
     {
       名称: '"下一个玩家"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Wan Jia "',
     },
     {
       名称: '"下一批玩家"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Pi Wan Jia "',
     },
     {
       名称: '"下一个回合"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Hui He "',
     },
     {
       名称: '"下一个目标"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Mu Biao "',
     },
     {
       名称: '"下一批目标"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Pi Mu Biao "',
     },
     {
       名称: '"下一个升级 "',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Yi Ge Sheng Ji   "',
     },
     {
       名称: '"表现不错"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Biao Xian Bu Cuo "',
     },
     {
       名称: '"否"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fou "',
     },
     {
       名称: '"不用了"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bu Yong Le "',
     },
     {
       名称: '"空"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Kong "',
     },
     {
       名称: '"普通"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Pu Tong "',
     },
     {
       名称: '"北"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bei "',
     },
     {
       名称: '"东北"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dong Bei "',
     },
     {
       名称: '"西北"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xi Bei "',
     },
     {
       名称: '"算了吧"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Suan Le Ba "',
     },
     {
       名称: '"对象"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dui Xiang "',
     },
     {
       名称: '"目标点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Mu Biao Dian "',
     },
     {
       名称: '"获取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Huo Qu "',
     },
     {
       名称: '"已获取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Huo Qu "',
     },
     {
       名称: '"正在获取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Huo Qu "',
     },
     {
       名称: '"关闭"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Guan Bi "',
     },
     {
       名称: '"开启"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Kai Qi "',
     },
     {
       名称: '"噢"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" O "',
     },
     {
       名称: '"啊呀"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" A Ya "',
     },
     {
       名称: '"优化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" You Hua "',
     },
     {
       名称: '"已优化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi You Hua "',
     },
     {
       名称: '"正在优化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai You Hua "',
     },
     {
       名称: '"不在视野中"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bu Zai Shi Ye Zhong "',
     },
     {
       名称: '"正在远去"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Yuan Qu "',
     },
     {
       名称: '"外"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wai "',
     },
     {
       名称: '"上方"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shang Fang "',
     },
     {
       名称: '"加时"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jia Shi "',
     },
     {
       名称: '"参与者"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Can Yu Zhe "',
     },
     {
       名称: '"运载目标"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yun Zai Mu Biao "',
     },
     {
       名称: '"阶段"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jie Duan "',
     },
     {
       名称: '"选取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xuan Qu "',
     },
     {
       名称: '"已选取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Xuan Qu "',
     },
     {
       名称: '"正在选取"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Xuan Qu "',
     },
     {
       名称: '"堆"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dui "',
     },
     {
       名称: '"打出"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Da Chu "',
     },
     {
       名称: '"已打出"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Da Chu "',
     },
     {
       名称: '"玩家"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wan Jia "',
     },
     {
       名称: '"正在打出"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Da Chu "',
     },
     {
       名称: '"点"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dian "',
     },
     {
       名称: '"获得分数"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Huo De Fen Shu "',
     },
     {
       名称: '"失去分数"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi Qu Fen Shu "',
     },
     {
       名称: '"位置"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wei Zhi "',
     },
     {
       名称: '"能量"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Neng Liang "',
     },
     {
       名称: '"强化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qiang Hua "',
     },
     {
       名称: '"价格"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jia Ge "',
     },
     {
       名称: '"主要攻击模式"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhu Yao Gong Ji Mo Shi "',
     },
     {
       名称: '"飞弹"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fei Dan "',
     },
     {
       名称: '"保护"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bao Hu "',
     },
     {
       名称: '"已保护"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Bao Hu "',
     },
     {
       名称: '"正在保护"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Bao Hu "',
     },
     {
       名称: '"已净化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Jing Hua "',
     },
     {
       名称: '"净化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jing Hua "',
     },
     {
       名称: '"正在净化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Jing Hua "',
     },
     {
       名称: '"亮紫色"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Liang Zi Se "',
     },
     {
       名称: '"复活"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fu Huo "',
     },
     {
       名称: '"已复活"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Fu Huo "',
     },
     {
       名称: '"正在复活"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Fu Huo "',
     },
     {
       名称: '"排名"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Pai Ming "',
     },
     {
       名称: '"等级 A"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji   A "',
     },
     {
       名称: '"等级 B"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji   B "',
     },
     {
       名称: '"等级 C"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji   C "',
     },
     {
       名称: '"等级 D"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji   D "',
     },
     {
       名称: '"等级 E"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji   E "',
     },
     {
       名称: '"等级 F"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji   F "',
     },
     {
       名称: '"等级 S"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Ji   S "',
     },
     {
       名称: '"已抵达"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Di Da "',
     },
     {
       名称: '"就绪"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jiu Xu "',
     },
     {
       名称: '"记录"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Lu "',
     },
     {
       名称: '"恢复"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hui Fu "',
     },
     {
       名称: '"已恢复"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Hui Fu "',
     },
     {
       名称: '"正在恢复"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Hui Fu "',
     },
     {
       名称: '"红色"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hong Se "',
     },
     {
       名称: '"剩余"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Sheng Yu "',
     },
     {
       名称: '"营救"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ying Jiu "',
     },
     {
       名称: '"已营救 "',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Ying Jiu   "',
     },
     {
       名称: '"正在营救"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Ying Jiu "',
     },
     {
       名称: '"资源"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zi Yuan "',
     },
     {
       名称: '"揭示"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jie Shi "',
     },
     {
       名称: '"已揭示"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Jie Shi "',
     },
     {
       名称: '"正在揭示"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Jie Shi "',
     },
     {
       名称: '"撤销"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Che Xiao "',
     },
     {
       名称: '"已撤销"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Che Xiao "',
     },
     {
       名称: '"正在撤销"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Che Xiao "',
     },
     {
       名称: '"右"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" You "',
     },
     {
       名称: '"回合"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hui He "',
     },
     {
       名称: '"战败回合数"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhan Bai Hui He Shu "',
     },
     {
       名称: '"胜利回合数"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Sheng Li Hui He Shu "',
     },
     {
       名称: '"运行"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yun Xing "',
     },
     {
       名称: '"正在运行"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Yun Xing "',
     },
     {
       名称: '"安全"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" An Quan "',
     },
     {
       名称: '"保存"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bao Cun "',
     },
     {
       名称: '"已保存"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Bao Cun "',
     },
     {
       名称: '"正在保存"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Bao Cun "',
     },
     {
       名称: '"分数"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fen Shu "',
     },
     {
       名称: '"辅助攻击模式"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fu Zhu Gong Ji Mo Shi "',
     },
     {
       名称: '"选择"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xuan Ze "',
     },
     {
       名称: '"已选择"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Xuan Ze "',
     },
     {
       名称: '"正在选择"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Xuan Ze "',
     },
     {
       名称: '"出售"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chu Shou "',
     },
     {
       名称: '"正在出售"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Chu Shou "',
     },
     {
       名称: '"服务器负载"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fu Wu Qi Fu Zai "',
     },
     {
       名称: '"服务器负载平均值"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fu Wu Qi Fu Zai Ping Jun Zhi "',
     },
     {
       名称: '"服务器负载峰值"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fu Wu Qi Fu Zai Feng Zhi "',
     },
     {
       名称: '"撕裂"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Si Lie "',
     },
     {
       名称: '"已撕裂"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Si Lie "',
     },
     {
       名称: '"正在撕裂"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Si Lie "',
     },
     {
       名称: '"商店"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shang Dian "',
     },
     {
       名称: '"洗牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xi Pai "',
     },
     {
       名称: '"已洗牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Xi Pai "',
     },
     {
       名称: '"击沉"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Chen "',
     },
     {
       名称: '"正在击沉"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Ji Chen "',
     },
     {
       名称: '"跳过"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Tiao Guo "',
     },
     {
       名称: '"已跳过"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Tiao Guo "',
     },
     {
       名称: '"正在跳过"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Tiao Guo "',
     },
     {
       名称: '"沉睡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Chen Shui "',
     },
     {
       名称: '"正在沉睡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Chen Shui "',
     },
     {
       名称: '"已沉睡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Chen Shui "',
     },
     {
       名称: '"慢"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Man "',
     },
     {
       名称: '"较慢"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jiao Man "',
     },
     {
       名称: '"最慢"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Man "',
     },
     {
       名称: '"已出售"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Chu Shou "',
     },
     {
       名称: '"抱歉"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bao Qian "',
     },
     {
       名称: '"南"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Nan "',
     },
     {
       名称: '"东南"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dong Nan "',
     },
     {
       名称: '"西南"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xi Nan "',
     },
     {
       名称: '"黑桃"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Hei Tao "',
     },
     {
       名称: '"火花"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Huo Hua "',
     },
     {
       名称: '"孵化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Fu Hua "',
     },
     {
       名称: '"已孵化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Fu Hua "',
     },
     {
       名称: '"正在孵化"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Fu Hua "',
     },
     {
       名称: '"速度"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Su Du "',
     },
     {
       名称: '"球体"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qiu Ti "',
     },
     {
       名称: '"球形"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qiu Xing "',
     },
     {
       名称: '"稳定"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wen Ding "',
     },
     {
       名称: '"已稳定"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Wen Ding "',
     },
     {
       名称: '"正在稳定"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Wen Ding "',
     },
     {
       名称: '"存放宠物"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Cun Fang Chong Wu "',
     },
     {
       名称: '"星星"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xing Xing "',
     },
     {
       名称: '"群星"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qun Xing "',
     },
     {
       名称: '"开始"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Kai Shi "',
     },
     {
       名称: '"已开始"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Kai Shi "',
     },
     {
       名称: '"正在开始"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Kai Shi "',
     },
     {
       名称: '"状态"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhuang Tai "',
     },
     {
       名称: '"停止"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ting Zhi "',
     },
     {
       名称: '"走开"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zou Kai "',
     },
     {
       名称: '"已停止 "',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Ting Zhi   "',
     },
     {
       名称: '"正在停止"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Ting Zhi "',
     },
     {
       名称: '"阻止"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zu Zhi "',
     },
     {
       名称: '"已阻止"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Zu Zhi "',
     },
     {
       名称: '"正在阻止"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Zu Zhi "',
     },
     {
       名称: '"力量"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Li Liang "',
     },
     {
       名称: '"击晕"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Yun "',
     },
     {
       名称: '"已击晕"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Ji Yun "',
     },
     {
       名称: '"正在击晕"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Ji Yun "',
     },
     {
       名称: '"次佳"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ci Jia "',
     },
     {
       名称: '"成功"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Cheng Gong "',
     },
     {
       名称: '"绝杀局"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jue Sha Ju "',
     },
     {
       名称: '"已击沉"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Ji Chen "',
     },
     {
       名称: '"强烈"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qiang Lie "',
     },
     {
       名称: '"生存"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Sheng Cun "',
     },
     {
       名称: '"已生存"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Sheng Cun "',
     },
     {
       名称: '"正在生存"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Shig Cun "',
     },
     {
       名称: '"目标"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Mu Biao "',
     },
     {
       名称: '"队伍"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dui Wu "',
     },
     {
       名称: '"队友"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Dui You "',
     },
     {
       名称: '"极差"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ji Cha "',
     },
     {
       名称: '"衷心感谢"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhong Xin Gan Xie "',
     },
     {
       名称: '"感谢"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Gan Xie "',
     },
     {
       名称: '"太棒了"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Tai Bang Le "',
     },
     {
       名称: '"威胁"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wei Xie "',
     },
     {
       名称: '"威胁等级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wei Xie Deng Ji "',
     },
     {
       名称: '"时间"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi Jian "',
     },
     {
       名称: '"总计"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zong Ji "',
     },
     {
       名称: '"交易"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jiao Yi "',
     },
     {
       名称: '"已交易"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Jiao Yi "',
     },
     {
       名称: '"正在交易"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Jiao Yi "',
     },
     {
       名称: '"叛徒"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Pan Tu "',
     },
     {
       名称: '"转移"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhuan Yi "',
     },
     {
       名称: '"已转移"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Zhuan Yi "',
     },
     {
       名称: '"正在转移"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Zhuan Yi "',
     },
     {
       名称: '"再来试试"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zai Lai Shi Shi "',
     },
     {
       名称: '"炮台"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Pao Tai "',
     },
     {
       名称: '"呃"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" E "',
     },
     {
       名称: '"终极技能"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zhong Ji Ji Neng "',
     },
     {
       名称: '"下方"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xia Fang "',
     },
     {
       名称: '"未知"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wei Zhi "',
     },
     {
       名称: '"不受限"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bu Shou Xian "',
     },
     {
       名称: '"解锁"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jie Suo "',
     },
     {
       名称: '"已解锁"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Jie Suo "',
     },
     {
       名称: '"正在解锁"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Jie Suo "',
     },
     {
       名称: '"不安全"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bu An Quan "',
     },
     {
       名称: '"不稳定"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bu Wen Ding "',
     },
     {
       名称: '"上"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shang "',
     },
     {
       名称: '"升级"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Sheng Ji "',
     },
     {
       名称: '"上传"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shang Chuan "',
     },
     {
       名称: '"已上传"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Yi Shang Chuan "',
     },
     {
       名称: '"正在上传"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Shang Chuan "',
     },
     {
       名称: '"使用技能 1"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi Yong Ji Neng   1 "',
     },
     {
       名称: '"使用技能 2"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi Yong Ji Neng   2 "',
     },
     {
       名称: '"使用终极技能"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi Yong Zhong Ji Ji Neng "',
     },
     {
       名称: '"胜利"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Sheng Li "',
     },
     {
       名称: '"可见"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ke Jian "',
     },
     {
       名称: '"漩涡"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xuan Wo "',
     },
     {
       名称: '"等待"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Deng Dai "',
     },
     {
       名称: '"正在等待"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zheng Zai Deng Dai "',
     },
     {
       名称: '"墙壁"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qiang Bi "',
     },
     {
       名称: '"警告"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jing Gao "',
     },
     {
       名称: '"欢迎"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Huan Ying "',
     },
     {
       名称: '"称赞"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Cheng Zan "',
     },
     {
       名称: '"西"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Xi "',
     },
     {
       名称: '"白色"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Bai Se "',
     },
     {
       名称: '"关键牌"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Guan Jian Pai "',
     },
     {
       名称: '"胜者"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Sheng Zhe "',
     },
     {
       名称: '"感知"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Gan Zhi "',
     },
     {
       名称: '"较差"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Jiao Cha "',
     },
     {
       名称: '"最差"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Zui Cha "',
     },
     {
       名称: '"哇哦"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Wa O "',
     },
     {
       名称: '"黄色"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Huang Se "',
     },
     {
       名称: '"是"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Shi "',
     },
     {
       名称: '"你"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ni "',
     },
     {
       名称: '"你失败了"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ni Shi Bai Le "',
     },
     {
       名称: '"你胜利了"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Ni Sheng Li Le "',
     },
     {
       名称: '"区域"',
       标签: ["字符串"],
       提示: "一个内置字符串选项。支持多语言。",
+      拼音: '" Qu Yu "',
     },
   ],
   阈值行为: [
@@ -9761,11 +10240,13 @@ let 常量 = {
       名称: "替换现有阈值",
       标签: ["阈值", "行为"],
       提示: "一个仅用于“开始定向阈值”的行为选项。",
+      拼音: "Ti Huan Xian You Yu Zhi",
     },
     {
       名称: "添加至现有阈值",
       标签: ["阈值", "行为"],
       提示: "一个仅用于“开始定向阈值”的行为选项。",
+      拼音: "Tian Jia Zhi Xian You Yu Zhi",
     },
   ],
   转换: [
@@ -9773,11 +10254,13 @@ let 常量 = {
       名称: "旋转",
       标签: ["矢量", "转换"],
       提示: "一个矢量转换选项。",
+      拼音: "Xuan Zhuan",
     },
     {
       名称: "旋转并转换",
       标签: ["矢量", "转换"],
       提示: "一个矢量转换选项。",
+      拼音: "Xuan Zhuan Bing Zhuan Huan",
     },
   ],
   可见: [
@@ -9785,16 +10268,19 @@ let 常量 = {
       名称: "全部",
       标签: ["可见"],
       提示: "一个玩家可见选项。",
+      拼音: "Quan Bu",
     },
     {
       名称: "敌人",
       标签: ["可见"],
       提示: "一个玩家可见选项。",
+      拼音: "Di Ren",
     },
     {
       名称: "全部禁用",
       标签: ["可见"],
       提示: "一个玩家可见选项。",
+      拼音: "Quan Bu Jin Yong",
     },
   ],
   观战: [
@@ -9802,16 +10288,19 @@ let 常量 = {
       名称: "默认可见度",
       标签: ["观战", "可见"],
       提示: "一个观战可见选项。",
+      拼音: "Mo Ren Ke Jian Du",
     },
     {
       名称: "始终可见",
       标签: ["观战", "可见"],
       提示: "一个观战可见选项。",
+      拼音: "Shi Zhong Ke Jian",
     },
     {
       名称: "始终不可见",
       标签: ["观战", "可见"],
       提示: "一个观战可见选项。",
+      拼音: "Shi Zhong Bu Ke Jian",
     },
   ],
   等待行为: [
@@ -9819,16 +10308,19 @@ let 常量 = {
       名称: "无视条件",
       标签: ["等待", "行为"],
       提示: "动作列表的执行不会被中断。",
+      拼音: "Wu Shi Tiao Jian",
     },
     {
       名称: "当为“假”时中止",
       标签: ["等待", "行为"],
       提示: "如果此规则中任何一项条件变为假，则中止执行动作列表。",
+      拼音: "Dang Wei “ Jia ” Shi Zhong Zhi",
     },
     {
       名称: "当为“真”时重新开始",
       标签: ["等待", "行为"],
       提示: "如果条件列表从假转变为真，或者规则中的事件在为真的条件下再次发生，则从第一项动作开始重新执行动作列表。",
+      拼音: "Dang Wei “ Zhen ” Shi Chong Xin Kai Shi",
     },
   ],
 };
@@ -9839,168 +10331,169 @@ let 规则 = {
       "持续 - 全局": {
         标签: ["事件"],
         提示: "当比赛开始时，创建此规则的单一副本。此副本在整场比赛中保持激活状态。",
+        拼音: "Chi Xu Quan Ju",
       },
-
       "持续 - 每名玩家": {
         标签: ["事件"],
         提示: "当玩家加入比赛时，为每位玩家创建此规则的副本。此副本会保持激活，直至玩家离开比赛或比赛结束。每个副本都会独立追踪并执行条件和行动。",
+        拼音: "Chi Xu Mei Ming Wan Jia",
       },
-
       玩家造成伤害: {
         标签: ["事件"],
         提示: "当玩家造成伤害时执行规则。",
+        拼音: "Wan Jia Zao Cheng Shang Hai",
       },
-
       玩家造成最后一击: {
         标签: ["事件"],
         提示: "当玩家造成最后一击时执行规则。",
+        拼音: "Wan Jia Zao Cheng Zui Hou Yi Ji",
       },
-
       玩家造成治疗: {
         标签: ["事件"],
         提示: "当玩家造成治疗时执行规则。",
+        拼音: "Wan Jia Zao Cheng Zhi Liao",
       },
-
       玩家造成击退: {
         标签: ["事件"],
         提示: "当玩家造成击退时执行规则. ",
+        拼音: "Wan Jia Zao Cheng Ji Tui",
       },
-
       玩家阵亡: {
         标签: ["事件"],
         提示: "当玩家阵亡时执行规则。",
+        拼音: "Wan Jia Zhen Wang",
       },
-
       玩家参与消灭: {
         标签: ["事件"],
         提示: "当玩家参与消灭时执行规则。",
+        拼音: "Wan Jia Can Yu Xiao Mie",
       },
-
       玩家加入比赛: {
         标签: ["事件"],
         提示: "当玩家加入比赛时执行规则。",
+        拼音: "Wan Jia Jia Ru Bi Sai",
       },
-
       玩家离开比赛: {
         标签: ["事件"],
         提示: "当玩家离开比赛时执行规则。",
+        拼音: "Wan Jia Li Kai Bi Sai",
       },
-
       玩家受到治疗: {
         标签: ["事件"],
         提示: "当玩家受到治疗时执行规则。",
+        拼音: "Wan Jia Shou Dao Zhi Liao",
       },
-
       玩家受到击退: {
         标签: ["事件"],
         提示: "当玩家受到击退时执行规则. ",
+        拼音: "Wan Jia Shou Dao Ji Tui",
       },
-
       玩家受到伤害: {
         标签: ["事件"],
         提示: "当玩家受到伤害时执行规则。",
+        拼音: "Wan Jia Shou Dao Shang Hai",
       },
-
       子程序: {
         标签: ["事件"],
         提示: "当被“调用子程序“或”开始规则”动作调用时执行该规则。",
+        拼音: "Zi Cheng Xu",
       },
     },
-
     队伍: {
       队伍1: {
         标签: ["事件", "队伍"],
         提示: "表示默认颜色为蓝的队伍。仅用于“规则事件”中的队伍选项。",
+        拼音: "Dui Wu 1",
       },
-
       队伍2: {
         标签: ["事件", "队伍"],
         提示: "表示默认颜色为红的队伍。仅用于“规则事件”中的队伍选项。",
+        拼音: "Dui Wu 2",
       },
-
       双方: {
         标签: ["事件", "队伍"],
         提示: "表示两支队伍或非团队模式（例如“死斗”）的所有玩家。仅用于“规则事件”中的队伍选项。",
+        拼音: "Shuang Fang",
       },
     },
-
     玩家: {
       全部: {
         标签: ["事件", "玩家"],
         顺序: "0",
         提示: "表示所有栏位的玩家。",
+        拼音: "Quan Bu",
       },
-
       "栏位 0": {
         标签: ["事件", "玩家"],
         顺序: "1",
         提示: "表示第0个栏位的玩家。",
+        拼音: "Lan Wei 0",
       },
-
       "栏位 1": {
         标签: ["事件", "玩家"],
         顺序: "2",
         提示: "表示第1个栏位的玩家。",
+        拼音: "Lan Wei 1",
       },
-
       "栏位 2": {
         标签: ["事件", "玩家"],
         顺序: "3",
         提示: "表示第2个栏位的玩家。",
+        拼音: "Lan Wei 2",
       },
-
       "栏位 3": {
         标签: ["事件", "玩家"],
         顺序: "4",
         提示: "表示第3个栏位的玩家。",
+        拼音: "Lan Wei 3",
       },
-
       "栏位 4": {
         标签: ["事件", "玩家"],
         顺序: "5",
         提示: "表示第4个栏位的玩家。",
+        拼音: "Lan Wei 4",
       },
-
       "栏位 5": {
         标签: ["事件", "玩家"],
         顺序: "6",
         提示: "表示第5个栏位的玩家。",
+        拼音: "Lan Wei 5",
       },
-
       "栏位 6": {
         标签: ["事件", "玩家"],
         顺序: "7",
         提示: "表示第6个栏位的玩家。",
+        拼音: "Lan Wei 6",
       },
-
       "栏位 7": {
         标签: ["事件", "玩家"],
         顺序: "8",
         提示: "表示第7个栏位的玩家。",
+        拼音: "Lan Wei 7",
       },
-
       "栏位 8": {
         标签: ["事件", "玩家"],
         顺序: "9",
         提示: "表示第8个栏位的玩家。",
+        拼音: "Lan Wei 8",
       },
-
       "栏位 9": {
         标签: ["事件", "玩家"],
         顺序: "10",
         提示: "表示第9个栏位的玩家。",
+        拼音: "Lan Wei 9",
       },
-
       "栏位 10": {
         标签: ["事件", "玩家"],
         顺序: "11",
         提示: "表示第10个栏位的玩家。",
+        拼音: "Lan Wei 10",
       },
-
       "栏位 11": {
         标签: ["事件", "玩家"],
         顺序: "12",
         提示: "表示第11个栏位的玩家。",
+        拼音: "Lan Wei 11",
       },
     },
   },
@@ -10051,6 +10544,7 @@ let 规则 = {
       返回: ["数字", "矢量"],
       标签: ["条件", "数学运算", "矢量运算"],
       提示: "两个数字或矢量的和。",
+      拼音: "Jia",
     },
     减: {
       参数: [
@@ -10071,6 +10565,7 @@ let 规则 = {
       返回: ["数字", "矢量"],
       标签: ["条件", "数学运算", "矢量运算"],
       提示: "两个数字或矢量的差。",
+      拼音: "Jian",
     },
     乘: {
       参数: [
@@ -10091,6 +10586,7 @@ let 规则 = {
       返回: ["数字", "矢量"],
       标签: ["条件", "数学运算", "矢量运算"],
       提示: "两个数字或矢量的积。矢量乘以数字会得到一个缩放后的矢量。",
+      拼音: "Cheng",
     },
     除: {
       参数: [
@@ -10111,6 +10607,7 @@ let 规则 = {
       返回: ["数字", "矢量"],
       标签: ["条件", "数学运算", "矢量运算"],
       提示: "两个数字或矢量的商。矢量除以数字会得到一个缩放后的矢量。除以零的结果为0。",
+      拼音: "Chu",
     },
     乘方: {
       参数: [
@@ -10131,6 +10628,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "左边运算量的乘方，幂为右边运算量。如果左边运算量为负，则结果始终为0。",
+      拼音: "Cheng Fang",
     },
     余数: {
       参数: [
@@ -10151,6 +10649,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "左边的运算量除以右边的运算量之后的余数。如果右边是0的话则结果为0。",
+      拼音: "Yu Shu",
     },
     非: {
       参数: [
@@ -10165,6 +10664,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "布尔运算"],
       提示: "返回输入的布尔的相反值。",
+      拼音: "Fei",
     },
     与: {
       参数: [
@@ -10185,6 +10685,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "布尔运算"],
       提示: "两个输入值是否都为“真”（或等效于“真”）。",
+      拼音: "Yu",
     },
     或: {
       参数: [
@@ -10205,6 +10706,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "布尔运算"],
       提示: "两个输入值是否都为“真”（或等效于“真”）。",
+      拼音: "Huo",
     },
     比较: {
       参数: [
@@ -10231,6 +10733,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "布尔运算"],
       提示: "比较输入的两个值的结果，如果相等则为“真”反之为“假”。",
+      拼音: "Bi Jiao",
     },
     X方向分量: {
       参数: [
@@ -10244,6 +10747,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "方向"],
       提示: "指定矢量在X方向上的分量，通常代表向左的量。",
+      拼音: "X Fang Xiang Fen Liang",
     },
     Y方向分量: {
       参数: [
@@ -10257,6 +10761,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "方向"],
       提示: "指定矢量在Y方向上的分量，通常代表向上的量。",
+      拼音: "Y Fang Xiang Fen Liang",
     },
     Z方向分量: {
       参数: [
@@ -10270,46 +10775,55 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "方向"],
       提示: "指定矢量在Z方向上的分量，通常代表向前的量。",
+      拼音: "Z Fang Xiang Fen Liang",
     },
     上: {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "方向性矢量 (0, 1, 0) 的简写，此矢量指向上方。",
+      拼音: "Shang",
     },
     上一个伤害调整ID: {
       返回: ["实体"],
       标签: ["条件", "ID"],
       提示: "此ID值代表最后一个事件玩家(或全局)所执行的“开始伤害调整”动作。",
+      拼音: "Shang Yi Ge Shang Hai Tiao Zheng ID",
     },
     上一个助攻ID: {
       返回: ["实体"],
       标签: ["条件", "ID"],
       提示: "此ID值代表最后一个时间玩家（或全局）所执行的“开始助攻”动作。",
+      拼音: "Shang Yi Ge Zhu Gong ID",
     },
     上一个持续伤害效果ID: {
       返回: ["实体"],
       标签: ["条件", "ID"],
       提示: "此ID值代表最后一个事件玩家（或全局）所执行的”持续伤害“动作。",
+      拼音: "Shang Yi Ge Chi Xu Shang Hai Xiao Guo ID",
     },
     上一个持续治疗效果ID: {
       返回: ["实体"],
       标签: ["条件", "ID"],
       提示: "此ID值代表最后一个事件玩家（或全局）所执行的”持续治疗“动作。",
+      拼音: "Shang Yi Ge Chi Xu Zhi Liao Xiao Guo ID",
     },
     上一个文本ID: {
       返回: ["实体"],
       标签: ["条件", "ID"],
       提示: "代表由事件玩家创建的（或由全局创建的）通过“创建HUD文本”、“创建地图文本”、“创建进度条HUD文本”或“创建进度条地图文本”动作所创建的最后一段文本。",
+      拼音: "Shang Yi Ge Wen Ben ID",
     },
     上一个治疗调整ID: {
       返回: ["实体"],
       标签: ["条件", "ID"],
       提示: "此ID值代表最后一个事件玩家（或全局）所执行的”开始治疗调整“动作。",
+      拼音: "Shang Yi Ge Zhi Liao Tiao Zheng ID",
     },
     下: {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "方向性矢量 (0, -1 ,0) 的简写，此矢量指向下方。",
+      拼音: "Xia",
     },
     与此方向的垂直角度: {
       参数: [
@@ -10323,6 +10837,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "与指定方向矢量的垂直夹角，单位为度。",
+      拼音: "Yu Ci Fang Xiang De Chui Zhi Jiao Du",
     },
     与此方向的水平角度: {
       参数: [
@@ -10336,6 +10851,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "与指定方向矢量的水平夹角，单位为度。",
+      拼音: "Yu Ci Fang Xiang De Shui Ping Jiao Du",
     },
     与此角度的相对方向: {
       参数: [
@@ -10355,68 +10871,82 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "指向指定角度的单位长度矢量。",
+      拼音: "Yu Ci Jiao Du De Xiang Dui Fang Xiang",
     },
     主机玩家: {
       返回: ["实体"],
       标签: ["条件", "主机"],
       提示: "当前自定游戏的主机玩家。如果当前的主机玩家离开了比赛，该值会改变。",
+      拼音: "Zhu Ji Wan Jia",
     },
     事件为急救包: {
       返回: ["布尔"],
       标签: ["条件", "事件"],
       提示: "此规则正在处理的事件中的治疗是否来自于急救包。",
+      拼音: "Shi Jian Wei Ji Jiu Bao",
     },
     事件为环境事件: {
       返回: ["布尔"],
       标签: ["条件", "事件"],
       提示: "此规则正在处理的事件中的消灭是否是由环境引起的。",
+      拼音: "Shi Jian Wei Huan Jing Shi Jian",
     },
     事件伤害: {
       返回: ["数字"],
       标签: ["条件", "事件"],
       提示: "此规则所处理的事件中被攻击者受到的伤害数值。",
+      拼音: "Shi Jian Shang Hai",
     },
     事件技能: {
       返回: ["按钮"],
       标签: ["条件", "事件"],
       提示: "此规则当前处理的事件中的技能所对应的按键。",
+      拼音: "Shi Jian Ji Neng",
     },
     事件方向: {
       返回: ["矢量"],
       标签: ["条件"],
       提示: "此规则当前处理的事件来自哪个方向。",
+      拼音: "Shi Jian Fang Xiang",
     },
     事件暴击: {
       返回: ["布尔"],
       标签: ["条件", "事件"],
       提示: "此规则处理的伤害是否为暴击（如爆头伤害）。",
+      拼音: "Shi Jian Bao Ji",
     },
     事件治疗: {
       返回: ["数字"],
       标签: ["条件", "事件"],
       提示: "此规则所处理的事件中被治疗者受到的治疗数值。",
+      拼音: "Shi Jian Zhi Liao",
     },
     事件玩家: {
       返回: ["实体"],
       标签: ["条件", "事件"],
       提示: "正在执行此规则的玩家，由事件指定。可能与攻击者或被攻击者为同一人。",
+      拼音: "Shi Jian Wan Jia",
     },
     全局: {
       返回: ["全局"],
       标签: ["条件", "全局"],
       提示: "一个全局变量的当前值，全局变量即属于游戏本身的变量。",
+      拼音: "Quan Ju",
     },
     队伍1: {
       标签: ["条件", "队伍"],
       提示: "表示默认颜色为蓝的队伍。",
+      拼音: "Dui Wu 1",
     },
     队伍2: {
       标签: ["条件", "队伍"],
       提示: "表示默认颜色为红的队伍。",
+      拼音: "Dui Wu 2",
     },
     所有队伍: {
       标签: ["条件", "队伍"],
       提示: "表示两支队伍或非团队模式（例如“死斗”）的所有玩家。",
+      拼音: "Suo You Dui Wu",
     },
     从数组中移除: {
       参数: [
@@ -10436,6 +10966,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "一个数组的复制，移除一个或更多的值（如果能找到）。",
+      拼音: "Cong Shu Zu Zhong Yi Chu",
     },
     以弧度为单位的反余弦值: {
       参数: [
@@ -10449,6 +10980,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定值的反余弦值，以弧度为单位。",
+      拼音: "Yi Hu Du Wei Dan Wei De Fan Yu Xian Zhi",
     },
     以弧度为单位的反正切值: {
       参数: [
@@ -10468,6 +11000,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定分子及分母的反正切值（通常称为Atan2），以弧度为单位。",
+      拼音: "Yi Hu Du Wei Dan Wei De Fan Zheng Qie Zhi",
     },
     以弧度为单位的反正弦值: {
       参数: [
@@ -10481,6 +11014,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定值的反正弦值，以弧度为单位。",
+      拼音: "Yi Hu Du Wei Dan Wei De Fan Zheng Xian Zhi",
     },
     以角度为单位的反余弦值: {
       参数: [
@@ -10494,6 +11028,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定值的反余弦值，以角度为单位。",
+      拼音: "Yi Jiao Du Wei Dan Wei De Fan Yu Xian Zhi",
     },
     以角度为单位的反正切值: {
       参数: [
@@ -10513,6 +11048,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定分子及分母的反正切值（通常称为Atan2），以角度为单位。",
+      拼音: "Yi Jiao Du Wei Dan Wei De Fan Zheng Qie Zhi",
     },
     以角度为单位的反正弦值: {
       参数: [
@@ -10526,11 +11062,13 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定值的反正弦值，以角度为单位。",
+      拼音: "Yi Jiao Du Wei Dan Wei De Fan Zheng Xian Zhi",
     },
     伤害调整数量: {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "由“开始伤害调整”动作启动的伤害调整副本的当前数量。",
+      拼音: "Shang Hai Tiao Zheng Shu Liang",
     },
     作为进攻队伍: {
       参数: [
@@ -10544,16 +11082,19 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "指定队伍是否是进攻方。如果游戏模式不是攻防作战、护送、或攻击",
+      拼音: "Zuo Wei Jin Gong Dui Wu",
     },
     假: {
       返回: ["布尔"],
       标签: ["条件", "布尔"],
       提示: "布尔值，假。",
+      拼音: "Jia",
     },
     全部英雄: {
       返回: ["数组"],
       标签: ["条件", "英雄"],
       提示: "此数组包括了所有英雄。",
+      拼音: "Quan Bu Ying Xiong",
     },
     具有状态: {
       参数: [
@@ -10573,6 +11114,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态"],
       提示: "指定玩家是否具有指定状态，无论此状态是通过“设置状态”行为获得的还是除命令以外的游戏机制获得的。",
+      拼音: "Ju You Zhuang Tai",
     },
     分数: {
       参数: [
@@ -10585,16 +11127,19 @@ let 规则 = {
       ],
       标签: ["条件", "分数"],
       提示: "一名玩家当前的得分。如果游戏不是自由混战模式，则结果为0。",
+      拼音: "Fen Shu",
     },
     前: {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "方向性矢量 (0, 0, 1) 的简写，此矢量指向前方。",
+      拼音: "Qian",
     },
     助攻数量: {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "由“开始助攻”动作启动的助攻副本的当前数量。",
+      拼音: "Zhu Gong Shu Liang",
     },
     单次赋值: {
       参数: [
@@ -10608,11 +11153,13 @@ let 规则 = {
       返回: ["条件"],
       标签: ["条件", "赋值"],
       提示: "结果为通过给定动作或条件提供给“输入值”参数的第一个值（当一个可重新赋值的值与一个动作相关联时，此选项可以用来有选择性地对此值的特定部分不重新赋值）。",
+      拼音: "Dan Ci Fu Zhi",
     },
     占领要点模式占领点解锁: {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "占领要点模式中占领点是否解锁。",
+      拼音: "Zhan Ling Yao Dian Mo Shi Zhan Ling Dian Jie Suo",
     },
     占领要点模式得分百分比: {
       参数: [
@@ -10626,11 +11173,13 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "百分比"],
       提示: "指定队伍在占领要点模式中的得分百分比。",
+      拼音: "Zhan Ling Yao Dian Mo Shi De Fen Bai Fen Bi",
     },
     占领要点模式正在得分的队伍: {
       返回: ["队伍"],
       标签: ["条件", "队伍"],
       提示: "该队伍正在占领要点模式中积累得分百分比。如果双方队伍都没有在积累得分，则结果为“全部”。",
+      拼音: "Zhan Ling Yao Dian Mo Shi Zheng Zai De Fen De Dui Wu",
     },
     取整: {
       参数: [
@@ -10650,11 +11199,13 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定值取整后的值。",
+      拼音: "Qu Zheng",
     },
     受治疗者: {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "根据此规则处理的事件中受到治疗的玩家。可能与治疗者或事件玩家是同一个人。",
+      拼音: "Shou Zhi Liao Zhe",
     },
     可用英雄: {
       参数: [
@@ -10668,16 +11219,19 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "英雄"],
       提示: "此数组中包括指定玩家当前可以选择的英雄。",
+      拼音: "Ke Yong Ying Xiong",
     },
     右: {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "方向性矢量 (-1 ,0 ,0) 的简写，此矢量指向右方。",
+      拼音: "You",
     },
     后: {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "方向性矢量 (0, 0, -1) 的简写，此矢量指向后方。",
+      拼音: "Hou",
     },
     向量: {
       参数: [
@@ -10697,6 +11251,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "从一个位置到另一个位置的位移矢量。",
+      拼音: "Xiang Liang",
     },
     团队得分: {
       参数: [
@@ -10710,6 +11265,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "分数"],
       提示: "指定队伍当前的得分。在自由混战模式中结果为0。",
+      拼音: "Tuan Dui De Fen",
     },
     图标字符串: {
       参数: [
@@ -10723,6 +11279,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "图标"],
       提示: "可以在字符串中使用图标（每个字符串最多4个图标）。",
+      拼音: "Tu Biao Zi Fu Chuan",
     },
     在地面上: {
       参数: [
@@ -10736,6 +11293,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "玩家是否位于地面上（或可行走的表面上）。",
+      拼音: "Zai Di Mian Shang",
     },
     在墙上: {
       参数: [
@@ -10749,11 +11307,13 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "玩家是否位于墙体上（滑墙或爬墙）。",
+      拼音: "Zai Qiang Shang",
     },
     在夺旗模式中开始绝杀局: {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "当前勇夺锦旗游戏是否处于绝杀局状态。",
+      拼音: "Zai Duo Qi Mo Shi Zhong Kai Shi Jue Sha Ju",
     },
     在目标点上: {
       参数: [
@@ -10767,6 +11327,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "指定玩家是否正在运载目标或占领点上。",
+      拼音: "Zai Mu Biao Dian Shang",
     },
     在视线内: {
       参数: [
@@ -10792,6 +11353,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "两个位置是否在彼此的视线内。",
+      拼音: "Zai Shi Xian Nei",
     },
     在视野内: {
       参数: [
@@ -10817,6 +11379,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "检测一个坐标是否位于玩家的视角内。",
+      拼音: "Zai Shi Ye Nei",
     },
     在重生室中: {
       参数: [
@@ -10830,6 +11393,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "指定玩家是否正在重生室内（恢复生命值且可更换英雄）。",
+      拼音: "Zai Chong Sheng Shi Zhong",
     },
     地图: {
       参数: [
@@ -10843,6 +11407,7 @@ let 规则 = {
       返回: ["地图"],
       标签: ["条件", "地图"],
       提示: "一个地图常量。",
+      拼音: "Di Tu",
     },
     地图工坊设置实数: {
       参数: [
@@ -10886,6 +11451,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "设置"],
       提示: "提供一个新的实数型设置值，会显示在“地图工坊设置”卡片上作为滑块。",
+      拼音: "Di Tu Gong Fang She Zhi Shi Shu",
     },
     地图工坊设置开关: {
       参数: [
@@ -10917,6 +11483,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "设置"],
       提示: "提供一个新的开关设置的值（真或假），会显示在“地图工坊设置”卡片上作为勾选项。",
+      拼音: "Di Tu Gong Fang She Zhi Kai Guan",
     },
     地图工坊设置整数: {
       参数: [
@@ -10960,6 +11527,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "设置"],
       提示: "提供一个新的整数型设置值，会显示在“地图工坊设置”卡片上作为滑块。",
+      拼音: "Di Tu Gong Fang She Zhi Zheng Shu",
     },
     地图工坊设置组合: {
       参数: [
@@ -10997,6 +11565,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "设置"],
       提示: "提供一个新的选项设置值（用于选择自定义字符串），会显示在“地图工坊设置”卡片上作为组合框。此值会返回所选内容的索引。",
+      拼音: "Di Tu Gong Fang She Zhi Zu He",
     },
     地图工坊设置英雄: {
       参数: [
@@ -11028,6 +11597,7 @@ let 规则 = {
       返回: ["英雄"],
       标签: ["条件", "设置"],
       提示: "提供一个新的英雄设置值，会显示在“地图工坊设置”卡片上作为组合框。",
+      拼音: "Di Tu Gong Fang She Zhi Ying Xiong",
     },
     地图矢量: {
       参数: [
@@ -11053,6 +11623,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "矢量运算"],
       提示: "相对于地图坐标的矢量值，与所提供的相对本地坐标的矢量值对应。",
+      拼音: "Di Tu Shi Liang",
     },
     垂直方向夹角: {
       参数: [
@@ -11072,6 +11643,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "玩家当前朝向的方向与指定位置之间的垂直方向夹角，单位为度。如果位置在玩家下方，则结果为正数。否则，结果为零或负数。",
+      拼音: "Chui Zhi Fang Xiang Jia Jiao",
     },
     垂直朝向角度: {
       参数: [
@@ -11085,6 +11657,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "玩家当前面对的方向与地图的垂直夹角。当玩家转向下方时这个值会增加。",
+      拼音: "Chui Zhi Chao Xiang Jiao Du",
     },
     垂直速度: {
       参数: [
@@ -11098,11 +11671,13 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "速度"],
       提示: "秒。排除所有垂直方向的运动，包括沿斜坡方向的运动。",
+      拼音: "Chui Zhi Su Du",
     },
     处于回合之间: {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "此比赛是否正在两个回合之间。",
+      拼音: "Chu Yu Hui He Zhi Jian",
     },
     处于非初始状态: {
       参数: [
@@ -11116,6 +11691,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "指定玩家当前是否处于非初始状态（如D.Va离开机甲、卢西奥使用加速音乐、堡垒处于转换形态期间、天使和托比昂使用辅助攻击武器，等等。）如果要检测回声是否正在使用人格复制，请使用“正在人格复制”的值。",
+      拼音: "Chu Yu Fei Chu Shi Zhuang Tai",
     },
     头像火力全开: {
       参数: [
@@ -11129,6 +11705,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "指定玩家的头像是否处于火力全开状态。",
+      拼音: "Tou Xiang Huo Li Quan Kai",
     },
     字符串: {
       参数: [
@@ -11160,6 +11737,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "由选定的字符串和指定的值构成的文本。",
+      拼音: "Zi Fu Chuan",
     },
     自定义字符串: {
       参数: [
@@ -11191,6 +11769,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "可以输入值的自定义文本。",
+      拼音: "Zi Ding Yi Zi Fu Chuan",
     },
     字符串中字符: {
       参数: [
@@ -11210,6 +11789,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "一条字符串的指定索引对应的字符。",
+      拼音: "Zi Fu Chuan Zhong Zi Fu",
     },
     字符串分割: {
       参数: [
@@ -11229,6 +11809,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "结果为字符串值数组。数组中的字符串值由将指定字符串值用分隔符字符串分割而成。",
+      拼音: "Zi Fu Chuan Fen Ge",
     },
     字符串包含: {
       参数: [
@@ -11242,6 +11823,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "字符串"],
       提示: "指定字符串中是否包含指定的值。",
+      拼音: "Zi Fu Chuan Bao Han",
     },
     字符串字符索引: {
       参数: [
@@ -11261,6 +11843,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "一个字符在字符串中的索引位置。如果找不到此字符，则为",
+      拼音: "Zi Fu Chuan Zi Fu Suo Yin",
     },
     字符串替换: {
       参数: [
@@ -11286,6 +11869,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "结果为字符串值。此字符串值由将指定字符串值中出现的所有模式字符串替换为替换字符串而成。",
+      拼音: "Zi Fu Chuan Ti Huan",
     },
     字符串长度: {
       参数: [
@@ -11299,6 +11883,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "字符串"],
       提示: "结果为所选字符串值中的字符数（所选值不是字符串时为0）。",
+      拼音: "Zi Fu Chuan Chang Du",
     },
     存活: {
       参数: [
@@ -11312,6 +11897,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "玩家是否存活。",
+      拼音: "Cun Huo",
     },
     存活玩家数量: {
       参数: [
@@ -11325,6 +11911,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "队伍或比赛中存活的玩家数量。",
+      拼音: "Cun Huo Wan Jia Shu Liang",
     },
     实体存在: {
       参数: [
@@ -11338,11 +11925,13 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "指定玩家、图标实体或效果实体是否存在。可以用来查看一个玩家是否已经离开比赛，或一个实体是否已被消除。",
+      拼音: "Shi Ti Cun Zai",
     },
     实体数量: {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "由“创建效果”、“创建光束效果”或“创建图标”动作创建的实体的当前数量。",
+      拼音: "Shi Ti Shu Liang",
     },
     "对任意为“真”": {
       参数: [
@@ -11362,6 +11951,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "数组"],
       提示: "指定数组中是否有元素对指定的条件为“真”。",
+      拼音: "Dui Ren Yi Wei “ Zhen ”",
     },
     "对全部为“真”": {
       参数: [
@@ -11381,6 +11971,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "数组"],
       提示: "指定数组中所有元素是否都对指定的条件为“真”。",
+      拼音: "Dui Quan Bu Wei “ Zhen ”",
     },
     对方队伍: {
       参数: [
@@ -11394,11 +11985,13 @@ let 规则 = {
       返回: ["队伍"],
       标签: ["条件", "队伍"],
       提示: "指定队伍的对方队伍。",
+      拼音: "Dui Fang Dui Wu",
     },
     对象索引: {
       返回: ["数字"],
       标签: ["条件", "索引"],
       提示: "当前激活的控制点、运载目标检查点或运载目标目的地（0，1或2）。在攻防作战、攻击",
+      拼音: "Dui Xiang Suo Yin",
     },
     射线命中位置: {
       参数: [
@@ -11436,6 +12029,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "射线"],
       提示: "射线在表面、物体或玩家上命中的位置（如果没有命中则此位置在视线结束处）。",
+      拼音: "She Xian Ming Zhong Wei Zhi",
     },
     射线命中法线: {
       参数: [
@@ -11473,6 +12067,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "射线"],
       提示: "射线命中平面的法线（如果没有命中，则从视线结束位置到射线起始位置）。",
+      拼音: "She Xian Ming Zhong Fa Xian",
     },
     射线命中玩家: {
       参数: [
@@ -11510,11 +12105,13 @@ let 规则 = {
       返回: ["实体"],
       标签: ["条件", "射线"],
       提示: "射线命中的玩家（如果没有命中则为空）。",
+      拼音: "She Xian Ming Zhong Wan Jia",
     },
     左: {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "方向性矢量 (1, 0, 0) 的简写，此矢量指向左方。",
+      拼音: "Zuo",
     },
     已排序的数组: {
       参数: [
@@ -11534,6 +12131,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "复制指定的数组，根据每个元素的值的排名重新排序。",
+      拼音: "Yi Pai Xu De Shu Zu",
     },
     已过滤的数组: {
       参数: [
@@ -11553,6 +12151,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "复制指定的数组，不满足特定条件的值将被移除。",
+      拼音: "Yi Guo Lü De Shu Zu",
     },
     已重生: {
       参数: [
@@ -11566,6 +12165,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "一个实体是否存在于地图中。如果玩家尚未选择英雄，则返回结果为“假“。",
+      拼音: "Yi Chong Sheng",
     },
     幅值: {
       参数: [
@@ -11579,6 +12179,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "矢量运算"],
       提示: "指定值的幅值。例如指定向量的长度。",
+      拼音: "Fu Zhi",
     },
     平方根: {
       参数: [
@@ -11592,6 +12193,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定值的平方根。",
+      拼音: "Ping Fang Gen",
     },
     弧度的余弦值: {
       参数: [
@@ -11605,6 +12207,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定角度（以弧度为单位）的余弦值。",
+      拼音: "Hu Du De Yu Xian Zhi",
     },
     弧度的正切值: {
       参数: [
@@ -11618,6 +12221,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定弧度（以度为单位）的正切值。",
+      拼音: "Hu Du De Zheng Qie Zhi",
     },
     弧度的正弦值: {
       参数: [
@@ -11631,6 +12235,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定角度（以弧度为单位）的正弦值。",
+      拼音: "Hu Du De Zheng Xian Zhi",
     },
     弹药: {
       参数: [
@@ -11650,6 +12255,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "一名玩家当前的弹药数量。",
+      拼音: "Dan Yao",
     },
     归一化: {
       参数: [
@@ -11663,31 +12269,37 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "矢量运算"],
       提示: "将矢量归一化为单位长度。",
+      拼音: "Gui Yi Hua",
     },
     当前地图: {
       返回: ["地图"],
       标签: ["条件", "地图"],
       提示: "自定义游戏中当前使用的地图。",
+      拼音: "Dang Qian Di Tu",
     },
     当前数组元素: {
       返回: ["条件"],
       标签: ["条件", "数组"],
       提示: "当前在考察的数组元素。只有在使用“过滤数组”或“排序数组”赋值时才有意义。",
+      拼音: "Dang Qian Shu Zu Yuan Su",
     },
     当前数组索引: {
       返回: ["数字"],
       标签: ["条件", "数组"],
       提示: "当前在考察的数组索引。只有在使用“过滤数组”或“排序数组”赋值时才有意义。",
+      拼音: "Dang Qian Shu Zu Suo Yin",
     },
     当前游戏模式: {
       返回: ["模式"],
       标签: ["条件", "判断"],
       提示: "当前自定游戏的游戏模式。",
+      拼音: "Dang Qian You Xi Mo Shi",
     },
     总计消耗时间: {
       返回: ["数字"],
       标签: ["条件", "时间"],
       提示: "该游戏副本创建后已经过去的总时间（包括准备时间和攻防转换时间），以秒为单位。",
+      拼音: "Zong Ji Xiao Hao Shi Jian",
     },
     截取字符串: {
       参数: [
@@ -11713,6 +12325,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "结果为所选字符串值的指定子字符串。",
+      拼音: "Jie Qu Zi Fu Chuan",
     },
     所在队伍: {
       参数: [
@@ -11726,6 +12339,7 @@ let 规则 = {
       返回: ["队伍"],
       标签: ["条件", "队伍"],
       提示: "一支玩家所在的队伍。如果在自由混战模式中，则“队伍”视为“全部”。",
+      拼音: "Suo Zai Dui Wu",
     },
     所有存活玩家: {
       参数: [
@@ -11739,11 +12353,13 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "玩家"],
       提示: "此数组中包括一支队伍或整个比赛中所有存活的玩家。",
+      拼音: "Suo You Cun Huo Wan Jia",
     },
     所有支援英雄: {
       返回: ["数组"],
       标签: ["条件", "英雄"],
       提示: "此数组包括了所有支援英雄。",
+      拼音: "Suo You Zhi Yuan Ying Xiong",
     },
     所有死亡玩家: {
       参数: [
@@ -11757,6 +12373,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "玩家"],
       提示: "此数组中包括一支队伍或整个比赛中所有已死亡的玩家。",
+      拼音: "Suo You Si Wang Wan Jia",
     },
     所有玩家: {
       参数: [
@@ -11770,6 +12387,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "玩家"],
       提示: "此数组中包括一支队伍或整个比赛中所有的玩家。",
+      拼音: "Suo You Wan Jia",
     },
     所有目标点内玩家: {
       参数: [
@@ -11783,6 +12401,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "玩家"],
       提示: "此数组中包括所有在运载目标或控制点上的玩家（可以是一支队伍中的，也可以是整个比赛中的）。",
+      拼音: "Suo You Mu Biao Dian Nei Wan Jia",
     },
     所有目标点外玩家: {
       参数: [
@@ -11796,16 +12415,19 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "玩家"],
       提示: "此数组中包括所有不在运载目标或控制点上的玩家（可以是一支队伍中的，也可以是整个比赛中的）。",
+      拼音: "Suo You Mu Biao Dian Wai Wan Jia",
     },
     所有输出英雄: {
       返回: ["数组"],
       标签: ["条件", "英雄"],
       提示: "此数组包括了所有输出英雄。",
+      拼音: "Suo You Shu Chu Ying Xiong",
     },
     所有重装英雄: {
       返回: ["数组"],
       标签: ["条件", "英雄"],
       提示: "此数组包括了所有重装英雄。",
+      拼音: "Suo You Zhong Zhuang Ying Xiong",
     },
     所用英雄: {
       参数: [
@@ -11819,6 +12441,7 @@ let 规则 = {
       返回: ["英雄"],
       标签: ["条件", "英雄"],
       提示: "一名玩家当前的英雄。",
+      拼音: "Suo Yong Ying Xiong",
     },
     所选位置: {
       参数: [
@@ -11832,6 +12455,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "位置"],
       提示: "玩家的当前位置，此值为矢量。",
+      拼音: "Suo Xuan Wei Zhi",
     },
     技能充能: {
       参数: [
@@ -11851,6 +12475,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "技能"],
       提示: "一名玩家指定按键对应技能的充能次数。",
+      拼音: "Ji Neng Chong Neng",
     },
     技能冷却时间: {
       参数: [
@@ -11870,6 +12495,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "技能"],
       提示: "一名玩家指定按键对应技能的冷却时间，以秒为单位。",
+      拼音: "Ji Neng Leng Que Shi Jian",
     },
     技能图标字符串: {
       参数: [
@@ -11889,6 +12515,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "将一个英雄和按键的参数转化为图标在字符串中显示（每个字符串中最多4个）。",
+      拼音: "Ji Neng Tu Biao Zi Fu Chuan",
     },
     技能资源: {
       参数: [
@@ -11908,16 +12535,19 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "资源"],
       提示: "一名玩家指定按键对应技能的资源百分比。",
+      拼音: "Ji Neng Zi Yuan",
     },
     持续伤害数量: {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "由“持续伤害”动作启动的持续伤害副本的当前数量。",
+      拼音: "Chi Xu Shang Hai Shu Liang",
     },
     持续治疗数量: {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "由“持续治疗”动作启动的持续治疗副本的当前数量。",
+      拼音: "Chi Xu Zhi Liao Shu Liang",
     },
     指定方向速度: {
       参数: [
@@ -11937,6 +12567,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "速度"],
       提示: "一名玩家在指定方向上的当前速度，单位为米/秒。",
+      拼音: "Zhi Ding Fang Xiang Su Du",
     },
     按钮: {
       参数: [
@@ -11950,6 +12581,7 @@ let 规则 = {
       返回: ["按钮"],
       标签: ["条件", "按钮"],
       提示: "一个按钮常量。",
+      拼音: "An Niu",
     },
     按钮被按下: {
       参数: [
@@ -11969,6 +12601,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "按钮"],
       提示: "玩家是否正在按下特定按钮。",
+      拼音: "An Niu Bei An Xia",
     },
     携带旗帜的玩家: {
       参数: [
@@ -11982,11 +12615,13 @@ let 规则 = {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "在勇夺锦旗模式中正在携带指定队伍旗帜的玩家。如果没有玩家正在携带旗帜，则返回值为空。",
+      拼音: "Xie Dai Qi Zhi De Wan Jia",
     },
     攻击方: {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "根据此规则处理的事件中造成伤害的玩家。可能与被攻击者或事件玩家是同一个人。",
+      拼音: "Gong Ji Fang",
     },
     数组: {
       参数: [
@@ -12000,6 +12635,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "由所列出的值组成的数组。",
+      拼音: "Shu Zu",
     },
     数组中的值: {
       参数: [
@@ -12019,6 +12655,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "一个数组中指定元素的值。如果该元素不存在，则结果为0。",
+      拼音: "Shu Zu Zhong De Zhi",
     },
     数组值的索引: {
       参数: [
@@ -12038,6 +12675,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数组"],
       提示: "一个值在数组中的索引位置。如果找不到此值，则为-1。",
+      拼音: "Shu Zu Zhi De Suo Yin",
     },
     数组分割: {
       参数: [
@@ -12063,6 +12701,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "复制指定的数组，只复制指定索引范围内的值。",
+      拼音: "Shu Zu Fen Ge",
     },
     数组包含: {
       参数: [
@@ -12082,6 +12721,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "数组"],
       提示: "指定数组中是否包含指定的值。",
+      拼音: "Shu Zu Bao Han",
     },
     数组随机取值: {
       参数: [
@@ -12095,6 +12735,7 @@ let 规则 = {
       返回: ["条件"],
       标签: ["条件", "数组"],
       提示: "指定数组中的一个随机值。",
+      拼音: "Shu Zu Sui Ji Qu Zhi",
     },
     数量: {
       参数: [
@@ -12108,11 +12749,13 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "指定数组的元素个数。",
+      拼音: "Shu Liang",
     },
     文本数量: {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "由“创建HUD文本”、“创建地图文本”、“创建进度条HUD文本”或“创建进度条地图文本”动作启动的文本副本的当前数量。",
+      拼音: "Wen Ben Shu Liang",
     },
     方向: {
       参数: [
@@ -12132,6 +12775,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "从一个位置到另一个位置的单位长度矢量。",
+      拼音: "Fang Xiang",
     },
     旗帜位置: {
       参数: [
@@ -12145,6 +12789,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "位置"],
       提示: "在勇夺锦旗模式中指定队伍的位置。",
+      拼音: "Qi Zhi Wei Zhi",
     },
     旗帜是否在基地中: {
       参数: [
@@ -12158,11 +12803,13 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "在勇夺锦旗模式下，指定队伍的旗帜是否在其基地内。",
+      拼音: "Qi Zhi Shi Fou Zai Ji Di Zhong",
     },
     空: {
       返回: ["空"],
       标签: ["条件", "空"],
       提示: "一名玩家已离开。当没有玩家进行输入时使用。用来比较或测试时等效于实数0。",
+      拼音: "Kong",
     },
     映射的数组: {
       参数: [
@@ -12182,6 +12829,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "复制指定的数组，根据映射表达式对每个元素进行赋值。",
+      拼音: "Ying She De Shu Zu",
     },
     是否是机器人: {
       参数: [
@@ -12195,6 +12843,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "玩家是否是机器人。",
+      拼音: "Shi Fou Shi Ji Qi Ren",
     },
     是否有人携带旗帜: {
       参数: [
@@ -12208,6 +12857,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "在勇夺锦旗模式下，指定队伍的旗帜是否在其基地内。",
+      拼音: "Shi Fou You Ren Xie Dai Qi Zhi",
     },
     最后: {
       参数: [
@@ -12221,6 +12871,7 @@ let 规则 = {
       返回: ["条件"],
       标签: ["条件", "数组"],
       提示: "指定数组末尾元素的值。如果指定数组为空，则结果为0。",
+      拼音: "Zui Hou",
     },
     最后一击数: {
       参数: [
@@ -12234,16 +12885,19 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "指定玩家造成最后一击的次数。这个值会随着游戏的进程不断累积。",
+      拼音: "Zui Hou Yi Ji Shu",
     },
     最后创建的实体: {
       返回: ["实体"],
       标签: ["条件", "ID"],
       提示: "对事件玩家创建的（或由全局创建的）最后一个效果，图标实体或机器人的引用。",
+      拼音: "Zui Hou Chuang Jian De Shi Ti",
     },
     最后创建的生命池: {
       返回: ["实体"],
       标签: ["条件", "ID"],
       提示: "此ID值代表最后一个事件玩家（或全局）所执行的”添加生命池“动作。",
+      拼音: "Zui Hou Chuang Jian De Sheng Ming Chi",
     },
     最大弹药量: {
       参数: [
@@ -12263,6 +12917,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "一名玩家当前的最大弹药数量。",
+      拼音: "Zui Da Dan Yao Liang",
     },
     最大生命值: {
       参数: [
@@ -12276,6 +12931,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "玩家"],
       提示: "一名玩家的最大生命值，包括护甲和护盾。",
+      拼音: "Zui Da Sheng Ming Zhi",
     },
     最近的可行走位置: {
       参数: [
@@ -12289,26 +12945,31 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "位置"],
       提示: "与指定位置最接近的、可以站立且能够从一个重生点到达的位置。",
+      拼音: "Zui Jin De Ke Xing Zou Wei Zhi",
     },
     服务器负载: {
       返回: ["数字"],
       标签: ["条件", "百分比"],
       提示: "当前游戏副本造成的CPU负载百分比。如果这个数字接近或者超过100，表示此游戏副本消耗了过多资源，游戏很可能会关闭。",
+      拼音: "Fu Wu Qi Fu Zai",
     },
     服务器负载峰值: {
       返回: ["数字"],
       标签: ["条件", "百分比"],
       提示: "当前游戏副本在过去2秒内造成的最高CPU负载百分比。如果这个数字接近或者超过100，表示此游戏副本消耗了过多资源，游戏很可能会关闭。",
+      拼音: "Fu Wu Qi Fu Zai Feng Zhi",
     },
     服务器负载平均值: {
       返回: ["数字"],
       标签: ["条件", "百分比"],
       提示: "当前游戏副本在过去2秒内造成的平均CPU负载百分比。如果这个数字接近或者超过100，表示此游戏副本消耗了过多资源，游戏很可能会关闭。",
+      拼音: "Fu Wu Qi Fu Zai Ping Jun Zhi",
     },
     本地玩家: {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "由终端用户的电脑所操控的玩家。此值对每位终端用户均不相同，所以只有会影响视觉效果或HUD的动作才可访问此值。此值无法储存在变量中。（一般配合“持续 - 全局”规则使用。）",
+      拼音: "Ben Di Wan Jia",
     },
     本地矢量: {
       参数: [
@@ -12334,6 +12995,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "矢量运算"],
       提示: "相对于本地坐标的矢量值，与所提供的相对地图坐标的矢量值对应。",
+      拼音: "Ben Di Shi Liang",
     },
     标准化生命值: {
       参数: [
@@ -12347,6 +13009,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "玩家当前的生命值，包括护甲和护盾，在0到1之间取标准化值。（例如，0为无生命值，0",
+      拼音: "Biao Zhun Hua Sheng Ming Zhi",
     },
     标量积: {
       参数: [
@@ -12366,6 +13029,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "矢量运算"],
       提示: "指定值的标量积。",
+      拼音: "Biao Liang Ji",
     },
     栏位: {
       参数: [
@@ -12379,6 +13043,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "栏位"],
       提示: "指定玩家的栏位编号。在队伍模式中，每个队伍中玩家的栏位编号为0到5的数字；在自由混战模式中，栏位编号为0到11。",
+      拼音: "Lan Wei",
     },
     栏位数量: {
       参数: [
@@ -12392,6 +13057,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "栏位", "数量"],
       提示: "队伍或比赛中的栏位数量。",
+      拼音: "Lan Wei Shu Liang",
     },
     正在与人交流: {
       参数: [
@@ -12405,6 +13071,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "交流", "判断"],
       提示: "玩家是否在使用任意的交流类型（如表情、播放语音、喷漆等）。",
+      拼音: "Zheng Zai Yu Ren Jiao Liu",
     },
     正在交流: {
       参数: [
@@ -12424,6 +13091,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "交流", "判断"],
       提示: "玩家是否在使用指定的交流类型（如表情、播放语音、喷漆等）。",
+      拼音: "Zheng Zai Jiao Liu",
     },
     正在人格复制: {
       参数: [
@@ -12437,6 +13105,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "指定玩家是否正在复制另一名输出英雄。（为了检测复制的英雄，可使用“正在复制的英雄”的值。）",
+      拼音: "Zheng Zai Ren Ge Fu Zhi",
     },
     正在使用主要武器: {
       参数: [
@@ -12450,6 +13119,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "指定玩家是否在使用主要武器攻击。",
+      拼音: "Zheng Zai Shi Yong Zhu Yao Wu Qi",
     },
     正在使用喷漆交流: {
       参数: [
@@ -12463,6 +13133,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "交流", "判断"],
       提示: "玩家是否在使用喷漆。",
+      拼音: "Zheng Zai Shi Yong Pen Qi Jiao Liu",
     },
     "正在使用技能 1": {
       参数: [
@@ -12476,6 +13147,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "指定玩家是否在使用技能",
+      拼音: "Zheng Zai Shi Yong Ji Neng   1",
     },
     "正在使用技能 2": {
       参数: [
@@ -12489,6 +13161,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "指定玩家是否在使用技能",
+      拼音: "Zheng Zai Shi Yong Ji Neng   2",
     },
     正在使用终极技能: {
       参数: [
@@ -12502,6 +13175,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "玩家是否在使用终极技能。",
+      拼音: "Zheng Zai Shi Yong Zhong Ji Ji Neng",
     },
     正在使用英雄: {
       参数: [
@@ -12521,6 +13195,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "英雄", "判断"],
       提示: "指定英雄是否正在使用（可以限定在队伍中或游戏中）。",
+      拼音: "Zheng Zai Shi Yong Ying Xiong",
     },
     正在使用表情交流: {
       参数: [
@@ -12534,6 +13209,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "交流", "判断"],
       提示: "玩家是否在使用表情。",
+      拼音: "Zheng Zai Shi Yong Biao Qing Jiao Liu",
     },
     正在使用语音交流: {
       参数: [
@@ -12547,6 +13223,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "交流", "判断"],
       提示: "玩家是否在播放语音（语音的长度统一视为4秒）。",
+      拼音: "Zheng Zai Shi Yong Yu Yin Jiao Liu",
     },
     正在使用辅助武器: {
       参数: [
@@ -12560,10 +13237,12 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "指定玩家是否在使用辅助武器攻击。",
+      拼音: "Zheng Zai Shi Yong Fu Zhu Wu Qi",
     },
     正在复制的英雄: {
       标签: ["条件", "英雄", "判断"],
       提示: "",
+      拼音: "Zheng Zai Fu Zhi De Ying Xiong",
     },
     正在移动: {
       参数: [
@@ -12577,6 +13256,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "玩家是否在移动（当前速度不为零）。",
+      拼音: "Zheng Zai Yi Dong",
     },
     正在空中: {
       参数: [
@@ -12590,6 +13270,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "玩家是否在空中。",
+      拼音: "Zheng Zai Kong Zhong",
     },
     正在站立: {
       参数: [
@@ -12603,11 +13284,13 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "玩家是否在站立（既不在移动也不在空中）。",
+      拼音: "Zheng Zai Zhan Li",
     },
     正在等待玩家: {
       返回: ["布尔"],
       标签: ["条件", "比赛", "判断"],
       提示: "此比赛是否正在等待玩家加入。",
+      拼音: "Zheng Zai Deng Dai Wan Jia",
     },
     正在装填: {
       参数: [
@@ -12621,11 +13304,13 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "指定玩家是否在装填。",
+      拼音: "Zheng Zai Zhuang Tian",
     },
     正在设置: {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "此比赛是否正在准备阶段。",
+      拼音: "Zheng Zai She Zhi",
     },
     正在跳跃: {
       参数: [
@@ -12639,6 +13324,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "指定玩家是否在跳跃。",
+      拼音: "Zheng Zai Tiao Yue",
     },
     正在蹲下: {
       参数: [
@@ -12652,6 +13338,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "玩家是否在下蹲。",
+      拼音: "Zheng Zai Dun Xia",
     },
     正在近战攻击: {
       参数: [
@@ -12665,6 +13352,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "状态", "判断"],
       提示: "指定玩家是否在近战攻击。",
+      拼音: "Zheng Zai Jin Zhan Gong Ji",
     },
     正在防守: {
       参数: [
@@ -12678,11 +13366,13 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "队伍", "判断"],
       提示: "指定队伍是否是防守方。如果游戏模式不是攻防作战、护送、或攻击",
+      拼音: "Zheng Zai Fang Shou",
     },
     正在集结英雄: {
       返回: ["布尔"],
       标签: ["条件", "比赛", "判断"],
       提示: "此比赛是否正在集结英雄阶段。",
+      拼音: "Zheng Zai Ji Jie Ying Xiong",
     },
     此栏位的玩家: {
       参数: [
@@ -12702,6 +13392,7 @@ let 规则 = {
       返回: ["玩家", "玩家数组"],
       标签: ["条件", "玩家"],
       提示: "游戏的指定栏位编号处的玩家或玩家数组。",
+      拼音: "Ci Lan Wei De Wan Jia",
     },
     武器: {
       参数: [
@@ -12715,6 +13406,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "武器", "索引"],
       提示: "一名玩家当前的武器。",
+      拼音: "Wu Qi",
     },
     死亡: {
       参数: [
@@ -12728,6 +13420,7 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "玩家", "判断"],
       提示: "玩家是否死亡。",
+      拼音: "Si Wang",
     },
     死亡数: {
       参数: [
@@ -12741,6 +13434,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "指定玩家死亡的次数。这个值会随着游戏的进程不断累积。",
+      拼音: "Si Wang Shu",
     },
     死亡玩家数量: {
       参数: [
@@ -12754,21 +13448,25 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "队伍或比赛中死亡的玩家数量。",
+      拼音: "Si Wang Wan Jia Shu Liang",
     },
     比赛回合: {
       返回: ["数字"],
       标签: ["条件", "索引"],
       提示: "比赛当前的回合数，从1开始计数。",
+      拼音: "Bi Sai Hui He",
     },
     比赛时间: {
       返回: ["数字"],
       标签: ["条件", "时间"],
       提示: "当前游戏模式阶段剩余的时间，以秒为单位。",
+      拼音: "Bi Sai Shi Jian",
     },
     比赛结束: {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "此比赛是否已经结束。",
+      拼音: "Bi Sai Jie Shu",
     },
     水平方向夹角: {
       参数: [
@@ -12788,6 +13486,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "玩家当前朝向的方向与指定位置之间的水平方向夹角，单位为度。如果位置在玩家左边，则结果为正数。否则，结果为零或负数。",
+      拼音: "Shui Ping Fang Xiang Jia Jiao",
     },
     水平朝向角度: {
       参数: [
@@ -12801,6 +13500,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "玩家当前面对的方向与地图的水平夹角。当玩家转向左方时这个值会增加。（范围为",
+      拼音: "Shui Ping Chao Xiang Jiao Du",
     },
     水平速度: {
       参数: [
@@ -12814,16 +13514,19 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "速度"],
       提示: "一名玩家在水平方向上的当前速度，单位为米",
+      拼音: "Shui Ping Su Du",
     },
     治疗者: {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "根据此规则处理的事件中造成治疗的玩家。可能与被治疗者或事件玩家是同一个人。",
+      拼音: "Zhi Liao Zhe",
     },
     治疗调整数量: {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "由“开始治疗调整”动作启动的治疗调整副本的当前数量。",
+      拼音: "Zhi Liao Tiao Zheng Shu Liang",
     },
     消灭数: {
       参数: [
@@ -12837,6 +13540,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "指定玩家参与消灭的次数。这个值会随着游戏的进程不断累积。",
+      拼音: "Xiao Mie Shu",
     },
     添加至数组: {
       参数: [
@@ -12856,6 +13560,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "一个数组的复制，将一个或更多的值添加至其末尾。",
+      拼音: "Tian Jia Zhi Shu Zu",
     },
     游戏模式: {
       参数: [
@@ -12869,11 +13574,13 @@ let 规则 = {
       返回: ["模式"],
       标签: ["条件", "模式"],
       提示: "一个模式常量。",
+      拼音: "You Xi Mo Shi",
     },
     游戏正在进行中: {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "此比赛是否正在主要阶段（可以进行战斗并获得分数的阶段）。",
+      拼音: "You Xi Zheng Zai Jin Xing Zhong",
     },
     玩家数据: {
       参数: [
@@ -12893,6 +13600,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数据"],
       提示: "提供指定玩家的数据（仅限当前比赛）。仅在游戏进行时收集数据。机器人不会收集数据。",
+      拼音: "Wan Jia Shu Ju",
     },
     玩家数量: {
       参数: [
@@ -12906,6 +13614,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "队伍或比赛中的玩家数量。",
+      拼音: "Wan Jia Shu Liang",
     },
     玩家英雄数据: {
       参数: [
@@ -12931,6 +13640,7 @@ let 规则 = {
       返回: ["数据", "英雄"],
       标签: ["条件", "英雄数据"],
       提示: "提供指定玩家使用指定英雄的数据（仅限当前比赛）。仅在游戏进行时收集数据。机器人不会收集数据。",
+      拼音: "Wan Jia Ying Xiong Shu Ju",
     },
     生命值: {
       参数: [
@@ -12944,6 +13654,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "玩家"],
       提示: "玩家当前的生命值，包括护甲和护盾。",
+      拼音: "Sheng Ming Zhi",
     },
     目标位置: {
       参数: [
@@ -12957,6 +13668,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "位置"],
       提示: "特定目标点（控制点、运载目标检查点、或运载目标目的地）在地图中的位置。在攻防作战、攻击",
+      拼音: "Mu Biao Wei Zhi",
     },
     目标是否完成: {
       参数: [
@@ -12970,16 +13682,19 @@ let 规则 = {
       返回: ["布尔"],
       标签: ["条件", "判断"],
       提示: "目标是否已经完成。如果游戏模式不是攻防作战、护送、或攻击/护送，则结果为“假”。在攻防作战、攻击/护送及占领要点模式中生效。",
+      拼音: "Mu Biao Shi Fou Wan Cheng",
     },
     目标点上玩家数量: {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "在运载目标或控制点上的玩家数量（可以是一支队伍中的，也可以是整个比赛中的）。",
+      拼音: "Mu Biao Dian Shang Wan Jia Shu Liang",
     },
     目标点占领百分比: {
       返回: ["数字"],
       标签: ["条件", "百分比"],
       提示: "已激活的控制点当前的占领进度（以百分比表示）。",
+      拼音: "Mu Biao Dian Zhan Ling Bai Fen Bi",
     },
     相距距离: {
       参数: [
@@ -12999,11 +13714,13 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "位置"],
       提示: "两个位置之间的距离，单位为米。",
+      拼音: "Xiang Ju Ju Li",
     },
     真: {
       返回: ["布尔"],
       标签: ["条件", "布尔"],
       提示: "布尔值，真。",
+      拼音: "Zhen",
     },
     眼睛位置: {
       参数: [
@@ -13017,6 +13734,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "位置"],
       提示: "玩家第一人称视角的位置（用于瞄准）。",
+      拼音: "Yan Jing Wei Zhi",
     },
     矢量: {
       参数: [
@@ -13042,6 +13760,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "矢量"],
       提示: "矢量在三个方向上的实数值（X，Y，Z），X为左，Y为上，Z为前。矢量用来表示位置、方向和速度。",
+      拼音: "Shi Liang",
     },
     矢量积: {
       参数: [
@@ -13061,6 +13780,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "矢量运算"],
       提示: "指定值的矢量积。（左乘以上等于前）",
+      拼音: "Shi Liang Ji",
     },
     矢量间夹角: {
       参数: [
@@ -13080,11 +13800,13 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "两方向性矢量间的夹角（不需要归一化）",
+      拼音: "Shi Liang Jian Jia Jiao",
     },
     空数组: {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "一个没有任何元素的数组。",
+      拼音: "Kong Shu Zu",
     },
     类型的最大生命值: {
       参数: [
@@ -13104,6 +13826,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "玩家"],
       提示: "玩家此类型的最大生命值（生命，护甲，或护盾）。",
+      拼音: "Lei Xing De Zui Da Sheng Ming Zhi",
     },
     类型的生命值: {
       参数: [
@@ -13123,6 +13846,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "玩家"],
       提示: "玩家此类型的生命值（生命，护甲，或护盾）。",
+      拼音: "Lei Xing De Sheng Ming Zhi",
     },
     终极技能充能百分比: {
       参数: [
@@ -13136,6 +13860,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "技能", "百分比"],
       提示: "一名玩家当前终极技能的充能百分比。",
+      拼音: "Zhong Ji Ji Neng Chong Neng Bai Fen Bi",
     },
     绝对值: {
       参数: [
@@ -13149,6 +13874,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定值的绝对值。",
+      拼音: "Jue Dui Zhi",
     },
     自定义颜色: {
       参数: [
@@ -13180,6 +13906,7 @@ let 规则 = {
       返回: ["颜色"],
       标签: ["条件", "颜色"],
       提示: "可设置指定RGB值和不透明度的自定义颜色。",
+      拼音: "Zi Ding Yi Yan Se",
     },
     英雄: {
       参数: [
@@ -13193,6 +13920,7 @@ let 规则 = {
       返回: ["英雄"],
       标签: ["条件", "英雄"],
       提示: "一个英雄常量。",
+      拼音: "Ying Xiong",
     },
     英雄图标字符串: {
       参数: [
@@ -13206,6 +13934,7 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "将一个英雄的参数转化为字符串并作为图标显示（每个字符串最多4项）。",
+      拼音: "Ying Xiong Tu Biao Zi Fu Chuan",
     },
     英雄数量: {
       参数: [
@@ -13225,6 +13954,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数量"],
       提示: "在一支队伍或此比赛中使用指定英雄的数量。",
+      拼音: "Ying Xiong Shu Liang",
     },
     范围内玩家: {
       参数: [
@@ -13256,11 +13986,13 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "玩家"],
       提示: "一个列表，其中包含距离指定位置小于一定距离的玩家，可设置是否受到队伍及视线的限制。",
+      拼音: "Fan Wei Nei Wan Jia",
     },
     被攻击方: {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "根据此规则处理的事件中受到伤害的玩家。可能与攻击者或事件玩家是同一个人。",
+      拼音: "Bei Gong Ji Fang",
     },
     视角中的玩家: {
       参数: [
@@ -13286,6 +14018,7 @@ let 规则 = {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "最接近此玩家准星位置的玩家，可以选择是否限制所在队伍。",
+      拼音: "Shi Jiao Zhong De Wan Jia",
     },
     角度差: {
       参数: [
@@ -13305,6 +14038,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "两个角度之间的度数差。将两个角度折算为彼此+/-180度范围内之后进行计算，如果第二个角度比第一个大则结果为正数。否则结果为负数。",
+      拼音: "Jiao Du Cha",
     },
     角度的余弦值: {
       参数: [
@@ -13318,6 +14052,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "指定角度（以度为单位）的余弦值。",
+      拼音: "Jiao Du De Yu Xian Zhi",
     },
     角度的正切值: {
       参数: [
@@ -13331,6 +14066,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "指定角度（以度为单位）的正切值。",
+      拼音: "Jiao Du De Zheng Qie Zhi",
     },
     角度的正弦值: {
       参数: [
@@ -13344,6 +14080,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "角度"],
       提示: "指定角度（以度为单位）的正弦值。",
+      拼音: "Jiao Du De Zheng Xian Zhi",
     },
     距离准星最近的玩家: {
       参数: [
@@ -13363,6 +14100,7 @@ let 规则 = {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "最接近指定玩家准星位置的玩家，可以选择是否限制所在队伍。",
+      拼音: "Ju Li Zhun Xing Zui Jin De Wan Jia",
     },
     距离最近的玩家: {
       参数: [
@@ -13382,6 +14120,7 @@ let 规则 = {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "距离一个位置最近的玩家，可以选择是否限制所在队伍。",
+      拼音: "Ju Li Zui Jin De Wan Jia",
     },
     距离最远的玩家: {
       参数: [
@@ -13401,6 +14140,7 @@ let 规则 = {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "距离一个位置最远的玩家，可以选择是否限制所在队伍。",
+      拼音: "Ju Li Zui Yuan De Wan Jia",
     },
     较大: {
       参数: [
@@ -13420,6 +14160,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "两个数字中较大的一个。",
+      拼音: "Jiao Da",
     },
     较小: {
       参数: [
@@ -13439,6 +14180,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "两个数字中较小的一个。",
+      拼音: "Jiao Xiao",
     },
     输入绑定字符串: {
       参数: [
@@ -13452,16 +14194,19 @@ let 规则 = {
       返回: ["字符串"],
       标签: ["条件", "字符串"],
       提示: "将一个“按钮”参数转化为一个字符串，根据玩家所输入的绑定按键显示。此值不能存储在变量中。",
+      拼音: "Shu Ru Bang Ding Zi Fu Chuan",
     },
     运载目标位置: {
       返回: ["矢量"],
       标签: ["条件", "位置"],
       提示: "已激活的运载目标在地图中的位置。",
+      拼音: "Yun Zai Mu Biao Wei Zhi",
     },
     运载目标进度百分比: {
       返回: ["数字"],
       标签: ["条件", "百分比"],
       提示: "已激活的运载目标前往目标地的当前进度（以百分比表示）。",
+      拼音: "Yun Zai Mu Biao Jin Du Bai Fen Bi",
     },
     选择英雄的玩家: {
       参数: [
@@ -13481,6 +14226,7 @@ let 规则 = {
       返回: ["实体"],
       标签: ["条件", "玩家"],
       提示: "此数列中是一支队伍或本场比赛中正在使用指定英雄的玩家。",
+      拼音: "Xuan Ze Ying Xiong De Wan Jia",
     },
     逐帧更新: {
       参数: [
@@ -13494,6 +14240,7 @@ let 规则 = {
       返回: ["条件"],
       标签: ["条件", "赋值"],
       提示: "结果为提供给“输入值”参数的值，并且会将此值的更新频率提高为每一帧更新一次。可以用来使特定值的出现更加平滑，例如“所选位置”等通常每几帧才会更新一次的值。可对条件和会重新赋值的动作参数使用。可能会增加服务器负载和/或降低帧率。",
+      拼音: "Zhu Zhen Geng Xin",
     },
     速度: {
       参数: [
@@ -13507,6 +14254,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "速度"],
       提示: "一名玩家的当前速度，单位为米/秒。",
+      拼音: "Su Du",
     },
     速率: {
       参数: [
@@ -13520,6 +14268,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "矢量运算"],
       提示: "玩家当前的速率，此值为一个矢量。如果玩家位于表面上，则矢量在Y方向上的分量为0，即使在上坡或下坡。",
+      拼音: "Su Lü",
     },
     重生点: {
       参数: [
@@ -13533,6 +14282,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "比赛"],
       提示: "队伍或比赛中激活的重生点，以实体数组的形式提供。",
+      拼音: "Chong Sheng Dian",
     },
     阈值: {
       参数: [
@@ -13546,6 +14296,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "玩家"],
       提示: "玩家所输入的方向，通过一个矢量表示，X轴为水平（正值代表向左），Z轴为垂直（正值代表向前）。",
+      拼音: "Yu Zhi",
     },
     随机实数: {
       参数: [
@@ -13565,6 +14316,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定最小值与最大值之间的一个随机实数。",
+      拼音: "Sui Ji Shi Shu",
     },
     随机数组: {
       参数: [
@@ -13578,6 +14330,7 @@ let 规则 = {
       返回: ["数组"],
       标签: ["条件", "数组"],
       提示: "复制指定的数组，所有值随机排序。",
+      拼音: "Sui Ji Shu Zu",
     },
     随机整数: {
       参数: [
@@ -13597,6 +14350,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "数学运算"],
       提示: "指定最小值与最大值之间的一个随机整数（包括最小值与最大值在内）。",
+      拼音: "Sui Ji Zheng Shu",
     },
     面朝方向: {
       参数: [
@@ -13610,6 +14364,7 @@ let 规则 = {
       返回: ["矢量"],
       标签: ["条件", "方向"],
       提示: "玩家当前面向方向与地图相对角度的单位长度方向矢量。此矢量的值同进包括水平和垂直方向。",
+      拼音: "Mian Chao Fang Xiang",
     },
     颜色: {
       参数: [
@@ -13623,6 +14378,7 @@ let 规则 = {
       返回: ["颜色"],
       标签: ["条件", "颜色"],
       提示: "一个颜色常量。",
+      拼音: "Yan Se",
     },
     首个: {
       参数: [
@@ -13636,6 +14392,7 @@ let 规则 = {
       返回: ["条件"],
       标签: ["条件", "数组"],
       提示: "指定数组开始处的值。如果指定数组为空，此值则为0。",
+      拼音: "Shou Ge",
     },
     高度: {
       参数: [
@@ -13649,6 +14406,7 @@ let 规则 = {
       返回: ["数字"],
       标签: ["条件", "玩家"],
       提示: "玩家当前距离表面的高度，以米为单位。如果玩家正在表面上则结果为0。",
+      拼音: "Gao Du",
     },
   },
 
@@ -13701,6 +14459,7 @@ let 规则 = {
       ],
       标签: ["动作", "流程"],
       提示: "表示在循环中执行的一系列行动的开始，并在每次循环时修改控制变量的值。当前级别中的下一个End行动表示循环的结束。如果执行至循环顶部时，控制条件达到或超过终止值，则退出循环，跳至 End 操作之后的下一个操作执行。",
+      拼音: "For Quan Ju Bian Liang",
     },
     "For 玩家变量": {
       参数: [
@@ -13736,6 +14495,7 @@ let 规则 = {
       ],
       标签: ["动作", "流程"],
       提示: "表示在循环中执行的一系列行动的开始，并在每次循环时修改控制变量的值。当前级别中的下一个End行动表示循环的结束。如果执行至循环顶部时，控制条件达到或超过终止值，则退出循环，跳至 End 操作之后的下一个操作执行。",
+      拼音: "For Wan Jia Bian Liang",
     },
     If: {
       参数: [
@@ -13764,10 +14524,12 @@ let 规则 = {
     中断: {
       标签: ["动作", "流程"],
       提示: "表示一个中止当前 While 或 For 循环的行动. 跳至 End 行动后的下一个行动继续执行。",
+      拼音: "Zhong Duan",
     },
     中止: {
       标签: ["动作", "流程"],
       提示: "停止执行动作列表。",
+      拼音: "Zhong Zhi",
     },
     为玩家添加生命池: {
       参数: [
@@ -13804,6 +14566,7 @@ let 规则 = {
       ],
       标签: ["动作", "流程"],
       提示: "为一名或多名玩家添加临时的生命池。如果要指定此生命池，可以使用“最后创建的生命池”值。同一名玩家身上任意一个生命值类型（生命、护甲或护盾）的生命池最多可以存在16个（包括基本生命池和由技能获得的生命池）。",
+      拼音: "Wei Wan Jia Tian Jia Sheng Ming Chi",
     },
     交流: {
       参数: [
@@ -13822,6 +14585,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "使一名或多名玩家使用一个表情、语音或其他已装备的方式进行交流。",
+      拼音: "Jiao Liu",
     },
     传送: {
       参数: [
@@ -13840,6 +14604,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家传送到指定位置。",
+      拼音: "Chuan Song",
     },
     伤害: {
       参数: [
@@ -13864,6 +14629,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "立刻为一名或多名玩家造成伤害，可能会杀死玩家。",
+      拼音: "Shang Hai",
     },
     修改全局变量: {
       参数: [
@@ -13887,6 +14653,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "修改一个全局变量的值，全局变量即属于游戏本身的变量。",
+      拼音: "Xiu Gai Quan Ju Bian Liang",
     },
     修改玩家分数: {
       参数: [
@@ -13905,6 +14672,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "修改一名或多名玩家的分数（击杀数）。此动作只会在自由混战模式中生效。",
+      拼音: "Xiu Gai Wan Jia Fen Shu",
     },
     修改玩家变量: {
       参数: [
@@ -13934,6 +14702,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "修改一个玩家变量的值，玩家变量即属于一个特定玩家的变量。",
+      拼音: "Xiu Gai Wan Jia Bian Liang",
     },
     修改队伍分数: {
       参数: [
@@ -13952,6 +14721,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "改变一方或双方队伍的分数。此动作在自由混战模式或没有队伍分数的模式中无效。",
+      拼音: "Xiu Gai Dui Wu Fen Shu",
     },
     停止为机器人强制设置名称: {
       参数: [
@@ -13964,6 +14734,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消对指定玩家进行“开始为机器人强制设置名称”的行为。",
+      拼音: "Ting Zhi Wei Ji Qi Ren Qiang Zhi She Zhi Ming Cheng",
     },
     停止伤害调整: {
       参数: [
@@ -13976,6 +14747,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止由“开始伤害调整”动作启动的一个伤害调整。",
+      拼音: "Ting Zhi Shang Hai Tiao Zheng",
     },
     停止修改英雄语音: {
       参数: [
@@ -13988,6 +14760,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“开始修改英雄语音”动作的效果。",
+      拼音: "Ting Zhi Xiu Gai Ying Xiong Yu Yin",
     },
     停止加速: {
       参数: [
@@ -14000,6 +14773,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止“开始加速”动作造成的加速效果。",
+      拼音: "Ting Zhi Jia Su",
     },
     停止助攻: {
       参数: [
@@ -14012,6 +14786,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "指定要停止的助攻副本。此ID可以是“上一个助攻ID”，或一个之前储存“上一个助攻ID”的变量。",
+      拼音: "Ting Zhi Zhu Gong",
     },
     停止定向阈值: {
       参数: [
@@ -14024,6 +14799,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“开始定向阈值”所造成的行为。",
+      拼音: "Ting Zhi Ding Xiang Yu Zhi",
     },
     停止强制玩家选择英雄: {
       参数: [
@@ -14036,6 +14812,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止强制一名或多名玩家使用指定的英雄。此行动不会使玩家复生，只会在其下次选择英雄时恢复可用的其他英雄。",
+      拼音: "Ting Zhi Qiang Zhi Wan Jia Xuan Ze Ying Xiong",
     },
     停止强制设置玩家位置: {
       参数: [
@@ -14048,6 +14825,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“开始强制设置玩家位置”行动对指定的一名或多名玩家造成的影响。这些玩家将从其最后被强制设置到的位置开始进行正常移动。",
+      拼音: "Ting Zhi Qiang Zhi She Zhi Wan Jia Wei Zhi",
     },
     停止强制设置玩家轮廓: {
       参数: [
@@ -14066,6 +14844,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "从观察玩家的视角看，取消被观察的玩家的“开始强制设置玩家轮廓”效果。",
+      拼音: "Ting Zhi Qiang Zhi She Zhi Wan Jia Lun Kuo",
     },
     停止强制重生室: {
       参数: [
@@ -14078,14 +14857,17 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“开始强制使用重生室”动作对一支队伍的效果。",
+      拼音: "Ting Zhi Qiang Zhi Chong Sheng Shi",
     },
     停止所有伤害调整: {
       标签: ["动作"],
       提示: "停止所有由“开始伤害调整”动作启动的伤害调整。",
+      拼音: "Ting Zhi Suo You Shang Hai Tiao Zheng",
     },
     停止所有助攻: {
       标签: ["动作"],
       提示: "停止所有由“开始助攻”动作启动的助攻。",
+      拼音: "Ting Zhi Suo You Zhu Gong",
     },
     停止所有持续伤害: {
       参数: [
@@ -14098,6 +14880,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止一个或多个玩家身上所有由“开始持续伤害”给予的持续伤害。",
+      拼音: "Ting Zhi Suo You Chi Xu Shang Hai",
     },
     停止所有持续治疗: {
       参数: [
@@ -14110,10 +14893,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止一个或多个玩家身上所有由“开始持续治疗”给予的持续治疗。",
+      拼音: "Ting Zhi Suo You Chi Xu Zhi Liao",
     },
     停止所有治疗调整: {
       标签: ["动作"],
       提示: "停止所有由“开始治疗调整”动作启动的治疗调整。",
+      拼音: "Ting Zhi Suo You Zhi Liao Tiao Zheng",
     },
     停止持续伤害: {
       参数: [
@@ -14126,6 +14911,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止一个由”开始持续伤害“动作启动的持续伤害副本。",
+      拼音: "Ting Zhi Chi Xu Shang Hai",
     },
     停止持续治疗: {
       参数: [
@@ -14138,6 +14924,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止一个由”开始持续治疗“动作启动的持续治疗副本。",
+      拼音: "Ting Zhi Chi Xu Zhi Liao",
     },
     停止按下按钮: {
       参数: [
@@ -14156,6 +14943,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“开始按下按钮”动作的效果。",
+      拼音: "Ting Zhi An Xia An Niu",
     },
     停止朝向: {
       参数: [
@@ -14168,6 +14956,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止“开始转向”动作造成的转向效果。",
+      拼音: "Ting Zhi Chao Xiang",
     },
     停止治疗调整: {
       参数: [
@@ -14180,6 +14969,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止由“开始治疗调整”动作启动的一个治疗调整。",
+      拼音: "Ting Zhi Zhi Liao Tiao Zheng",
     },
     停止调整玩家大小: {
       参数: [
@@ -14192,6 +14982,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止调整一名或多名玩家的大小。",
+      拼音: "Ting Zhi Tiao Zheng Wan Jia Da Xiao",
     },
     停止调整障碍大小: {
       参数: [
@@ -14204,6 +14995,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止调整一名或多名玩家的屏障大小。",
+      拼音: "Ting Zhi Tiao Zheng Zhang Ai Da Xiao",
     },
     停止转换阈值: {
       参数: [
@@ -14216,6 +15008,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止由“开始转换阈值”所开始的转换效果。",
+      拼音: "Ting Zhi Zhuan Huan Yu Zhi",
     },
     停止追踪全局变量: {
       参数: [
@@ -14227,6 +15020,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止追踪一个全局变量，并使其保持为当前值。",
+      拼音: "Ting Zhi Zhui Zong Quan Ju Bian Liang",
     },
     停止追踪玩家变量: {
       参数: [
@@ -14244,6 +15038,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "停止追踪一个玩家变量，并使其保持为当前值。",
+      拼音: "Ting Zhi Zhui Zong Wan Jia Bian Liang",
     },
     停止镜头: {
       参数: [
@@ -14256,6 +15051,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将镜头缩放恢复至默认视角。",
+      拼音: "Ting Zhi Jing Tou",
     },
     停止限制阈值: {
       参数: [
@@ -14268,6 +15064,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“开始限制阈值”动作的效果。",
+      拼音: "Ting Zhi Xian Zhi Yu Zhi",
     },
     关闭游戏预设复生模式: {
       参数: [
@@ -14280,22 +15077,27 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "使一名或多名玩家不再自动复生，只允许其在程序命令控制下复生。",
+      拼音: "Guan Bi You Xi Yu She Fu Sheng Mo Shi",
     },
     关闭游戏预设完成条件: {
       标签: ["动作"],
       提示: "取消游戏模式自带的完成条件，比赛只由程序命令完成。",
+      拼音: "Guan Bi You Xi Yu She Wan Cheng Tiao Jian",
     },
     关闭游戏预设计分模式: {
       标签: ["动作"],
       提示: "取消游戏模式本身对玩家和队伍进行的计分，分数只会由程序命令改变。",
+      拼音: "Guan Bi You Xi Yu She Ji Fen Mo Shi",
     },
     关闭游戏预设通告模式: {
       标签: ["动作"],
       提示: "禁用游戏模式中所有提示语音，直到重新启用或比赛结束为止。",
+      拼音: "Guan Bi You Xi Yu She Tong Gao Mo Shi",
     },
     关闭游戏预设音乐模式: {
       标签: ["动作"],
       提示: "禁用游戏模式中所有音乐，直到重新启用或比赛结束为止。",
+      拼音: "Guan Bi You Xi Yu She Yin Yue Mo Shi",
     },
     击杀: {
       参数: [
@@ -14314,6 +15116,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "立即杀死一名或多名玩家。",
+      拼音: "Ji Sha",
     },
     创建HUD文本: {
       参数: [
@@ -14387,6 +15190,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "在指定玩家屏幕上的指定位置创建一条HUD文本。此文本会持续至消除为止。如果想指定此文本，可使用“上一个文本ID”的返还值。如果已创建了太多的文本元素，此动作可能会失败。",
+      拼音: "Chuang Jian HUD Wen Ben",
     },
     创建光束效果: {
       参数: [
@@ -14430,6 +15234,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "创建一个地图中的光束效果实体。此实体会持续至消除为止。如果想引用此实体，可使用“上一个创建的实体”的返还值。如果已创建了太多的实体，此动作可能会失败。",
+      拼音: "Chuang Jian Guang Shu Xiao Guo",
     },
     创建图标: {
       参数: [
@@ -14473,6 +15278,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "创建一个地图中的图标实体。此实体会持续至消除为止。如果想指定此实体，可使用“上一个创建的实体”的返还值。如果已创建了太多的实体，此动作可能会失败。",
+      拼音: "Chuang Jian Tu Biao",
     },
     创建地图文本: {
       参数: [
@@ -14528,6 +15334,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "在地图的指定位置创建一条地图文本，可以由指定玩家看到。此文本会持续至消除为止。如果想指定此文本，可使用“上一个文本ID”的返还值。如果已创建了太多的文本元素，此动作可能会失败。",
+      拼音: "Chuang Jian Di Tu Wen Ben",
     },
     创建效果: {
       参数: [
@@ -14571,6 +15378,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "创建一个地图中的效果实体。此实体会持续至消除为止。如果想指定此实体，可使用“上一个创建的实体”的返还值。如果已创建了太多的实体，此动作可能会失败。",
+      拼音: "Chuang Jian Xiao Guo",
     },
     创建进度条HUD文本: {
       参数: [
@@ -14632,6 +15440,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "在指定玩家屏幕上的指定位置创建一条进度条HUD文本。此文本会持续至消除为止。如果想指定此文本，可使用“上一个文本ID”的返还值。如果已创建了太多的文本元素，此动作可能会失败。",
+      拼音: "Chuang Jian Jin Du Tiao HUD Wen Ben",
     },
     创建进度条地图文本: {
       参数: [
@@ -14699,10 +15508,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "在地图的指定位置创建一条进度条HUD文本，可以由指定玩家看到。此文本会持续至消除为止。如果想指定此文本，可使用“上一个文本ID”的返还值。如果已创建了太多的文本元素，此动作可能会失败。",
+      拼音: "Chuang Jian Jin Du Tiao Di Tu Wen Ben",
     },
     前往集结英雄: {
       标签: ["动作"],
       提示: "回到比赛模式的集结英雄阶段。只有在游戏正在进行中时生效。",
+      拼音: "Qian Wang Ji Jie Ying Xiong",
     },
     取消与玩家的移动碰撞: {
       参数: [
@@ -14715,6 +15526,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "使玩家停止与其他玩家发生碰撞。",
+      拼音: "Qu Xiao Yu Wan Jia De Yi Dong Peng Zhuang",
     },
     取消与环境的移动碰撞: {
       参数: [
@@ -14733,6 +15545,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "使玩家停止与其他环境（墙壁，天花板，以及特定物体）发生碰撞。",
+      拼音: "Qu Xiao Yu Huan Jing De Yi Dong Peng Zhuang",
     },
     取消主要动作: {
       参数: [
@@ -14745,6 +15558,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消一名或多名玩家启动技能的设置。",
+      拼音: "Qu Xiao Zhu Yao Dong Zuo",
     },
     可用按钮: {
       参数: [
@@ -14763,6 +15577,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“禁用按钮”动作的效果。",
+      拼音: "Ke Yong An Niu",
     },
     启用文字聊天: {
       参数: [
@@ -14775,10 +15590,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“禁用文字聊天”动作对一个或多个玩家的效果。",
+      拼音: "Qi Yong Wen Zi Liao Tian",
     },
     启用查看器录制: {
       标签: ["动作"],
       提示: "使地图工坊查看器可以继续录制新的条目（假如之前被禁用的话）。在特定时间开启录制可以更容易地对你的脚本逻辑中出问题的地方进行错误排查。",
+      拼音: "Qi Yong Cha Kan Qi Lu Zhi",
     },
     启用死亡回放时目标的HUD: {
       参数: [
@@ -14791,6 +15608,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "使一名或多名玩家在死亡后观战时看到目标的HUD信息，而不是他们自己的。",
+      拼音: "Qi Yong Si Wang Hui Fang Shi Mu Biao Di HUD",
     },
     启用语音聊天: {
       参数: [
@@ -14803,6 +15621,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“禁用语音聊天”动作对一个或多个玩家的效果。",
+      拼音: "Qi Yong Yu Yin Liao Tian",
     },
     在索引处修改全局变量: {
       参数: [
@@ -14832,6 +15651,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "修改索引处一个全局变量的值，全局变量即属于游戏本身的变量。",
+      拼音: "Zai Suo Yin Chu Xiu Gai Quan Ju Bian Liang",
     },
     在索引处修改玩家变量: {
       参数: [
@@ -14867,6 +15687,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "修改索引处一个玩家变量的值，玩家变量即属于一个特定玩家的变量。",
+      拼音: "Zai Suo Yin Chu Xiu Gai Wan Jia Bian Liang",
     },
     在索引处设置全局变量: {
       参数: [
@@ -14890,6 +15711,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "为一个全局变量寻找或创建一个数组，然后将一个值储存至指定的索引中。全局变量即属于游戏本身的变量。",
+      拼音: "Zai Suo Yin Chu She Zhi Quan Ju Bian Liang",
     },
     在索引处设置玩家变量: {
       参数: [
@@ -14919,6 +15741,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "为一个玩家变量寻找或创建一个数组，然后将一个值储存至指定的索引处。玩家变量即属于一个特定玩家的变量。",
+      拼音: "Zai Suo Yin Chu She Zhi Wan Jia Bian Liang",
     },
     复活: {
       参数: [
@@ -14931,6 +15754,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "立即使一名到多名玩家在其死亡的位置复活，无需等待时间。",
+      拼音: "Fu Huo",
     },
     复生: {
       参数: [
@@ -14943,6 +15767,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "使一名或多名玩家在适当的复生位置复生并恢复至最大生命值，对仍然存活的玩家依然有效。",
+      拼音: "Fu Sheng",
     },
     大字体信息: {
       参数: [
@@ -14961,22 +15786,27 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "在准星上方显示大字体信息，对指定玩家可见。",
+      拼音: "Da Zi Ti Xin Xi",
     },
     "如条件为“假”则中止": {
       标签: ["动作"],
       提示: "如果条件列表中至少有一项条件为“假”，则停止执行动作列表。如果所有条件均为“真”，则继续执行下一条动作。",
+      拼音: "Ru Tiao Jian Wei “ Jia ” Ze Zhong Zhi",
     },
     "如条件为“假”则循环": {
       标签: ["动作"],
       提示: "如果条件列表中至少有一项条件为“假”，则从头开始执行动作列表。如果所有条件均为“真”，则执行下一项动作。",
+      拼音: "Ru Tiao Jian Wei “ Jia ” Ze Xun Huan",
     },
     "如条件为“真”则中止": {
       标签: ["动作"],
       提示: "如果条件列表中所有条件均为“真”，则停止执行动作列表。如果有任何一条为“假”，则继续执行下一条动作。",
+      拼音: "Ru Tiao Jian Wei “ Zhen ” Ze Zhong Zhi",
     },
     "如条件为“真”则循环": {
       标签: ["动作"],
       提示: "如果条件列表中的每一项条件均为“真”，则从头开始执行动作列表。如果任意一项为“假”，则执行下一项动作。",
+      拼音: "Ru Tiao Jian Wei “ Zhen ” Ze Xun Huan",
     },
     宣告回合胜利: {
       参数: [
@@ -14989,6 +15819,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "宣布一支队伍为当前回合的胜利方。只在占领要点模式和决斗先锋模式中可用。",
+      拼音: "Xuan Gao Hui He Sheng Li",
     },
     宣告玩家胜利: {
       参数: [
@@ -15001,6 +15832,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "立即结束比赛并指定一名玩家为胜利者。此动作只在自由混战模式中生效。",
+      拼音: "Xuan Gao Wan Jia Sheng Li",
     },
     宣告队伍胜利: {
       参数: [
@@ -15013,14 +15845,17 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "立即结束比赛，并指定获胜的队伍。此动作在自由混战模式中无效。",
+      拼音: "Xuan Gao Dui Wu Sheng Li",
     },
     宣布回合为平局: {
       标签: ["动作"],
       提示: "宣布当前回合为平局。只在决斗先锋模式中可用。",
+      拼音: "Xuan Bu Hui He Wei Ping Ju",
     },
     宣布比赛为平局: {
       标签: ["动作"],
       提示: "立即结束比赛，且结果为平局。此动作在自由混战模式中无效。",
+      拼音: "Xuan Bu Bi Sai Wei Ping Ju",
     },
     对所有玩家启用死亡回放: {
       参数: [
@@ -15033,6 +15868,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "使一名或多名玩家死亡后可以观看所有玩家的比赛，而不止是自己的盟友。",
+      拼音: "Dui Suo You Wan Jia Qi Yong Si Wang Hui Fang",
     },
     对所有玩家禁用死亡回放: {
       参数: [
@@ -15045,6 +15881,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“对所有玩家启用死亡回放”动作的效果。",
+      拼音: "Dui Suo You Wan Jia Jin Yong Si Wang Hui Fang",
     },
     小字体信息: {
       参数: [
@@ -15063,6 +15900,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "在准星下方显示小字体信息，对指定玩家可见。",
+      拼音: "Xiao Zi Ti Xin Xi",
     },
     开启与玩家的移动碰撞: {
       参数: [
@@ -15075,6 +15913,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“取消与玩家的移动碰撞”动作的效果。",
+      拼音: "Kai Qi Yu Wan Jia De Yi Dong Peng Zhuang",
     },
     开启与环境的移动碰撞: {
       参数: [
@@ -15087,6 +15926,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“取消与环境的移动碰撞”动作的效果。",
+      拼音: "Kai Qi Yu Huan Jing De Yi Dong Peng Zhuang",
     },
     开启游戏预设复生模式: {
       参数: [
@@ -15099,22 +15939,27 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“关闭游戏预设复生模式”动作的效果。",
+      拼音: "Kai Qi You Xi Yu She Fu Sheng Mo Shi",
     },
     开启游戏预设完成条件: {
       标签: ["动作"],
       提示: "取消“关闭游戏预设完成条件”动作的效果。",
+      拼音: "Kai Qi You Xi Yu She Wan Cheng Tiao Jian",
     },
     开启游戏预设计分模式: {
       标签: ["动作"],
       提示: "取消“关闭游戏预设计分模式”动作的效果。",
+      拼音: "Kai Qi You Xi Yu She Ji Fen Mo Shi",
     },
     开启游戏预设通告模式: {
       标签: ["动作"],
       提示: "取消“关闭游戏预设通告模式”动作的效果。",
+      拼音: "Kai Qi You Xi Yu She Tong Gao Mo Shi",
     },
     开启游戏预设音乐模式: {
       标签: ["动作"],
       提示: "取消“关闭游戏预设音乐模式”动作的效果。",
+      拼音: "Kai Qi You Xi Yu She Yin Yue Mo Shi",
     },
     开始为机器人强制设置名称: {
       参数: [
@@ -15133,6 +15978,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始强制设置指定玩家的名称。",
+      拼音: "Kai Shi Wei Ji Qi Ren Qiang Zhi She Zhi Ming Cheng",
     },
     开始伤害调整: {
       参数: [
@@ -15163,6 +16009,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始调整一名或多名受伤害者从一个或多个伤害者受到的伤害。如果想指定此伤害调整，可以使用“上一个伤害调整ID“的值。如果已经开始了太多的伤害调整，此动作可能会失败。",
+      拼音: "Kai Shi Shang Hai Tiao Zheng",
     },
     开始修改英雄语音: {
       参数: [
@@ -15187,6 +16034,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "修改玩家的英雄语音声音。",
+      拼音: "Kai Shi Xiu Gai Ying Xiong Yu Yin",
     },
     开始加速: {
       参数: [
@@ -15229,6 +16077,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始令一名或多名玩家向指定方向加速。",
+      拼音: "Kai Shi Jia Su",
     },
     开始助攻: {
       参数: [
@@ -15253,6 +16102,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "当一名或多名目标被消灭时，开始将此助攻归于一名或多名助攻者名下。如果想指定此伤害调整，可以使用“上一个助攻ID“的值。如果已经开始了太多的助攻，此动作可能会失败。",
+      拼音: "Kai Shi Zhu Gong",
     },
     开始定向阈值: {
       参数: [
@@ -15295,6 +16145,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "为一名或多名玩家设置或添加阈值（方向性输入控制），对其向指定方向的移动做出限制。取消之前所有的定向阈值。",
+      拼音: "Kai Shi Ding Xiang Yu Zhi",
     },
     开始强制玩家选择英雄: {
       参数: [
@@ -15313,6 +16164,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始强制一名或多名玩家使用指定的英雄，如有必要，使这些玩家立即在当前位置复生。这名或这些玩家只能使用指定的英雄，直到执行”停止强制玩家选择英雄“动作为止。",
+      拼音: "Kai Shi Qiang Zhi Wan Jia Xuan Ze Ying Xiong",
     },
     开始强制设置玩家位置: {
       参数: [
@@ -15337,6 +16189,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始强制一名玩家停留在指定位置。如果启动了“重新赋值”，那么每一帧都会重新为“位置”赋值，让玩家进行强制移动。",
+      拼音: "Kai Shi Qiang Zhi She Zhi Wan Jia Wei Zhi",
     },
     开始强制设置玩家轮廓: {
       参数: [
@@ -15373,6 +16226,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "从观察玩家的视角看，设置被观察的玩家的轮廓的可见性和颜色。",
+      拼音: "Kai Shi Qiang Zhi She Zhi Wan Jia Lun Kuo",
     },
     开始强制重生室: {
       参数: [
@@ -15391,6 +16245,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "强制一支队伍在指定的重生室重生，不管在游戏模式中应当使用哪个重生室。此动作只会在攻防作战、攻击",
+      拼音: "Kai Shi Qiang Zhi Chong Sheng Shi",
     },
     开始持续伤害: {
       参数: [
@@ -15421,6 +16276,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始一个持续伤害副本。此持续伤害会持续一段指定长度的时间，或直到被程序中止。如果想指定此持续伤害，可以使用”上一个持续伤害效果ID“的返还值。",
+      拼音: "Kai Shi Chi Xu Shang Hai",
     },
     开始持续治疗: {
       参数: [
@@ -15451,6 +16307,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始一个持续治疗副本。此持续治疗会持续一段指定长度的时间，或直到被程序中止。如果想指定此持续治疗，可以使用”上一个持续治疗效果ID“的返还值。",
+      拼音: "Kai Shi Chi Xu Zhi Liao",
     },
     开始按下按钮: {
       参数: [
@@ -15469,6 +16326,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "强制一名或多名玩家按下一个虚拟按钮，直到被“停止按下按钮”动作取消。",
+      拼音: "Kai Shi An Xia An Niu",
     },
     开始朝向: {
       参数: [
@@ -15505,6 +16363,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始强制一名或多名玩家转向面对指定的方向。",
+      拼音: "Kai Shi Chao Xiang",
     },
     开始治疗调整: {
       参数: [
@@ -15535,10 +16394,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始调整一名或多名受治疗者从一个或多个治疗者受到的治疗。如果想指定此治疗调整，可以使用“上一个治疗调整ID“的值。如果已经开始了太多的治疗调整，此动作可能会失败。",
+      拼音: "Kai Shi Zhi Liao Tiao Zheng",
     },
     开始游戏模式: {
       标签: ["动作"],
       提示: "开始游戏模式。若游戏已在进行中，此动作不会生效。",
+      拼音: "Kai Shi You Xi Mo Shi",
     },
     开始规则: {
       参数: [
@@ -15556,6 +16417,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始同时执行一个子程序规则（事件类型为”子程序“的规则）。原来规则的执行不会被打断。子程序可以使用同样的情景变量（如事件玩家）的原始值。",
+      拼音: "Kai Shi Gui Ze",
     },
     开始调整玩家大小: {
       参数: [
@@ -15580,6 +16442,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始调整一名或多名玩家的大小（会影响模型、移动碰撞、命中判定及部分技能）。请注意将大体形的玩家放置到复杂环境中会严重影响服务器负载，所以在做出此调整的同时应用“禁用与环境的移动碰撞”行动。",
+      拼音: "Kai Shi Tiao Zheng Wan Jia Da Xiao",
     },
     开始调整障碍大小: {
       参数: [
@@ -15604,6 +16467,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始调整一名或多名玩家的屏障大小。",
+      拼音: "Kai Shi Tiao Zheng Zhang Ai Da Xiao",
     },
     开始转换阈值: {
       参数: [
@@ -15634,6 +16498,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "开始转换（放大并旋转）一名或多名玩家的阈值（方向输入控制）。取消所有已存在的“开始转换阈值”动作。",
+      拼音: "Kai Shi Zhuan Huan Yu Zhi",
     },
     开始镜头: {
       参数: [
@@ -15664,6 +16529,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将你的镜头放置在一个位置，面向一个角度。",
+      拼音: "Kai Shi Jing Tou",
     },
     开始限制阈值: {
       参数: [
@@ -15712,10 +16578,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "定义玩家移动输入的最大值和最小值，可能会强迫或阻止玩家移动。",
+      拼音: "Kai Shi Xian Zhi Yu Zhi",
     },
     循环: {
       标签: ["动作"],
       提示: "从头开始执行动作列表。",
+      拼音: "Xun Huan",
     },
     持续追踪全局变量: {
       参数: [
@@ -15745,6 +16613,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "逐渐改变一个全局变量的值，全局变量即属于游戏本身的变量。",
+      拼音: "Chi Xu Zhui Zong Quan Ju Bian Liang",
     },
     持续追踪玩家变量: {
       参数: [
@@ -15780,6 +16649,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "逐步改变一个玩家变量的值，玩家变量即属于一个特定玩家的变量。",
+      拼音: "Chi Xu Zhui Zong Wan Jia Bian Liang",
     },
     按下按键: {
       参数: [
@@ -15798,6 +16668,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "强制一名或多名玩家按下虚拟按键，持续一帧。",
+      拼音: "An Xia An Jian",
     },
     播放效果: {
       参数: [
@@ -15834,6 +16705,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "在地图的指定位置播放一个效果。此效果的持续时间很短，所以不需要更新或消除。",
+      拼音: "Bo Fang Xiao Guo",
     },
     施加推力: {
       参数: [
@@ -15870,6 +16742,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "立即使一名或多名玩家的移动速度发生改变。",
+      拼音: "Shi Jia Tui Li",
     },
     显示信息: {
       参数: [
@@ -15882,6 +16755,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“隐藏信息”动作的效果。",
+      拼音: "Xian Shi Xin Xi",
     },
     显示姓名板: {
       参数: [
@@ -15900,6 +16774,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "从观察玩家的视角看，取消被观察的玩家的“隐藏姓名板”效果。",
+      拼音: "Xian Shi Xing Ming Ban",
     },
     显示消灭提示: {
       参数: [
@@ -15912,6 +16787,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“隐藏消灭提示”动作的效果。",
+      拼音: "Xian Shi Xiao Mie Ti Shi",
     },
     显示游戏模式HUD: {
       参数: [
@@ -15924,6 +16800,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“隐藏游戏模式HUD”动作的效果。",
+      拼音: "Xian Shi You Xi Mo Shi HUD",
     },
     显示游戏模式地图UI: {
       参数: [
@@ -15936,6 +16813,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“隐藏游戏模式地图UI”动作的效果。",
+      拼音: "Xian Shi You Xi Mo Shi Di Tu UI",
     },
     显示英雄HUD: {
       参数: [
@@ -15948,6 +16826,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“隐藏英雄HUD”动作的效果。",
+      拼音: "Xian Shi Ying Xiong HUD",
     },
     显示计分板: {
       参数: [
@@ -15960,6 +16839,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“隐藏计分板”动作的效果。",
+      拼音: "Xian Shi Ji Fen Ban",
     },
     根据条件中止: {
       参数: [
@@ -15972,6 +16852,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "如果此动作的条件为“真”，则停止执行动作列表。否则，则继续执行下一条动作。",
+      拼音: "Gen Ju Tiao Jian Zhong Zhi",
     },
     根据条件循环: {
       参数: [
@@ -15984,6 +16865,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "如果此动作的条件为“真”，则从头开始动作列表。否则，继续执行下一条动作。",
+      拼音: "Gen Ju Tiao Jian Xun Huan",
     },
     根据条件跳过: {
       参数: [
@@ -16002,14 +16884,17 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "如果此动作的条件为“真”，则跳过动作列表中一定条数的动作。否则，则继续执行下一条动作。",
+      拼音: "Gen Ju Tiao Jian Tiao Guo",
     },
     比赛时间暂停: {
       标签: ["动作"],
       提示: "暂停比赛时间。玩家、目标点逻辑、以及游戏模式的进展标准不会受暂停的影响。",
+      拼音: "Bi Sai Shi Jian Zan Ting",
     },
     比赛时间继续: {
       标签: ["动作"],
       提示: "取消比赛时间暂停。",
+      拼音: "Bi Sai Shi Jian Ji Xu",
     },
     治疗: {
       参数: [
@@ -16034,6 +16919,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "立刻为一名或多名玩家恢复生命值。此治疗效果不会复活已死亡的玩家。",
+      拼音: "Zhi Liao",
     },
     消除HUD文本: {
       参数: [
@@ -16046,6 +16932,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "消除由”创建HUD文本“所创建的HUD文本。",
+      拼音: "Xiao Chu HUD Wen Ben",
     },
     消除图标: {
       参数: [
@@ -16058,6 +16945,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "消除通过“创建图标”所创建的一个图标实体。",
+      拼音: "Xiao Chu Tu Biao",
     },
     消除地图文本: {
       参数: [
@@ -16070,30 +16958,37 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "清除”创建地图文本“所创建的地图文本。",
+      拼音: "Xiao Chu Di Tu Wen Ben",
     },
     消除所有HUD文本: {
       标签: ["动作"],
       提示: "消除由“创建HUD文本”动作所创建的所有HUD文本。",
+      拼音: "Xiao Chu Suo You HUD Wen Ben",
     },
     消除所有图标: {
       标签: ["动作"],
       提示: "消除所有由”创建图标“所创建的图标实体。",
+      拼音: "Xiao Chu Suo You Tu Biao",
     },
     消除所有地图文本: {
       标签: ["动作"],
       提示: "消除所有”创建地图文本“所创建的所有地图文本。",
+      拼音: "Xiao Chu Suo You Di Tu Wen Ben",
     },
     消除所有效果: {
       标签: ["动作"],
       提示: "消除所有由”创建效果“或“创建光束效果”所创建的效果实体。",
+      拼音: "Xiao Chu Suo You Xiao Guo",
     },
     消除所有进度条HUD文本: {
       标签: ["动作"],
       提示: "消除由“创建进度条HUD文本”动作所创建的所有进度条HUD文本。",
+      拼音: "Xiao Chu Suo You Jin Du Tiao HUD Wen Ben",
     },
     消除所有进度条地图文本: {
       标签: ["动作"],
       提示: "消除由“创建进度条地图文本”动作所创建的所有进度条地图文本。",
+      拼音: "Xiao Chu Suo You Jin Du Tiao Di Tu Wen Ben",
     },
     消除效果: {
       参数: [
@@ -16106,6 +17001,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "消除一个由“创建效果”或“创建光束效果”所创建的效果实体。",
+      拼音: "Xiao Chu Xiao Guo",
     },
     消除进度条HUD文本: {
       参数: [
@@ -16118,6 +17014,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "消除由“创建进度条HUD文本”所创建的进度条HUD文本。",
+      拼音: "Xiao Chu Jin Du Tiao HUD Wen Ben",
     },
     消除进度条地图文本: {
       参数: [
@@ -16130,6 +17027,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "消除由“创建进度条地图文本”动作所创建的进度条地图文本。",
+      拼音: "Xiao Chu Jin Du Tiao Di Tu Wen Ben",
     },
     清除状态: {
       参数: [
@@ -16148,6 +17046,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "清除一个或多个玩家身上由”设置状态“动作施加的一个状态。",
+      拼音: "Qing Chu Zhuang Tai",
     },
     生成机器人: {
       参数: [
@@ -16184,6 +17083,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "在指定队伍的指定栏位添加一个新的机器人（只要该空位可用）。机器人只能移动与射击，或根据地图工坊的动作设置使用技能。启用相应地图工坊扩展可额外创建更多机器人。",
+      拼音: "Sheng Cheng Ji Qi Ren",
     },
     禁用按钮: {
       参数: [
@@ -16202,6 +17102,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "禁用一名或多名玩家的逻辑按键，按下此按键后不会产生效果。",
+      拼音: "Jin Yong An Niu",
     },
     禁用文字聊天: {
       参数: [
@@ -16214,10 +17115,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "禁用一名或多名玩家的文字聊天，直到重新被启用为止。",
+      拼音: "Jin Yong Wen Zi Liao Tian",
     },
     禁用查看器录制: {
       标签: ["动作"],
       提示: "使地图工坊查看器无法录制新的条目。此功能可以降低你的脚本对服务器造成的负担，特别是当修改数组时。",
+      拼音: "Jin Yong Cha Kan Qi Lu Zhi",
     },
     禁用死亡回放时目标的HUD: {
       参数: [
@@ -16230,6 +17133,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "取消“死亡回放时启用目标的HUD”动作的效果。",
+      拼音: "Jin Yong Si Wang Hui Fang Shi Mu Biao Di HUD",
     },
     禁用语音聊天: {
       参数: [
@@ -16260,10 +17164,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "禁用一名或多名玩家的语音聊天，直到重新被启用为止。",
+      拼音: "Jin Yong Yu Yin Liao Tian",
     },
     移除所有机器人: {
       标签: ["动作"],
       提示: "从比赛中移除所有机器人。",
+      拼音: "Yi Chu Suo You Ji Qi Ren",
     },
     移除机器人: {
       参数: [
@@ -16282,6 +17188,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "从比赛中移除指定机器人。",
+      拼音: "Yi Chu Ji Qi Ren",
     },
     移除玩家: {
       参数: [
@@ -16294,6 +17201,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家移出自定游戏。此动作对机器人无效。",
+      拼音: "Yi Chu Wan Jia",
     },
     移除玩家的所有生命值: {
       参数: [
@@ -16306,6 +17214,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "移除由“添加生命池”行动添加的所有生命池。",
+      拼音: "Yi Chu Wan Jia De Suo You Sheng Ming Zhi",
     },
     移除玩家的生命池: {
       参数: [
@@ -16318,6 +17227,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "移除由“添加生命池”行动添加的一个生命池。",
+      拼音: "Yi Chu Wan Jia De Sheng Ming Chi",
     },
     等待: {
       参数: [
@@ -16336,6 +17246,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "暂停执行动作列表。除非等待被中断，否则剩余的动作将在暂停之后执行。",
+      拼音: "Deng Dai",
     },
     等待直到: {
       参数: [
@@ -16354,6 +17265,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "持续等待，直到“继续条件”为“真”，或达到“超时”的秒数时限。（在此等待过程中，忽略规则的条件。）",
+      拼音: "Deng Dai Zhi Dao",
     },
     绑定玩家: {
       参数: [
@@ -16378,10 +17290,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名玩家（子玩家）与另一名玩家（父玩家）绑定。绑定之后，除非解除绑定或传送离开，否则子玩家无法自由移动。多个子玩家可以绑定至同一名父玩家，但反之则不成立。",
+      拼音: "Bang Ding Wan Jia",
     },
     继续: {
       标签: ["动作"],
       提示: "表示一个跳至当前While或For循环起始处继续执行的动作。",
+      拼音: "Ji Xu",
     },
     解除绑定: {
       参数: [
@@ -16394,6 +17308,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "为一名或多名玩家解除“绑定玩家”的行动产生的效果。这些玩家将从其当前位置开始恢复自由行动的能力。",
+      拼音: "Jie Chu Bang Ding",
     },
     记入查看器: {
       参数: [
@@ -16406,6 +17321,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "使地图工坊查看器录制一条记录。",
+      拼音: "Ji Ru Cha Kan Qi",
     },
     设置不可见: {
       参数: [
@@ -16424,6 +17340,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "使一名或多名玩家变为隐形，此效果可对所有玩家生效，也可以只对敌人生效。",
+      拼音: "She Zhi Bu Ke Jian",
     },
     设置主要攻击模式启用: {
       参数: [
@@ -16442,6 +17359,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "启用或禁用一名或多名玩家的主要攻击模式。",
+      拼音: "She Zhi Zhu Yao Gong Ji Mo Shi Qi Yong",
     },
     设置全局变量: {
       参数: [
@@ -16459,6 +17377,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一个值存储为一个全局变量，全局变量即属于游戏本身的变量。",
+      拼音: "She Zhi Quan Ju Bian Liang",
     },
     设置受到伤害: {
       参数: [
@@ -16477,6 +17396,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家受到的伤害设置为其原始受到伤害的一定百分比。",
+      拼音: "She Zhi Shou Dao Shang Hai",
     },
     设置受到治疗: {
       参数: [
@@ -16495,6 +17415,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家受到的治疗效果设置为其原始受到治疗的一定百分比。",
+      拼音: "She Zhi Shou Dao Zhi Liao",
     },
     设置受到的击退: {
       参数: [
@@ -16513,6 +17434,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家受到的击退效果设置为其原始受到击退效果的一定百分比。",
+      拼音: "She Zhi Shou Dao De Ji Tui",
     },
     "设置启用技能 1": {
       参数: [
@@ -16531,6 +17453,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "启用或禁用一名或多名玩家的技能 1。",
+      拼音: "She Zhi Qi Yong Ji Neng   1",
     },
     "设置启用技能 2": {
       参数: [
@@ -16549,6 +17472,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "启用或禁用一名或多名玩家的技能 2。",
+      拼音: "She Zhi Qi Yong Ji Neng   2",
     },
     设置启用终极技能: {
       参数: [
@@ -16567,6 +17491,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "启用或禁用一名或多名玩家的终极技能。",
+      拼音: "She Zhi Qi Yong Zhong Ji Ji Neng",
     },
     设置启用装填: {
       参数: [
@@ -16585,6 +17510,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "启用或禁用一名或多名玩家的装填。",
+      拼音: "She Zhi Qi Yong Zhuang Tian",
     },
     设置启用跳跃: {
       参数: [
@@ -16603,6 +17529,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "启用或禁用一名或多名玩家的跳跃动作。",
+      拼音: "She Zhi Qi Yong Tiao Yue",
     },
     设置启用蹲下: {
       参数: [
@@ -16621,6 +17548,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "启用或禁用一名或多名玩家的蹲下动作。",
+      拼音: "She Zhi Qi Yong Dun Xia",
     },
     设置启用近战攻击: {
       参数: [
@@ -16639,6 +17567,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "启用或禁用一名或多名玩家的近战攻击。",
+      拼音: "She Zhi Qi Yong Jin Zhan Gong Ji",
     },
     设置地形消灭者玩家: {
       参数: [
@@ -16657,6 +17586,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置当指定玩家降落在地面前被地形消灭时，会被归为地形消灭者的玩家。",
+      拼音: "She Zhi Di Xing Xiao Mie Zhe Wan Jia",
     },
     设置引力: {
       参数: [
@@ -16675,6 +17605,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家的移动引力设置为正常行动引力的一定百分比。",
+      拼音: "She Zhi Yin Li",
     },
     设置弹药: {
       参数: [
@@ -16699,6 +17630,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家的弹药数量。",
+      拼音: "She Zhi Dan Yao",
     },
     创建弹道: {
       参数: [
@@ -16813,6 +17745,7 @@ let 规则 = {
       ],
       标签: ["动作", "弹道"],
       提示: "创建一个弹道实体，可对玩家或玩家拥有的实体造成治疗或伤害。如果已创建了太多的实体，此动作可能会失败。",
+      拼音: "Chuang Jian Dan Dao",
     },
     创建弹道效果: {
       参数: [
@@ -16862,6 +17795,7 @@ let 规则 = {
       ],
       标签: ["动作", "弹道", "效果"],
       提示: "创建一个地图中的弹道效果实体。此实体会持续至使用“消除效果”或“消除所有效果”消除为止。如果想引用此效果，可使用“上一个创建的实体”的返回值。如果已创建了太多的实体，此动作可能会失败。",
+      拼音: "Chuang Jian Dan Dao Xiao Guo",
     },
     创建追踪弹道: {
       参数: [
@@ -16976,6 +17910,7 @@ let 规则 = {
       ],
       标签: ["动作", "弹道", "追踪"],
       提示: "创建一个弹道实体，可对玩家或玩家拥有的实体造成治疗或伤害。弹道会按强度变量追踪给定目标。如果已创建了太多的实体，此动作可能会失败。",
+      拼音: "Chuang Jian Zhui Zong Dan Dao",
     },
     设置弹道引力: {
       参数: [
@@ -16994,6 +17929,7 @@ let 规则 = {
       ],
       标签: ["动作", "弹道"],
       提示: "将一名或多名玩家的弹道引力设置为正常弹道引力的一定百分比。",
+      拼音: "She Zhi Dan Dao Yin Li",
     },
     设置弹道速度: {
       参数: [
@@ -17012,6 +17948,7 @@ let 规则 = {
       ],
       标签: ["动作", "弹道"],
       提示: "将一名或多名玩家的弹道速度设置为正常弹道速度的一定百分比。",
+      拼音: "She Zhi Dan Dao Su Du",
     },
     设置慢动作: {
       参数: [
@@ -17024,6 +17961,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置整个游戏的模拟速率，包括所有玩家、弹道、效果及游戏模式逻辑。",
+      拼音: "She Zhi Man Dong Zuo",
     },
     设置技能充能: {
       参数: [
@@ -17048,6 +17986,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家的技能充能次数（如果支持的话）。",
+      拼音: "She Zhi Ji Neng Chong Neng",
     },
     设置技能冷却: {
       参数: [
@@ -17072,6 +18011,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家的技能冷却时间（如果支持的话）。",
+      拼音: "She Zhi Ji Neng Leng Que",
     },
     设置技能资源: {
       参数: [
@@ -17096,6 +18036,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家的技能资源百分比（如果支持的话）。",
+      拼音: "She Zhi Ji Neng Zi Yuan",
     },
     设置最大复生时间: {
       参数: [
@@ -17114,6 +18055,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家死亡与复生之间的持续时间。对此动作执行时已经死亡的玩家，此效果将在他们下次死亡时生效。",
+      拼音: "She Zhi Zui Da Fu Sheng Shi Jian",
     },
     设置最大弹药: {
       参数: [
@@ -17138,6 +18080,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家的最大弹药数量。",
+      拼音: "She Zhi Zui Da Dan Yao",
     },
     设置最大生命值: {
       参数: [
@@ -17156,6 +18099,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家的最大生命值设置为其原始最大生命值的一定百分比。此动作会保证玩家当前的生命值不会超过其新的最大生命值。由地图工坊动作添加的生命池不会受此动作影响。",
+      拼音: "She Zhi Zui Da Sheng Ming Zhi",
     },
     设置朝向: {
       参数: [
@@ -17180,6 +18124,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家面向的方向。",
+      拼音: "She Zhi Chao Xiang",
     },
     设置武器: {
       参数: [
@@ -17198,6 +18143,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家的武器。",
+      拼音: "She Zhi Wu Qi",
     },
     设置比赛时间: {
       参数: [
@@ -17210,6 +18156,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置当前比赛时间（玩家可在屏幕顶端看到）。此行动可以用来缩短或延长比赛的持续时间，或改变集结英雄或准备阶段的时间。",
+      拼音: "She Zhi Bi Sai Shi Jian",
     },
     设置状态: {
       参数: [
@@ -17240,6 +18187,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "对一名或多名玩家施加一个状态。此状态会持续指定的”持续时间“，或直到被”清除状态“动作清除。",
+      拼音: "She Zhi Zhuang Tai",
     },
     设置玩家分数: {
       参数: [
@@ -17258,6 +18206,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家的分数（击杀数）。此动作只在自由混战模式中生效。",
+      拼音: "She Zhi Wan Jia Fen Shu",
     },
     设置玩家变量: {
       参数: [
@@ -17275,6 +18224,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一个值存储为一个玩家变量，玩家变量即属于一个特定玩家的变量。",
+      拼音: "She Zhi Wan Jia Bian Liang",
     },
     设置玩家可选的英雄: {
       参数: [
@@ -17293,6 +18243,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家可用的英雄列表。如果玩家当前所使用的英雄变得不可用，则此玩家将被强制选择另一名英雄，并在适当的复生位置复生。",
+      拼音: "She Zhi Wan Jia Ke Xuan De Ying Xiong",
     },
     设置玩家生命值: {
       参数: [
@@ -17311,6 +18262,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一名或多名玩家的生命值，同时不影响状态，也不造成伤害/治疗。此行动只会对还活着的玩家造成影响。（对死去的玩家，请使用“复活玩家”动作。）",
+      拼音: "She Zhi Wan Jia Sheng Ming Zhi",
     },
     设置目标点描述: {
       参数: [
@@ -17335,6 +18287,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将屏幕顶部正中通常用来显示目标点信息的文字修改为其他信息，对指定的玩家可见。",
+      拼音: "She Zhi Mu Biao Dian Miao Shu",
     },
     设置瞄准速度: {
       参数: [
@@ -17353,6 +18306,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家的瞄准速度设置为其原始瞄准速度的一定百分比。",
+      拼音: "She Zhi Miao Zhun Su Du",
     },
     设置移动速度: {
       参数: [
@@ -17371,6 +18325,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家的移动速度设置为其原始移动速度的一定百分比。",
+      拼音: "She Zhi Yi Dong Su Du",
     },
     设置终极技能充能: {
       参数: [
@@ -17389,6 +18344,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家的终极技能充能设为最大充能的一定百分比。",
+      拼音: "She Zhi Zhong Ji Ji Neng Chong Neng",
     },
     设置跳跃垂直速度: {
       参数: [
@@ -17407,6 +18363,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家的跳跃垂直速度设置为其原始跳跃垂直速度的一定百分比。",
+      拼音: "She Zhi Tiao Yue Chui Zhi Su Du",
     },
     设置辅助攻击模式启用: {
       参数: [
@@ -17425,6 +18382,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "启用或禁用一名或多名玩家的辅助攻击模式。",
+      拼音: "She Zhi Fu Zhu Gong Ji Mo Shi Qi Yong",
     },
     设置造成伤害: {
       参数: [
@@ -17443,6 +18401,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家造成的伤害设置为其原始造成伤害的一定百分比。",
+      拼音: "She Zhi Zao Cheng Shang Hai",
     },
     设置造成治疗: {
       参数: [
@@ -17461,6 +18420,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家造成的治疗效果设置为其原始造成治疗的一定百分比。",
+      拼音: "She Zhi Zao Cheng Zhi Liao",
     },
     设置造成的击退: {
       参数: [
@@ -17479,6 +18439,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家造成的击退效果设置为其原始造成击退效果的一定百分比。",
+      拼音: "She Zhi Zao Cheng De Ji Tui",
     },
     设置队伍分数: {
       参数: [
@@ -17497,6 +18458,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "设置一方或双方队伍的分数。此动作在自由混战模式或没有队伍分数的模式中无效。",
+      拼音: "She Zhi Dui Wu Fen Shu",
     },
     调整玩家队伍: {
       参数: [
@@ -17521,6 +18483,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家移动至指定队伍和栏位。指定栏位不可用时，此动作会失败。此动作对机器人无效。",
+      拼音: "Tiao Zheng Wan Jia Dui Wu",
     },
     调用子程序: {
       参数: [
@@ -17532,6 +18495,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "暂停执行当前规则，并开始执行子程序规则（事件类型为”子程序“的规则）。当子程序规则结束时，原来的规则将恢复执行。子程序可以使用同样的情景变量（如事件玩家）的原始值。",
+      拼音: "Diao Yong Zi Cheng Xu",
     },
     跳过: {
       参数: [
@@ -17544,10 +18508,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "跳过动作列表中一定条数的动作。",
+      拼音: "Tiao Guo",
     },
     返回大厅: {
       标签: ["动作"],
       提示: "将游戏模式返回至自定游戏大厅。",
+      拼音: "Fan Hui Da Ting",
     },
     追踪全局变量频率: {
       参数: [
@@ -17577,6 +18543,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "以指定的速率逐步改变一个全局变量的值，全局变量即属于游戏本身的变量。",
+      拼音: "Zhui Zong Quan Ju Bian Liang Pin Lü",
     },
     追踪玩家变量频率: {
       参数: [
@@ -17612,10 +18579,12 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "以指定的速率逐步改变一个玩家变量的值，玩家变量即属于一个特定玩家的变量。",
+      拼音: "Zhui Zong Wan Jia Bian Liang Pin Lü",
     },
     重新开始比赛: {
       标签: ["动作"],
       提示: "重新开始比赛。此动作仅在比赛存在30秒后才可生效。",
+      拼音: "Chong Xin Kai Shi Bi Sai",
     },
     重置玩家英雄可选状态: {
       参数: [
@@ -17628,6 +18597,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "将一名或多名玩家可用的英雄列表恢复至游戏设置所指定的英雄列表。如果玩家当前所使用的英雄变得不可用，则此玩家将被强制选择另一名英雄，并在适当的复生位置复生。",
+      拼音: "Zhong Zhi Wan Jia Ying Xiong Ke Xuan Zhuang Tai",
     },
     隐藏信息: {
       参数: [
@@ -17640,6 +18610,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "隐藏一名或多名玩家的信息，直到重新被显示为止。",
+      拼音: "Yin Cang Xin Xi",
     },
     隐藏姓名板: {
       参数: [
@@ -17658,6 +18629,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "从观察玩家的视角看，被观察的玩家的姓名板将被隐藏。",
+      拼音: "Yin Cang Xing Ming Ban",
     },
     隐藏消灭提示: {
       参数: [
@@ -17670,6 +18642,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "隐藏一名或多名玩家的消灭提示，直到重新被显示为止。",
+      拼音: "Yin Cang Xiao Mie Ti Shi",
     },
     隐藏游戏模式HUD: {
       参数: [
@@ -17682,6 +18655,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "隐藏一名或多名玩家的游戏模式HUD，直到重新被显示为止。",
+      拼音: "Yin Cang You Xi Mo Shi HUD",
     },
     隐藏游戏模式地图UI: {
       参数: [
@@ -17694,6 +18668,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "隐藏一名或多名玩家的游戏模式地图UI，直到重新被显示为止。",
+      拼音: "Yin Cang You Xi Mo Shi Di Tu UI",
     },
     隐藏英雄HUD: {
       参数: [
@@ -17706,6 +18681,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "隐藏一名或多名玩家的英雄HUD，直到重新被显示为止。",
+      拼音: "Yin Cang Ying Xiong HUD",
     },
     隐藏计分板: {
       参数: [
@@ -17718,6 +18694,7 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "隐藏一名或多名玩家的消灭提示，直到重新被显示为止。",
+      拼音: "Yin Cang Ji Fen Ban",
     },
     预加载英雄: {
       参数: [
@@ -17736,22 +18713,67 @@ let 规则 = {
       ],
       标签: ["动作"],
       提示: "预先为指定的玩家将指定的英雄及皮肤加载入内存。当需要经常改变英雄且已知接下来要使用哪个英雄时适用。",
+      拼音: "Yu Jia Zai Ying Xiong",
     },
   },
 };
 
 let 扩展 = {
-  光束效果: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
-  光束声音: { 标签: ["扩展", "∴ 1"], 提示: "一个工坊扩展选项。" },
-  增益状态效果: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
-  减益状态效果: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
-  增益效果和减益效果声音: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
-  能量爆炸效果: { 标签: ["扩展", "∴ 4"], 提示: "一个工坊扩展选项。" },
-  运动爆炸效果: { 标签: ["扩展", "∴ 4"], 提示: "一个工坊扩展选项。" },
-  爆炸声音: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
-  播放更多效果: { 标签: ["扩展", "∴ 1"], 提示: "一个工坊扩展选项。" },
-  生成更多机器人: { 标签: ["扩展", "∴ 2"], 提示: "一个工坊扩展选项。" },
-  弹道: { 标签: ["扩展", "∴ 4"], 提示: "一个工坊扩展选项。" },
+  光束效果: {
+    标签: ["扩展", "∴ 2"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Guang Shu Xiao Guo",
+  },
+  光束声音: {
+    标签: ["扩展", "∴ 1"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Guang Shu Sheng Yin",
+  },
+  增益状态效果: {
+    标签: ["扩展", "∴ 2"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Zeng Yi Zhuang Tai Xiao Guo",
+  },
+  减益状态效果: {
+    标签: ["扩展", "∴ 2"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Jian Yi Zhuang Tai Xiao Guo",
+  },
+  增益效果和减益效果声音: {
+    标签: ["扩展", "∴ 2"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Zeng Yi Xiao Guo He Jian Yi Xiao Guo Sheng Yin",
+  },
+  能量爆炸效果: {
+    标签: ["扩展", "∴ 4"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Neng Liang Bao Zha Xiao Guo",
+  },
+  运动爆炸效果: {
+    标签: ["扩展", "∴ 4"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Yun Dong Bao Zha Xiao Guo",
+  },
+  爆炸声音: {
+    标签: ["扩展", "∴ 2"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Bao Zha Sheng Yin",
+  },
+  播放更多效果: {
+    标签: ["扩展", "∴ 1"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Bo Fang Geng Duo Xiao Guo",
+  },
+  生成更多机器人: {
+    标签: ["扩展", "∴ 2"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Sheng Cheng Geng Duo Ji Qi Ren",
+  },
+  弹道: {
+    标签: ["扩展", "∴ 4"],
+    提示: "一个工坊扩展选项。",
+    拼音: "Dan Dao",
+  },
 };
 
 let 模版 = {
@@ -17865,21 +18887,6 @@ let 模版 = {
   },
 };
 
-function buildFilterText(text, isPinyin) {
-  try {
-    return isPinyin
-      ? require("pinyin-pro")
-          .pinyin(text, {
-            toneType: "none",
-            type: "array",
-          })
-          .join(" ")
-      : text.split("").join(" ");
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 function buildHover(PATH, name, tags, details) {
   let hoverString = new vscode.MarkdownString();
   hoverString.isTrusted = true;
@@ -17905,16 +18912,19 @@ function buildHover(PATH, name, tags, details) {
 function buildCompletion(
   PATH,
   label,
+  pinyin,
   kind,
   tags,
   details,
   filterText,
-  isPinyin = true,
   insertText,
   sortText,
   command
 ) {
-  const item = new vscode.CompletionItem(label, kind);
+  const item = new vscode.CompletionItem(
+    pinyin ? `${label} ← ${pinyin.split(" ").join("")}` : label,
+    kind
+  );
   item.documentation = new vscode.MarkdownString();
   item.documentation.isTrusted = true;
   item.documentation.supportHtml = true;
@@ -17931,20 +18941,19 @@ function buildCompletion(
     item.documentation.appendMarkdown(details);
   }
   if (filterText) {
-    item.filterText = buildFilterText(filterText, isPinyin);
+    item.filterText = filterText;
   } else {
-    item.filterText = buildFilterText(label, isPinyin);
+    item.filterText = `${label.split("").join(" ")} ${pinyin}`;
   }
   if (insertText) {
     item.insertText = insertText;
+  } else {
+    item.insertText = label;
   }
   if (sortText) {
     item.sortText = `${sortText}`.padStart(3, "0");
   } else {
-    item.sortText =
-      `${kind}`.padStart(2, "0") +
-      `${label[0]}` +
-      `${label.length}`.padStart(2, "0");
+    item.sortText = label;
   }
   if (command) {
     item.command = command;
@@ -17992,18 +19001,10 @@ function buildStaticModels(PATH) {
         常量[i][j].补全 = buildCompletion(
           PATH,
           常量[i][j].名称,
+          常量[i][j].拼音.split(" ").join(""),
           vscode.CompletionItemKind.Constant,
           常量[i][j].标签,
           常量[i][j].提示
-        );
-        常量[i][j].中文补全 = buildCompletion(
-          PATH,
-          常量[i][j].名称,
-          vscode.CompletionItemKind.Constant,
-          常量[i][j].标签,
-          常量[i][j].提示,
-          undefined,
-          false
         );
       }
     }
@@ -18081,6 +19082,7 @@ function buildStaticModels(PATH) {
         深色: buildCompletion(
           PATH,
           常量.英雄[i].名称,
+          常量.英雄[i].拼音,
           vscode.CompletionItemKind.Constant,
           常量.英雄[i].标签,
           description + abilities.深色
@@ -18088,29 +19090,10 @@ function buildStaticModels(PATH) {
         浅色: buildCompletion(
           PATH,
           常量.英雄[i].名称,
+          常量.英雄[i].拼音,
           vscode.CompletionItemKind.Constant,
           常量.英雄[i].标签,
           description + abilities.浅色
-        ),
-      };
-      常量.英雄[i].中文补全 = {
-        深色: buildCompletion(
-          PATH,
-          常量.英雄[i].名称,
-          vscode.CompletionItemKind.Constant,
-          常量.英雄[i].标签,
-          description + abilities.深色,
-          undefined,
-          false
-        ),
-        浅色: buildCompletion(
-          PATH,
-          常量.英雄[i].名称,
-          vscode.CompletionItemKind.Constant,
-          常量.英雄[i].标签,
-          description + abilities.浅色,
-          undefined,
-          false
         ),
       };
     }
@@ -18143,6 +19126,7 @@ function buildStaticModels(PATH) {
         深色: buildCompletion(
           PATH,
           常量.图标[i].名称,
+          常量.图标[i].拼音,
           vscode.CompletionItemKind.Constant,
           常量.图标[i].标签,
           details.深色
@@ -18150,29 +19134,10 @@ function buildStaticModels(PATH) {
         浅色: buildCompletion(
           PATH,
           常量.图标[i].名称,
+          常量.图标[i].拼音,
           vscode.CompletionItemKind.Constant,
           常量.图标[i].标签,
           details.浅色
-        ),
-      };
-      常量.图标[i].中文补全 = {
-        深色: buildCompletion(
-          PATH,
-          常量.图标[i].名称,
-          vscode.CompletionItemKind.Constant,
-          常量.图标[i].标签,
-          details.深色,
-          undefined,
-          false
-        ),
-        浅色: buildCompletion(
-          PATH,
-          常量.图标[i].名称,
-          vscode.CompletionItemKind.Constant,
-          常量.图标[i].标签,
-          details.浅色,
-          undefined,
-          false
         ),
       };
     }
@@ -18213,6 +19178,7 @@ function buildStaticModels(PATH) {
           深色: buildCompletion(
             PATH,
             常量.按钮[i].名称,
+            常量.按钮[i].拼音,
             vscode.CompletionItemKind.Constant,
             常量.按钮[i].标签,
             details.深色
@@ -18220,29 +19186,10 @@ function buildStaticModels(PATH) {
           浅色: buildCompletion(
             PATH,
             常量.按钮[i].名称,
+            常量.按钮[i].拼音,
             vscode.CompletionItemKind.Constant,
             常量.按钮[i].标签,
             details.浅色
-          ),
-        };
-        常量.按钮[i].中文补全 = {
-          深色: buildCompletion(
-            PATH,
-            常量.按钮[i].名称,
-            vscode.CompletionItemKind.Constant,
-            常量.按钮[i].标签,
-            details.深色,
-            undefined,
-            false
-          ),
-          浅色: buildCompletion(
-            PATH,
-            常量.按钮[i].名称,
-            vscode.CompletionItemKind.Constant,
-            常量.按钮[i].标签,
-            details.浅色,
-            undefined,
-            false
           ),
         };
       } else {
@@ -18260,18 +19207,10 @@ function buildStaticModels(PATH) {
         常量.按钮[i].补全 = buildCompletion(
           PATH,
           常量.按钮[i].名称,
+          常量.按钮[i].拼音,
           vscode.CompletionItemKind.Constant,
           常量.按钮[i].标签,
           details
-        );
-        常量.按钮[i].中文补全 = buildCompletion(
-          PATH,
-          常量.按钮[i].名称,
-          vscode.CompletionItemKind.Constant,
-          常量.按钮[i].标签,
-          details,
-          undefined,
-          false
         );
       }
     }
@@ -18293,18 +19232,10 @@ function buildStaticModels(PATH) {
       常量.颜色[i].补全 = buildCompletion(
         PATH,
         常量.颜色[i].名称,
+        常量.颜色[i].拼音,
         vscode.CompletionItemKind.Constant,
         常量.颜色[i].标签,
         details
-      );
-      常量.颜色[i].中文补全 = buildCompletion(
-        PATH,
-        常量.颜色[i].名称,
-        vscode.CompletionItemKind.Constant,
-        常量.颜色[i].标签,
-        details,
-        undefined,
-        false
       );
     }
   } catch (error) {
@@ -18315,18 +19246,10 @@ function buildStaticModels(PATH) {
       常量.字符串[i].补全 = buildCompletion(
         PATH,
         常量.字符串[i].名称,
+        常量.字符串[i].拼音,
         vscode.CompletionItemKind.Constant,
         常量.字符串[i].标签,
         常量.字符串[i].提示
-      );
-      常量.字符串[i].中文补全 = buildCompletion(
-        PATH,
-        常量.字符串[i].名称,
-        vscode.CompletionItemKind.Constant,
-        常量.字符串[i].标签,
-        常量.字符串[i].提示,
-        undefined,
-        false
       );
     }
   } catch (error) {
@@ -18343,21 +19266,11 @@ function buildStaticModels(PATH) {
       规则.事件.选项[i].补全 = buildCompletion(
         PATH,
         i,
+        规则.事件.选项[i].拼音,
         vscode.CompletionItemKind.Event,
         规则.事件.选项[i].标签,
         规则.事件.选项[i].提示,
         undefined,
-        undefined,
-        `${i};`
-      );
-      规则.事件.选项[i].中文补全 = buildCompletion(
-        PATH,
-        i,
-        vscode.CompletionItemKind.Event,
-        规则.事件.选项[i].标签,
-        规则.事件.选项[i].提示,
-        undefined,
-        false,
         `${i};`
       );
     }
@@ -18375,21 +19288,11 @@ function buildStaticModels(PATH) {
       规则.事件.队伍[i].补全 = buildCompletion(
         PATH,
         i,
+        规则.事件.队伍[i].拼音,
         vscode.CompletionItemKind.Event,
         规则.事件.队伍[i].标签,
         规则.事件.队伍[i].提示,
         undefined,
-        undefined,
-        `${i};`
-      );
-      规则.事件.队伍[i].中文补全 = buildCompletion(
-        PATH,
-        i,
-        vscode.CompletionItemKind.Event,
-        规则.事件.队伍[i].标签,
-        规则.事件.队伍[i].提示,
-        undefined,
-        false,
         `${i};`
       );
     }
@@ -18407,22 +19310,11 @@ function buildStaticModels(PATH) {
       规则.事件.玩家[i].补全 = buildCompletion(
         PATH,
         i,
+        规则.事件.玩家[i].拼音,
         vscode.CompletionItemKind.Event,
         规则.事件.玩家[i].标签,
         规则.事件.玩家[i].提示,
         undefined,
-        undefined,
-        `${i};`,
-        规则.事件.玩家[i].顺序
-      );
-      规则.事件.玩家[i].中文补全 = buildCompletion(
-        PATH,
-        i,
-        vscode.CompletionItemKind.Event,
-        规则.事件.玩家[i].标签,
-        规则.事件.玩家[i].提示,
-        undefined,
-        false,
         `${i};`,
         规则.事件.玩家[i].顺序
       );
@@ -18518,25 +19410,11 @@ function buildStaticModels(PATH) {
       规则.条件[i].补全 = buildCompletion(
         PATH,
         i,
+        规则.条件[i].拼音,
         vscode.CompletionItemKind.Class,
         规则.条件[i].标签,
         details.replace(/---/g, ""),
         undefined,
-        undefined,
-        规则.条件[i].hasOwnProperty("格式")
-          ? new vscode.SnippetString(规则.条件[i].格式)
-          : insertText,
-        undefined,
-        command
-      );
-      规则.条件[i].中文补全 = buildCompletion(
-        PATH,
-        i,
-        vscode.CompletionItemKind.Class,
-        规则.条件[i].标签,
-        details.replace(/---/g, ""),
-        undefined,
-        false,
         规则.条件[i].hasOwnProperty("格式")
           ? new vscode.SnippetString(规则.条件[i].格式)
           : insertText,
@@ -18625,23 +19503,11 @@ function buildStaticModels(PATH) {
       规则.动作[i].补全 = buildCompletion(
         PATH,
         i,
+        规则.动作[i].拼音,
         vscode.CompletionItemKind.Method,
         规则.动作[i].标签,
         details.replace(/---/g, ""),
         undefined,
-        undefined,
-        insertText,
-        undefined,
-        command
-      );
-      规则.动作[i].中文补全 = buildCompletion(
-        PATH,
-        i,
-        vscode.CompletionItemKind.Method,
-        规则.动作[i].标签,
-        details.replace(/---/g, ""),
-        undefined,
-        false,
         insertText,
         undefined,
         command
@@ -18654,7 +19520,6 @@ function buildStaticModels(PATH) {
 
 module.exports = {
   示例,
-  拼音,
   常量,
   规则,
   扩展,

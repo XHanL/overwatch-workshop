@@ -63,31 +63,224 @@ function convertObjectToArray() {
 //调试工具：多音字数组 (npm install pinyinlite)
 function buildPinYinArray() {
   try {
-    const pinyinlite = require("pinyinlite");
+    let obj = MODEL.常量;
 
-    const chineseDict = MODEL.拼音;
-
-    const sortedKeys = Object.keys(chineseDict).sort((a, b) => {
-      return a.localeCompare(b, "zh-CN"); // Sort Chinese characters
-    });
-
-    const pinyinDict = {};
-
-    for (const char of sortedKeys) {
-      const pinyinArray = pinyinlite(char, { noTone: true });
-
-      let pinyinString = pinyinArray.join(",");
-      pinyinString = pinyinString
-        .split(",")
-        .map(
-          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        )
-        .join(" ");
-
-      pinyinDict[char] = pinyinString;
+    for (const key in obj) {
+      if (Array.isArray(obj[key])) {
+        obj[key].forEach((item) => {
+          if (item.名称) {
+            item.拼音 = require("pinyin-pro")
+              .pinyin(item.名称, {
+                toneType: "none",
+                type: "array",
+              })
+              .join(" ");
+          }
+        });
+      } else if (typeof obj[key] === "object") {
+        addPinyin(obj[key]);
+      }
     }
 
-    const outputString = JSON.stringify(pinyinDict, null, 2);
+    const outputString = JSON.stringify(obj, null, 2);
+    fs.writeFileSync(
+      "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
+      outputString,
+      "utf-8"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function buildPinYinPropertyToObjectElement() {
+  try {
+    let obj = MODEL.常量;
+
+    for (const key in obj) {
+      if (Array.isArray(obj[key])) {
+        obj[key].forEach((item) => {
+          if (item.名称) {
+            item.拼音 = require("pinyin-pro")
+              .pinyin(item.名称, {
+                toneType: "none",
+                type: "array",
+              })
+              .join(" ");
+          }
+        });
+      } else if (typeof obj[key] === "object") {
+        addPinyin(obj[key]);
+      }
+    }
+
+    const outputString = JSON.stringify(obj, null, 2);
+    fs.writeFileSync(
+      "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
+      outputString,
+      "utf-8"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function buildPinYinToSubSubObject() {
+  try {
+    let obj = MODEL.规则.事件;
+
+    for (const key in obj) {
+      if (typeof obj[key] === "object") {
+        for (const subKey in obj[key]) {
+          if (typeof obj[key][subKey] === "object") {
+            // Assuming you have a getPinyin function to get the 拼音
+            obj[key][subKey].拼音 = require("pinyin-pro")
+              .pinyin(subKey, {
+                toneType: "none",
+                type: "array",
+              })
+              .join(" ");
+          }
+        }
+      }
+    }
+
+    const outputString = JSON.stringify(obj, null, 2);
+    fs.writeFileSync(
+      "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
+      outputString,
+      "utf-8"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function buildPinYinToSubObject() {
+  try {
+    //先换成字符串防止属性展开
+    //选项: 常量\.(.*), | 选项: "常量.$1",
+
+    //完成后替换回来
+    //选项: "常量\.(.*)", | 选项: 常量.$1,
+
+    let obj = MODEL.规则.条件;
+
+    for (const key in obj) {
+      obj[key].拼音 = require("pinyin-pro")
+        .pinyin(key, {
+          toneType: "none",
+          type: "array",
+        })
+        .join(" ");
+    }
+
+    const outputString = JSON.stringify(MODEL.规则.条件, null, 2);
+    fs.writeFileSync(
+      "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
+      outputString,
+      "utf-8"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function buildPinYinToSubObject() {
+  try {
+    //先换成字符串防止属性展开
+    //选项: 常量\.(.*), | 选项: "常量.$1",
+
+    //完成后替换回来
+    //选项: "常量\.(.*)", | 选项: 常量.$1,
+
+    let sampleObject = MODEL.规则.动作;
+
+    function replaceProperty(obj, propName, replacement) {
+      if (typeof obj === "object") {
+        if (obj.hasOwnProperty(propName)) {
+          obj[propName] = obj[propName]
+            .split(" ")
+            .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
+            .join(" ");
+        }
+        for (var key in obj) {
+          if (obj.hasOwnProperty(key) && typeof obj[key] === "object") {
+            replaceProperty(obj[key], propName, replacement);
+          }
+        }
+      }
+    }
+
+    replaceProperty(sampleObject, "拼音", sampleObject["拼音"]);
+
+    const outputString = JSON.stringify(MODEL.规则.动作, null, 2);
+    fs.writeFileSync(
+      "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
+      outputString,
+      "utf-8"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function buildPinYinToSubObject() {
+  try {
+    //先换成字符串防止属性展开
+    //选项: 常量\.(.*), | 选项: "常量.$1",
+
+    //完成后替换回来
+    //选项: "常量\.(.*)", | 选项: 常量.$1,
+
+    let obj = MODEL.常量;
+
+    for (const key in obj) {
+      for (const subKey in obj[key]) {
+        for (const subsubKey in obj[key][subKey]) {
+          if (subsubKey == "拼音") {
+            console.log(obj[key][subKey][subsubKey]);
+            obj[key][subKey][subsubKey] = obj[key][subKey][subsubKey]
+              .split(" ")
+              .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
+              .join(" ");
+          }
+        }
+      }
+    }
+
+    const outputString = JSON.stringify(MODEL.常量, null, 2);
+    fs.writeFileSync(
+      "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
+      outputString,
+      "utf-8"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function buildPinYinToSubObject() {
+  try {
+    //先换成字符串防止属性展开
+    //选项: 常量\.(.*), | 选项: "常量.$1",
+
+    //完成后替换回来
+    //选项: "常量\.(.*)", | 选项: 常量.$1,
+
+    let obj = MODEL.扩展;
+
+    for (const key in obj) {
+      obj[key].拼音 = require("pinyin-pro")
+        .pinyin(key, {
+          toneType: "none",
+          type: "array",
+        })
+        .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
+        .join(" ");
+    }
+
+    const outputString = JSON.stringify(MODEL.扩展, null, 2);
     fs.writeFileSync(
       "/Users/x/Desktop/overwatch-workshop/overwatch-workshop/output.txt",
       outputString,

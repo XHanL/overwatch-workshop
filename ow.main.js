@@ -1056,10 +1056,6 @@ function activate(context) {
       {
         provideCompletionItems(document, position, token, context) {
           try {
-            const text = document.getText(
-              document.getWordRangeAtPosition(position)
-            );
-            const isPinyin = !text.match(/[\u4e00-\u9fa5]/);
             const scope = UTIL.getScope(document, position);
             if (scope.name === "全局") {
               return getGlobalCompletions();
@@ -1072,7 +1068,6 @@ function activate(context) {
             } else if (scope.name === "条件") {
               return getConditionCompletions();
             } else if (scope.name === "动作") {
-              //console.log(getActionCompletions());
               return getActionCompletions();
             }
 
@@ -1088,7 +1083,7 @@ function activate(context) {
                     MODEL.模版.全局[i].标签,
                     MODEL.模版.全局[i].提示,
                     undefined,
-                    isPinyin,
+                    undefined,
                     new vscode.SnippetString(`${MODEL.模版.全局[i].格式}`)
                   )
                 );
@@ -1106,9 +1101,7 @@ function activate(context) {
                     i,
                     vscode.CompletionItemKind.Property,
                     MODEL.扩展[i].标签,
-                    MODEL.扩展[i].提示,
-                    undefined,
-                    isPinyin
+                    MODEL.扩展[i].提示
                   )
                 );
               }
@@ -1127,7 +1120,7 @@ function activate(context) {
                     MODEL.模版.规则[i].标签,
                     MODEL.模版.规则[i].提示,
                     undefined,
-                    isPinyin,
+                    undefined,
                     new vscode.SnippetString(`${MODEL.模版.规则[i].格式}`)
                   )
                 );
@@ -1270,16 +1263,14 @@ function activate(context) {
                 vscode.ColorThemeKind.Dark
                   ? "深色"
                   : "浅色";
-              const language = isPinyin ? "补全" : "中文补全";
               let completions = [];
               for (const p in object) {
-                //console.log(object[p][language]);
-                if (object[p][language].hasOwnProperty("深色")) {
+                if (object[p].补全.hasOwnProperty("深色")) {
                   //双色主题图标
-                  completions.push(object[p][language][theme]);
+                  completions.push(object[p].补全[theme]);
                 } else {
                   //通用主题图标
-                  completions.push(object[p][[language]]);
+                  completions.push(object[p].补全);
                 }
               }
               return completions;
@@ -1300,7 +1291,6 @@ function activate(context) {
                     (i.padStart(3, "0") + dynamicList.全局变量[i])
                       .split("")
                       .join(" "),
-                    false,
                     dynamicList.全局变量[i],
                     i.padStart(3, "0")
                   );
@@ -1317,7 +1307,6 @@ function activate(context) {
                     (i.padStart(3, "0") + dynamicList.玩家变量[i])
                       .split("")
                       .join(" "),
-                    false,
                     dynamicList.玩家变量[i],
                     i.padStart(3, "0")
                   );
@@ -1334,7 +1323,6 @@ function activate(context) {
                     (i.padStart(3, "0") + dynamicList.子程序[i])
                       .split("")
                       .join(" "),
-                    false,
                     dynamicList.子程序[i],
                     i.padStart(3, "0")
                   );
