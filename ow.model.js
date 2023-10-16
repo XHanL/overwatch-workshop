@@ -17865,18 +17865,19 @@ let 模版 = {
   },
 };
 
-function buildFilterText(text) {
-  let filterText = "";
-  for (let i = 0; i < text.length; i++) {
-    if (拼音.hasOwnProperty(text[i])) {
-      filterText += `${拼音[text[i]]} ${text[i]} `;
-    } else if (/[\.a-zA-Z0-9： -，“”（）！？…]/.test(text[i])) {
-      filterText += `${text[i]} `;
-    } else {
-      console.log(`拼音缺失: ${text[i]}: "",`);
-    }
+function buildFilterText(text, isPinyin) {
+  try {
+    return isPinyin
+      ? require("pinyin-pro")
+          .pinyin(text, {
+            toneType: "none",
+            type: "array",
+          })
+          .join(" ")
+      : text.split("").join(" ");
+  } catch (error) {
+    console.log(error);
   }
-  return filterText.slice(0, -1);
 }
 
 function buildHover(PATH, name, tags, details) {
@@ -17908,6 +17909,7 @@ function buildCompletion(
   tags,
   details,
   filterText,
+  isPinyin = true,
   insertText,
   sortText,
   command
@@ -17929,9 +17931,9 @@ function buildCompletion(
     item.documentation.appendMarkdown(details);
   }
   if (filterText) {
-    item.filterText = buildFilterText(filterText);
+    item.filterText = buildFilterText(filterText, isPinyin);
   } else {
-    item.filterText = buildFilterText(label);
+    item.filterText = buildFilterText(label, isPinyin);
   }
   if (insertText) {
     item.insertText = insertText;
@@ -17993,6 +17995,15 @@ function buildStaticModels(PATH) {
           vscode.CompletionItemKind.Constant,
           常量[i][j].标签,
           常量[i][j].提示
+        );
+        常量[i][j].中文补全 = buildCompletion(
+          PATH,
+          常量[i][j].名称,
+          vscode.CompletionItemKind.Constant,
+          常量[i][j].标签,
+          常量[i][j].提示,
+          undefined,
+          false
         );
       }
     }
@@ -18082,6 +18093,26 @@ function buildStaticModels(PATH) {
           description + abilities.浅色
         ),
       };
+      常量.英雄[i].中文补全 = {
+        深色: buildCompletion(
+          PATH,
+          常量.英雄[i].名称,
+          vscode.CompletionItemKind.Constant,
+          常量.英雄[i].标签,
+          description + abilities.深色,
+          undefined,
+          false
+        ),
+        浅色: buildCompletion(
+          PATH,
+          常量.英雄[i].名称,
+          vscode.CompletionItemKind.Constant,
+          常量.英雄[i].标签,
+          description + abilities.浅色,
+          undefined,
+          false
+        ),
+      };
     }
   } catch (error) {
     console.log(`错误：buildStaticModels 常量.英雄` + error);
@@ -18122,6 +18153,26 @@ function buildStaticModels(PATH) {
           vscode.CompletionItemKind.Constant,
           常量.图标[i].标签,
           details.浅色
+        ),
+      };
+      常量.图标[i].中文补全 = {
+        深色: buildCompletion(
+          PATH,
+          常量.图标[i].名称,
+          vscode.CompletionItemKind.Constant,
+          常量.图标[i].标签,
+          details.深色,
+          undefined,
+          false
+        ),
+        浅色: buildCompletion(
+          PATH,
+          常量.图标[i].名称,
+          vscode.CompletionItemKind.Constant,
+          常量.图标[i].标签,
+          details.浅色,
+          undefined,
+          false
         ),
       };
     }
@@ -18174,6 +18225,26 @@ function buildStaticModels(PATH) {
             details.浅色
           ),
         };
+        常量.按钮[i].中文补全 = {
+          深色: buildCompletion(
+            PATH,
+            常量.按钮[i].名称,
+            vscode.CompletionItemKind.Constant,
+            常量.按钮[i].标签,
+            details.深色,
+            undefined,
+            false
+          ),
+          浅色: buildCompletion(
+            PATH,
+            常量.按钮[i].名称,
+            vscode.CompletionItemKind.Constant,
+            常量.按钮[i].标签,
+            details.浅色,
+            undefined,
+            false
+          ),
+        };
       } else {
         //通用主题图标
         const details = `
@@ -18192,6 +18263,15 @@ function buildStaticModels(PATH) {
           vscode.CompletionItemKind.Constant,
           常量.按钮[i].标签,
           details
+        );
+        常量.按钮[i].中文补全 = buildCompletion(
+          PATH,
+          常量.按钮[i].名称,
+          vscode.CompletionItemKind.Constant,
+          常量.按钮[i].标签,
+          details,
+          undefined,
+          false
         );
       }
     }
@@ -18217,6 +18297,15 @@ function buildStaticModels(PATH) {
         常量.颜色[i].标签,
         details
       );
+      常量.颜色[i].中文补全 = buildCompletion(
+        PATH,
+        常量.颜色[i].名称,
+        vscode.CompletionItemKind.Constant,
+        常量.颜色[i].标签,
+        details,
+        undefined,
+        false
+      );
     }
   } catch (error) {
     console.log(`错误：buildStaticModels 常量.颜色` + error);
@@ -18229,6 +18318,15 @@ function buildStaticModels(PATH) {
         vscode.CompletionItemKind.Constant,
         常量.字符串[i].标签,
         常量.字符串[i].提示
+      );
+      常量.字符串[i].中文补全 = buildCompletion(
+        PATH,
+        常量.字符串[i].名称,
+        vscode.CompletionItemKind.Constant,
+        常量.字符串[i].标签,
+        常量.字符串[i].提示,
+        undefined,
+        false
       );
     }
   } catch (error) {
@@ -18249,6 +18347,17 @@ function buildStaticModels(PATH) {
         规则.事件.选项[i].标签,
         规则.事件.选项[i].提示,
         undefined,
+        undefined,
+        `${i};`
+      );
+      规则.事件.选项[i].中文补全 = buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Event,
+        规则.事件.选项[i].标签,
+        规则.事件.选项[i].提示,
+        undefined,
+        false,
         `${i};`
       );
     }
@@ -18270,6 +18379,17 @@ function buildStaticModels(PATH) {
         规则.事件.队伍[i].标签,
         规则.事件.队伍[i].提示,
         undefined,
+        undefined,
+        `${i};`
+      );
+      规则.事件.队伍[i].中文补全 = buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Event,
+        规则.事件.队伍[i].标签,
+        规则.事件.队伍[i].提示,
+        undefined,
+        false,
         `${i};`
       );
     }
@@ -18291,6 +18411,18 @@ function buildStaticModels(PATH) {
         规则.事件.玩家[i].标签,
         规则.事件.玩家[i].提示,
         undefined,
+        undefined,
+        `${i};`,
+        规则.事件.玩家[i].顺序
+      );
+      规则.事件.玩家[i].中文补全 = buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Event,
+        规则.事件.玩家[i].标签,
+        规则.事件.玩家[i].提示,
+        undefined,
+        false,
         `${i};`,
         规则.事件.玩家[i].顺序
       );
@@ -18390,6 +18522,21 @@ function buildStaticModels(PATH) {
         规则.条件[i].标签,
         details.replace(/---/g, ""),
         undefined,
+        undefined,
+        规则.条件[i].hasOwnProperty("格式")
+          ? new vscode.SnippetString(规则.条件[i].格式)
+          : insertText,
+        undefined,
+        command
+      );
+      规则.条件[i].中文补全 = buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Class,
+        规则.条件[i].标签,
+        details.replace(/---/g, ""),
+        undefined,
+        false,
         规则.条件[i].hasOwnProperty("格式")
           ? new vscode.SnippetString(规则.条件[i].格式)
           : insertText,
@@ -18482,6 +18629,19 @@ function buildStaticModels(PATH) {
         规则.动作[i].标签,
         details.replace(/---/g, ""),
         undefined,
+        undefined,
+        insertText,
+        undefined,
+        command
+      );
+      规则.动作[i].中文补全 = buildCompletion(
+        PATH,
+        i,
+        vscode.CompletionItemKind.Method,
+        规则.动作[i].标签,
+        details.replace(/---/g, ""),
+        undefined,
+        false,
         insertText,
         undefined,
         command
