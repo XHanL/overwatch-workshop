@@ -4,11 +4,11 @@ from PIL import Image
 background_color = (31, 31, 31)  # For example, white background
 
 # List of image file paths to combine vertically
-image_paths = ["image1.png", "image2.png", "image3.png", "image4.png"]
+image_paths = ["image1.png", "image2.png", "image3.png"]
 
 # Open the images and get their dimensions
 images = [Image.open(image_path) for image_path in image_paths]
-width, total_height = images[3].size[0], sum(image.size[1] for image in images)
+width, total_height = images[2].size[0], sum(image.size[1] for image in images)
 
 # Create a new blank image with the specified background color
 combined_image = Image.new("RGB", (width, total_height), background_color)
