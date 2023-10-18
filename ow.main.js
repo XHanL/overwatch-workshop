@@ -562,6 +562,7 @@ function activate(context) {
                                 if (options.includes("混淆索引")) {
                                   if (
                                     [
+                                      "开始镜头",
                                       "小字体信息",
                                       "大字体信息",
                                       "创建光束效果",
