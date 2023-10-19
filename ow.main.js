@@ -4986,9 +4986,9 @@ function activate(context) {
                         "ow",
                         "hero",
                         "ability",
-                        "support_illari_weapon.png"
+                        "support_illari_secondaryfire.png"
                       )
-                    )}" height="32"></td>
+                    )}" class="icon"></td>
                     <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
                       vscode.Uri.joinPath(
                         extensionUri,

@@ -3974,9 +3974,13 @@ let 常量 = {
         职责: "200",
       },
       技能: {
-        阳焰步枪: {
+        "阳焰步枪-蓄力射击": {
           图标: "images/ow/hero/ability/support_illari_weapon.png",
-          绑定: ["主要攻击模式", "辅助攻击模式"],
+          绑定: ["主要攻击模式"],
+        },
+        "阳焰步枪-治疗光束": {
+          图标: "images/ow/hero/ability/support_illari_secondaryfire.png",
+          绑定: ["辅助攻击模式"],
         },
         桎梏灼日: {
           图标: {
