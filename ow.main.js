@@ -1762,12 +1762,8 @@ function activate(context) {
 
           function getModeTableHtml() {
             const mode = MODEL.常量.模式
-              .map((element, index) => {
-                if (index % 2 === 0) {
-                  return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-                } else {
-                  return `<td style="text-align: center;">${element.名称}</td>`;
-                }
+              .map((element) => {
+                return `<tr><td style="text-align: center;">${element.名称}</td></tr>`;
               })
               .join("");
             return `<!DOCTYPE html>
@@ -1782,9 +1778,7 @@ function activate(context) {
                     <button style="width: auto; height: 25px;" onclick="navigate('Home')">返回</button>
                     <i><h3>模式</h3></i>
                     <table style="min-width: 300px; max-width: 400px;">
-                    <tr>
                     ${mode}
-                    </tr>
                     </table>
                     </body>
                     </html>`;
@@ -1792,12 +1786,8 @@ function activate(context) {
 
           function getMapTableHtml() {
             const maps = MODEL.常量.地图
-              .map((element, index) => {
-                if (index % 2 === 0) {
-                  return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
-                } else {
-                  return `<td style="text-align: center;">${element.名称}</td>`;
-                }
+              .map((element) => {
+                return `<tr><td style="text-align: center;">${element.名称}</td></tr>`;
               })
               .join("");
             return `<!DOCTYPE html>
@@ -1812,9 +1802,7 @@ function activate(context) {
                     <button style="width: auto; height: 25px;" onclick="navigate('Home')">返回</button>
                     <i><h3>地图</h3></i>
                     <table style="min-width: 300px; max-width: 500px;">
-                    <tr>
                     ${maps}
-                    </tr>
                     </table>
                     </body>
                     </html>`;
@@ -5108,6 +5096,11 @@ function activate(context) {
                 return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
               })
               .join("");
+            const beamEffects = MODEL.常量.光束效果
+              .map((element, index) => {
+                return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
+              })
+              .join("");
             const playerEffects = MODEL.常量.播放效果
               .map((element, index) => {
                 return `</tr><tr><td style="text-align: center;">${element.名称}</td>`;
@@ -5128,6 +5121,13 @@ function activate(context) {
                     <table style="min-width: 300px; max-width: 525px;">
                     <tr>
                     ${effects}
+                    </tr>
+                    </table>
+
+                    <i><h3>光束效果</h3></i>
+                    <table style="min-width: 300px; max-width: 525px;">
+                    <tr>
+                    ${beamEffects}
                     </tr>
                     </table>
 
