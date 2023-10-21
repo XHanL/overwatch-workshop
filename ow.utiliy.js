@@ -28,7 +28,8 @@ function getDynamicType(text) {
       return "玩家变量";
     }
   } catch (error) {
-    console.log(`错误：getDynamicType 获取动态类型` + error);
+    console.log(`错误：getDynamicType 获取动态类型`);
+    console.log(error);
     return undefined;
   }
 }
@@ -102,7 +103,8 @@ function getDynamicList(document) {
       子程序: subroutines,
     };
   } catch (error) {
-    console.log(`错误：getDynamicList 获取动态列表` + error);
+    console.log(`错误：getDynamicList 获取动态列表`);
+    console.log(error);
     return undefined;
   }
 }
@@ -123,7 +125,8 @@ function getPrevValidPosition(document, pos) {
       return undefined;
     }
   } catch (error) {
-    console.log(`错误：getPrevValidPosition 获取前一个合法位置` + error);
+    console.log(`错误：getPrevValidPosition 获取前一个合法位置`);
+    console.log(error);
     return undefined;
   }
 }
@@ -144,7 +147,8 @@ function getNextValidPosition(document, pos) {
       return undefined;
     }
   } catch (error) {
-    console.log(`错误：getNextValidPosition 获取后一个合法位置` + error);
+    console.log(`错误：getNextValidPosition 获取后一个合法位置`);
+    console.log(error);
     return undefined;
   }
 }
@@ -174,7 +178,8 @@ function getPrevValidWordRange(document, position, pattern, includingSelf) {
     }
     return range;
   } catch (error) {
-    console.log(`错误：getPrevValidWordRange 获取前一个合法单词范围` + error);
+    console.log(`错误：getPrevValidWordRange 获取前一个合法单词范围`);
+    console.log(error);
     return undefined;
   }
 }
@@ -204,7 +209,8 @@ function getNextValidWordRange(document, position, pattern, includingSelf) {
     }
     return range;
   } catch (error) {
-    console.log(`错误：getNextValidWordRange 获取后一个合法单词范围` + error);
+    console.log(`错误：getNextValidWordRange 获取后一个合法单词范围`);
+    console.log(error);
     return undefined;
   }
 }
@@ -219,10 +225,12 @@ function getScope(document, position) {
       const line = document.lineAt(i);
       const lineRange = line.range;
       const lineText = document.getText(lineRange).trim();
+
       //跳过当前行
       if (lineText == "" || lineText.startsWith("//")) {
         continue;
       }
+
       //识别符号
       if (lineText.startsWith("{")) {
         if (rightBracesCount > 0) {
@@ -242,6 +250,7 @@ function getScope(document, position) {
             name: prevText,
             first: nextText,
             index: semicolonCount,
+            range: new vscode.Range(new vscode.Position(i, 0), position),
           };
         }
       } else if (lineText.endsWith("}")) {
@@ -261,8 +270,32 @@ function getScope(document, position) {
       name: "全局",
     };
   } catch (error) {
-    console.log(`错误：getScope 获取当前作用域` + error);
+    console.log(`错误：getScope 获取当前作用域`);
+    console.log(error);
     return undefined;
+  }
+}
+
+//获取忽略范围(注释/字符串)
+function getIgnoreRanges(document, range) {
+  try {
+    const text = document.getText(range);
+    const regex = /(?:"(?:\\"|[^"])*"|\/\/[^\n\r]*|\/\*[\s\S]*?\*\/)/g;
+    const matchRanges = [];
+    while ((match = regex.exec(text))) {
+      const startPos = document.positionAt(
+        document.offsetAt(range.start) + match.index
+      );
+      const endPos = document.positionAt(
+        document.offsetAt(range.start) + match.index + match[0].length
+      );
+      const matchRange = new vscode.Range(startPos, endPos);
+      matchRanges.push(matchRange);
+    }
+    return matchRanges;
+  } catch (error) {
+    console.log(`错误：getCommentRanges 获取忽略范围(注释/字符串)`);
+    console.log(error);
   }
 }
 
@@ -271,7 +304,13 @@ function getEntry(document, position, scope) {
   try {
     let rightParenthesesCount = 0;
     let commasCount = 0;
-    let isString = false;
+    let ignoreRanges = undefined;
+
+    //尝试获取忽略范围(注释/字符串)
+    if (scope.hasOwnProperty("range")) {
+      ignoreRanges = getIgnoreRanges(document, scope.range);
+    }
+
     for (let i = position.line; i >= 0; i--) {
       //当前行
       const line = document.lineAt(i);
@@ -288,29 +327,25 @@ function getEntry(document, position, scope) {
         i == position.line ? position.character : line.range.end.character;
 
       for (let j = lastCharacter; j >= 0; j--) {
+        //当前字符范围
         const charStart = new vscode.Position(i, j);
         const charEnd = charStart.translate(0, 1);
         const charRange = new vscode.Range(charStart, charEnd);
-        const charText = document.getText(charRange);
 
-        if (charText == '"') {
-          if (j > 0) {
-            const prevRange = new vscode.Range(
-              charEnd.translate(0, -2),
-              charEnd.translate(0, -1)
-            );
-            const prevText = document.getText(prevRange);
-            if (prevText == "\\") {
-              continue;
-            }
+        //跳过忽略范围(注释/字符串)
+        if (ignoreRanges) {
+          const filterRanges = ignoreRanges.filter((range) =>
+            range.contains(charRange)
+          );
+          if (filterRanges.length > 0) {
+            i = filterRanges[0].start.line;
+            j = filterRanges[0].start.character;
+            continue;
           }
-          isString = !isString;
         }
 
-        if (isString || charText == " ") {
-          continue;
-        }
-
+        //匹配符号
+        const charText = document.getText(charRange);
         if ((match = charText.match(/[\{\;]/))) {
           return scope.name;
         } else if (charText == "(") {
@@ -352,7 +387,6 @@ function getEntry(document, position, scope) {
             true
           );
           const name = document.getText(range);
-          console.log(name);
           if (name === "" || name.match(/^-?\d+$/)) {
             return;
           }
@@ -368,24 +402,7 @@ function getEntry(document, position, scope) {
             )
           );
 
-          if (charText === "/" && j > 0) {
-            //跳过注释
-            if (prevCharText === "/") {
-              j -= 1;
-              continue;
-            } else if (prevCharText === "*") {
-              const commentRange = getPrevValidWordRange(
-                document,
-                charStart,
-                /\/\*/
-              );
-              i = commentRange.start.line;
-              j = commentRange.start.character;
-              continue;
-            } else {
-              return "条件";
-            }
-          } else if (prevCharText == ".") {
+          if (prevCharText == ".") {
             //跳过变量
             continue;
           } else {
@@ -396,7 +413,8 @@ function getEntry(document, position, scope) {
     }
     console.log(`性能警告：getEntry 获取当前条目`);
   } catch (error) {
-    console.log(`错误：getEntry 获取当前条目` + error);
+    console.log(`错误：getEntry 获取当前条目`);
+    console.log(error);
     return undefined;
   }
 }
@@ -430,6 +448,7 @@ module.exports = {
   getNextValidPosition,
   getPrevValidWordRange,
   getNextValidWordRange,
+  getIgnoreRanges,
   getScope,
   getEntry,
   getShuffleList,

@@ -33,7 +33,8 @@ function activate(context) {
             }
           });
       } catch (error) {
-        console.log("错误：ow.command.newFile 新建文件能力" + error);
+        console.log("错误：ow.command.newFile 新建文件能力");
+        console.log(error);
       }
     }),
 
@@ -43,7 +44,8 @@ function activate(context) {
         vscode.commands.executeCommand("editor.action.triggerSuggest");
         vscode.commands.executeCommand("editor.action.triggerParameterHints");
       } catch (error) {
-        console.log("错误：ow.command.suggest 主动建议能力" + error);
+        console.log("错误：ow.command.suggest 主动建议能力");
+        console.log(error);
       }
     }),
 
@@ -52,7 +54,8 @@ function activate(context) {
       try {
         vscode.commands.executeCommand("editor.action.toggleWordWrap");
       } catch (error) {
-        console.log("错误：ow.command.line 自动换行能力" + error);
+        console.log("错误：ow.command.line 自动换行能力");
+        console.log(error);
       }
     }),
 
@@ -77,7 +80,8 @@ function activate(context) {
           );
         }
       } catch (error) {
-        console.log("错误：ow.command.copy 导出修复能力" + error);
+        console.log("错误：ow.command.copy 导出修复能力");
+        console.log(error);
       }
     }),
 
@@ -107,7 +111,8 @@ function activate(context) {
           });
         }
       } catch (error) {
-        console.log("错误：ow.command.paste 修复导入能力" + error);
+        console.log("错误：ow.command.paste 修复导入能力");
+        console.log(error);
       }
     }),
 
@@ -731,7 +736,8 @@ function activate(context) {
               });
           });
       } catch (error) {
-        console.log("错误：ow.command.obfuscate 代码混淆能力" + error);
+        console.log("错误：ow.command.obfuscate 代码混淆能力");
+        console.log(error);
       }
     }),
 
@@ -849,7 +855,8 @@ function activate(context) {
           }
           return documentSymbols;
         } catch (error) {
-          console.log("错误：provideDocumentSymbols 代码大纲能力" + error);
+          console.log("错误：provideDocumentSymbols 代码大纲能力");
+          console.log(error);
         }
       },
     }),
@@ -880,7 +887,8 @@ function activate(context) {
           }
           return colors;
         } catch (error) {
-          console.log("错误：provideDocumentColors 调色盘能力" + error);
+          console.log("错误：provideDocumentColors 调色盘能力");
+          console.log(error);
         }
       },
       provideColorPresentations(color) {
@@ -897,7 +905,8 @@ function activate(context) {
             ")";
           return [new vscode.ColorPresentation(newColor)];
         } catch (error) {
-          console.log("错误：provideColorPresentations 调色盘能力" + error);
+          console.log("错误：provideColorPresentations 调色盘能力");
+          console.log(error);
         }
       },
     }),
@@ -1046,7 +1055,8 @@ function activate(context) {
             }
           }
         } catch (error) {
-          console.log("错误：provideHover 悬停提示能力" + error);
+          console.log("错误：provideHover 悬停提示能力");
+          console.log(error);
         }
       },
     }),
@@ -1337,7 +1347,8 @@ function activate(context) {
               return completionItems;
             }
           } catch (error) {
-            console.log("错误：provideCompletionItems 补全建议能力" + error);
+            console.log("错误：provideCompletionItems 补全建议能力");
+            console.log(error);
           }
         },
       },
@@ -1384,7 +1395,8 @@ function activate(context) {
           }
         }
       } catch (error) {
-        console.log("错误：onDidChangeTextDocument 补全占位符监视" + error);
+        console.log("错误：onDidChangeTextDocument 补全占位符监视");
+        console.log(error);
       }
     }),
 
@@ -1488,7 +1500,8 @@ function activate(context) {
               return signatureHelp;
             }
           } catch (error) {
-            console.log("错误：provideSignatureHelp 参数提示能力" + error);
+            console.log("错误：provideSignatureHelp 参数提示能力");
+            console.log(error);
           }
         },
       },
@@ -1690,7 +1703,8 @@ function activate(context) {
           await processMatchesAsync();
           return codeLens;
         } catch (error) {
-          console.log("错误：provideCodeLenses 切换开关能力" + error);
+          console.log("错误：provideCodeLenses 切换开关能力");
+          console.log(error);
         }
       },
     }),
@@ -1709,7 +1723,8 @@ function activate(context) {
         edit.replace(document.uri, range, text);
         vscode.workspace.applyEdit(edit);
       } catch (error) {
-        console.log("错误：ow.toggle.disableRule 切换开关行为" + error);
+        console.log("错误：ow.toggle.disableRule 切换开关行为");
+        console.log(error);
       }
     }),
 
@@ -5179,7 +5194,8 @@ function activate(context) {
             }
           });
         } catch (error) {
-          console.log("错误：resolveWebviewView 面板手册能力" + error);
+          console.log("错误：resolveWebviewView 面板手册能力");
+          console.log(error);
         }
       },
     })
