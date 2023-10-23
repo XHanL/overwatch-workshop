@@ -419,13 +419,13 @@ function getEntry(document, position, scope) {
   }
 }
 
-function getShuffleList(list) {
-  let shuffled = list;
-  for (let i = shuffled.length - 1; i > 0; i--) {
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+
+    // Swap elements at i and j
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  return shuffled;
 }
 
 //获取混淆名称
@@ -436,7 +436,8 @@ function getObfuscatedNames(length) {
     .map((x) =>
       x.toString(2).padStart(12, "0").replace(/0/g, "l").replace(/1/g, "I")
     );
-  return getShuffleList(array).slice(0, length);
+  shuffleArray(array);
+  return array.slice(0, length);
 }
 
 module.exports = {
@@ -451,6 +452,6 @@ module.exports = {
   getIgnoreRanges,
   getScope,
   getEntry,
-  getShuffleList,
+  shuffleArray,
   getObfuscatedNames,
 };

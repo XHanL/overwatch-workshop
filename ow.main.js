@@ -326,22 +326,16 @@ function activate(context) {
                     全局变量: [],
                     玩家变量: [],
                   };
-                  for (const i in dynamicList.子程序) {
-                    obfuscatedList.子程序[i] = obfuscatedNames[i];
-                  }
-                  for (const i in dynamicList.全局变量) {
-                    obfuscatedList.全局变量[i] = obfuscatedNames[i];
-                  }
-                  for (const i in dynamicList.玩家变量) {
-                    obfuscatedList.玩家变量[i] = obfuscatedNames[i];
-                  }
 
                   //混淆子程序
                   for (const i in dynamicList.子程序) {
+                    //更新混淆列表
+                    obfuscatedList.子程序.push(obfuscatedNames[i]);
+
                     //事件
                     rules = rules.replace(
                       RegExp(`^\\b${dynamicList.子程序[i]}\\b;$`, "gm"),
-                      `${obfuscatedList.子程序[i]};`
+                      `${obfuscatedNames[i]};`
                     );
                     //开始规则
                     rules = rules.replace(
@@ -349,7 +343,7 @@ function activate(context) {
                         `开始规则\\(\\b${dynamicList.子程序[i]}\\b,(.*)\\);`,
                         "g"
                       ),
-                      `开始规则(${obfuscatedList.子程序[i]},$1);`
+                      `开始规则(${obfuscatedNames[i]},$1);`
                     );
                     //调用子程序
                     rules = rules.replace(
@@ -357,16 +351,19 @@ function activate(context) {
                         `调用子程序\\(\\b${dynamicList.子程序[i]}\\b\\);`,
                         "g"
                       ),
-                      `调用子程序(${obfuscatedList.子程序[i]});`
+                      `调用子程序(${obfuscatedNames[i]});`
                     );
                   }
 
                   //混淆全局变量
                   for (const i in dynamicList.全局变量) {
+                    //更新混淆列表
+                    obfuscatedList.全局变量.push(obfuscatedNames[i]);
+
                     //前缀为 "全局."
                     rules = rules.replace(
                       RegExp(`全局\\.\\b${dynamicList.全局变量[i]}\\b`, "g"),
-                      `全局.${obfuscatedList.全局变量[i]}`
+                      `全局.${obfuscatedNames[i]}`
                     );
 
                     //For 全局变量
@@ -375,7 +372,7 @@ function activate(context) {
                         `For 全局变量\\(\\b${dynamicList.全局变量[i]}\\b,(.*),(.*),(.*)\\);`,
                         "g"
                       ),
-                      `For 全局变量(${obfuscatedList.全局变量[i]},$1,$2,$3);`
+                      `For 全局变量(${obfuscatedNames[i]},$1,$2,$3);`
                     );
                     //设置全局变量
                     rules = rules.replace(
@@ -383,7 +380,7 @@ function activate(context) {
                         `设置全局变量\\(\\b${dynamicList.全局变量[i]}\\b,(.*)\\);`,
                         "g"
                       ),
-                      `设置全局变量(${obfuscatedList.全局变量[i]},$1);`
+                      `设置全局变量(${obfuscatedNames[i]},$1);`
                     );
                     //修改全局变量
                     rules = rules.replace(
@@ -391,7 +388,7 @@ function activate(context) {
                         `修改全局变量\\(\\b${dynamicList.全局变量[i]}\\b,(.*),(.*)\\);`,
                         "g"
                       ),
-                      `修改全局变量(${obfuscatedList.全局变量[i]},$1,$2);`
+                      `修改全局变量(${obfuscatedNames[i]},$1,$2);`
                     );
                     //在索引处设置全局变量
                     rules = rules.replace(
@@ -399,7 +396,7 @@ function activate(context) {
                         `在索引处设置全局变量\\(\\b${dynamicList.全局变量[i]}\\b,(.*),(.*)\\);`,
                         "g"
                       ),
-                      `在索引处设置全局变量(${obfuscatedList.全局变量[i]},$1,$2);`
+                      `在索引处设置全局变量(${obfuscatedNames[i]},$1,$2);`
                     );
                     //在索引处修改全局变量
                     rules = rules.replace(
@@ -407,7 +404,7 @@ function activate(context) {
                         `在索引处修改全局变量\\(\\b${dynamicList.全局变量[i]}\\b,(.*),(.*),(.*)\\);`,
                         "g"
                       ),
-                      `在索引处修改全局变量(${obfuscatedList.全局变量[i]},$1,$2,$3);`
+                      `在索引处修改全局变量(${obfuscatedNames[i]},$1,$2,$3);`
                     );
                     //持续追踪全局变量
                     rules = rules.replace(
@@ -415,7 +412,7 @@ function activate(context) {
                         `持续追踪全局变量\\(\\b${dynamicList.全局变量[i]}\\b,(.*),(.*),(.*)\\);`,
                         "g"
                       ),
-                      `持续追踪全局变量(${obfuscatedList.全局变量[i]},$1,$2,$3);`
+                      `持续追踪全局变量(${obfuscatedNames[i]},$1,$2,$3);`
                     );
                     //追踪全局变量频率
                     rules = rules.replace(
@@ -423,7 +420,7 @@ function activate(context) {
                         `追踪全局变量频率\\(\\b${dynamicList.全局变量[i]}\\b,(.*),(.*),(.*)\\);`,
                         "g"
                       ),
-                      `追踪全局变量频率(${obfuscatedList.全局变量[i]},$1,$2,$3);`
+                      `追踪全局变量频率(${obfuscatedNames[i]},$1,$2,$3);`
                     );
                     //停止追踪全局变量
                     rules = rules.replace(
@@ -431,16 +428,19 @@ function activate(context) {
                         `停止追踪全局变量\\(\\b${dynamicList.全局变量[i]}\\b\\);`,
                         "g"
                       ),
-                      `停止追踪全局变量(${obfuscatedList.全局变量[i]});`
+                      `停止追踪全局变量(${obfuscatedNames[i]});`
                     );
                   }
 
                   //混淆玩家变量
                   for (const i in dynamicList.玩家变量) {
+                    //更新混淆列表
+                    obfuscatedList.玩家变量.push(obfuscatedNames[i]);
+
                     //前缀为 "."
                     rules = rules.replace(
                       RegExp(`\\.\\b${dynamicList.玩家变量[i]}\\b`, "g"),
-                      `.${obfuscatedList.玩家变量[i]}`
+                      `.${obfuscatedNames[i]}`
                     );
                     //For 玩家变量
                     rules = rules.replace(
@@ -448,7 +448,7 @@ function activate(context) {
                         `For 玩家变量\\((.*),\\b${dynamicList.玩家变量[i]}\\b,(.*),(.*),(.*)\\);`,
                         "g"
                       ),
-                      `For 玩家变量($1,${obfuscatedList.玩家变量[i]},$2,$3,$4);`
+                      `For 玩家变量($1,${obfuscatedNames[i]},$2,$3,$4);`
                     );
                     //设置玩家变量
                     rules = rules.replace(
@@ -456,7 +456,7 @@ function activate(context) {
                         `设置玩家变量\\((.*),\\b${dynamicList.玩家变量[i]}\\b,(.*)\\);`,
                         "g"
                       ),
-                      `设置玩家变量($1,${obfuscatedList.玩家变量[i]},$2);`
+                      `设置玩家变量($1,${obfuscatedNames[i]},$2);`
                     );
                     //修改玩家变量
                     rules = rules.replace(
@@ -464,7 +464,7 @@ function activate(context) {
                         `修改玩家变量\\((.*),\\b${dynamicList.玩家变量[i]}\\b,(.*),(.*)\\);`,
                         "g"
                       ),
-                      `修改玩家变量($1,${obfuscatedList.玩家变量[i]},$2,$3);`
+                      `修改玩家变量($1,${obfuscatedNames[i]},$2,$3);`
                     );
                     //在索引处设置玩家变量
                     rules = rules.replace(
@@ -472,7 +472,7 @@ function activate(context) {
                         `在索引处设置玩家变量\\((.*),\\b${dynamicList.玩家变量[i]}\\b,(.*),(.*)\\);`,
                         "g"
                       ),
-                      `在索引处设置玩家变量($1,${obfuscatedList.玩家变量[i]},$2,$3);`
+                      `在索引处设置玩家变量($1,${obfuscatedNames[i]},$2,$3);`
                     );
                     //在索引处修改玩家变量
                     rules = rules.replace(
@@ -480,7 +480,7 @@ function activate(context) {
                         `在索引处修改玩家变量\\((.*),\\b${dynamicList.玩家变量[i]}\\b,(.*),(.*),(.*)\\);`,
                         "g"
                       ),
-                      `在索引处修改玩家变量($1,${obfuscatedList.玩家变量[i]},$2,$3,$4);`
+                      `在索引处修改玩家变量($1,${obfuscatedNames[i]},$2,$3,$4);`
                     );
                     //持续追踪玩家变量
                     rules = rules.replace(
@@ -488,7 +488,7 @@ function activate(context) {
                         `持续追踪玩家变量\\((.*),\\b${dynamicList.玩家变量[i]}\\b,(.*),(.*),(.*)\\);`,
                         "g"
                       ),
-                      `持续追踪玩家变量($1,${obfuscatedList.玩家变量[i]},$2,$3,$4);`
+                      `持续追踪玩家变量($1,${obfuscatedNames[i]},$2,$3,$4);`
                     );
                     //追踪玩家变量频率
                     rules = rules.replace(
@@ -496,7 +496,7 @@ function activate(context) {
                         `追踪玩家变量频率\\((.*),\\b${dynamicList.玩家变量[i]}\\b,(.*),(.*),(.*)\\);`,
                         "g"
                       ),
-                      `追踪玩家变量频率($1,${obfuscatedList.玩家变量[i]},$2,$3,$4);`
+                      `追踪玩家变量频率($1,${obfuscatedNames[i]},$2,$3,$4);`
                     );
                     //停止追踪玩家变量
                     rules = rules.replace(
@@ -504,7 +504,7 @@ function activate(context) {
                         `停止追踪玩家变量\\((.*),\\b${dynamicList.玩家变量[i]}\\b\\);`,
                         "g"
                       ),
-                      `停止追踪玩家变量($1,${obfuscatedList.玩家变量[i]});`
+                      `停止追踪玩家变量($1,${obfuscatedNames[i]});`
                     );
                   }
 
@@ -704,6 +704,7 @@ function activate(context) {
 
                   //混淆子程序列表
                   if (obfuscatedList.子程序.length > 0) {
+                    UTIL.shuffleArray(obfuscatedList.子程序);
                     subroutines += `子程序{\n`;
                     for (const i in obfuscatedList.子程序) {
                       subroutines += `${i}: ${obfuscatedList.子程序[i]}\n`;
@@ -714,12 +715,14 @@ function activate(context) {
                   //混淆变量列表
                   variables += `变量{\n`;
                   if (obfuscatedList.全局变量.length > 0) {
+                    UTIL.shuffleArray(obfuscatedList.全局变量);
                     variables += `全局:\n`;
                     for (const i in obfuscatedList.全局变量) {
                       variables += `${i}: ${obfuscatedList.全局变量[i]}\n`;
                     }
                   }
                   if (obfuscatedList.玩家变量.length > 0) {
+                    UTIL.shuffleArray(obfuscatedList.玩家变量);
                     variables += `玩家:\n`;
                     for (const i in obfuscatedList.玩家变量) {
                       variables += `${i}: ${obfuscatedList.玩家变量[i]}\n`;
