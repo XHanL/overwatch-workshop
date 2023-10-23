@@ -142,14 +142,18 @@ function activate(context) {
               //用户取消
               return;
             }
-            const pickItems = ["填充规则", "混淆索引", "混淆字符"].map(
-              (label) => {
-                return {
-                  label: label,
-                  picked: true,
-                };
-              }
-            );
+            const pickItems = [
+              "填充规则（占用更多元素）",
+              "混淆字符（影响字符比较，例如玩家名称或数字）",
+              "混淆索引（影响负载，占用更多元素）",
+              "混淆本地索引（影响帧率表现）",
+            ].map((label, index) => {
+              return {
+                label: label,
+                index: index,
+                picked: true,
+              };
+            });
             vscode.window
               .showQuickPick(pickItems, {
                 title: "混淆生成   2 / 2",
@@ -164,7 +168,7 @@ function activate(context) {
 
                 //获取用户配置
                 const options = selected.map((option) => {
-                  return option.label;
+                  return option.index;
                 });
 
                 //最大元素数量
@@ -247,7 +251,7 @@ function activate(context) {
                         //替换混淆字符
                         //console.log(`替换字符：${string} → ❖`);
                         strings.push(
-                          options.includes("混淆字符")
+                          options.includes(1)
                             ? string.replace(
                                 /\{[0-2]\}|(\\[abfnrtv'"\\\\])+|./g,
                                 (char) => {
@@ -527,16 +531,14 @@ function activate(context) {
                               .split("✂")
                               .map((entry) => {
                                 //混淆索引
-                                return options.includes("混淆索引")
+                                return options.includes(2)
                                   ? entry.replace(
                                       /\[(\d+)\]/g,
                                       (match, number) => {
                                         // 预留330 = 查看器警告2 + 篡改保护25 + 填充规则300 + 允许继续的自身3
                                         if (
                                           elementCount >=
-                                          (options.includes("填充规则")
-                                            ? 330
-                                            : 30)
+                                          (options.includes(0) ? 330 : 30)
                                         ) {
                                           //加密服务端计算条目其它索引
                                           elementCount -= 3;
@@ -564,26 +566,26 @@ function activate(context) {
                               })
                               .map((entry) => {
                                 //混淆索引
-                                if (options.includes("混淆索引")) {
-                                  if (
-                                    [
-                                      "开始镜头",
-                                      "小字体信息",
-                                      "大字体信息",
-                                      "创建光束效果",
-                                      "创建效果",
-                                      "播放效果",
-                                      "创建图标",
-                                      "创建地图文本",
-                                      "创建进度条地图文本",
-                                      "创建HUD文本",
-                                      "创建进度条HUD文本",
-                                      "创建弹道",
-                                      "创建弹道效果",
-                                      "创建追踪弹道",
-                                      "设置目标点描述",
-                                    ].some((name) => entry.startsWith(name))
-                                  ) {
+                                if (
+                                  [
+                                    "开始镜头",
+                                    "小字体信息",
+                                    "大字体信息",
+                                    "创建光束效果",
+                                    "创建效果",
+                                    "播放效果",
+                                    "创建图标",
+                                    "创建地图文本",
+                                    "创建进度条地图文本",
+                                    "创建HUD文本",
+                                    "创建进度条HUD文本",
+                                    "创建弹道",
+                                    "创建弹道效果",
+                                    "创建追踪弹道",
+                                    "设置目标点描述",
+                                  ].some((name) => entry.startsWith(name))
+                                ) {
+                                  if (options.includes(3)) {
                                     //加密客户端计算条目索引
                                     entry = entry.replace(
                                       /\[(\d+)\]/g,
@@ -595,16 +597,16 @@ function activate(context) {
                                         ).toFixed(3)}]`;
                                       }
                                     );
-                                  } else {
+                                  }
+                                } else {
+                                  if (options.includes(2)) {
                                     entry = entry.replace(
                                       /\[(\d+)\]/g,
                                       (match, number) => {
                                         // 预留330 = 查看器警告2 + 篡改保护25 + 填充规则300 + 允许继续的自身3
                                         if (
                                           elementCount >=
-                                          (options.includes("填充规则")
-                                            ? 330
-                                            : 30)
+                                          (options.includes(0) ? 330 : 30)
                                         ) {
                                           //加密服务端计算条目其它索引
                                           elementCount -= 3;
@@ -664,7 +666,7 @@ function activate(context) {
                   for (let i = 0; i < ruleList.length; i++) {
                     obfuscatedRules.push(ruleList[i]);
                     //填充空白规则 (随机插入，1元素/个)
-                    if (options.includes("填充规则")) {
+                    if (options.includes(0)) {
                       for (let j = 0; j < length; j++) {
                         if (elementCount > 0) {
                           obfuscatedRules.push(`规则(""){事件{持续 - 全局;}}`);
