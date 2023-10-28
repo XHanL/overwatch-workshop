@@ -279,18 +279,28 @@ function getScope(document, position) {
 //获取忽略范围(注释/字符串)
 function getIgnoreRanges(document, range) {
   try {
-    const text = document.getText(range);
-    const regex = /(?:"(?:\\"|[^"])*"|\/\/[^\n\r]*|\/\*[\s\S]*?\*\/)/g;
     const matchRanges = [];
-    while ((match = regex.exec(text))) {
-      const startPos = document.positionAt(
-        document.offsetAt(range.start) + match.index
-      );
-      const endPos = document.positionAt(
-        document.offsetAt(range.start) + match.index + match[0].length
-      );
-      const matchRange = new vscode.Range(startPos, endPos);
-      matchRanges.push(matchRange);
+    const regex = /(?:"(?:\\"|[^"])*"|\/\/[^\n\r]*|\/\*[\s\S]*?\*\/)/g;
+    if (range) {
+      const text = document.getText(range);
+      while ((match = regex.exec(text))) {
+        const startPos = document.positionAt(
+          document.offsetAt(range.start) + match.index
+        );
+        const endPos = document.positionAt(
+          document.offsetAt(range.start) + match.index + match[0].length
+        );
+        const matchRange = new vscode.Range(startPos, endPos);
+        matchRanges.push(matchRange);
+      }
+    } else {
+      const text = document.getText();
+      while ((match = regex.exec(text))) {
+        const startPos = document.positionAt(match.index);
+        const endPos = document.positionAt(match.index + match[0].length);
+        const matchRange = new vscode.Range(startPos, endPos);
+        matchRanges.push(matchRange);
+      }
     }
     return matchRanges;
   } catch (error) {

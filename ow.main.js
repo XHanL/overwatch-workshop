@@ -1590,7 +1590,7 @@ function activate(context) {
           const text = document.getText();
           const indentations = {};
           const pattern =
-            /"(?:[^"\\]|\\.)*"|\{|\}|\[|\]|\(|\)|全局:|玩家:|For 全局变量|For 玩家变量|While|If|Else If|Else|End/gm;
+            /(?:"(?:\\"|[^"])*"|\/\/[^\n\r]*|\/\*[\s\S]*?\*\/)|\{|\}|\[|\]|\(|\)|全局:|玩家:|For 全局变量|For 玩家变量|While|If|Else If|Else|End/g;
           let isVariable = false;
           let level = 0;
           let ignore = 0;
