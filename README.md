@@ -1,6 +1,6 @@
 # <img src="docs/images/readme/icon.png" width="50" height="50" align=center width=500 /> **Overwatch®** Workshop
 
-### **守望先锋 ®** 工坊语言支持（中文）
+### **守望先锋 ®** 工坊语言支持
 
 <br>
 
