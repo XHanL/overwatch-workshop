@@ -3,7 +3,7 @@
   "name": "overwatch-workshop",
   "displayName": "Overwatch Workshop",
   "publisher": "Xcrystal",
-  "description": "守望先锋® 工坊语言支持",
+  "description": "守望先锋® 工坊语言支持（中文）",
   "repository": {
     "url": "https://github.com/XHanL/overwatch-workshop"
   },
@@ -14,7 +14,7 @@
     "守望先锋",
     "工坊"
   ],
-  "version": "3.4.13",
+  "version": "3.4.15",
   "engines": {
     "vscode": "^1.39.0"
   },

@@ -1,6 +1,6 @@
 # <img src="docs/images/readme/icon.png" width="50" height="50" align=center width=500 /> **Overwatch®** Workshop
 
-### **守望先锋 ®** 工坊语言支持
+### **守望先锋 ®** 工坊语言支持（中文）
 
 <br>
 
@@ -270,13 +270,3 @@
   | :--------- | :------------------------------------------------------------------------ |
   | **GitHub** | _[XHanL/overwatch-workshop](https://github.com/xhanl/overwatch-workshop)_ |
   | **Gitee**  | _[XHanL/overwatch-workshop](https://gitee.com/xhanl/overwatch-workshop)_  |
-
-<br>
-
-## **_待办_**
-
-- #### _需要帮忙的地方！_
-  | 任务               | 细节                                 |
-  | :----------------- | :----------------------------------- |
-  | **手册数据 - PNG** | _手册中所有模式，所有地图的预览图片_ |
-  | **手册数据 - GIF** | _手册中所有弹道，所有效果的循环预览_ |
