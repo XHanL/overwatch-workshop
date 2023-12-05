@@ -270,3 +270,9 @@
   | :--------- | :------------------------------------------------------------------------ |
   | **GitHub** | _[XHanL/overwatch-workshop](https://github.com/xhanl/overwatch-workshop)_ |
   | **Gitee**  | _[XHanL/overwatch-workshop](https://gitee.com/xhanl/overwatch-workshop)_  |
+
+## **_许可_**
+
+### MIT License
+
+#### Copyright (c) 2023 - present Crystal Platform
