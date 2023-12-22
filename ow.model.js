@@ -4006,6 +4006,56 @@ let 常量 = {
       },
       拼音: "Yi La Rui",
     },
+    {
+      名称: "毛加",
+      标签: ["事件", "英雄", "重装"],
+      提示: "毛加是一名魅力十足且行事狡黠的萨摩亚战士，他在混乱的战场上如鱼得水，仿佛每一天都是他生命的最后一天。",
+      图标: "images/ow/hero/avatar/tank_mauga_avatar.png",
+      生命: {
+        自由: "300",
+        职责: "500",
+        护甲: "150",
+      },
+      技能: {
+        燃火链式机枪: {
+          图标: "images/ow/hero/ability/tank_mauga_weapon1.png",
+          绑定: ["主要攻击模式"],
+        },
+        爆烈链式机枪: {
+          图标: "images/ow/hero/ability/tank_mauga_weapon2.png",
+          绑定: ["辅助攻击模式"],
+        },
+        笼中斗: {
+          图标: {
+            深色: "images/ow/hero/ability/tank_mauga_ultimate.png",
+            浅色: "images/ow/hero/ability_gray/tank_mauga_ultimate.png",
+          },
+          绑定: ["终极技能"],
+        },
+        蛮力冲撞: {
+          图标: {
+            深色: "images/ow/hero/ability/tank_mauga_ability1.png",
+            浅色: "images/ow/hero/ability_gray/tank_mauga_ability1.png",
+          },
+          绑定: ["技能1"],
+        },
+        心脏过载: {
+          图标: {
+            深色: "images/ow/hero/ability/tank_mauga_ability2.png",
+            浅色: "images/ow/hero/ability_gray/tank_mauga_ability2.png",
+          },
+          绑定: ["技能2"],
+        },
+        狂战士: {
+          图标: {
+            深色: "images/ow/hero/ability/tank_mauga_passive.png",
+            浅色: "images/ow/hero/ability_gray/tank_mauga_passive.png",
+          },
+          绑定: ["被动"],
+        },
+      },
+      拼音: "Mao Jia",
+    },
   ],
   HUD位置: [
     {

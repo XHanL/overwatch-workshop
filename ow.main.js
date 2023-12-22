@@ -2955,6 +2955,81 @@ function activate(context) {
                     <td style="text-align: center;"></td>
                     <td style="text-align: center;"></td>
                     </tr>
+
+                    <tr>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "avatar",
+                        "tank_mauga_avatar.png"
+                      )
+                    )}" height="48"><br>毛加<br></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "tank_mauga_weapon1.png"
+                      )
+                    )}" height="32"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "tank_mauga_weapon2.png"
+                      )
+                    )}" height="32"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "tank_mauga_ultimate.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "tank_mauga_ability1.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "tank_mauga_ability2.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"><img src="${webviewView.webview.asWebviewUri(
+                      vscode.Uri.joinPath(
+                        extensionUri,
+                        "images",
+                        "ow",
+                        "hero",
+                        "ability",
+                        "melee.png"
+                      )
+                    )}" class="icon"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                    </tr>
                     </tbody>
                     </table>
 
@@ -5054,9 +5129,7 @@ function activate(context) {
                     </tr>
                     </tbody>
                     </table>
-
                     </body>
-
                     </html>`;
           }
 
