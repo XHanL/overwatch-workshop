@@ -14,9 +14,9 @@
     "守望先锋",
     "工坊"
   ],
-  "version": "3.5.2",
+  "version": "3.5.3",
   "engines": {
-    "vscode": "^1.39.0"
+    "vscode": "^1.80.0"
   },
   "categories": [
     "Programming Languages"
