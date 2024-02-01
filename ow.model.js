@@ -2972,8 +2972,8 @@ let 常量 = {
         },
         滑墙: {
           图标: {
-            深色: "images/ow/hero/ability/support_lucio_passive.png",
-            浅色: "images/ow/hero/ability_gray/support_lucio_passive.png",
+            深色: "images/ow/hero/ability/passive.png",
+            浅色: "images/ow/hero/ability_gray/passive.png",
           },
           绑定: ["跳跃", "技能2"],
           提示: "跃上墙面并在其上滑动。滑墙时视为“在墙上”。",
@@ -3236,8 +3236,8 @@ let 常量 = {
         },
         悬浮背包: {
           图标: {
-            深色: "images/ow/hero/ability/damage_pharah_passive.png",
-            浅色: "images/ow/hero/ability_gray/damage_pharah_passive.png",
+            深色: "images/ow/hero/ability/passive.png",
+            浅色: "images/ow/hero/ability_gray/passive.png",
           },
           绑定: ["辅助攻击模式", "跳跃", "被动"],
         },
@@ -18927,22 +18927,8 @@ function buildHover(PATH, name, tags, details) {
   return new vscode.Hover(hoverString);
 }
 
-function buildCompletion(
-  PATH,
-  label,
-  pinyin,
-  kind,
-  tags,
-  details,
-  filterText,
-  insertText,
-  sortText,
-  command
-) {
-  const item = new vscode.CompletionItem(
-    pinyin ? `${label} ← ${pinyin.split(" ").join("")}` : label,
-    kind
-  );
+function buildCompletion(PATH, label, pinyin, kind, tags, details, filterText, insertText, sortText, command) {
+  const item = new vscode.CompletionItem(pinyin ? `${label} ← ${pinyin.split(" ").join("")}` : label, kind);
   item.documentation = new vscode.MarkdownString();
   item.documentation.isTrusted = true;
   item.documentation.supportHtml = true;
@@ -18985,45 +18971,21 @@ function buildParameter(paramName, paramIndex, paramType, paramDetails) {
   parameterInformation.documentation.isTrusted = true;
   parameterInformation.documentation.supportHtml = true;
   parameterInformation.documentation.supportThemeIcons = true;
-  parameterInformation.documentation.appendMarkdown(
-    `***<span style="color:#0ac;">⬘</span>&nbsp;参数&nbsp;:&nbsp;${paramName}***\n\n`
-  );
-  parameterInformation.documentation.appendMarkdown(
-    `\`${paramIndex}\` \`${paramType}\`&nbsp;\n\n`
-  );
-  parameterInformation.documentation.appendMarkdown(
-    `${paramDetails}&nbsp;\n\n`
-  );
+  parameterInformation.documentation.appendMarkdown(`***<span style="color:#0ac;">⬘</span>&nbsp;参数&nbsp;:&nbsp;${paramName}***\n\n`);
+  parameterInformation.documentation.appendMarkdown(`\`${paramIndex}\` \`${paramType}\`&nbsp;\n\n`);
+  parameterInformation.documentation.appendMarkdown(`${paramDetails}&nbsp;\n\n`);
   return parameterInformation;
 }
 
 function buildStaticModels(PATH) {
   try {
     for (i in 常量) {
-      if (
-        i == "英雄" ||
-        i == "图标" ||
-        i == "颜色" ||
-        i == "按钮" ||
-        i == "字符串"
-      ) {
+      if (i == "英雄" || i == "图标" || i == "颜色" || i == "按钮" || i == "字符串") {
         continue;
       }
       for (j in 常量[i]) {
-        常量[i][j].悬停 = buildHover(
-          PATH,
-          常量[i][j].名称,
-          常量[i][j].标签,
-          常量[i][j].提示
-        );
-        常量[i][j].补全 = buildCompletion(
-          PATH,
-          常量[i][j].名称,
-          常量[i][j].拼音.split(" ").join(""),
-          vscode.CompletionItemKind.Constant,
-          常量[i][j].标签,
-          常量[i][j].提示
-        );
+        常量[i][j].悬停 = buildHover(PATH, 常量[i][j].名称, 常量[i][j].标签, 常量[i][j].提示);
+        常量[i][j].补全 = buildCompletion(PATH, 常量[i][j].名称, 常量[i][j].拼音.split(" ").join(""), vscode.CompletionItemKind.Constant, 常量[i][j].标签, 常量[i][j].提示);
       }
     }
   } catch (error) {
@@ -19082,37 +19044,13 @@ function buildStaticModels(PATH) {
       }
 
       常量.英雄[i].悬停 = {
-        深色: buildHover(
-          PATH,
-          常量.英雄[i].名称,
-          常量.英雄[i].标签,
-          description + abilities.深色
-        ),
-        浅色: buildHover(
-          PATH,
-          常量.英雄[i].名称,
-          常量.英雄[i].标签,
-          description + abilities.浅色
-        ),
+        深色: buildHover(PATH, 常量.英雄[i].名称, 常量.英雄[i].标签, description + abilities.深色),
+        浅色: buildHover(PATH, 常量.英雄[i].名称, 常量.英雄[i].标签, description + abilities.浅色),
       };
 
       常量.英雄[i].补全 = {
-        深色: buildCompletion(
-          PATH,
-          常量.英雄[i].名称,
-          常量.英雄[i].拼音,
-          vscode.CompletionItemKind.Constant,
-          常量.英雄[i].标签,
-          description + abilities.深色
-        ),
-        浅色: buildCompletion(
-          PATH,
-          常量.英雄[i].名称,
-          常量.英雄[i].拼音,
-          vscode.CompletionItemKind.Constant,
-          常量.英雄[i].标签,
-          description + abilities.浅色
-        ),
+        深色: buildCompletion(PATH, 常量.英雄[i].名称, 常量.英雄[i].拼音, vscode.CompletionItemKind.Constant, 常量.英雄[i].标签, description + abilities.深色),
+        浅色: buildCompletion(PATH, 常量.英雄[i].名称, 常量.英雄[i].拼音, vscode.CompletionItemKind.Constant, 常量.英雄[i].标签, description + abilities.浅色),
       };
     }
   } catch (error) {
@@ -19126,37 +19064,13 @@ function buildStaticModels(PATH) {
       };
 
       常量.图标[i].悬停 = {
-        深色: buildHover(
-          PATH,
-          常量.图标[i].名称,
-          常量.图标[i].标签,
-          details.深色
-        ),
-        浅色: buildHover(
-          PATH,
-          常量.图标[i].名称,
-          常量.图标[i].标签,
-          details.浅色
-        ),
+        深色: buildHover(PATH, 常量.图标[i].名称, 常量.图标[i].标签, details.深色),
+        浅色: buildHover(PATH, 常量.图标[i].名称, 常量.图标[i].标签, details.浅色),
       };
 
       常量.图标[i].补全 = {
-        深色: buildCompletion(
-          PATH,
-          常量.图标[i].名称,
-          常量.图标[i].拼音,
-          vscode.CompletionItemKind.Constant,
-          常量.图标[i].标签,
-          details.深色
-        ),
-        浅色: buildCompletion(
-          PATH,
-          常量.图标[i].名称,
-          常量.图标[i].拼音,
-          vscode.CompletionItemKind.Constant,
-          常量.图标[i].标签,
-          details.浅色
-        ),
+        深色: buildCompletion(PATH, 常量.图标[i].名称, 常量.图标[i].拼音, vscode.CompletionItemKind.Constant, 常量.图标[i].标签, details.深色),
+        浅色: buildCompletion(PATH, 常量.图标[i].名称, 常量.图标[i].拼音, vscode.CompletionItemKind.Constant, 常量.图标[i].标签, details.浅色),
       };
     }
   } catch (error) {
@@ -19178,37 +19092,13 @@ function buildStaticModels(PATH) {
         };
 
         常量.按钮[i].悬停 = {
-          深色: buildHover(
-            PATH,
-            常量.按钮[i].名称,
-            常量.按钮[i].标签,
-            details.深色
-          ),
-          浅色: buildHover(
-            PATH,
-            常量.按钮[i].名称,
-            常量.按钮[i].标签,
-            details.浅色
-          ),
+          深色: buildHover(PATH, 常量.按钮[i].名称, 常量.按钮[i].标签, details.深色),
+          浅色: buildHover(PATH, 常量.按钮[i].名称, 常量.按钮[i].标签, details.浅色),
         };
 
         常量.按钮[i].补全 = {
-          深色: buildCompletion(
-            PATH,
-            常量.按钮[i].名称,
-            常量.按钮[i].拼音,
-            vscode.CompletionItemKind.Constant,
-            常量.按钮[i].标签,
-            details.深色
-          ),
-          浅色: buildCompletion(
-            PATH,
-            常量.按钮[i].名称,
-            常量.按钮[i].拼音,
-            vscode.CompletionItemKind.Constant,
-            常量.按钮[i].标签,
-            details.浅色
-          ),
+          深色: buildCompletion(PATH, 常量.按钮[i].名称, 常量.按钮[i].拼音, vscode.CompletionItemKind.Constant, 常量.按钮[i].标签, details.深色),
+          浅色: buildCompletion(PATH, 常量.按钮[i].名称, 常量.按钮[i].拼音, vscode.CompletionItemKind.Constant, 常量.按钮[i].标签, details.浅色),
         };
       } else {
         //通用主题图标
@@ -19216,20 +19106,8 @@ function buildStaticModels(PATH) {
 |||
 |:-|:-|
 <img src="${常量.按钮[i].图标}" width=32 height=32/>&nbsp;&nbsp;|${常量.按钮[i].提示}`;
-        常量.按钮[i].悬停 = buildHover(
-          PATH,
-          常量.按钮[i].名称,
-          常量.按钮[i].标签,
-          details
-        );
-        常量.按钮[i].补全 = buildCompletion(
-          PATH,
-          常量.按钮[i].名称,
-          常量.按钮[i].拼音,
-          vscode.CompletionItemKind.Constant,
-          常量.按钮[i].标签,
-          details
-        );
+        常量.按钮[i].悬停 = buildHover(PATH, 常量.按钮[i].名称, 常量.按钮[i].标签, details);
+        常量.按钮[i].补全 = buildCompletion(PATH, 常量.按钮[i].名称, 常量.按钮[i].拼音, vscode.CompletionItemKind.Constant, 常量.按钮[i].标签, details);
       }
     }
   } catch (error) {
@@ -19241,101 +19119,39 @@ function buildStaticModels(PATH) {
 |||
 |:-|:-|
 <img src="${常量.颜色[i].图标}" width=32 height=32/>&nbsp;&nbsp;|${常量.颜色[i].提示}`;
-      常量.颜色[i].悬停 = buildHover(
-        PATH,
-        常量.颜色[i].名称,
-        常量.颜色[i].标签,
-        details
-      );
-      常量.颜色[i].补全 = buildCompletion(
-        PATH,
-        常量.颜色[i].名称,
-        常量.颜色[i].拼音,
-        vscode.CompletionItemKind.Constant,
-        常量.颜色[i].标签,
-        details
-      );
+      常量.颜色[i].悬停 = buildHover(PATH, 常量.颜色[i].名称, 常量.颜色[i].标签, details);
+      常量.颜色[i].补全 = buildCompletion(PATH, 常量.颜色[i].名称, 常量.颜色[i].拼音, vscode.CompletionItemKind.Constant, 常量.颜色[i].标签, details);
     }
   } catch (error) {
     console.log(`错误：buildStaticModels 常量.颜色` + error);
   }
   try {
     for (i in 常量.字符串) {
-      常量.字符串[i].补全 = buildCompletion(
-        PATH,
-        常量.字符串[i].名称,
-        常量.字符串[i].拼音,
-        vscode.CompletionItemKind.Constant,
-        常量.字符串[i].标签,
-        常量.字符串[i].提示
-      );
+      常量.字符串[i].补全 = buildCompletion(PATH, 常量.字符串[i].名称, 常量.字符串[i].拼音, vscode.CompletionItemKind.Constant, 常量.字符串[i].标签, 常量.字符串[i].提示);
     }
   } catch (error) {
     console.log(`错误：buildStaticModels 常量.字符串` + error);
   }
   try {
     for (i in 规则.事件.选项) {
-      规则.事件.选项[i].悬停 = buildHover(
-        PATH,
-        i,
-        规则.事件.选项[i].标签,
-        规则.事件.选项[i].提示
-      );
-      规则.事件.选项[i].补全 = buildCompletion(
-        PATH,
-        i,
-        规则.事件.选项[i].拼音,
-        vscode.CompletionItemKind.Event,
-        规则.事件.选项[i].标签,
-        规则.事件.选项[i].提示,
-        undefined,
-        `${i};`
-      );
+      规则.事件.选项[i].悬停 = buildHover(PATH, i, 规则.事件.选项[i].标签, 规则.事件.选项[i].提示);
+      规则.事件.选项[i].补全 = buildCompletion(PATH, i, 规则.事件.选项[i].拼音, vscode.CompletionItemKind.Event, 规则.事件.选项[i].标签, 规则.事件.选项[i].提示, undefined, `${i};`);
     }
   } catch (error) {
     console.log(`错误：buildStaticModels 规则.事件.选项` + error);
   }
   try {
     for (i in 规则.事件.队伍) {
-      规则.事件.队伍[i].悬停 = buildHover(
-        PATH,
-        i,
-        规则.事件.队伍[i].标签,
-        规则.事件.队伍[i].提示
-      );
-      规则.事件.队伍[i].补全 = buildCompletion(
-        PATH,
-        i,
-        规则.事件.队伍[i].拼音,
-        vscode.CompletionItemKind.Event,
-        规则.事件.队伍[i].标签,
-        规则.事件.队伍[i].提示,
-        undefined,
-        `${i};`
-      );
+      规则.事件.队伍[i].悬停 = buildHover(PATH, i, 规则.事件.队伍[i].标签, 规则.事件.队伍[i].提示);
+      规则.事件.队伍[i].补全 = buildCompletion(PATH, i, 规则.事件.队伍[i].拼音, vscode.CompletionItemKind.Event, 规则.事件.队伍[i].标签, 规则.事件.队伍[i].提示, undefined, `${i};`);
     }
   } catch (error) {
     console.log(`错误：buildStaticModels 规则.事件.队伍` + error);
   }
   try {
     for (i in 规则.事件.玩家) {
-      规则.事件.玩家[i].悬停 = buildHover(
-        PATH,
-        i,
-        规则.事件.玩家[i].标签,
-        规则.事件.玩家[i].提示
-      );
-      规则.事件.玩家[i].补全 = buildCompletion(
-        PATH,
-        i,
-        规则.事件.玩家[i].拼音,
-        vscode.CompletionItemKind.Event,
-        规则.事件.玩家[i].标签,
-        规则.事件.玩家[i].提示,
-        undefined,
-        `${i};`,
-        规则.事件.玩家[i].顺序
-      );
+      规则.事件.玩家[i].悬停 = buildHover(PATH, i, 规则.事件.玩家[i].标签, 规则.事件.玩家[i].提示);
+      规则.事件.玩家[i].补全 = buildCompletion(PATH, i, 规则.事件.玩家[i].拼音, vscode.CompletionItemKind.Event, 规则.事件.玩家[i].标签, 规则.事件.玩家[i].提示, undefined, `${i};`, 规则.事件.玩家[i].顺序);
     }
   } catch (error) {
     console.log(`错误：buildStaticModels 规则.事件.玩家` + error);
@@ -19362,8 +19178,7 @@ function buildStaticModels(PATH) {
           if (element.类型 == "自定义字符串") {
             const match = element.默认.match(/"([^"]*)"/);
             if (match) {
-              insertText.value +=
-                '"${' + insertPlaceHolder++ + ":" + match[1] + '}"';
+              insertText.value += '"${' + insertPlaceHolder++ + ":" + match[1] + '}"';
             } else {
               insertText.value += '"${' + insertPlaceHolder++ + '}"';
             }
@@ -19371,21 +19186,13 @@ function buildStaticModels(PATH) {
             const match = element.默认.match(/([^(]*)(?:\(([^)]*)\))?/);
             insertText.value += "${" + insertPlaceHolder++ + ":" + match[1];
             if (match[2] !== undefined) {
-              const paramParams = match[2]
-                .split(",")
-                .map((param) => param.trim());
+              const paramParams = match[2].split(",").map((param) => param.trim());
               insertText.value += "(";
               for (const paramIndex in paramParams) {
                 if ((paramMatch = paramParams[paramIndex].match(/"([^"]*)"/))) {
-                  insertText.value +=
-                    '"${' + insertPlaceHolder++ + ":" + paramMatch[1] + '}"';
+                  insertText.value += '"${' + insertPlaceHolder++ + ":" + paramMatch[1] + '}"';
                 } else {
-                  insertText.value +=
-                    "${" +
-                    insertPlaceHolder++ +
-                    ":" +
-                    paramParams[paramIndex] +
-                    "}";
+                  insertText.value += "${" + insertPlaceHolder++ + ":" + paramParams[paramIndex] + "}";
                 }
                 if (paramIndex < paramParams.length - 1) {
                   insertText.value += ", ";
@@ -19395,26 +19202,14 @@ function buildStaticModels(PATH) {
             }
             insertText.value += "}";
           } else if (Array.isArray(element.选项)) {
-            insertText.value +=
-              "${" +
-              insertPlaceHolder++ +
-              ":" +
-              (element.hasOwnProperty("默认")
-                ? element.默认
-                : element.选项[0].名称) +
-              "}";
+            insertText.value += "${" + insertPlaceHolder++ + ":" + (element.hasOwnProperty("默认") ? element.默认 : element.选项[0].名称) + "}";
           } else {
             insertText.value += "${" + insertPlaceHolder++ + "}";
           }
           if (index < params.length - 1) {
             insertText.value += ", ";
           }
-          element.签名 = buildParameter(
-            element.名称,
-            index,
-            element.类型,
-            element.提示
-          );
+          element.签名 = buildParameter(element.名称, index, element.类型, element.提示);
           details += `\`${index}\`&nbsp;\`${element.名称}\`&nbsp;-&nbsp;${element.提示}\n\n`;
         });
         insertText.value += ")";
@@ -19425,20 +19220,7 @@ function buildStaticModels(PATH) {
         };
       }
       规则.条件[i].悬停 = buildHover(PATH, i, 规则.条件[i].标签, details);
-      规则.条件[i].补全 = buildCompletion(
-        PATH,
-        i,
-        规则.条件[i].拼音,
-        vscode.CompletionItemKind.Class,
-        规则.条件[i].标签,
-        details.replace(/---/g, ""),
-        undefined,
-        规则.条件[i].hasOwnProperty("格式")
-          ? new vscode.SnippetString(规则.条件[i].格式)
-          : insertText,
-        undefined,
-        command
-      );
+      规则.条件[i].补全 = buildCompletion(PATH, i, 规则.条件[i].拼音, vscode.CompletionItemKind.Class, 规则.条件[i].标签, details.replace(/---/g, ""), undefined, 规则.条件[i].hasOwnProperty("格式") ? new vscode.SnippetString(规则.条件[i].格式) : insertText, undefined, command);
     }
   } catch (error) {
     console.log(`错误：buildStaticModels 规则.条件` + error);
@@ -19459,21 +19241,13 @@ function buildStaticModels(PATH) {
             const match = element.默认.match(/([^(]*)(?:\(([^)]*)\))?/);
             insertText.value += "${" + insertPlaceHolder++ + ":" + match[1];
             if (match[2] !== undefined) {
-              const paramParams = match[2]
-                .split(",")
-                .map((param) => param.trim());
+              const paramParams = match[2].split(",").map((param) => param.trim());
               insertText.value += "(";
               for (const paramIndex in paramParams) {
                 if ((paramMatch = paramParams[paramIndex].match(/"([^"]*)"/))) {
-                  insertText.value +=
-                    '"${' + insertPlaceHolder++ + ":" + paramMatch[1] + '}"';
+                  insertText.value += '"${' + insertPlaceHolder++ + ":" + paramMatch[1] + '}"';
                 } else {
-                  insertText.value +=
-                    "${" +
-                    insertPlaceHolder++ +
-                    ":" +
-                    paramParams[paramIndex] +
-                    "}";
+                  insertText.value += "${" + insertPlaceHolder++ + ":" + paramParams[paramIndex] + "}";
                 }
                 if (paramIndex < paramParams.length - 1) {
                   insertText.value += ", ";
@@ -19483,14 +19257,7 @@ function buildStaticModels(PATH) {
             }
             insertText.value += "}";
           } else if (Array.isArray(element.选项)) {
-            insertText.value +=
-              "${" +
-              insertPlaceHolder++ +
-              ":" +
-              (element.hasOwnProperty("默认")
-                ? element.默认
-                : element.选项[0].名称) +
-              "}";
+            insertText.value += "${" + insertPlaceHolder++ + ":" + (element.hasOwnProperty("默认") ? element.默认 : element.选项[0].名称) + "}";
           } else if (element.类型.match(/^全局变量|玩家变量$/)) {
             insertText.value += "${" + insertPlaceHolder++ + ":A}";
           } else if (element.类型.match("子程序")) {
@@ -19501,12 +19268,7 @@ function buildStaticModels(PATH) {
           if (index < params.length - 1) {
             insertText.value += ", ";
           }
-          element.签名 = buildParameter(
-            element.名称,
-            index,
-            element.类型,
-            element.提示
-          );
+          element.签名 = buildParameter(element.名称, index, element.类型, element.提示);
           details += `\`${index}\`&nbsp;\`${element.名称}\`&nbsp;-&nbsp;${element.提示}\n\n`;
         });
         insertText.value += ")";
@@ -19518,18 +19280,7 @@ function buildStaticModels(PATH) {
       }
       insertText.appendText(`;`);
       规则.动作[i].悬停 = buildHover(PATH, i, 规则.动作[i].标签, details);
-      规则.动作[i].补全 = buildCompletion(
-        PATH,
-        i,
-        规则.动作[i].拼音,
-        vscode.CompletionItemKind.Method,
-        规则.动作[i].标签,
-        details.replace(/---/g, ""),
-        undefined,
-        insertText,
-        undefined,
-        command
-      );
+      规则.动作[i].补全 = buildCompletion(PATH, i, 规则.动作[i].拼音, vscode.CompletionItemKind.Method, 规则.动作[i].标签, details.replace(/---/g, ""), undefined, insertText, undefined, command);
     }
   } catch (error) {
     console.log(`错误：buildStaticModels 规则.动作` + error);
